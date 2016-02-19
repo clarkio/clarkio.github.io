@@ -6,11 +6,7 @@ header-img: "img/home-bg.png"
 header-class: "grayscale-img"
 ---
 
-<p style="margin: auto; width: 50%; padding: 10px;">No blog posts at the moment.</p>
-{{ paginator.total_pages }}
-{% if paginator.total_pages == 0 %}
-<p>No blog posts at the moment.</p>
-{% endif %}
+<!--<p style="margin: auto; width: 50%; padding: 10px;">No blog posts at the moment.</p>-->
 
 {% for post in paginator.posts %}
 <div class="post-preview">

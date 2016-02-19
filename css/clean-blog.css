@@ -26,7 +26,6 @@ a:hover,
 a:focus {
   color: #0085a1;
 }
-a img:hover,
 a img:focus {
   cursor: zoom-in;
 }
@@ -401,6 +400,6 @@ body {
     /*background-size: 100% 175%;
     background-position: 30% 20%;*/
     padding-top: 20px;
-    -webkit-filter: grayscale(60%);
-    filter: grayscale(60%);
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
 }
