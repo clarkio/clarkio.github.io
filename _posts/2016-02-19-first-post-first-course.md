@@ -5,6 +5,7 @@ date:       2016-02-19
 author:     "Brian Clark"
 header-img: "img/pbp-angular-man-sm3.png"
 header-class: "grayscale-img"
+comments: True
 ---
 
 To kick things off, I thought what better way could I start the site than by sharing a quick highlight of my first course published on [Pluralsight](https://app.pluralsight.com).
