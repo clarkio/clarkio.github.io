@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "Getting a Handle on User Input"
-date:       2016-06-13
+date:       2016-06-14
 author:     "Brian Clark"
 header-img: "img/input-dresser-handle.jpg"
 header-class: "grayscale-img"
