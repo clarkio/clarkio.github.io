@@ -10,6 +10,7 @@ order: 2
 # Videos
 
 1. [Angular Internationalization: Play by Play with John Papa](http://bit.ly/1Q6XrJI)
+2. [Getting Started with Node.js Security with Express and Angular](http://bit.ly/2cJyxhD)
 
 # 2016 Events
 
