@@ -4,6 +4,7 @@ title:      "Restify Middleware & Next()"
 date:       2016-11-02
 author:     "Brian Clark"
 header-class: "grayscale-img"
+keywords: "headers already set, next(), restify next(), short-circuit request, node restify"
 comments: True
 ---
 
