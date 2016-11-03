@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{{ site.description }}">
-
+    {%if page.keywords %}
+    <meta name="keywords" content="{{ page.keywords | escape }}"/>
+    {%endif %}
     <title>{% if page.title %}{{ page.title }} {% if site.title !=  "Clarkio" %} - {{ site.title }}{% else %}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
 
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
