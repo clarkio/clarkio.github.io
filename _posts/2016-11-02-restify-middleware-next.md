@@ -14,7 +14,7 @@ I've built several middleware modules that are specifically tied to Restify as t
 
 {% highlight javascript %}
 server.get('/secure/route',
-  // My short-circuiting middleware module
+  // My short-circuiting middleware "module"
   function checkAuthorization (req, res, next) {
     res.send(401, 'Unauthorized');
     return next();
@@ -29,13 +29,13 @@ server.get('/secure/route',
 
 Now looking at this you may be thinking it is perfectly fine and in some cases it actually could be, but I don't actually want to allow the execution of whatever middleware module is next. Meaning, while I'm supposed to always return `next();` in my routes when using Restify (as stated in the [official documentation](http://restify.com/#routing)), this code results in the next module being accessed.
 
-The other problem this leads to is that it will execute two instances of `res.send()` and this causes an error stating `can't set headers after they are sent`. The reason for this is that we attempt to set those headers with the first instance of `res.send()` in our middleware module and then, since we're not blocking the route implementation execution, we attempt to use `res.send()` a second time.
+The other problem this leads to is that it will execute two instances of `res.send()` and this causes an error stating `"can't set headers after they are sent"`. The reason for this is that we attempt to set those headers with the first instance of `res.send()` in our middleware module and then, since we're not blocking the route implementation execution, we attempt to use `res.send()` a second time.
 
-What I had failed to miss all this time was passing in an argument to the `next()` function to indicate I want things to stop there. The nice thing is it's as simple as passing in the boolean value `false` as an argument to `next()`. Having this in place, I still follow the correct pattern and best practice of always returning `next()`, but also accomplish short-circuiting the middleware chain. Here is what my code looks like after the changes:
+What I had failed to notice all this time was passing in an argument to the `next()` function to indicate I want things to stop there. The nice thing is it's as simple as passing in the boolean value `false` as an argument to `next()`. Having this in place, I still follow the correct pattern and best practice of always returning `next()`, but also accomplish short-circuiting the middleware chain. Here is what my code looks like after the changes:
 
 {% highlight javascript %}
 server.get('/secure/route',
-  // My short-circuiting middleware module
+  // My short-circuiting middleware "module"
   function checkAuthorization (req, res, next) {
     res.send(401, 'Unauthorized');
     return next(false);
