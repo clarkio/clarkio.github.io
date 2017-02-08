@@ -2,7 +2,7 @@
 title: Clarkio
 header-img: img/home-bg.png
 email: brian@clarkio.com
-description: "Landing page and blog for web developer, Brian Clark."
+description: "Landing page and blog for Brian Clark. Brian is a Senior Technical Architect that has been building and architecting software for many years. His initial focus was on ASP.NET, C#/.NET, SQL and WPF, but it has since shifted to technologies such as Swift, Ionic, Angular and Node.js. Brian is an author of several courses on Pluralsight and co-authored the Angular Security Guide documentation. He has presented many talks at public and private conferences as well as at local code camps covering topics such as secure application development practices and getting started in OSS. You can best get in touch with him on Twitter, GitHub or at clarkio.com."
 # baseurl: "/"
 url: "http://clarkio.com"
 twitter_username: _clarkio
