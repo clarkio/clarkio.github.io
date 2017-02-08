@@ -15,4 +15,4 @@ order: 3
 
 1. [vulnerable-app](https://github.com/clarkio/vulnerable-app)
 2. [cert-sig-alg](https://github.com/clarkio/cert-sig-alg)
-3. [ios-favoriate-movies](https://github.com/clarkio/ios-favorite-movies)
+3. [ios-favorite-movies](https://github.com/clarkio/ios-favorite-movies)
