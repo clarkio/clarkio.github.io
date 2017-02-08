@@ -9,14 +9,24 @@ order: 2
 
 # Videos
 
+### Pluralsight
 1. [Angular Internationalization: Play by Play with John Papa](http://bit.ly/1Q6XrJI)
 2. [Getting Started with Node.js Security with Express and Angular](http://bit.ly/2cJyxhD)
 
+<hr>
+# 2017 Events
+
+
+- ### [Anglebrackets](https://anglebrackets.org/) - Spring 2017
+    - Easy Web Application Security in Node.js & Angular
+    <p>Walt Disney World Swan - Orlando, FL<br>
+    May 21-24, 2017</p>
+
 # 2016 Events
 
-1. [Anglebrackets](https://anglebrackets.org/) Fall 2016
-    <p>OCTOBER 24-28, 2016
-    MGM Grand Las Vegas, NV</p>
-- Simplifying Web Application Security
-- Debugging Node.js with VS Code
-- How to Be a Good Community Member by Contributing to OSS
+- ### [Anglebrackets](https://anglebrackets.org/) - Fall 2016
+    - Simplifying Web Application Security
+    - Debugging Node.js with VS Code
+    - How to Be a Good Community Member by Contributing to OSS
+    <p>MGM Grand - Las Vegas, NV<br>
+    October 24-28, 2016</p>
