@@ -131,6 +131,8 @@ Another interesting result captured from their survey is that regardless of a de
 
 This is quite unfortunate because as we've seen in this post there are options available to us now that make for a much richer and more efficient debugging experience that developers may be missing out on.
 
+<hr>
+
 If you haven't done so already you can use the following GitHub repository to try out everything that was discussed in this blog post: [clarkio/nodejs-debugging](https://github.com/clarkio/nodejs-debugging)
 
 {% highlight bash %}
@@ -138,3 +140,9 @@ git clone git@github.com:clarkio/nodejs-debugging.git
 cd nodejs-debugging
 node console-log.js
 {% endhighlight %}
+
+If you're interested in learning how to improve the security of your Node.js applications check out my course on Pluralsight: [Getting Started with Node.js Security with Express and Angular](https://bit.ly/2cJyxhD)
+<a href="https://bit.ly/2cJyxhD
+">
+    <img src="{{ site.baseurl }}/img/course-node-angular-security-ps.png" alt="Getting Started with Node.js Security with Express and Angular Video">
+</a>
