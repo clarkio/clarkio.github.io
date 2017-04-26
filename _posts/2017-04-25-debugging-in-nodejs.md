@@ -9,6 +9,8 @@ comments:   True
 
 Debugging our applications is a critical part of the development process and can aid in discovering why the app may be behaving differently than expected. Doing this using Node.js can tend to be quite elusive and maybe even frustrating. In this post we'll talk about the typical hurdles developers run into while debugging Node.js and look at better ways to approach it. We'll go over the various techniques and tools that are available to help make debugging Node.js an easy task.
 
+> You can use this [GitHub repository](https://github.com/clarkio/nodejs-debugging) to follow along and try out what's described in this post.
+
 ## The Simple and Initial Approach: Console.log()
 When starting out in a Node.js project for the first time the natural approach to debugging an application is with `console.log`. This is typical for developers either starting out in general for the first time or even seasoned developers coming from other languages and platforms. We want to get a quick understanding of what the value of a variable may be at a certain point in code or make sure a method is actually being executed. Plugging in a simple `console.log(variable);` or `console.log('Made it here!!!');` and then spinning up our application is very simple and provides quick feedback. Let's briefly take a look at an example of doing this in Node.js.
 
@@ -72,6 +74,11 @@ We can continue from here by stepping through the loop and observing the value c
 ## Node.js Built-in Inspector
 Insert the built-in Node.js inspector that is available as of version 6.3.0. It provides a means to debug Node.js applications with a UI and a familiar one at that. This utility leverages the Chrome developer tools to create an even better debugging experience. It's filled with the expected features many of us are used to when debugging client-side JavaScript code: view source files, set breakpoints, add watchers and more which can be found in [Paul Irish's post](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27).
 
+In short, we can start the inspector using the `--inspect` flag and add the `--debug-brk` option so that it breaks on the first line of code. We will then see a long URL in our terminal which we can copy and paste into a new browser tab.
+
+
+<img src="{{ site.baseurl }}/img/node-debugging/node-built-in-inspector-start.png" alt="Node.js built-in inspector start in terminal">
+
 <img src="{{ site.baseurl }}/img/node-debugging/node-built-in-inspector.png" alt="Node.js built-in inspector running in Chrome Dev Tools">
 
 ## Visual Studio Code (VS Code)
@@ -123,3 +130,11 @@ Another interesting result captured from their survey is that regardless of a de
 )</span>
 
 This is quite unfortunate because as we've seen in this post there are options available to us now that make for a much richer and more efficient debugging experience that developers may be missing out on.
+
+If you haven't done so already you can use the following GitHub repository to try out everything that was discussed in this blog post: [clarkio/nodejs-debugging](https://github.com/clarkio/nodejs-debugging)
+
+{% highlight bash %}
+git clone git@github.com:clarkio/nodejs-debugging.git
+cd nodejs-debugging
+node console-log.js
+{% endhighlight %}
