@@ -7,6 +7,7 @@ header-img: "img/new-start-at-msft/new-start-at-msft-header.jpg"
 header-class: "grayscale-img"
 ---
 
+
 ### Cloud Developer Advocate
 
 I started a new role this past week at Microsoft as a Cloud Developer Advocate. In this role, I'll be involved in the communities around JavaScript, Node.js, Angular and Security and connecting them with the relevant awesomeness in Azure. I'll also be collaborating with the excellent teams that build the products in Azure to ensure it's creating the best experiences possible.
