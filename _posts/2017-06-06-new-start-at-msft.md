@@ -5,6 +5,7 @@ date:       2017-06-06
 author:     "Brian Clark"
 header-img: "img/new-start-at-msft/new-start-msft-header.jpg"
 header-class: "grayscale-img"
+comments:   True
 ---
 
 
