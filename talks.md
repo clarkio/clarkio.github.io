@@ -19,12 +19,15 @@ order: 2
 
 <hr>
 # 2017 Events
-
-
 - ### [Anglebrackets](https://anglebrackets.org/) - Spring 2017
     - Easy Web Application Security in Node.js & Angular
     <p>Walt Disney World Swan - Orlando, FL<br>
-    May 21-24, 2017</p>
+    May 21 - 24, 2017</p>
+- ### [Microsoft Ignite](https://www.microsoft.com/en-us/ignite)
+    <p>Orlando, Florida<br>September 25 - 29, 2017</p>
+- ### [Anglebrackets](https://anglebrackets.org/) - Fall 2017
+    <p>Las Vegas, NV<br>
+    October 31 - November 2, 2017</p>
 
 # 2016 Events
 
