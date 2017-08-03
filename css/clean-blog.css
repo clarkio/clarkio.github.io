@@ -10,12 +10,9 @@ p {
 blockquote p {
   margin: 0px 0;
 }
-p a {
+/* a {
   text-decoration: underline;
-}
-a {
-  text-decoration: underline;
-}
+} */
 h1,
 h2,
 h3,
@@ -408,4 +405,10 @@ body {
     padding-top: 20px;
     -webkit-filter: grayscale(80%);
     filter: grayscale(80%);
+}
+
+p a,
+h3 a,
+ol li a {
+  text-decoration: underline;
 }
