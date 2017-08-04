@@ -5,6 +5,10 @@ date:       2016-01-01
 author:     "Brian Clark"
 ---
 
+Link to another post:
+{{ site.baseurl }}{% post_url 2017-06-15-pwa-web-push %}
+
+
 # Test 1
 
 ## Test 2
