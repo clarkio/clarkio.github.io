@@ -7,7 +7,7 @@ header-class: "grayscale-img"
 order: 2
 ---
 
-## 2017
+## Upcoming Events
 - ### [Microsoft Ignite](https://www.microsoft.com/en-us/ignite)
     - [Building and deploying secure angular apps in the enterprise](https://myignite.microsoft.com/sessions/55304)
     <p>Orlando, FL<br>September 25 - 29, 2017</p>
