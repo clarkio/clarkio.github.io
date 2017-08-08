@@ -1,7 +1,7 @@
 ---
 layout: page
 title: "Talks"
-description: "Conferences, code camps, community group events and videos that I've talked and presented something in."
+description: "Conferences, code camps and community group events at which I've talked and presented something."
 header-img: "img/pbp-angular-man-sm3.png"
 header-class: "grayscale-img"
 order: 2
