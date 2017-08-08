@@ -409,6 +409,7 @@ body {
 
 p a,
 h3 a,
-ol li a {
+ol li a,
+ul li ul li a {
   text-decoration: underline;
 }
