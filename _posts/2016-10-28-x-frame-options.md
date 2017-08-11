@@ -32,7 +32,7 @@ If your browser supports CSP 1.0 then the directive is `frame-src`. If it's CSP 
 
 > [CSP 3.0 (as of 10/28/2016)](https://w3c.github.io/webappsec-csp/) is in draft and it seems they will be [undeprecating `frame-src`](https://w3c.github.io/webappsec-csp/#changes-from-level-2) and using that as the standard again. Fun stuff!
 
-##Which Option Should I Use?
+## Which Option Should I Use?
 If you're wondering which option you should use, the safest option is `DENY`.
 
 If you find there's no way around using an `<iframe>` for your site then I suggest to make its use as explicit and as restrictive as possible. Have a defined list of origins that you want to allow to perform this action and that's it. Anything else will leave your site vulnerable to the risks associated with clickjacking attacks.
