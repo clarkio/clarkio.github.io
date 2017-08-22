@@ -10,7 +10,8 @@ comments:   True
 
 1. [Introduction]({{ site.baseurl }}{% post_url 2017-06-15-pwa-web-push %})
 2. Subscriber (this post)
-3. Application Server (coming soon)
+3. [Application Server]({{ site.baseurl }}{% post_url 2017-08-22-pwa-web-push-3 %})
+4. Pushing Messages (coming soon)
 
 ----------
 
@@ -56,4 +57,4 @@ The following steps will help you set up a PWA using the Google Push Notificatio
 ### What is All This?
 We now have a PWA client that will act as the subscriber to our push notifications. The Google lab provides this (almost) complete version of a PWA that's ready to leverage the Web Push API using the Voluntary Application Server Identification for Web Push protocol (VAPID). Now that's a mouthful but think of it as a way to securely identify and connect the subscribers, push service and application server. 
 
-Using the VAPID protocol allows us to avoid having to create any kind of account with a cloud provider and register our application with it. Instead, we'll build our own Node.js application server that implements this protocol and securely connect it to the PWA we started in this post. All of that will be covered in the next blog post so stay tuned.
+Using the VAPID protocol allows us to avoid having to create any kind of account with a cloud provider and register our application with it. Instead, we'll build our own Node.js application server that implements this protocol and securely connect it to the PWA we started in this post. All of that is covered in the [next blog post]({{ site.baseurl }}{% post_url 2017-08-22-pwa-web-push-3 %}).

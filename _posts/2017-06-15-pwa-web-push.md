@@ -11,7 +11,8 @@ comments:   True
 
 1. Introduction (this post)
 2. [Subscriber]({{ site.baseurl }}{% post_url 2017-08-04-pwa-web-push-2 %})
-3. Application Server (coming soon)
+3. [Application Server]({{ site.baseurl }}{% post_url 2017-08-22-pwa-web-push-3 %})
+4. Pushing Messages (coming soon)
 
 ----------
 
@@ -27,4 +28,4 @@ With these tools I was able to push notifications through a Node.js web server r
 
 <img src="{{ site.baseurl }}/img/pwa-web-push/result-animation.gif" alt="a progressive web app with web push API sending notifications to clients">
 
-Continue reading and learn about setting up a service worker in the next post: [Progressive Web Apps and Web Push API - Service Worker]({{ site.baseurl }}{% post_url 2017-08-04-pwa-web-push-2 %})
+Continue reading and learn about setting up the PWA subscriber in the next post: [Progressive Web Apps and Web Push API - Subscriber]({{ site.baseurl }}{% post_url 2017-08-04-pwa-web-push-2 %})
