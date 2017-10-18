@@ -12,7 +12,7 @@ comments:   True
 1. Introduction (this post)
 2. [Subscriber]({{ site.baseurl }}{% post_url 2017-08-04-pwa-web-push-2 %})
 3. [Application Server]({{ site.baseurl }}{% post_url 2017-08-22-pwa-web-push-3 %})
-4. Pushing Messages (coming soon)
+4. [Pushing Messages]({{ site.baseurl }}{% post_url 2017-10-18-pwa-web-push-4 %})
 
 ----------
 

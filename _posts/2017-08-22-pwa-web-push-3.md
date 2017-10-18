@@ -11,7 +11,7 @@ comments:   True
 1. [Introduction]({{ site.baseurl }}{% post_url 2017-06-15-pwa-web-push %})
 2. [Subscriber]({{ site.baseurl }}{% post_url 2017-08-04-pwa-web-push-2 %})
 3. Application Server (this post)
-4. Pushing Messages (coming soon)
+4. [Pushing Messages]({{ site.baseurl }}{% post_url 2017-10-18-pwa-web-push-4 %})
 
 ----------
 
@@ -121,7 +121,7 @@ At this point we have an application server that speaks web-push but no interfac
             'Access-Control-Allow-Headers',
             'Origin, X-Requested-With, Content-Type, Accept'
         );
-        next();
+        return next();
     });
     ```
 
@@ -158,7 +158,7 @@ At this point we have an application server that speaks web-push but no interfac
 
         if (!pushSubscription) {
             res.status(400).send(constants.errors.ERROR_SUBSCRIPTION_REQUIRED);
-            return next();
+            return next(false);
         }
 
         if (subscriptions.length) {
@@ -171,17 +171,17 @@ At this point we have an application server that speaks web-push but no interfac
             });
         } else {
             res.send(constants.messages.NO_SUBSCRIBERS_MESSAGE);
-            return next();
+            return next(false);
         }
 
         function handleSuccess(success, index) {
             res.send(constants.messages.SINGLE_PUBLISH_SUCCESS_MESSAGE);
-            return next();    
+            return next(false);    
         }
 
         function handleError(error, index) {
             res.status(500).send(constants.errors.ERROR_MULTIPLE_PUBLISH);
-            return next();    
+            return next(false);    
         }
     });
     ```
@@ -210,4 +210,4 @@ Let's ensure everything is set up and working as expected by send some dummy dat
 
 5. Go back to your terminal and press `CTRL + c` to stop the server
 
-Our application server is all set to handle subscriptions from clients and push notification messages to the subscribers using the [web-push](https://github.com/web-push-libs/web-push) Node.js library. In the next post we'll see how we can tie it all together and start pushing notification messages to the subscribers.
+Our application server is all set to handle subscriptions from clients and push notification messages to the subscribers using the [web-push](https://github.com/web-push-libs/web-push) Node.js library. We'll see how we can tie it all together and start pushing notification messages to the subscribers [in the next post]({{ site.baseurl }}{% post_url 2017-10-18-pwa-web-push-4 %})
