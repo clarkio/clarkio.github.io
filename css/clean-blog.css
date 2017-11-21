@@ -303,10 +303,10 @@ footer .copyright {
   vertical-align: middle;
   vertical-align: baseline;
   opacity: 0;
-  -webkit-transition: top 0.3s ease,opacity 0.3s ease;
-  -moz-transition: top 0.3s ease,opacity 0.3s ease;
-  -ms-transition: top 0.3s ease,opacity 0.3s ease;
-  transition: top 0.3s ease,opacity 0.3s ease;
+  -webkit-transition: top 0.3s ease, opacity 0.3s ease;
+  -moz-transition: top 0.3s ease, opacity 0.3s ease;
+  -ms-transition: top 0.3s ease, opacity 0.3s ease;
+  transition: top 0.3s ease, opacity 0.3s ease;
 }
 .floating-label-form-group::not(:first-child) {
   padding-left: 14px;
@@ -398,18 +398,21 @@ body {
   webkit-tap-highlight-color: #0085a1;
 }
 .grayscale-img {
-    width: 100%;
-    height: auto;
-    /*background-size: 100% 175%;
+  width: 100%;
+  height: auto;
+  /*background-size: 100% 175%;
     background-position: 30% 20%;*/
-    padding-top: 20px;
-    -webkit-filter: grayscale(80%);
-    filter: grayscale(80%);
+  padding-top: 20px;
+  -webkit-filter: grayscale(80%);
+  filter: grayscale(80%);
 }
 
 p a,
 h3 a,
 ol li a,
 ul li ul li a {
+  text-decoration: underline;
+}
+div ul:not([class='nav navbar-nav navbar-right']) li a {
   text-decoration: underline;
 }

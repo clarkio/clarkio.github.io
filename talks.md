@@ -8,10 +8,6 @@ order: 2
 ---
 
 ## Upcoming Events
-- ### [VS Live](https://live360events.com/Events/Orlando-2017/)
-    - [Fast Focus on Azure Functions](https://live360events.com/Events/Orlando-2017/Sessions/Tuesday/VST15-Fast-Focus-on-Azure-Functions.aspx)
-    <p>Orlando, FL<br>
-    November 12 - 17, 2017</p>
 - ### [ng-atl](http://ng-atl.org)
     - [Code and Deploy Angular to the Azure Cloud - Workshop](http://ng-atl.org/Workshops)
     <p>Atlanta, GA<br>
@@ -19,6 +15,10 @@ order: 2
 
 ## Past Events
 ### 2017
+- ### [VS Live](https://live360events.com/Events/Orlando-2017/)
+    - [Fast Focus on Azure Functions](https://live360events.com/Events/Orlando-2017/Sessions/Tuesday/VST15-Fast-Focus-on-Azure-Functions.aspx)
+    <p>Orlando, FL<br>
+    November 12 - 17, 2017</p>
 - ### [Anglebrackets](https://anglebrackets.org/#!/speakers/Brian%20Clark) - Fall
     - Debugging in Node.js and Azure
     - Securing Angular and Node.js Apps in Azure
