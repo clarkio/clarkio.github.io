@@ -10,61 +10,59 @@
                 <span class="icon-bar"></span>
             </button>
             <ul class="list-inline text-center">
-                    {% if site.twitter_username %}
-                    <li>
-                        <a href="https://twitter.com/{{ site.twitter_username }}">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-twitter fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if site.facebook_username %}
-                    <li>
-                        <a href="https://www.facebook.com/{{ site.facebook_username }}">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-facebook fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% if site.github_username %}
-                    <li>
-                        <a href="https://github.com/{{ site.github_username }}">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-github fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                    {% endif %}
-                    <li>
-                        <a href="https://www.youtube.com/channel/UCID02LhTNYYhWbok3zyggOw">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-youtube fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.instagram.com/_clarkio/">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-instagram fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ "/feed.xml" | prepend: site.baseurl }}">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fa fa-rss fa-stack-1x"></i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
+                {% if site.twitter_username %}
+                <li>
+                    <a href="https://twitter.com/{{ site.twitter_username }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %} {% if site.facebook_username %}
+                <li>
+                    <a href="https://www.facebook.com/{{ site.facebook_username }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-facebook fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %} {% if site.github_username %}
+                <li>
+                    <a href="https://github.com/{{ site.github_username }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-github fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    <a href="https://www.youtube.com/c/clarkio">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-youtube fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/_clarkio/">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-instagram fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ " /feed.xml " | prepend: site.baseurl }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-rss fa-stack-1x"></i>
+                        </span>
+                    </a>
+                </li>
+            </ul>
             <!--<a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>-->
         </div>
 
@@ -74,8 +72,7 @@
                 <li>
                     <a href="{{ site.baseurl }}/">Home</a>
                 </li>
-                {% assign sorted_pages = site.pages | sort:"order" %}
-                {% for page in sorted_pages %}{% if page.title %}
+                {% assign sorted_pages = site.pages | sort:"order" %} {% for page in sorted_pages %}{% if page.title %}
                 <li>
                     <a href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
                 </li>
