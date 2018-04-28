@@ -9,14 +9,11 @@
     enable_page_level_ads: true
   });
 </script>
+
 <body>
-
-    {% include nav.html %}
-
-    {{ content }}
-
-    {% include footer.html %}
-
+  <div class="grid-container">
+    {% include nav.html %} {{ content }} {% include footer.html %}
+  </div>
 </body>
 
 </html>
