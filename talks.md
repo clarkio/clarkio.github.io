@@ -9,14 +9,20 @@ order: 2
 
 ## Upcoming Events
 
-* ### [Orlando Devs](https://orlandodevs.com/)
-  * [Security for All Apps](https://www.meetup.com/OrlandoDevs/events/248472263/)
-    <p>Orlando, FL<br>
-    April 2, 2018</p>
+* ### [Microsoft Build](https://www.microsoft.com/en-us/build)
+  * [Node.js with CI on Azure]()
+    <p>Seattle, WA<br>
+    May 7, 2018</p>
 
 ## Past Events
 
 ### 2018
+
+* ### [Orlando Devs](https://orlandodevs.com/)
+
+  * [Security for All Apps](https://www.meetup.com/OrlandoDevs/events/248472263/)
+    <p>Orlando, FL<br>
+    April 2, 2018</p>
 
 * ### [Orlando Code Camp](http://orlandocodecamp.com)
 
@@ -46,8 +52,8 @@ order: 2
     <p>Orlando, FL<br>
     October 10 - 12, 2017</p>
 * ### [Node.js Interactive](http://events.linuxfoundation.org/events/archive/2017/node-interactive)
-    <p>Vancouver, BC<br>
-October 4 - 6, 2017</p>
+      <p>Vancouver, BC<br>
+  October 4 - 6, 2017</p>
 * ### [Microsoft Ignite](https://www.microsoft.com/en-us/ignite)
   * [Building and deploying secure angular apps in the enterprise](https://myignite.microsoft.com/sessions/55304)
     <p>Orlando, FL<br>September 25 - 29, 2017</p>
