@@ -52,7 +52,7 @@ order: 2
     <p>Orlando, FL<br>
     October 10 - 12, 2017</p>
 * ### [Node.js Interactive](http://events.linuxfoundation.org/events/archive/2017/node-interactive)
-      <p>Vancouver, BC<br>
+    <p>Vancouver, BC<br>
   October 4 - 6, 2017</p>
 * ### [Microsoft Ignite](https://www.microsoft.com/en-us/ignite)
   * [Building and deploying secure angular apps in the enterprise](https://myignite.microsoft.com/sessions/55304)
