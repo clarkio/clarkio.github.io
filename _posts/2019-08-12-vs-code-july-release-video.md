@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "VS Code July 2019 Release Highlights Video"
-date:       2019-08-09
+date:       2019-08-12
 author:     "Brian Clark"
 # header-img: "img/vscode-jul19/vscode-jul19-header.png"
 header-class: "grayscale-img"
