@@ -1,26 +1,31 @@
 ---
 layout: page
-title: "Talks"
+title: 'Talks'
 description: "Conferences, code camps and community group events at which I've talked and presented something."
-header-img: "img/pbp-angular-man-sm3.png"
-header-class: "grayscale-img"
+header-img: 'img/pbp-angular-man-sm3.png'
+header-class: 'grayscale-img'
 order: 2
 ---
 
 ## Upcoming Events
 
-- ### [Anglebrackets](https://anglebrackets.org/) - Fall
-  - Debugging Node: An Unexpected Journey
-  - Node.js Security: The Sugar Glider Smuggle
-  - The Definitive JavaScript Developer Toolbox Workshop
-    <p>Las Vegas, NV<br>
-    December 4 - 7, 2018</p>
+- TBD
 
 ## Past Events
 
 ### 2018
 
-- ### [TwitchCon](https://twitchcon.com/schedule/lights-camera-ai-interactive-chat-bots-on-twitch/)
+- ### [Anglebrackets](https://anglebrackets.org/) - Fall
+
+  - Debugging Node: An Unexpected Journey
+  - Node.js Security: The Sugar Glider Smuggle
+  - The Definitive JavaScript Developer Toolbox Workshop
+
+    <p>Las Vegas, NV<br>
+    December 4 - 7, 2018</p>
+
+- ### [TwitchCon](https://twitchcon.com)
+
   - [Lights, Camera, AI: Interactive Chat Bots on Twitch](https://www.twitch.tv/videos/328589889?t=11663s)
     <p>San Jose, CA<br>
     October 25 - 28, 2018</p>

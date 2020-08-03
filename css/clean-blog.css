@@ -1,18 +1,15 @@
 body {
   font-family: 'Lora', 'Times New Roman', serif;
-  font-size: 20px;
+  font-size: 1.5em;
   color: #404040;
 }
 p {
   line-height: 1.5;
   margin: 30px 0;
 }
-blockquote p {
-  margin: 0px 0;
-}
-/* a {
+p a {
   text-decoration: underline;
-} */
+}
 h1,
 h2,
 h3,
@@ -137,19 +134,19 @@ hr.small {
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 .intro-header .site-heading,
 .intro-header .post-heading,
 .intro-header .page-heading {
-  padding: 100px 0 50px;
+  padding: 50px 0 25px;
   color: white;
 }
 @media only screen and (min-width: 768px) {
   .intro-header .site-heading,
   .intro-header .post-heading,
   .intro-header .page-heading {
-    padding: 150px 0;
+    padding: 75px 0;
   }
 }
 .intro-header .site-heading,
@@ -300,13 +297,11 @@ footer .copyright {
   margin: 0;
   font-size: 0.85em;
   line-height: 1.764705882em;
-  vertical-align: middle;
-  vertical-align: baseline;
   opacity: 0;
-  -webkit-transition: top 0.3s ease, opacity 0.3s ease;
-  -moz-transition: top 0.3s ease, opacity 0.3s ease;
-  -ms-transition: top 0.3s ease, opacity 0.3s ease;
-  transition: top 0.3s ease, opacity 0.3s ease;
+  -webkit-transition: top 0.3s ease,opacity 0.3s ease;
+  -moz-transition: top 0.3s ease,opacity 0.3s ease;
+  -ms-transition: top 0.3s ease,opacity 0.3s ease;
+  transition: top 0.3s ease,opacity 0.3s ease;
 }
 .floating-label-form-group::not(:first-child) {
   padding-left: 14px;
@@ -406,7 +401,6 @@ body {
   -webkit-filter: grayscale(80%);
   filter: grayscale(80%);
 }
-
 p a,
 h3 a,
 ol li a,
@@ -415,4 +409,8 @@ ul li ul li a {
 }
 div ul:not([class='nav navbar-nav navbar-right']) li a {
   text-decoration: underline;
+}
+#twitch-embed {
+  height: 100%;
+  width: 100%;
 }

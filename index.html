@@ -5,12 +5,10 @@ header-img: "img/home-bg.png"
 header-class: "grayscale-img"
 ---
 
-<!--<p style="margin: auto; width: 50%; padding: 10px;">No blog posts at the moment.</p>-->
-
 {% for post in paginator.posts %}
 <div class="post-preview">
     <a href="{{ post.url | prepend: site.baseurl }}">
-        <h2 class="post-title">            {{ post.title }}
+        <h2 class="post-title"> {{ post.title }}
         </h2>
         {% if post.subtitle %}
         <h3 class="post-subtitle">
@@ -18,7 +16,9 @@ header-class: "grayscale-img"
         </h3>
         {% endif %}
     </a>
-    <p class="post-meta">Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}</p>
+    <p class="post-meta">Posted by
+        {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %}
+        on {{ post.date | date: "%B %-d, %Y" }}</p>
 </div>
 <hr>
 {% endfor %}
@@ -28,13 +28,28 @@ header-class: "grayscale-img"
 <ul class="pager">
     {% if paginator.previous_page %}
     <li class="previous">
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+        <a
+            href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr;
+            Newer Posts</a>
     </li>
     {% endif %}
     {% if paginator.next_page %}
     <li class="next">
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+        <a
+            href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older
+            Posts &rarr;</a>
     </li>
     {% endif %}
 </ul>
 {% endif %}
+
+
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+<script type="text/javascript">
+    new Twitch.Embed("twitch-embed", {
+        height: 480,
+        width: '100%',
+        channel: "clarkio"
+    });
+</script>

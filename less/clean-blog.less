@@ -5,7 +5,7 @@
 
 body {
 	.serif;
-	font-size: 20px;
+	font-size: 1.5em;
 	color: @gray-dark;
 }
 
@@ -161,14 +161,14 @@ hr.small {
 	background-attachment: scroll;
 	.background-cover;
 	// NOTE: Background images are set within the HTML using inline CSS!
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 	.site-heading,
 	.post-heading,
 	.page-heading {
-		padding: 100px 0 50px;
+		padding: 50px 0 25px;
 		color: white;
 		@media only screen and (min-width: 768px) {
-			padding: 150px 0;
+			padding: 75px 0;
 		}
 	}
 	.site-heading,
@@ -459,4 +459,29 @@ img::-moz-selection {
 
 body {
 	webkit-tap-highlight-color: @brand-primary;
+}
+
+.grayscale-img {
+  width: 100%;
+  height: auto;
+  /*background-size: 100% 175%;
+    background-position: 30% 20%;*/
+  padding-top: 20px;
+  -webkit-filter: grayscale(80%);
+  filter: grayscale(80%);
+}
+
+p a,
+h3 a,
+ol li a,
+ul li ul li a {
+  text-decoration: underline;
+}
+div ul:not([class='nav navbar-nav navbar-right']) li a {
+  text-decoration: underline;
+}
+
+#twitch-embed {
+	height: 100%;
+	width: 100%;
 }
