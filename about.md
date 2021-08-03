@@ -4,7 +4,7 @@ title: 'About'
 description: ''
 header-img: 'img/home-bg.png'
 header-class: 'grayscale-img'
-order: 3
+order: 4
 ---
 
 **TL;DR:**<br/>
