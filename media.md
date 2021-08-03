@@ -4,7 +4,7 @@ title: 'Media'
 description: "Videos and podcasts in which I've talked and/or presented something."
 header-img: 'img/pbp-angular-man-sm3.png'
 header-class: 'grayscale-img'
-order: 2
+order: 3
 ---
 
 ### Live Stream
