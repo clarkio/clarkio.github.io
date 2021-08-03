@@ -11,6 +11,7 @@ order: 3
 
 - [Twitch Channel](https://twitch.tv/clarkio): Regular live coding sessions covering various projects dealing mostly with JavaScript
 - [Past Streams](https://twitch.tv/clarkio/videos): If you missed a stream you can catch the recordings that are saved on Twitch
+- [PyWeekly Live](https://www.youtube.com/playlist?list=PLlrxD0HtieHhMG0KVlaG9LlFpSOmJcCLa): A show I co-host with Cecil Phillip where we both learn Python as beginners and build with it.
 - [All Around Azure](https://blog.allaroundazure.com/): I was a guest on the show sharing VS Code extensions that help when working with Azure
   - [Part 1](https://www.youtube.com/watch?v=CTwjrxwWoLQ)
   - [Part 2](https://www.youtube.com/watch?v=rTAWOxr210Y)
