@@ -18,12 +18,13 @@ order: 3
 
 ### Pluralsight
 
-1. [Automating Node.js with NPM Scripts](https://www.pluralsight.com/courses/automating-nodejs-npm-scripts)
-1. [Angular Internationalization: Play by Play with John Papa](http://bit.ly/1Q6XrJI)
-1. [Getting Started with Node.js Security with Express and Angular](http://bit.ly/2cJyxhD)
-1. [Play by Play: iOS and Swift from Scratch](http://bit.ly/2nvJY1j)
-1. [Play by Play: Getting Started with Yarn as a Package Manager](https://www.pluralsight.com/courses/play-by-play-yarn-package-manager)
+- [Automating Node.js with NPM Scripts](https://www.pluralsight.com/courses/automating-nodejs-npm-scripts)
+- [Angular Internationalization: Play by Play with John Papa](http://bit.ly/1Q6XrJI)
+- [Getting Started with Node.js Security with Express and Angular](http://bit.ly/2cJyxhD)
+- [Play by Play: iOS and Swift from Scratch](http://bit.ly/2nvJY1j)
+- [Play by Play: Getting Started with Yarn as a Package Manager](https://www.pluralsight.com/courses/play-by-play-yarn-package-manager)
 
 ### Podcasts
 
-1. [Adventures in Angular: Episode 131 Security and Angular](http://bit.ly/2nKfCZU)
+- [Talk Python: Episode 242 Your education will be live-streamed](https://talkpython.fm/episodes/show/242/your-education-will-be-live-streamed)
+- [Adventures in Angular: Episode 131 Security and Angular](http://bit.ly/2nKfCZU)
