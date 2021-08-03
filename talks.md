@@ -9,6 +9,26 @@ order: 2
 
 ## Past Events
 
+### 2021
+
+- ### Microsoft Build
+
+  - [Get started with popular programming languages: Intro to Python and C# | CON069](https://www.youtube.com/watch?v=wiUzCG_mEGo)
+    <p>Virtual<br>
+    May 25 - 27, 2021</p>
+
+- ### [VS Code Day](https://www.youtube.com/watch?v=MUGWOdN3JHU)
+   - Host/MC
+      <p>Virtual<br>
+      Jan 27, 2021</p>
+
+### 2020
+
+- ### Start.Dev.Change
+  - [Intro to Twitch: Join the Live Coding Community!](https://www.youtube.com/watch?v=paFHjYhtKVU)
+    <p>Virtual<br>
+    Oct 14 - 15, 2020</p>
+
 ### 2018
 
 - ### [Anglebrackets](https://anglebrackets.org/) - Fall
