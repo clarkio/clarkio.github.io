@@ -4,7 +4,7 @@ title: "Slides"
 description: "Presentation content from past talks"
 header-img: "img/pbp-angular-man-sm3.png"
 header-class: "grayscale-img"
-order: 2
+order: 4
 ---
 
 ## Slides
