@@ -7,10 +7,6 @@ header-class: 'grayscale-img'
 order: 2
 ---
 
-## Upcoming Events
-
-- TBD
-
 ## Past Events
 
 ### 2018
@@ -85,7 +81,7 @@ order: 2
     <p>Vancouver, BC<br>
   October 4 - 6, 2017</p>
 - ### [Microsoft Ignite](https://www.microsoft.com/en-us/ignite)
-  - [Building and deploying secure angular apps in the enterprise](https://myignite.microsoft.com/sessions/55304)
+  - [Building and deploying secure angular apps in the enterprise](https://channel9.msdn.com/Events/Ignite/Microsoft-Ignite-Orlando-2017/BRK3288)
     <p>Orlando, FL<br>September 25 - 29, 2017</p>
 - ### [Anglebrackets](https://anglebrackets.org/) - Spring
   - Easy Web Application Security in Node.js & Angular
