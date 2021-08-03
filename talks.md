@@ -7,8 +7,6 @@ header-class: 'grayscale-img'
 order: 2
 ---
 
-## Past Events
-
 ### 2021
 
 - ### Microsoft Build
