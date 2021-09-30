@@ -18,6 +18,7 @@ Brian also hosts regular live code stream sessions on <a href="https://twitch.tv
 ### Publishings
 
 - [Angular Security Guide](https://angular.io/docs/ts/latest/guide/security.html)
+- [Node.js API Field Guide](https://nodejs.medium.com/node-js-api-field-guide-the-dos-and-donts-in-using-node-js-to-build-apis-66f582f983): ([pdf]({{ site.baseurl }}/assets/files/NodeJS_FieldGuide_Building_APIs_Final.pdf))
 
 ### GitHub Projects of Note
 
