@@ -3,6 +3,9 @@ layout: post
 title: 'Visual Studio Code Extension Development'
 date: 2019-03-25
 author: 'Brian Clark'
+header-class: "grayscale-img"
+keywords: "VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript"
+comments: True
 ---
 
 # Visual Studio Code Extension Development
