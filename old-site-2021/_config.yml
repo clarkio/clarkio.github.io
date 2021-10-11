@@ -1,0 +1,19 @@
+# Site settings
+title: Clarkio
+header-img: img/home-bg.png
+email: brian@clarkio.com
+description: "I'm Brian Clark and I go by clarkio on the interwebs. I run this site and author the content shared on it. I work in Developer Relations and create educational content on programming and tech. I live stream weekly, learning in public so stop by some time and join us."
+# baseurl: "/"
+url: "http://clarkio.com"
+twitter_username: _clarkio
+github_username:  clarkio
+# facebook_username:
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md", "generated_examples", "mail", ".devcontainer"]
+
+plugins: [jekyll-paginate]

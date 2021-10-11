@@ -1,0 +1,58 @@
+---
+layout: default
+---
+
+<!-- Page Header -->
+<header
+    class="intro-header {% if page.header-class %}{{ page.header-class }}{% endif %}"
+    style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
+                    </h1>
+                    <hr class="small">
+                    <span class="subheading">{{ page.description }}</span>
+                    {% if page.title == "Clarkio" %}
+                    {% if site.twitter_username %}
+                    <a href="https://twitter.com/{{ site.twitter_username }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-twitter fa-stack-1x"></i>
+                        </span>
+                    </a>
+                    {% endif %}
+                    {% if site.github_username %}
+                    <a href="https://github.com/{{ site.github_username }}">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-github fa-stack-1x"></i>
+                        </span>
+                    </a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+{% if page.url == "/" %}
+<div class="container">
+    <div class="row">
+        <div id="twitch-embed"></div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            {{ content }}
+        </div>
+    </div>
+</div>
+
+<hr>
