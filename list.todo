@@ -3,6 +3,7 @@
   https://docs.astro.build/guides/pagination/
 ☐ Research how to support old post URLs @created(Mon 10/11/2021 - 02:10 PM)
   /2016/02/19/first-post-first-course/
+  https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
 ☐ Research making blog posts self containing with assests @created(Mon 10/11/2021 - 11:42 PM)
   https://docs.astro.build/core-concepts/astro-components/#url-resolution
 ☐ Fix accessibility issues @created(Mon 10/11/2021 - 03:24 PM)
