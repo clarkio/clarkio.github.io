@@ -6,8 +6,14 @@ Structure:
   about
   blog
     - will read posts from posts/ folder
-  posts
-    - each folder is a self-contained blog post
-    - *.md, images,
+    > posts
+      - each folder is a self-contained blog post
+      - *.md, images,
+
+
+Layouts:
+  Docs: https://docs.astro.build/core-concepts/layouts/
+
+  
 
 
