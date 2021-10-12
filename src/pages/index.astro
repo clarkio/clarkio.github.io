@@ -1,5 +1,7 @@
 ---
 // Component Imports
+import MainHead from '../components/MainHead.astro';
+import Nav from '../components/Nav/Nav.astro';
 import BaseHead from '../components/BaseHead.astro';
 import BlogHeader from '../components/BlogHeader.astro';
 import BlogPostPreview from '../components/BlogPostPreview.astro';
@@ -12,9 +14,9 @@ interface MarkdownFrontmatter {
 // You can write any JavaScript/TypeScript that you'd like here.
 // It will run during the build, but never in the browser.
 // All variables are available to use in the HTML template below.
-let title = 'Example Blog';
-let description = 'The perfect starter for your perfect blog.';
-let permalink = 'https://example.com/';
+let title = 'Clarkio';
+let description = 'I\'m Brian Clark and I go by clarkio on the interwebs. I run this site and author the content shared on it. I work in Developer Relations and create educational content on programming and tech. I live stream weekly, learning in public so stop by some time and join us.';
+let permalink = 'https://clarkio.com/';
 
 // Data Fetching: List all Markdown posts in the repo.
 
@@ -26,10 +28,175 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
 ---
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} permalink={permalink} />
-    <link rel="stylesheet" href="/blog.css" />
+    <MainHead title={title} description={description} permalink={permalink} />
+    <!-- <link rel="stylesheet" href="/blog.css" /> -->
+    <style lang="scss">
+      $w-s: 750px;
 
-    <style>
+      .hero {
+        position: relative;
+        overflow: hidden;
+
+        @media (min-width: $w-s) {
+          height: 45vw;
+        }
+      }
+
+      .img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .gradient,
+      .gradient2 {
+        background-image: url('/assets/mesh-gradient.jpg');
+        background-size: cover;
+        pointer-events: none;
+        mix-blend-mode: screen;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+      }
+
+      .gradient2 {
+        mix-blend-mode: multiply;
+        background-size: cover;
+      }
+
+      .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        padding-left: 2rem;
+
+        @media (min-width: $w-s) {
+          padding-left: 4rem;
+        }
+      }
+
+      .title {
+        font-weight: 900;
+        font-size: var(--f-u8);
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+
+        @media (min-width: $w-s) {
+          font-size: var(--f-u12);
+        }
+      }
+
+      .grid {
+        display: grid;
+        grid-gap: 2rem;
+
+        @media (min-width: 1200px) {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+
+      .sectionTitle {
+        font-weight: 700;
+        font-size: var(--f-u8);
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+      }
+
+      .role {
+        position: relative;
+        display: inline-block;
+        font-weight: 900;
+        color: var(--t-bg);
+        background-color: var(--t-fg);
+        padding: 0.25em 0.5em;
+        z-index: 2;
+
+        @media (min-width: $w-s) {
+          font-size: var(--f-u3);
+        }
+
+        + .role {
+          margin-left: 1em;
+        }
+
+        &:nth-of-type(1) {
+          .invert {
+            background-color: var(--c-pink);
+          }
+        }
+
+        &:nth-of-type(2) {
+          .invert {
+            background-color: var(--c-blue);
+          }
+        }
+
+        &:nth-of-type(3) {
+          .invert {
+            background-color: var(--c-green);
+          }
+        }
+
+        &:hover {
+          .invert {
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          }
+        }
+      }
+
+      .invert {
+        position: absolute;
+        color: var(--t-fg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        clip-path: polygon(0% 100%, 100% 100%, 100% 200%, 0% 200%);
+        transition: clip-path cubic-bezier(0.4, 0, 0.5, 1) 150ms;
+      }
+
+      .desc {
+        font-size: var(--f-u2);
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+      }
+
+      .subtitle {
+        display: block;
+        font-weight: 400;
+        font-size: var(--f-d6);
+        letter-spacing: -0.0625em;
+      }
+
+      .bio {
+        line-height: 2;
+        margin-bottom: 2rem;
+
+        > span:first-of-type {
+          line-height: 1;
+          margin-bottom: 0.5em;
+          display: block;
+          font-weight: 700;
+          font-size: var(--f-u4);
+        }
+      }
+    </style>
+
+    <!--<style>
       body {
         width: 100%;
         display: grid;
@@ -70,12 +237,50 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
         font-size: 2.5rem;
         font-weight: 700;
       }
-    </style>
+    </style>-->
   </head>
 
   <body>
-    <BlogHeader />
-    <div class="layout">
+    <Nav />
+    <main class="wrapper mt4 mb4">
+      <div class="grid">
+        <div class="section">
+          <h3 class="sectionTitle">About me</h3>
+          <p class="bio">
+            <span>Hello!</span> I’m Brian, and this is my website. It was made using{' '}
+            <a href="https://github.com/snowpackjs/astro" target="_blank" rel="nofollow">
+              Astro
+            </a>
+            , a new way to build static sites.
+          </p>
+          <p>
+            <a href="/about">Read more</a>
+          </p>
+        </div>
+        <div class="section">
+          <h3 class="sectionTitle">Blog - Latest Post</h3>
+          <article class="content">
+            <!-- <section class="intro">
+              <h1 class="latest">{title}</h1>
+              <p>{description}</p>
+            </section> -->
+            <section>
+              {allPosts.map(p => <BlogPostPreview post={p} />)}
+            </section>
+          </article>
+        </div>
+        <div class="section">
+          <h3 class="sectionTitle">Selected Work</h3>
+          <!-- <PortfolioPreview project={featuredProject} /> -->
+          <div class="tac mt4">
+            <a href="/projects">
+              View All
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- <div class="layout">
       <article class="content">
         <section class="intro">
           <h1 class="latest">{title}</h1>
@@ -85,6 +290,6 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
           {allPosts.map(p => <BlogPostPreview post={p} />)}
         </section>
       </article>
-    </div>
+    </div> -->
   </body>
 </html>

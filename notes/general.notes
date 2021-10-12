@@ -1,0 +1,13 @@
+General Notes
+-----
+
+Structure:
+  index
+  about
+  blog
+    - will read posts from posts/ folder
+  posts
+    - each folder is a self-contained blog post
+    - *.md, images,
+
+
