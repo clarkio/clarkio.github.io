@@ -1,5 +1,4 @@
 ---
-# slug: '/2016/02/19/first-post-first-course/'
 title: 'First Post, First Course'
 description: "Sharing clarkio's first course on Pluralsight."
 publishDate: 'February 19, 2016'

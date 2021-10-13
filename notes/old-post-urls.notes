@@ -3,3 +3,13 @@ Research on supporting old post URLs
 
 
 https://daily-dev-tips.com/posts/astro-moving-from-collections-to-dynamic-routing/
+
+
+Ok we have things working with the following
+  [year]/[month]/[day]/[name].astro
+
+Such that Astro knows it needs to render a page for the given Markdown files found in the _posts folder
+
+  This was accomplished with a getStaticPaths() function that fetched all files from _posts folder and parse the year, month, day and name from each file and supplied that as a "param" in the returned array of the function
+
+However we've yet to determine how to load a Markdown file from the _posts folder based on the request path
