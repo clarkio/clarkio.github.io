@@ -10,7 +10,7 @@ let title = 'Clarkio | Blog';
 let description = 'Writings by clarkio.'
 let permalink = 'https://clarkio.com/blog';
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./blog/**/*.md');
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./blog/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
 ---
 
