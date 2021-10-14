@@ -31,3 +31,9 @@ Instead I need to do the following which seems to work so far:
 ```
 let posts = Astro.fetchContent<MarkdownFrontmatter>('./**/*.md');
 ```
+
+Another possible solution for this issue - what if you used a svelte component/file instead?
+
+According to the Docs, no a .svelte Page is not supported and couldn't be used as a different way to approach solving the problem
+  "Astro Components (.astro) and Markdown Files (.md) are the only supported formats for pages. Other page types (like a .jsx React component) are not supported, but you can use anything as a UI component inside of an .astro page to achieve a similar result."
+  > From: https://docs.astro.build/core-concepts/astro-pages/
