@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Main.astro';
 import BlogPost from '../components/BlogPost.astro';
+import {Debug} from 'astro/components';
 
 const {content} = Astro.props;
 const {title, description, publishDate, author, heroImage, permalink, alt} = content;
 ---
 
 <Layout content={{ title, description, publishDate, author, heroImage, permalink, alt }}>
+    <!-- <Debug {content} /> -->
     <BlogPost title={title} author={author} heroImage={heroImage} publishDate={publishDate} alt={alt}>
       <slot />
     </BlogPost>
