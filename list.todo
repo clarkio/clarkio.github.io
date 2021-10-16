@@ -1,5 +1,4 @@
 
-☐ Research how to sort new and old posts together based on date @created(Fri 10/15/2021 - 10:33 PM)
 ☐ Research pagination for astro/sveltekit @created(Mon 10/11/2021 - 06:42 PM)
   https://docs.astro.build/guides/pagination/
 ☐ Research making blog posts self containing with assests @created(Mon 10/11/2021 - 11:42 PM)
@@ -7,6 +6,7 @@
 ☐ Fix accessibility issues @created(Mon 10/11/2021 - 03:24 PM)
 
 Archive:
+  ✔ Research how to sort new and old posts together based on date @created(Fri 10/15/2021 - 10:33 PM) @done(Fri 10/15/2021 - 11:40 PM)
   ✔ Convert legacy post dates to Astro supported dates @created(Fri 10/15/2021 - 11:34 PM) @done(Fri 10/15/2021 - 11:35 PM)
   ✔ Research how to include all new and legacy posts when displaying posts @created(Wed 10/13/2021 - 08:39 PM) @done(Fri 10/15/2021 - 10:38 PM)
   ✔ Research how to support old post URLs @created(Mon 10/11/2021 - 02:10 PM) @done(21-10-13 17:08)
