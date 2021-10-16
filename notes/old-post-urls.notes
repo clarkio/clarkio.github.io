@@ -42,3 +42,11 @@ Also when testing a silly typo in the URL made it seem like things weren't worki
   Example: for this post 2017-02-01-introducing-astro.md I accidentally was trying to request it from the following url with an extra 't' in it localhost:3000/2017/02/01/introducting-astro/
 
 The next hurdle was reading the file content and having it rendered. This still needs to be tweaked a bit for styling but we're able to gather this when processing the static files in the getStaticPath() function in the "props" property. Setting up this in the function return value props: {content: postContent} allows us to access it in the component through Astro.props.content or const {content} = Astro.props;
+
+
+
+Need to create a Node.js script to read in each old post and clean up for support in Astro. You can see the script in /helper-scripts/update-legacy-posts.js/
+
+The script describes what needed to be modified from jekyll frontmatter and syntax in order to be supported during an Astro build
+
+This was mostly removing frontmatter keys and adjusting links to other posts

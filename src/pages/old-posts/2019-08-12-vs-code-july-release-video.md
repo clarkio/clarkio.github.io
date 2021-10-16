@@ -1,18 +1,14 @@
 ---
-
-title:      "VS Code July 2019 Release Highlights Video"
-date:       2019-08-12
-author:     "Brian Clark"
-# header-img: "img/vscode-jul19/vscode-jul19-header.png"
-
-
+title: 'VS Code July 2019 Release Highlights Video'
+publishDate: August 11, 2019
+author: 'Brian Clark'
 ---
 
 ## July 2019 VS Code Release
+
 Visual Studio Code has come out with another release that is jam packed with improvements and new features. You can read through the [release notes](https://code.visualstudio.com/updates/v1_37?WT.mc_id=clarkio-blog-brcl) to find out more about them or watch this short video to see some of the highlights from it.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BPhzEbugqsM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
 
 ### Features Highlighted
 
@@ -21,6 +17,5 @@ Visual Studio Code has come out with another release that is jam packed with imp
 - [New Product Icons](https://code.visualstudio.com/updates/v1_37#_new-product-icons?WT.mc_id=clarkio-blog-brcl)
 - [NPM Scripts Explorer Visibility](https://code.visualstudio.com/updates/v1_37#_npm-scripts-explorer-visible-by-default?WT.mc_id=clarkio-blog-brcl)
 - [Improved Minimap Search Results Visibility](https://code.visualstudio.com/updates/v1_37#_improved-minimap-search-results-visibility?WT.mc_id=clarkio-blog-brcl)
-
 
 What's your favorite feature or improvement in this month's release? Share it below 👇

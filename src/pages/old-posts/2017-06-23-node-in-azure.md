@@ -1,10 +1,7 @@
 ---
-
 title:      "Running Node.js in Azure"
-date:       2017-06-23
+publishDate:       June 22, 2017
 author:     "Brian Clark"
-header-img: "img/plain-bg.png"
-
 ---
 
 ### Running Node.js in Azure

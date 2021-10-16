@@ -12,15 +12,42 @@ posts.forEach((postName) => {
     encoding: 'utf-8',
   });
 
+  // Clean up some of the not needed Jekyll frontmatter
   // case insensitive with 0 or more spaces between
-  postContents = postContents.replace(/layout: *post/i, '');
-  postContents = postContents.replace(/comments: *True/i, '');
+  postContents = postContents.replace(/layout: *post\n/i, '');
+  postContents = postContents.replace(/comments: *True\n/i, '');
 
-  postContents = postContents.replace('header-class: "grayscale-img"', '');
-  postContents = postContents.replace(
-    'header-img: "img/pbp-angular-man-sm3.png"',
-    ''
-  );
+  postContents = postContents.replace('header-class: "grayscale-img"\n', '');
+  postContents = postContents.replace("header-class: 'grayscale-img'\n", '');
+  // postContents = postContents.replace('header-img: "img/plain-bg.png"\n', '');
+  postContents = postContents.replace(/header-img: *"([\w\d\-\/.])+"\n/, '');
+  postContents = postContents.replace(/header-img: *'([\w\d\-\/.])+'\n/, '');
+
+  // Update Jekyll date key and format to Astro supported date
+  postContents = postContents.replace(/date/i, 'publishDate');
+  const dateRegex = /(\d{4})\-(\d{1,2})\-(\d{1,2})/;
+  postContents = postContents.replace(dateRegex, function (match, token) {
+    // 'match' is the full line match
+    // 'token' is the group within the match (if any)
+    // Convert old post Jekyll date (2017-12-01) to Astro date December 1, 2017
+    const year = match.substr(0, 4);
+    const month = match.substr(5, 2);
+    const day = match.substr(8, 2);
+    const jekyllDate = new Date(
+      year,
+      parseInt(month) - 1,
+      parseInt(day) - 1,
+      0,
+      0,
+      0,
+      0
+    ).toLocaleDateString(undefined, {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+    return jekyllDate;
+  });
 
   // replace all by using regex and '/g'
   postContents = postContents.replace(
@@ -31,7 +58,7 @@ posts.forEach((postName) => {
   postContents = postContents.replace(/{% endhighlight %}/g, '```');
 
   // find any links to other posts and convert to newer format
-  let linkRegex = /{{ site.baseurl }}{% post_url ([\w\d\-_]+) %}/g;
+  const linkRegex = /{{ site.baseurl }}{% post_url ([\w\d\-_]+) %}/g;
   postContents = postContents.replace(linkRegex, function (match, token) {
     // 'match' is the full line match
     // 'token' is the group within the match (if any)
@@ -45,6 +72,11 @@ posts.forEach((postName) => {
   postContents = postContents.replace(
     /{{ site.baseurl }}/g,
     '/assets/old-posts'
+  );
+
+  postContents = postContents.replace(
+    '"<Extension Category>: <Command Title>"',
+    '`<Extension Category>: <Command Title>`'
   );
 
   fs.writeFileSync(outputDirectory + postName, postContents);

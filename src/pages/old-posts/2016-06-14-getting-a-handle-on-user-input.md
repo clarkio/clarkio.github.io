@@ -1,11 +1,7 @@
 ---
-
 title:      "Getting a Handle on User Input"
-date:       2016-06-14
+publishDate:       June 13, 2016
 author:     "Brian Clark"
-header-img: "img/input-dresser-handle.jpg"
-
-
 ---
 
 # Input Handling

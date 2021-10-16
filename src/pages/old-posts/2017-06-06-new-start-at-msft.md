@@ -1,11 +1,7 @@
 ---
-
 title:      "A New Start at Microsoft"
-date:       2017-06-06
+publishDate:       June 5, 2017
 author:     "Brian Clark"
-header-img: "img/new-start-at-msft/new-start-msft-header.jpg"
-
-
 ---
 
 

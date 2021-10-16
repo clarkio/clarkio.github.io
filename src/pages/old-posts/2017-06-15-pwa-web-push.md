@@ -1,10 +1,7 @@
 ---
-
 title:      "Progressive Web Apps and Web Push API - Introduction"
-date:       2017-06-15
+publishDate:       June 14, 2017
 author:     "Brian Clark"
-
-
 ---
 
 #### PWA and Web Push API Blog Series
