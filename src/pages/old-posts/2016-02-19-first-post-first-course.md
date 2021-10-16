@@ -1,6 +1,6 @@
 ---
 title:      "First Post, First Course"
-publishDate:       February 18, 2016
+publishDate:       February 19, 2016
 author:     "Brian Clark"
 ---
 

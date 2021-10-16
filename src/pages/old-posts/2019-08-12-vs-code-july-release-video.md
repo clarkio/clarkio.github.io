@@ -1,6 +1,6 @@
 ---
 title: 'VS Code July 2019 Release Highlights Video'
-publishDate: August 11, 2019
+publishDate: August 12, 2019
 author: 'Brian Clark'
 ---
 

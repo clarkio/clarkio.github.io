@@ -1,6 +1,6 @@
 ---
 title:      "Getting a Handle on User Input"
-publishDate:       June 13, 2016
+publishDate:       June 14, 2016
 author:     "Brian Clark"
 ---
 

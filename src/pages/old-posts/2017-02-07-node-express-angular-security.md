@@ -1,6 +1,6 @@
 ---
 title:      "Getting Started with Node.js Security with Express and Angular"
-publishDate:       February 6, 2017
+publishDate:       February 7, 2017
 author:     "Brian Clark"
 ---
 

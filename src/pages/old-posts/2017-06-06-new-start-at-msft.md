@@ -1,6 +1,6 @@
 ---
 title:      "A New Start at Microsoft"
-publishDate:       June 5, 2017
+publishDate:       June 6, 2017
 author:     "Brian Clark"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: 'Visual Studio Code Extension Development'
-publishDate: March 24, 2019
+publishDate: March 25, 2019
 author: 'Brian Clark'
 keywords: "VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript"
 ---

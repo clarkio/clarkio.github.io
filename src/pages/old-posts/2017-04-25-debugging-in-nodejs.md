@@ -1,6 +1,6 @@
 ---
 title:      "Debugging in Node.js"
-publishDate:       April 24, 2017
+publishDate:       April 25, 2017
 author:     "Brian Clark"
 ---
 

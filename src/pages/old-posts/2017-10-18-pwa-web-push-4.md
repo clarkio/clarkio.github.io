@@ -1,6 +1,6 @@
 ---
 title:      "Progressive Web Apps and Web Push API - Pushing Messages"
-publishDate:       October 17, 2017
+publishDate:       October 18, 2017
 author:     "Brian Clark"
 ---
 #### PWA and Web Push API Blog Series

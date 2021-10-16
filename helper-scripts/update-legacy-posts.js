@@ -36,7 +36,7 @@ posts.forEach((postName) => {
     const jekyllDate = new Date(
       year,
       parseInt(month) - 1,
-      parseInt(day) - 1,
+      parseInt(day),
       0,
       0,
       0,

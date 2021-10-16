@@ -1,6 +1,6 @@
 ---
 title:      "Restify Middleware & Next()"
-publishDate:       November 1, 2016
+publishDate:       November 2, 2016
 author:     "Brian Clark"
 keywords: "headers already set, next(), restify next(), short-circuit request, node restify"
 ---
