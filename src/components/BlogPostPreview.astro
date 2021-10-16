@@ -4,15 +4,20 @@ export interface Props {
 }
 
 const { post } = Astro.props;
+let url = post.url;
+if (post.url.includes('old-posts')) {
+  url = post.url.replace('/old-posts/', '');
+  url = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
+}
 ---
 <article class="post-preview">
   <header>
     <h3 class="publish-date">{post.publishDate}</h3>
-    <a href={post.url}><h1 class="title">{post.title}</h1></a>
+    <a href={url}><h1 class="title">{post.title}</h1></a>
   </header>
   <main>
     <p>{post.description}</p>
-    <a href={post.url}>Read more</a>
+    <a href={url}>Read more</a>
   </main>
 </article>
 

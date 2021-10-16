@@ -14,6 +14,16 @@ Structure:
 Layouts:
   Docs: https://docs.astro.build/core-concepts/layouts/
 
-  
+
+Migration steps
+
+1. Learn how Astro works by reading through the docs
+2. Use the blog template
+3.
+...
+X. Write a script to replace jekyll specific elements from the posts
+    - frontmatter such as "post"
+    - code highlighting such as {% highlight javascript %}
+    - general interpolation for things like links/urls using {{ site.baseurl }} or {% post_url 2017-06-15-pwa-web-push %}
 
 
