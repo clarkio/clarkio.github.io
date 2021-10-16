@@ -14,3 +14,4 @@ What I think you'll at least get from this course is a good laugh from the quite
 <a href="http://jpapa.me/pbpngi18n" class="caption">
     Play by Play: Angular Internationalization with John Papa and Brian Clark
 </a>
+
