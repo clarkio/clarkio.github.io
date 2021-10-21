@@ -17,12 +17,19 @@ export async function getStaticPaths({paginate, rss}) {
     title: 'Clarkio | Blog',
     description: 'Writings by clarkio.',
     customData: `<language>en-us</language>`,
-    items: sortedPosts.map(item => ({
-      title: item.title,
-      description: item.description,
-      link: item.url,
-      pubDate: item.date,
-    })),
+    items: sortedPosts.map(item => {
+      let url = item.url;
+      if (item.url.includes('old-posts')) {
+        url = item.url.replace('/old-posts/', '');
+        url = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
+      }
+      return {
+        title: item.title,
+        description: item.description,
+        link: url,
+        pubDate: item.date,
+      }
+    })
   });
 
   // Return a paginated collection of paths for all posts

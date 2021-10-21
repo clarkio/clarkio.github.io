@@ -1,11 +1,11 @@
 
-☐ Add RSS feed support @created(Sun 10/17/2021 - 02:07 PM)
-  https://docs.astro.build/guides/rss/
 ☐ Research making blog posts self containing with assests @created(Mon 10/11/2021 - 11:42 PM)
   https://docs.astro.build/core-concepts/astro-components/#url-resolution
 ☐ Fix accessibility issues @created(Mon 10/11/2021 - 03:24 PM)
 
 Archive:
+  ✔ Add RSS feed support @created(Sun 10/17/2021 - 02:07 PM) @done(Thu 10/21/2021 - 05:12 PM)
+    https://docs.astro.build/guides/rss/
   ✔ Research pagination for astro/sveltekit @created(Mon 10/11/2021 - 06:42 PM) @done(Sun 10/17/2021 - 02:06 PM)
     https://docs.astro.build/guides/pagination/
     Error: Rename your file to `[...page].astro` or customize the param name via the `paginate([], {param: '...'}` option.
