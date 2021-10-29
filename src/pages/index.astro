@@ -13,7 +13,7 @@ let description = 'I\'m Brian Clark and I go by clarkio on the interwebs. I run 
 let permalink = 'https://clarkio.com/';
 
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('./posts/*.md');
+let allPosts = Astro.fetchContent<MarkdownFrontmatter>('../**/*.md');
 allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
 
 ---
@@ -33,7 +33,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
         <h3 class="sectionTitle">Blog - Latest Post</h3>
         <article class="content">
           <section>
-            {allPosts.map(p => <BlogPostPreview post={p} />)}
+            <BlogPostPreview post={allPosts[0]} />
           </section>
         </article>
       </div>
