@@ -2,7 +2,7 @@
 title: 'Visual Studio Code Extension Development'
 publishDate: March 25, 2019
 author: 'Brian Clark'
-keywords: "VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript"
+keywords: 'VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript'
 ---
 
 # Visual Studio Code Extension Development
@@ -239,9 +239,7 @@ let extensionListData = ''; // variable to hold the file contents as a string
 activeExtensions.forEach((extension: vscode.Extension<any>) => {
   // thanks to TypeScript and the exposed Extension type from the VS Code API we get intellisense to see the properties of each extension.
   // In particular we want to read the display name property found in the `packageJSON` object and generate the URL using the extension ID property
-  extensionListData += `${
-    extension.packageJSON.displayName
-  }: https://marketplace.visualstudio.com/items?itemName=${extension.id}\n`;
+  extensionListData += `${extension.packageJSON.displayName}: https://marketplace.visualstudio.com/items?itemName=${extension.id}\n`;
 });
 ```
 
@@ -250,7 +248,7 @@ At this point we have the data we need and in a human readable format so we're r
 When the user has completed their actions in the save dialog the resulting URI (universal resource indicator) for the file will be returned to us in the promise `.then()` resolve function. We'll need to make sure a URI was indeed provided first. If it wasn't we can show an error dialog with `vscode.window.showErrorMessage()`. Once we know we at least have a value we can write to the file but let's hold on that just for a moment. See the following code which accomplishes what we've discussed in this section:
 
 ```javascript
-vscode.window.showSaveDialog({ filters: { '*': ['txt'] } }).then(uri => {
+vscode.window.showSaveDialog({ filters: { '*': ['txt'] } }).then((uri) => {
   if (!uri) {
     // This pops up an error notification dialog
     vscode.window.showErrorMessage(
