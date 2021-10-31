@@ -117,11 +117,11 @@ body {
 
 .layout {
   display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--max-width)) minmax(
+  grid-auto-flow: row;
+  /* grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--max-width)) minmax(
       var(--gutter),
       1fr
-    );
+    ); */
   gap: 1em;
 }
 
@@ -132,6 +132,10 @@ body {
 nav ul {
   list-style: none;
   padding: 0;
+}
+
+nav {
+  text-align: center;
 }
 
 /* Typography */
@@ -182,7 +186,7 @@ a {
   color: var(--theme-accent);
   font-weight: 400;
   text-underline-offset: 0.08em;
-  text-decoration: underline;
+  text-decoration: none;
   align-items: center;
   gap: 0.5rem;
 }
