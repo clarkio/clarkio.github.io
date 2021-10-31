@@ -18,26 +18,25 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
 
 ---
 <Layout content={{ title, description, permalink }}>
-  <main class="wrapper mt4 mb4">
-    <div class="grid">
-      <div class="section">
-        <p class="bio">
-          <span>Hello!</span> I’m Brian, and this is my website. It was made using{' '}
-          <a href="https://github.com/snowpackjs/astro" target="_blank" rel="noopener">Astro</a>, a new way to build static sites.
-        </p>
-        <p>
-          <a href="/about">Read more about Clarkio to get to know him</a>
-        </p>
-      </div>
-      <div class="section">
-        <h3 class="sectionTitle">Blog - Latest Post</h3>
-        <article class="content">
-          <section>
-            <BlogPostPreview post={allPosts[0]} />
-          </section>
-        </article>
-      </div>
-      <!-- <div class="section">
+  <div class="layout">
+    <div>
+      <p class="bio">
+        <span>Hello!</span> I’m Brian, and this is my website. It was made using{' '}
+        <a href="https://github.com/snowpackjs/astro" target="_blank" rel="noopener">Astro</a>, a new way to build static sites.
+      </p>
+      <p>
+        <a href="/about">Read more about Clarkio to get to know him</a>
+      </p>
+    </div>
+    <div>
+      <h3 class="sectionTitle">Latest Blog Post:</h3>
+      <article class="content">
+        <section>
+          <BlogPostPreview post={allPosts[0]} />
+        </section>
+      </article>
+    </div>
+    <!-- <div class="section">
         <h3 class="sectionTitle">Selected Work</h3>
         <PortfolioPreview project={featuredProject} />
         <div class="tac mt4">
@@ -45,8 +44,6 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
             View All
           </a>
         </div>
-      </div> -->
-    </div>
-  </main>
-
+    </div> -->
+  </div>
 </Layout>
