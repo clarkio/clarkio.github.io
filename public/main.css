@@ -54,11 +54,6 @@
   --theme-code-bg: var(--color-gray-700);
 }
 
-body {
-  background: var(--theme-bg);
-  color: var(--theme-text);
-}
-
 :root.theme-dark {
   color-scheme: dark;
   --theme-accent-opacity: 0.3;
@@ -78,6 +73,11 @@ body {
   background-color: rgba(var(--theme-accent-rgb), var(--theme-accent-opacity));
 }
 
+/*
+  ninopepper: * means everything
+  not the html root
+  for html you would use html {}
+*/
 * {
   box-sizing: border-box;
   margin: 0;
@@ -94,10 +94,19 @@ body {
   }
 }
 
+/*
+  Why no need for 'width' property?
+  ninopepper: because the body is a block level element, and block-level elements take the full width of the container element by default
+
+  Why use vh instead of %?
+  ninopepper: because % means, % of the parent
+*/
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: var(--theme-bg);
+  color: var(--theme-text);
   font-family: var(--font-body);
   font-size: 1rem;
   font-size: clamp(
@@ -106,36 +115,14 @@ body {
     1.125rem
   );
   line-height: 1.625;
-}
-
-body {
-  width: 100%;
-  display: grid;
   --gutter: 0.5rem;
   --doc-padding: 2rem;
 }
 
-.layout {
-  display: grid;
-  grid-auto-flow: row;
-  /* grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--max-width)) minmax(
-      var(--gutter),
-      1fr
-    ); */
-  gap: 1em;
-}
-
-.layout > article {
-  grid-column: 2;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-nav {
-  text-align: center;
+.content {
+  flex: 1;
+  /* padding: 0 40px; */
+  padding: 0 clamp(10px, 10vw, 40px);
 }
 
 /* Typography */
@@ -227,86 +214,43 @@ strong {
   color: inherit;
 }
 
+footer {
+  margin-top: auto;
+  text-align: center;
+}
+
 /* Supporting Content */
 
 code:not([class*='language']) {
-  --border-radius: 3px;
-  --padding-block: 0.2rem;
-  --padding-inline: 0.33rem;
 
-  font-family: var(--font-mono);
-  font-size: 0.85em;
-  color: inherit;
-  background-color: var(--theme-code-inline-bg);
-  padding: var(--padding-block) var(--padding-inline);
-  margin: calc(var(--padding-block) * -1) -0.125em;
-  border-radius: var(--border-radius);
 }
 
 pre > code:not([class*='language']) {
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  color: inherit;
+
 }
 
 pre {
-  position: relative;
-  background-color: var(--theme-code-bg);
-  color: var(--theme-code-text);
-  --padding-block: 1rem;
-  --padding-inline: 2rem;
-  padding: var(--padding-block) var(--padding-inline);
-  padding-right: calc(var(--padding-inline) * 2);
-  margin-left: calc(50vw - var(--padding-inline));
-  transform: translateX(-50vw);
 
-  line-height: 1.414;
-  width: calc(100vw + (var(--padding-inline) * 2));
-  max-width: calc(100% + (var(--padding-inline) * 2));
-  overflow-y: hidden;
-  overflow-x: auto;
 }
 
 @media (min-width: 37.75em) {
   pre {
-    --padding-inline: 1.25rem;
-    border-radius: 8px;
+
   }
 }
 
 .flex {
-  display: flex;
-  align-items: center;
+
 }
 
 img.cover {
-  width: 100%;
-  max-height: 50vh;
-  object-fit: cover;
+
 }
 
 blockquote {
-  font-size: 1.5rem;
-  --padding-block: 1rem;
-  --padding-inline: 1.25rem;
-  --color: var(--theme-divider);
 
-  display: flex;
-  flex-direction: column;
-
-  padding: var(--padding-block) var(--padding-inline);
-  margin-left: calc(var(--padding-inline) * -1);
-  margin-right: calc(var(--padding-inline) * -1);
-
-  background: transparent;
-  border-left: calc(var(--padding-inline) / 2) solid var(--color);
-  border-radius: 0;
 }
 
 blockquote .source {
-  font-weight: 500;
-  color: var(--color);
-  font-size: 1rem;
+
 }

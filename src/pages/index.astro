@@ -18,7 +18,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
 
 ---
 <Layout content={{ title, description, permalink }}>
-  <div class="layout">
+  <div class="content">
     <div>
       <p class="bio">
         <span>Hello!</span> I’m Brian, and this is my website. It was made using{' '}
@@ -30,7 +30,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
     </div>
     <div>
       <h3 class="sectionTitle">Latest Blog Post:</h3>
-      <article class="content">
+      <article>
         <section>
           <BlogPostPreview post={allPosts[0]} />
         </section>
