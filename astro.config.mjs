@@ -7,8 +7,20 @@
 // You can disable this by removing "@ts-check" and `@type` comments below.
 
 // @ts-check
-export default /** @type {import('astro').AstroUserConfig} */ ({
-  // Enable the Preact renderer to support Preact JSX components.
+// export default /** @type {import('astro').AstroUserConfig} */ ({
+//   // Enable the Preact renderer to support Preact JSX components.
+//   renderers: ['@astrojs/renderer-svelte'],
+//   buildOptions: {
+//     /** Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs. */
+//     site: 'https://clarkio.com',
+//     /** Generate an automatically-generated sitemap for your build.
+//      * Default: true
+//      */
+//     sitemap: true,
+//   },
+// });
+
+export default {
   renderers: ['@astrojs/renderer-svelte'],
   buildOptions: {
     /** Your public domain, e.g.: https://my-site.dev/. Used to generate sitemaps and canonical URLs. */
@@ -18,4 +30,4 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
      */
     sitemap: true,
   },
-});
+}
