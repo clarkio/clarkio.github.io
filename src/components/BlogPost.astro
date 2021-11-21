@@ -15,10 +15,10 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
 <div class="layout">
   <article class="content">
     <div>
-      <header>
+      <header class="post-header">
         {heroImage && <img width="720" height="420" class="hero-image" loading="lazy" src={heroImage} alt={alt} />}
+        <h1>{title}</h1>
         <p class="publish-date">{publishDate}</p>
-        <h1 class="title">{title}</h1>
         <Author name="@Clarkio" href="https://twitter.com/_clarkio" />
       </header>
       <main>
@@ -27,3 +27,11 @@ const { title, author, publishDate, heroImage, alt } = Astro.props;
     </div>
   </article>
 </div>
+
+<style>
+
+.post-header {
+  text-align: center;
+}
+
+</style>

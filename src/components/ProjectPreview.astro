@@ -1,0 +1,10 @@
+---
+const { project } = Astro.props;
+const projectSvgData = `https://gh-card.dev/repos/clarkio/${project.slug}.svg?link_target=_blank`
+---
+<article class="project-preview">
+  <header>
+    <!-- <h6>{project.title}</h6> -->
+    <object type="image/svg+xml" data={projectSvgData}></object>
+  </header>
+</article>

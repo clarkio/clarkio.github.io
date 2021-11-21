@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Main.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import allProjects from '../../public/projects.json';
 
 let title = 'Clarkio | Projects';
 let description = 'Learn about projects clarkio has worked on.'
@@ -8,6 +10,24 @@ let permalink = 'https://clarkio.com/projects';
 
 <Layout content={{ title, description, permalink }}>
   <div class="content">
-    Learn about projects Clarkio has worked on.
+    <h3>GitHub Projects of Note:</h3>
+
+    {allProjects.map(p => <ProjectPreview project={p} />)}
+    <!-- <ul>
+      <li>
+        <a href="https://github.com/clarkio/vscode-twitch-highlighter">vscode-twitch-highlighter</a>: A VS Code extension that integrates with Twitch chat that allows viewers to highlight lines of code via commands. The idea is this will help point out issues a viewer may have caught but the streamer missed.
+      </li>
+      <li><a href="https://github.com/clarkio/snyk-cli-action">snyk-cli-action</a>: A GitHub Action that integrates the Snyk CLI tool into workflows.</li>
+      <li><a href="https://github.com/clarkio/macos-wifiname">wifiname</a>: A macOS toolbar app that displays the name of the wifi to which your device is currently connected.</li>
+      <li><a href="https://github.com/clarkio/azure-mask">azure-mask</a>: A browser extension built with [Anthony Chu](https:twitter.com/nthonychu) that can be used to obfuscate subscription ID's when presenting the Azure portal website on your screen.</li>
+      <li><a href="https://github.com/clarkio/ttv-chat-bot">ttv-chat-bot</a>: A Twitch chat bot that will listen for commands to control internet connected lights and on stream overlay color.</li>
+      <li><a href="https://github.com/dhanishgajjar/vscode-icons">vscode-icons</a>: A project I've contributed to that provides custom app icons for VS Code instead of the default one.</li>
+      <li><a href="https://github.com/Azure-Samples/angular-cosmosdb/tree/insecure-heroes">insecure-heroes</a>: A sample Angular application that is used to demonstrate web application security topics.</li>
+      <li><a href="https://github.com/clarkio/vulnerable-app">vulnerable-app</a>: A sample AngularJS application that is used to demonstrate web application security topics.</li>
+      <li><a href="https://github.com/clarkio/cert-sig-alg">cert-sig-alg</a>: A CLI tool that will determine the signature algorithm used in the SSL certificate for a list of domains.</li>
+      <li><a href="https://github.com/clarkio/ios-favorite-movies">ios-favorite-movies</a>: A sample iOS app that allows the user to search for movies and add them to a list as their favorite.</li>
+      <li><a href="https://github.com/clarkio/node-web-push">node-web-push</a>: A demo Node.js application that uses the Web Push protocol to be used with Progressive Web Application clients.</li>
+      <li><a href="https://github.com/clarkio/house-bot">house-bot</a>: A serverless AI bot using Azure Functions to receive text commands for controlling internet connected light bulbs.</li>
+    </ul> -->
   </div>
 </Layout>

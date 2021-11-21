@@ -4,6 +4,8 @@
 ☐ Fix accessibility issues @created(Mon 10/11/2021 - 03:24 PM)
 
 Archive:
+  ✔ Add dynamic retrieval of projects using GitHub card service @created(Sun 11/21/2021 - 06:24 PM) @done(Sun 11/21/2021 - 06:25 PM)
+  ✔ Finish converting markdown links to anchor links in /about @created(Sun 11/21/2021 - 02:23 PM) @done(Sun 11/21/2021 - 05:21 PM)
   ✔ Add RSS feed support @created(Sun 10/17/2021 - 02:07 PM) @done(Thu 10/21/2021 - 05:12 PM)
     https://docs.astro.build/guides/rss/
   ✔ Research pagination for astro/sveltekit @created(Mon 10/11/2021 - 06:42 PM) @done(Sun 10/17/2021 - 02:06 PM)
