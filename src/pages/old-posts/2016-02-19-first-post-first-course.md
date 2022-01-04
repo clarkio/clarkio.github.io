@@ -14,7 +14,7 @@ What I think you'll at least get from this course is a good laugh from the quite
 <span class="caption text-muted">[Play by Play: Angular Internationalization with John Papa and Brian Clark](http://jpapa.me/pbpngi18n)</span> -->
 
 <a href="http://jpapa.me/pbpngi18n">
-    <img src="/assets/old-posts/img/pbp-angular-i18n.png" alt="Play by Play: Angular Internationalization with John Papa and Brian Clark Video">
+    <img class="post-image" src="/assets/old-posts/img/pbp-angular-i18n.png" alt="Play by Play: Angular Internationalization with John Papa and Brian Clark Video">
 </a>
 <a href="http://jpapa.me/pbpngi18n" class="caption">
     Play by Play: Angular Internationalization with John Papa and Brian Clark

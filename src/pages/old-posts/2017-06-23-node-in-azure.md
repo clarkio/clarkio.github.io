@@ -10,10 +10,14 @@ Do you have an amazing web API or application built with Node.js? Do you have so
 If you'd prefer, you can watch the following short videos capturing these same steps as I narrate through them.
 
 #### Preparing Azure to Run an Existing Node.js Application
+<div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/CFtLF5qVshI" frameborder="0" allowfullscreen></iframe>
+</div>
 
 #### Connecting Node.js Source Code to Azure from GitHub
+<div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/IQ7hGovGEmM" frameborder="0" allowfullscreen></iframe>
+</div>
 
 ## Prerequisites
 * [Create an account with Azure](https://azure.microsoft.com/)

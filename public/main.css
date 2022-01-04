@@ -47,7 +47,7 @@
   --theme-accent-opacity: 0.3;
   --theme-divider: var(--color-gray-900);
   --theme-text: var(--color-theme-foreground);
-  --theme-text-light: var(--color-gray-400);
+  --theme-text-light: var(--color-gray-200);
   --theme-text-lighter: var(--color-gray-600);
   --theme-bg: var(--color-theme-background);
   --theme-bg-offset: var(--color-gray-900);
@@ -143,7 +143,7 @@ body {
   /* padding: 0 40px; */
   padding: 0 clamp(10px, 10vw, 40px);
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
 }
 
 /* Typography */
@@ -157,8 +157,8 @@ body {
   /* max-width: 40ch; */
 }
 
-:is(h2, h3):not(:first-child) {
-  margin-top: 3rem;
+:is(h2, h3, h4):not(:first-child) {
+  margin-top: 1rem;
 }
 
 h1 {
@@ -291,4 +291,14 @@ blockquote .source {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.caption {
+  font-size: 12px;
+  font-style: italic;
 }

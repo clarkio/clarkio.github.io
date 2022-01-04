@@ -73,25 +73,25 @@ That is all that was left to do so let's run it all and try sending our first pu
 
 3. Open your browser to [http://localhost:8080/push-notification-lab/04-3-vapid/](http://localhost:8080/push-notification-lab/04-3-vapid/) and click the **Enable Push Messaging** button
 
-    <img src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-push-notification.png" alt="The web page of the push notification lab from the Google PWA labs">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-push-notification.png" alt="The web page of the push notification lab from the Google PWA labs">
 
     **You may be prompted to enable Notifications in your browser as seen in the image below. Click "Allow" to enable them.**
 
-    <img src="/assets/old-posts/img/pwa-web-push-4/enable-notifications-in-browser.png" alt="The pop up message from the Chrome browser to request permission for displaying notifications">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-4/enable-notifications-in-browser.png" alt="The pop up message from the Chrome browser to request permission for displaying notifications">
 
 4. Open up a REST client (I suggest and will be using [Postman](https://www.getpostman.com/))
 
 5. Set up your REST client to execute a POST request to [http://localhost:3000/push](http://localhost:3000/push) and with the JSON data seen below as the raw body value.
 
-    <img src="/assets/old-posts/img/pwa-web-push-4/sending-push-message-postman.png" alt="The POST request to push a message using the Postman REST client">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-4/sending-push-message-postman.png" alt="The POST request to push a message using the Postman REST client">
 
 6. Send the request from your REST client and you should see a pop up notification with the message of "Hello!"
 
-    <img src="/assets/old-posts/img/pwa-web-push-4/push-message-result.png" alt="The result of push a message via the REST client and a pop notification message showing the expected text">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-4/push-message-result.png" alt="The result of push a message via the REST client and a pop notification message showing the expected text">
 
 7. Done!
 
 ### Wrap Up
 We've completed setting up a Progressive Web App and enabling push notifications by leveraging web-push and the VAPID protocol. This is just the start though and there's plenty more you can try out with push notifications. Check out the [Introduction to Push Notifications](https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications) article to learn more about customization, best practices and more!
 
-<img src="/assets/old-posts/img/pwa-web-push/result-animation.gif" alt="a progressive web app with web push API sending notifications to clients">
+<img class="post-image" src="/assets/old-posts/img/pwa-web-push/result-animation.gif" alt="a progressive web app with web push API sending notifications to clients">

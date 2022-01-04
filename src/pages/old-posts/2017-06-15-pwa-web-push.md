@@ -23,6 +23,6 @@ In my experimentation, I created a PWA and quickly jumped into sending notificat
 
 With these tools I was able to push notifications through a Node.js web server running on Azure. This was set up by leveraging the [web-push](https://github.com/web-push-libs/web-push) module which helps in securely creating the correct message payloads to be received by the service worker running on the client. The result is a browser notification displayed on the user's machine with the message:
 
-<img src="/assets/old-posts/img/pwa-web-push/result-animation.gif" alt="a progressive web app with web push API sending notifications to clients">
+<img class="post-image" src="/assets/old-posts/img/pwa-web-push/result-animation.gif" alt="a progressive web app with web push API sending notifications to clients">
 
 Continue reading and learn about setting up the PWA subscriber in the next post: [Progressive Web Apps and Web Push API - Subscriber](/2017/08/04/pwa-web-push-2)

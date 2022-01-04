@@ -45,13 +45,13 @@ The following steps will help you set up a PWA using the Google Push Notificatio
 
 4. Open up your browser to [http://localhost:8080](http://localhost:8080) and you should see something like the following:
 
-    <img src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-index.png" alt="The web page of the index for the Google PWA labs">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-index.png" alt="The web page of the index for the Google PWA labs">
 
 5. Click the `push-notification-lab` link, then the `04-3-vapid` link and you should now be viewing the running Push Notification code lab in your browser
 
-   <img src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-push-notification.png" alt="The web page of the push notification lab from the Google PWA labs">
+   <img class="post-image" src="/assets/old-posts/img/pwa-web-push-2/google-pwa-lab-push-notification.png" alt="The web page of the push notification lab from the Google PWA labs">
 
 ### What is All This?
-We now have a PWA client that will act as the subscriber to our push notifications. The Google lab provides this (almost) complete version of a PWA that's ready to leverage the Web Push API using the Voluntary Application Server Identification for Web Push protocol (VAPID). Now that's a mouthful but think of it as a way to securely identify and connect the subscribers, push service and application server. 
+We now have a PWA client that will act as the subscriber to our push notifications. The Google lab provides this (almost) complete version of a PWA that's ready to leverage the Web Push API using the Voluntary Application Server Identification for Web Push protocol (VAPID). Now that's a mouthful but think of it as a way to securely identify and connect the subscribers, push service and application server.
 
 Using the VAPID protocol allows us to avoid having to create any kind of account with a cloud provider and register our application with it. Instead, we'll build our own Node.js application server that implements this protocol and securely connect it to the PWA we started in this post. All of that is covered in the [next blog post](/2017/08/22/pwa-web-push-3).

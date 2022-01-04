@@ -18,6 +18,6 @@ Each topic is approached by first showing an attack in action against a sample a
 If you're interested in learning more about secure application development and/or applying such patterns and practices in an AngularJS/Node.js application stack then this course is a great start for you. I hope you enjoy it!
 
 <a href="https://bit.ly/2cJyxhD">
-    <img src="/assets/old-posts/img/course-sec-sample.png" alt="Getting Started with Node.js Security with Express and Angular Video">
+    <img class="post-image" src="/assets/old-posts/img/course-sec-sample.png" alt="Getting Started with Node.js Security with Express and Angular Video">
 </a>
-<span class="caption text-muted">[Getting Started with Node.js Security with Express and Angular](https://bit.ly/2cJyxhD)</span>
+<span class="caption text-muted"><a href="https://bit.ly/2cJyxhD">Getting Started with Node.js Security with Express and Angular</a></span>

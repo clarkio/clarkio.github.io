@@ -19,10 +19,10 @@ We created a subscriber client in the last post but we need somewhere for it to 
 To get us started we're going to create a simple Node.js server with Express and we'll leverage my [node-web-push](https://github.com/clarkio/node-web-push) server on GitHub to save some time setting up.
 
 1. Clone the repository
-    
+
     Using https:
     `git clone https://github.com/clarkio/node-web-push.git`
-    
+
     Using ssh:
     `git clone git@github.com:clarkio/node-web-push.git`
 
@@ -46,7 +46,7 @@ To get us started we're going to create a simple Node.js server with Express and
 
     You should see the following message in your browser:
 
-    <img src="/assets/old-posts/img/pwa-web-push-3/start-node-running-message.png" alt="The web page result when navigating to http://localhost:3000">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-3/start-node-running-message.png" alt="The web page result when navigating to http://localhost:3000">
 
 ### Generate VAPID Keys
 Now that we have an application server we can add our code to support the Web Push protocol. We'll be using the [web-push](https://github.com/web-push-libs/web-push) npm package to help us out and you should have it already installed from when we ran `npm i` earlier.
@@ -60,7 +60,7 @@ To save you from having to do yet another install you can run the following in t
 
 After you run that command you should see a similar output to what is shown below.
 
-<img src="/assets/old-posts/img/pwa-web-push-3/generate-keys-output.png" alt="The keys generated using the web-push generate-vapid-keys command in terminal">
+<img class="post-image" src="/assets/old-posts/img/pwa-web-push-3/generate-keys-output.png" alt="The keys generated using the web-push generate-vapid-keys command in terminal">
 
 Now we need to put those key values in a place that our application server can access them. A good place to store them for local development (temporarily) is in our shell profile file as environment variables. In bash this is your `.bash_profile` file which is typically found in `~/.bash_profile` on a Mac. If you're using a different shell please refer to its documentation to determine the profile file to store your VAPID keys in.
 
@@ -173,12 +173,12 @@ At this point we have an application server that speaks web-push but no interfac
 
         function handleSuccess(success, index) {
             res.send(constants.messages.SINGLE_PUBLISH_SUCCESS_MESSAGE);
-            return next(false);    
+            return next(false);
         }
 
         function handleError(error, index) {
             res.status(500).send(constants.errors.ERROR_MULTIPLE_PUBLISH);
-            return next(false);    
+            return next(false);
         }
     });
     ```
@@ -203,7 +203,7 @@ Let's ensure everything is set up and working as expected by send some dummy dat
 
 4. Confirm you receive the response message "Subscription stored"
 
-    <img src="/assets/old-posts/img/pwa-web-push-3/postman-test-result.png" alt="The Postman REST client POST request and response results">
+    <img class="post-image" src="/assets/old-posts/img/pwa-web-push-3/postman-test-result.png" alt="The Postman REST client POST request and response results">
 
 5. Go back to your terminal and press `CTRL + c` to stop the server
 

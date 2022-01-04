@@ -5,8 +5,6 @@ author: 'Brian Clark'
 keywords: 'VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript'
 ---
 
-# Visual Studio Code Extension Development
-
 I don't like long introductions in posts because you know what brought you here and don't need the fluff. Let's get right into it...
 
 ## Assumptions
@@ -38,17 +36,15 @@ What does this mean? Color themes and Icon Themes. A Color theme is actually a g
 
   My favorite theme at the time of writing this post is [Night Owl](https://aka.ms/AA4mrsy) by [Sarah Drasner](https://twitter.com/sarah_edo)
 
-  <img src="/assets/old-posts/img/vscode-extension-dev/vscode-color-themes.gif" alt="The result when cycling through VS Code color theme options">
+  <img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/vscode-color-themes.gif" alt="The result when cycling through VS Code color theme options">
   <span class="caption text-muted">Cycling through color themes in VS Code that have been installed</span>
 
 - Icon Theme
 
   This type of extension customizes the graphics associated to file/folder types. A great example of this is the [Material Icon Theme](https://aka.ms/AA4mjye) (which is what I use).
 
-  <img src="/assets/old-posts/img/vscode-extension-dev/vscode-icon-themes.gif" alt="The result when cycling through VS Code icon theme options">
+  <img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/vscode-icon-themes.gif" alt="The result when cycling through VS Code icon theme options">
   <span class="caption text-muted">Cycling through icon themes in VS Code that have been installed</span>
-
----
 
 #### 2. Extend Existing Functionality
 
@@ -63,8 +59,6 @@ More complex examples:
 
 - Enhancing source control with Git: [GitLens](https://aka.ms/AA4mxac)
 - Improving code readability: [Bracket Pair Colorizer](https://aka.ms/AA4mxae)
-
----
 
 #### 3. Add New Functionality
 
@@ -83,8 +77,6 @@ Examples:
 - Problem: No native support for integrating Twitch chat messages to control highlighting lines of code
 
   Solution: [Line Highlighter for Twitch Extension](https://aka.ms/AA4n4y4)
-
----
 
 #### 4. Aggregate Other Extensions into One Place
 
@@ -116,11 +108,11 @@ yo code
 
 You'll be prompted to choose the type of extension you want to create. Use your keyboard arrow keys to move to the "New Color Theme" option and press your `Enter` key.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme1.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme1.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
 
 Next, you'll be prompted with an option to import or convert an existing color theme. Choose the option "No, start fresh"
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme2.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme2.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
 
 From here, the prompt will ask you to provide details about the extension.
 
@@ -130,35 +122,35 @@ From here, the prompt will ask you to provide details about the extension.
 - name of your theme: this is the text users will see as an option when switching themes within VS Code (after it's been installed)
 - `base theme`: this give you a starting point for creating your theme instead of trying to figure out how to create one completely from scratch. Choose whichever option best suites the type of color theme you want to create: Dark, Light, High Contrast
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme3.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme3.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
 
 When you've finished entering all the options for your color theme press the `Enter` key for the last prompt to start generatoring everything. You'll see some progress in the terminal/command prompt which shows the files and folders it is generating for you.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme4.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme4.png" alt="VS Code Yeoman Generator - results from running yo code in the terminal/command prompt">
 
 When it's done you should see a message that says the following: "To start editing with Visual Studio Code, use the following commands:" Run the commands shown below it and you'll see VS Code open the folder for your color theme extension.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme5.png" alt="VS Code with the current color theme extension folder open">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme5.png" alt="VS Code with the current color theme extension folder open">
 
 Open up the debugger view in VS Code using the keyboard shortcut `CTRL/CMD + SHIFT + D` (or click on the icon with a bug in it). Click on the green "play" button (as seen in the screenshot below) to start debugging/running your color theme extension.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme8.png" alt="VS Code with the current color theme .json file open">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme8.png" alt="VS Code with the current color theme .json file open">
 
 Once running you'll see a new instance of VS Code open up with a title of "Extension Development Host". This is a separate instance of VS Code running with your extension loaded into it. Back in a previous step when generating this color theme extensions in the terminal/command prompt I chose the "Dark" option for my base theme so I see this as the default color in the Extension Development Host instance of VS Code. You may see different colors based on the base theme you chose during that step. Let's test out changing a color to the theme.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme9.png" alt="VS Code with the current color theme .json file open">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme9.png" alt="VS Code with the current color theme .json file open">
 
 Go back to your other instance of VS Code that has the extension folder opened. Expand the "themes" folder and double click on the `.json` file to open/view the contents.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme6.png" alt="VS Code with the current color theme .json file open">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme6.png" alt="VS Code with the current color theme .json file open">
 
 Now find the `editor.background` key in the JSON file under the `colors` key. Hover your mouse over the `string` value to bring up the color picker view in VS Code. Carefully move your mouse into the color picker pop up view and change the color to something different. You'll see the `string` value change.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme7.png" alt="Editing the background color for the color theme in VS">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme7.png" alt="Editing the background color for the color theme in VS">
 
 Once you save your changes you'll see the "Extension Development Host" of VS Code will automatically update and display the color change.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme10.png" alt="Editing the background color for the color theme in VS">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-color-theme10.png" alt="Editing the background color for the color theme in VS">
 
 You've done it! Congratulations on creating your first extension for Visual Studio Code! Feel free to continue tweaking color options in the `.json` file to further customize your color theme extension.
 
@@ -174,7 +166,7 @@ yo code
 
 You'll be prompted to choose the type of extension you want to create. Use your keyboard arrow keys to move to the "New Extension (TypeScript)" option and press your `Enter` key.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list1.png" alt="Terminal/command line prompt using the Yeoman generator for VS Code and selecting 'New Extension (TypeScript)'">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list1.png" alt="Terminal/command line prompt using the Yeoman generator for VS Code and selecting 'New Extension (TypeScript)'">
 
 From here, the prompt will ask you to provide details about the extension.
 
@@ -185,11 +177,11 @@ From here, the prompt will ask you to provide details about the extension.
 - `git repository`: this give you the option to initialize the project as a new git repository or not
 - `package manager`: choose whichever you prefer between npm and yarn
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list2.png" alt="Filling in options for creating a new VS Code extension with the Yeoman generator">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list2.png" alt="Filling in options for creating a new VS Code extension with the Yeoman generator">
 
 Change to the directory for the newly generated extension and open it up in VS Code
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list4.png" alt="Changing directories and opening the folder in VS Code via the terminal/command line">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list4.png" alt="Changing directories and opening the folder in VS Code via the terminal/command line">
 
 VS Code extensions leverage `package.json` as their manifest and extend it with some further options beyond the conventional options. We won't go into detail for all of them but we'll need to change a few for the purposes of this extension.
 
@@ -199,13 +191,13 @@ VS Code extensions leverage `package.json` as their manifest and extend it with 
 
 3. The `title` key within the command definition provides the text that will be shown to users within the command palette. Change the value of this key to be `Create List`. The last thing we'll change in this file is add another key below `title` so put a comma at the end of the `title` value and press your "Enter" key for a new line. Add a key `"category"` (intellisense should pop up to help here too) and give it a value `"Extension Lister"`. This `category` helps group commands visually such that they show up as the following in the command palette `<Extension Category>: <Command Title>` (Example: "Extension Listener: Create List")
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list5.png" alt="Modifying the package.json file for our new extension">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list5.png" alt="Modifying the package.json file for our new extension">
 
 Let's get into building out the functionality for this extension. Within the `src` folder you'll see a file `extension.ts`. This is the main file that's used to load up your extension and corresponding functionality. Take a moment to read the comments within the code that helps describe some of the parts of code that were generated for you... Seriously go read it and come back.
 
 Now that you're a bit more familiar with the code let's get our first command set up. We first need to update our command code to match the changes we made in the `package.json`. Find the code `registerCommand('extension.helloWorld'` and replace `helloWorld` with `createList`.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list7.png" alt="Changing the name of the registered command in code">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list7.png" alt="Changing the name of the registered command in code">
 
 Ok the command is wired up correctly and we're ready to start gathering the list of extensions. The VS Code API provides a namespace `extensions` which contains a list of all extensions available in the instance under the `all` array. We access the API via the `import * as vscode from 'vscode';` statement. Since that was already done within the `registerCommand` (on line 17) let's grabbed the array and assign it to a constant. Replace the line of code `vscode.window.showInformationMessage('Hello World!');` (and the comment above it) with the following code:
 
@@ -262,7 +254,7 @@ vscode.window.showSaveDialog({ filters: { '*': ['txt'] } }).then((uri) => {
 
 We want to implement writing to a file on the Operating System's file system, however, we shouldn't pollute our main extension code with that code. Let's create a separate file to handle writing a file to the file system. Open VS Code's file explorer view by clicking on the icon or using the keyboard shortcut `CTRL/CMD + SHIFT + E`. Right-click on the `src` folder and choose "New File"
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list8.png" alt="Creating a new file in the 'src' folder">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list8.png" alt="Creating a new file in the 'src' folder">
 
 Give it the name `file-manager` and press enter to complete the file creation. VS Code should automatically open up that file but if not double-click on it. We won't go through the following code as it's not really pertinent to the creation of VS Code extensions but know that it's handling writing the contents to a file. Feel free to review the code if you'd like. Add this to the `file-manager.ts` file and save:
 
@@ -311,19 +303,19 @@ What does this code do? It's calling the function `writeExtensionListFile` and p
 
 How about we give it a run and test it out? Press `F5` to start debugging or open the debug view in VS Code and press the green "Play" button.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list9.png" alt="Running/debugging the Extension Lister extension">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list9.png" alt="Running/debugging the Extension Lister extension">
 
 You'll then see a new VS Code instance load up with the title "Extension Development Host" that has your extension running within it. Open the command palette using the keyboard shortcut `CTRL/CMD + SHIFT + P` and type `lister` to see the available command for our extension.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list10.png" alt="Testing out the Extension Lister extension">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list10.png" alt="Testing out the Extension Lister extension">
 
 Press the "Enter" key on your keyboard and you should be prompted to choose a location and name for your file. Pick a location and name for your file and click the "Save" button. You should see a success notification pop up in the bottom right-hand corner of VS Code.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list11.png" alt="A success notification for completing the file creation in our extension">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list11.png" alt="A success notification for completing the file creation in our extension">
 
 Just to make sure go to where you saved the file and open it to see the contents. You should see the full list of active extensions you're using with their marketplace URLs.
 
-<img src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list12.png" alt="The resulting file contents from the VS Code Extension Lister extension">
+<img class="post-image" src="/assets/old-posts/img/vscode-extension-dev/yo-code-extension-list12.png" alt="The resulting file contents from the VS Code Extension Lister extension">
 
 Congrats you've created another VS Code extension and one that adds new functionality!
 
