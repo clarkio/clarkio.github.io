@@ -39,11 +39,13 @@
   --color-theme-foreground-rgb: 229, 229, 229;
   --color-theme-background: #05498e;
   --color-theme-background-rgb: 5, 73, 142;
+  --color-theme-accent: #8df2ff;
 
   /* --color-logo: #19b3fc;
   --color-logo-rgb: 25, 179, 252; */
 
   color-scheme: dark;
+  --theme-accent: var(--color-theme-accent);
   --theme-accent-opacity: 0.3;
   --theme-divider: var(--color-gray-900);
   --theme-text: var(--color-theme-foreground);
@@ -134,8 +136,10 @@ body {
     1.125rem
   );
   line-height: 1.625;
-  --gutter: 0.5rem;
+  /* --gutter: 0.5rem;
   --doc-padding: 2rem;
+  padding: 0 clamp(10px, 10vw, 40px);
+  max-width: 900px; */
 }
 
 .content {
@@ -155,6 +159,7 @@ body {
 
 :is(h1, h2) {
   /* max-width: 40ch; */
+  margin-bottom: 1rem;
 }
 
 :is(h2, h3, h4):not(:first-child) {
@@ -183,6 +188,19 @@ h5 {
 
 p {
   color: var(--theme-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.section {
+  margin-bottom: 0.5rem;
+}
+
+.sectionTitle {
+  font-weight: bold;
+}
+
+article {
+  margin-bottom: 0.75rem;
 }
 
 small,
@@ -301,4 +319,11 @@ blockquote .source {
 .caption {
   font-size: 12px;
   font-style: italic;
+}
+
+.project-preview {
+  /* display: none; */
+  max-width: 100%;
+  width: 100px;
+  height: auto;
 }

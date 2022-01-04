@@ -20,14 +20,14 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
 ---
 <Layout content={{ title, description, permalink }}>
   <div class="content">
-    <div>
+    <div class="section">
       <h2>Brian Clark (clarkio)</h2>
       <p class="bio">
         <span>Hey there!</span> I’m a developer and content creator that loves to learn new things and share them. I enjoy building tools to automate the boring stuff, teaching about application security and sharing development tips and tricks.
       </p>
       <a href="/about">Read more to get to know me</a>
     </div>
-    <div>
+    <div class="section">
       <h2 class="sectionTitle">Latest Writings:</h2>
       <article>
         <section>
@@ -41,11 +41,11 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
         </div>
       </article>
     </div>
-    <div>
+    <div class="section">
         <h2 class="sectionTitle">Latest Projects:</h2>
-        <ProjectPreview project={allProjects[0]} />
+        <!-- <ProjectPreview project={allProjects[0]} />
         <ProjectPreview project={allProjects[1]} />
-        <ProjectPreview project={allProjects[2]} />
+        <ProjectPreview project={allProjects[2]} /> -->
         <div>
           <a href="/projects">
             View All Projects
