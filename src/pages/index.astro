@@ -25,12 +25,10 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
       <p class="bio">
         <span>Hey there!</span> I’m a developer and content creator that loves to learn new things and share them. I enjoy building tools to automate the boring stuff, teaching about application security and sharing development tips and tricks.
       </p>
-      <p>
-        <a href="/about">Read more to get to know me</a>
-      </p>
+      <a href="/about">Read more to get to know me</a>
     </div>
     <div>
-      <h3 class="sectionTitle">Latest Writings:</h3>
+      <h2 class="sectionTitle">Latest Writings:</h2>
       <article>
         <section>
           <BlogPostPreview post={allPosts[0]} />
@@ -44,7 +42,7 @@ allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(
       </article>
     </div>
     <div>
-        <h3 class="sectionTitle">Latest Projects:</h3>
+        <h2 class="sectionTitle">Latest Projects:</h2>
         <ProjectPreview project={allProjects[0]} />
         <ProjectPreview project={allProjects[1]} />
         <ProjectPreview project={allProjects[2]} />

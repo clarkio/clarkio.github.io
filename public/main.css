@@ -33,11 +33,30 @@
   --color-red-rgb: 255, 22, 57;
   --color-yellow: #ffbe2d;
   --color-yellow-rgb: 255, 190, 45;
-  --color-logo: #19b3fc;
-  --color-logo-rgb: 25, 179, 252;
+  --color-logo: #00607D;
+  --color-logo-rgb: 0, 96, 125;
+  --color-theme-foreground: #E5E5E5;
+  --color-theme-foreground-rgb: 229, 229, 229;
+  --color-theme-background: #05498e;
+  --color-theme-background-rgb: 5, 73, 142;
+
+  /* --color-logo: #19b3fc;
+  --color-logo-rgb: 25, 179, 252; */
+
+  color-scheme: dark;
+  --theme-accent-opacity: 0.3;
+  --theme-divider: var(--color-gray-900);
+  --theme-text: var(--color-theme-foreground);
+  --theme-text-light: var(--color-gray-400);
+  --theme-text-lighter: var(--color-gray-600);
+  --theme-bg: var(--color-theme-background);
+  --theme-bg-offset: var(--color-gray-900);
+  --theme-code-inline-bg: var(--color-gray-800);
+  --theme-code-text: var(--color-gray-200);
+  --theme-code-bg: var(--color-gray-900);
 }
 
-:root {
+:root.theme-light {
   color-scheme: light;
   --theme-accent: var(--color-logo);
   --theme-accent-rgb: var(--color-logo-rgb);
@@ -54,8 +73,8 @@
   --theme-code-bg: var(--color-gray-700);
 }
 
-:root.theme-dark {
-  color-scheme: dark;
+/*:root.theme-dark {
+   color-scheme: dark;
   --theme-accent-opacity: 0.3;
   --theme-divider: var(--color-gray-900);
   --theme-text: var(--color-gray-200);
@@ -66,7 +85,7 @@
   --theme-code-inline-bg: var(--color-gray-800);
   --theme-code-text: var(--color-gray-200);
   --theme-code-bg: var(--color-gray-900);
-}
+}*/
 
 ::selection {
   color: var(--theme-accent);
@@ -123,6 +142,8 @@ body {
   flex: 1;
   /* padding: 0 40px; */
   padding: 0 clamp(10px, 10vw, 40px);
+  margin: 0 auto;
+  max-width: 800px;
 }
 
 /* Typography */
