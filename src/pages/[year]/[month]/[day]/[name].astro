@@ -1,6 +1,5 @@
 ---
 import BlogPostLayout from '../../../../layouts/BlogPost.astro';
-import {Markdown, Debug} from 'astro/components';
 
 export async function getStaticPaths() {
   let allLegacyPosts = await Astro.glob('../../../old-posts/*.md');
