@@ -15,8 +15,8 @@ let description = 'I\'m Brian Clark and I go by clarkio on the interwebs. I run 
 let permalink = 'https://clarkio.com/';
 
 
-let allPosts = Astro.fetchContent<MarkdownFrontmatter>('../**/*.md');
-allPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
+let allPosts = await Astro.glob<MarkdownFrontmatter>('../**/*.md');
+allPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
 ---
 <Layout content={{ title, description, permalink }}>
   <div class="content">

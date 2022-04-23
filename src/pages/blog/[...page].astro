@@ -8,29 +8,29 @@ let description = 'Writings by clarkio.'
 let permalink = 'https://clarkio.com/blog';
 
 export async function getStaticPaths({paginate, rss}) {
-  const allPosts = Astro.fetchContent('../../**/*.md');
-  const sortedPosts = allPosts.sort((a, b) => new Date(b.publishDate).valueOf() - new Date(a.publishDate).valueOf());
+  const allPosts = await Astro.glob('../../**/*.md');
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
 
   // Generate an RSS feed from this collection of posts.
   // NOTE: This is disabled by default, since it requires `buildOptions.site` to be set in your "astro.config.mjs" file.
-  rss({
-    title: 'Clarkio | Blog',
-    description: 'Writings by clarkio.',
-    customData: `<language>en-us</language>`,
-    items: sortedPosts.map(item => {
-      let url = item.url;
-      if (item.url.includes('old-posts')) {
-        url = item.url.replace('/old-posts/', '');
-        url = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
-      }
-      return {
-        title: item.title,
-        description: item.description,
-        link: url,
-        pubDate: item.date,
-      }
-    })
-  });
+  // rss({
+  //   title: 'Clarkio | Blog',
+  //   description: 'Writings by clarkio.',
+  //   customData: `<language>en-us</language>`,
+  //   items: sortedPosts.map(item => {
+  //     let url = item.url;
+  //     if (item.url.includes('old-posts')) {
+  //       url = item.url.replace('/old-posts/', '');
+  //       url = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
+  //     }
+  //     return {
+  //       title: item.frontmatter.title,
+  //       description: item.frontmatter.description,
+  //       link: url,
+  //       pubDate: item.frontmatter.date,
+  //     }
+  //   })
+  // });
 
   // Return a paginated collection of paths for all posts
   return paginate(sortedPosts, {pageSize: 5});
