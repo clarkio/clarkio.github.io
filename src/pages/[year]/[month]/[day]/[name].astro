@@ -17,11 +17,10 @@ export async function getStaticPaths() {
 }
 
 const {content} = Astro.props;
-const awaitedContent = await content.default();
 ---
 
 <!-- Supply the content needed to render the BlogPost Layout -->
 <BlogPostLayout content={content}>
   <!-- Supply the actual blog post markdown  -->
-  <Markdown content={awaitedContent.metadata.source}/>
+  <content.Content />
 </BlogPostLayout>
