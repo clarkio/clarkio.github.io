@@ -3,9 +3,11 @@ import BlogPostLayout from '../../../../layouts/BlogPost.astro';
 import {Markdown} from 'astro/components';
 
 export async function getStaticPaths() {
-  let allLegacyPosts = Astro.fetchContent('../../../old-posts/*.md');
+  let allLegacyPosts = await Astro.glob('../../../old-posts/*.md');
+  console.log(allLegacyPosts[0]);
   const result = allLegacyPosts.map(postContent => {
     const url = postContent.url.replace('/old-posts/', '');
+    // console.log(url);
     const year = url.substr(0,4);
     const month = url.substr(5,2);
     const day = url.substr(8,2);

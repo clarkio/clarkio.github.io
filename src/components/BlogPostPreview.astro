@@ -12,11 +12,11 @@ if (post.url.includes('old-posts')) {
 ---
 <article class="post-preview">
   <header>
-    <a href={url}><h3 class="title">{post.title}</h3></a>
-    <h5 class="publish-date">{post.publishDate}</h5>
+    <a href={url}><h3 class="title">{post.frontmatter.title}</h3></a>
+    <h5 class="publish-date">{post.frontmatter.publishDate}</h5>
   </header>
   <main>
-    <p>{post.description}</p>
+    <p>{post.frontmatter.description}</p>
     <a href={url}>Read more</a>
   </main>
 </article>
