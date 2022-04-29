@@ -2,6 +2,7 @@
 title:      "Getting a Handle on User Input"
 publishDate:       June 14, 2016
 author:     "Brian Clark"
+layout: '../../layouts/BlogPost.astro'
 ---
 
 ## Input Handling

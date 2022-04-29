@@ -3,6 +3,7 @@ title: 'Visual Studio Code Extension Development'
 publishDate: March 25, 2019
 author: 'Brian Clark'
 keywords: 'VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript'
+layout: '../../layouts/BlogPost.astro'
 ---
 
 I don't like long introductions in posts because you know what brought you here and don't need the fluff. Let's get right into it...
@@ -100,10 +101,13 @@ npm i -g generator-code
 
 > This installs the Yeoman CLI tool and the VS Code templating/scaffolding generator as an option within it
 
-Once you've installed that go to your main folder/directory that you'd like to use for development (example: `cd /my/dev/folder`) and run the following command to get started:
+Once you've installed that go to your main folder/directory that you'd like to use for development (example: `cd /my/dev/folder`) and run `yo code` to get started:
 
-```bash
-yo code
+```javascript
+function test (a, b) {
+  const sum = a + b;
+  return sum;
+}
 ```
 
 You'll be prompted to choose the type of extension you want to create. Use your keyboard arrow keys to move to the "New Color Theme" option and press your `Enter` key.

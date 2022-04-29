@@ -4,6 +4,7 @@ publishDate:       October 28, 2016
 author:     "Brian Clark"
 description: "An explanation of the options available for use in the X-FRAME-OPTIONS header"
 keywords: "security, headers, web, development, iframe, clickjacking, X-FRAME-OPTIONS, content security policy, csp"
+layout: '../../layouts/BlogPost.astro'
 ---
 
 I ran across [Scott Smith's blog](http://scottksmith.com/blog/) which has a series on [Securing Node Apps Against OWASP Top 10](http://scottksmith.com/blog/2015/06/08/secure-node-apps-against-owasp-top-10-injection/) (it's quite good and worth a read). I saw that he had briefly touched upon the use of `X-FRAME-OPTIONS` as one of the solutions to mitigate [Cross-site Request Forgery](http://scottksmith.com/blog/2015/06/29/secure-node-apps-against-owasp-top-10-cross-site-request-forgery/). In that example the option used as the value of this header was `DENY`. In addition to this value there are a couple of other options available to you as well. This inspired me to share more on this mitigation technique and the other options available as values for this HTTP header.
@@ -27,7 +28,7 @@ Something to be aware of about this particular option is that its browser suppor
 
 If your browser supports CSP 1.0 then the directive is `frame-src`. If it's CSP 2.0 then you'll want to use `frame-ancestors`.
 
-> [CSP 3.0 (as of 10/28/2016)](https://w3c.github.io/webappsec-csp/) is in draft and it seems they will be [undeprecating `frame-src`](https://w3c.github.io/webappsec-csp/#changes-from-level-2) and using that as the standard again. Fun stuff!
+> [CSP 3.0 (as of 10/28/2016)](https://w3c.github.io/webappsec-csp/) is in draft and it seems they will be [undeprecating frame-src](https://w3c.github.io/webappsec-csp/#changes-from-level-2) and using that as the standard again. Fun stuff!
 
 ## Which Option Should I Use?
 If you're wondering which option you should use, the safest option is `DENY`.

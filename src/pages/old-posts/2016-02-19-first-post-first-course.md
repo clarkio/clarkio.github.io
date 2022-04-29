@@ -2,6 +2,7 @@
 title: 'First Post, First Course'
 publishDate: February 19, 2016
 author: 'Brian Clark'
+layout: '../../layouts/BlogPost.astro'
 ---
 
 To kick things off, I thought what better way could I start the site than by sharing a quick highlight of my first course published on [Pluralsight](https://app.pluralsight.com).
@@ -16,6 +17,8 @@ What I think you'll at least get from this course is a good laugh from the quite
 <a href="http://jpapa.me/pbpngi18n">
     <img class="post-image" src="/assets/old-posts/img/pbp-angular-i18n.png" alt="Play by Play: Angular Internationalization with John Papa and Brian Clark Video">
 </a>
-<a href="http://jpapa.me/pbpngi18n" class="caption">
-    Play by Play: Angular Internationalization with John Papa and Brian Clark
-</a>
+<div class="center">
+    <a href="http://jpapa.me/pbpngi18n" class="caption">
+        Play by Play: Angular Internationalization with John Papa and Brian Clark
+    </a>
+</div>
