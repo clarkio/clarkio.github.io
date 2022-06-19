@@ -1,0 +1,32 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer>
+  <span>© {year} Brian Clark</span>
+  <p><a href="https://astro.build" target="_blank" rel="noreferrer noopener">🚀 Built with Astro</a></p>
+</footer>
+
+<style>
+  footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  span,
+  p {
+    font-size: clamp(.75rem, 2vw, 1rem);
+  }
+
+  span,
+  p a {
+    color: #000;
+  }
+
+  @media(min-width: 700px) {
+    footer {
+      padding: 60px 0;
+    }
+  }
+</style>

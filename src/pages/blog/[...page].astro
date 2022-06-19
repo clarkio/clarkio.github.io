@@ -1,55 +1,65 @@
 ---
-import Layout from '../../layouts/Main.astro';
-import BlogPostPreview from '../../components/BlogPostPreview.astro';
-import Pagination from '../../components/Pagination.astro';
+import readingTime from 'reading-time';
 
-let title = 'Clarkio | Blog';
-let description = 'Writings by clarkio.'
-let permalink = 'https://clarkio.com/blog';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Paginator from '../../components/Paginator.astro';
 
-export async function getStaticPaths({paginate, rss}) {
-  const allPosts = await Astro.glob('../../**/*.md');
-  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
-
-  // Generate an RSS feed from this collection of posts.
-  // NOTE: This is disabled by default, since it requires `buildOptions.site` to be set in your "astro.config.mjs" file.
-  rss({
-    title: 'Clarkio | Blog',
-    description: 'Writings by clarkio.',
-    customData: `<language>en-us</language>`,
-    items: sortedPosts.map(item => {
-      let url = item.url;
-      if (item.url.includes('old-posts')) {
-        url = item.url.replace('/old-posts/', '');
-        url = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
-      }
-      return {
-        title: item.frontmatter.title,
-        description: item.frontmatter.description,
-        link: url,
-        pubDate: item.frontmatter.date,
-      }
-    })
-  });
-
-  // Return a paginated collection of paths for all posts
-  return paginate(sortedPosts, {pageSize: 5});
+export async function getStaticPaths({ paginate }) {
+  const allPosts = await Astro.glob('./*.md');
+  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+  return paginate(sortedPosts, { pageSize: 10 });
 }
 
+// If set up correctly, The page prop now has everything that
+// you need to render a single page (see next section).
 const { page } = Astro.props;
 ---
 
-<Layout content={{ title, description, permalink }}>
-  <body>
-    <div class="layout">
-      <article class="content">
-        <section>
-          {page.data.map(p => <BlogPostPreview post={p} />)}
-        </section>
-      </article>
-    </div>
-    <footer>
-      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    </footer>
-  </body>
-</Layout>
+<BaseLayout title="Blog Posts" description="Recently written posts on various topics and interests.">
+  <h1>Blog Posts</h1>
+  <ul>
+    {page.data.map(({ rawContent, frontmatter: {title, url, pubDate, description}}) => (
+    <li>
+      <h2><a href={url}>{title}</a></h2>
+      <div class="details">
+        <span class="date">{pubDate}</span>
+        <span class="reading-time">{readingTime(rawContent()).text}</span>
+      </div>
+      <p>{description}</p>
+    </li>
+    ))}
+  </ul>
+  <Paginator page={page} />
+</BaseLayout>
+
+<style>
+  ul,
+  li {
+    list-style: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin: 2rem 0;
+  }
+
+  h2 a {
+    color: #000;
+  }
+
+  span {
+    color: #7D7D7D;
+  }
+
+  p {
+    color: #333;
+  }
+
+  .reading-time {
+    margin-left: 2rem;
+  }
+</style>

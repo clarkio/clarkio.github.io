@@ -1,56 +1,110 @@
 ---
-// Component Imports
-import Layout from '../layouts/Main.astro';
-import BlogPostPreview from '../components/BlogPostPreview.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
-import allProjects from '../../public/projects.json';
-
-interface MarkdownFrontmatter {
-  publishDate: number;
-}
-
-
-let title = 'Clarkio';
-let description = 'I\'m Brian Clark and I go by clarkio on the interwebs. I run this site and author the content shared on it. I work in Developer Relations and create educational content on programming and tech. I live stream weekly, learning in public so stop by some time and join us.';
-let permalink = 'https://clarkio.com/';
-
-
-let allPosts = await Astro.glob<MarkdownFrontmatter>('../**/*.md');
-allPosts = allPosts.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
+import BaseLayout from '../layouts/BaseLayout.astro';
+import profilePhoto from '../images/clarkio-profile-photo.jpg';
+import rss from '../images/rss.png';
+import twitter from '../images/twitter.png';
+import twitch from '../images/twitch.png';
+import github from '../images/github.png';
+import youtube from '../images/youtube.png';
+import instagram from '../images/instagram.png';
 ---
-<Layout content={{ title, description, permalink }}>
-  <div class="content">
-    <div class="section">
-      <h2>Brian Clark (clarkio)</h2>
-      <p class="bio">
-        <span>Hey there!</span> I’m a developer and content creator that loves to learn new things and share them. I enjoy building tools to automate the boring stuff, teaching about application security and sharing development tips and tricks.
-      </p>
-      <a href="/about">Read more to get to know me</a>
+
+<BaseLayout title="Brian Clark"
+  description="Developer advocate and content creator who loves to learn new things and share them.">
+  <div class="heroContainer">
+    <div class="heroText">
+      <span>Hey there, It’s me! Brian Clark.</span>
+      <h1>Developer advocate and content creator who loves to learn new things and share them. I enjoy building tools
+        to automate the boring stuff, teaching about application security and sharing development tips and tricks.
+      </h1>
+      <a href="/about/" class="about">Read more about me &rarr;</a>
     </div>
-    <div class="section">
-      <h2 class="sectionTitle">Latest Writings:</h2>
-      <article>
-        <section>
-          <BlogPostPreview post={allPosts[0]} />
-          <BlogPostPreview post={allPosts[1]} />
-        </section>
-        <div>
-          <a href="/blog">
-            View All Writings
-          </a>
-        </div>
-      </article>
-    </div>
-    <div class="section">
-        <h2 class="sectionTitle">Latest Projects:</h2>
-        <!-- <ProjectPreview project={allProjects[0]} />
-        <ProjectPreview project={allProjects[1]} />
-        <ProjectPreview project={allProjects[2]} /> -->
-        <div>
-          <a href="/projects">
-            View All Projects
-          </a>
-        </div>
-    </div>
+    <img class="profile-photo" src={profilePhoto} alt="Clarkio Profile Photo" />
   </div>
-</Layout>
+  <div class="socials">
+    <a href="/rss.xml">
+      <img src={rss} alt="rss feed" />
+    </a>
+    <a href="https://twitter.com/_clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={twitter} alt="twitter profile" />
+    </a>
+    <a href="https://www.twitch.tv/clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={twitch} alt="twitch channel" />
+    </a>
+
+    <a href="https://github.com/clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={github} alt="github profile" />
+    </a>
+
+    <a href="https://www.youtube.com/c/Clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={youtube} alt="youtube channel" />
+    </a>
+
+    <a href="https://instagram.com/_clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={instagram} alt="instagram profile" />
+    </a>
+
+  </div>
+</BaseLayout>
+
+<style>
+  .heroContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .heroText span {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+  }
+
+  h1 {
+    color: #7D7D7D;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    margin: 2rem 0;
+  }
+
+  .profile-photo {
+    width: 95%;
+    box-shadow: 32px 32px 0px rgba(0, 0, 0, 0.12);
+  }
+
+  .about {
+    color: rgb(0 0 255 / 0.5);
+    display: inline-block;
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    text-decoration: none;
+  }
+
+  .about:hover {
+    color: rgb(0 0 255);
+    text-decoration: underline;
+  }
+
+  .socials {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 0;
+  }
+
+  .socials img {
+    height: 24px;
+  }
+
+  @media(min-width: 700px) {
+    .heroContainer {
+      grid-template-columns: auto 300px;
+      padding: 60px 1rem;
+    }
+
+    .socials img {
+      height: 36px;
+    }
+
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import logo from '../images/logo.png';
+---
+
+<nav>
+  <a href="/">
+    <img src={logo} alt="Brian Clark Logo">
+  </a>
+  <ul>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/projects/">Projects</a></li>
+    <li><a href="/about/">About</a></li>
+    <li><a href="/uses/">Uses</a></li>
+  </ul>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  ul {
+    display: flex;
+    padding: 0;
+  }
+
+  li {
+    margin-right: 1rem;
+  }
+
+  li a,
+  li a:visited {
+    color: rgb(0 0 255 / 50%);
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    color: rgb(0 0 255 / 100%);
+    text-decoration: underline;
+  }
+
+  img {
+    height: 48px;
+  }
+
+  @media (min-width: 500px) {
+    nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 60px 0;
+    }
+
+    li {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+
+    img {
+      height: 64px;
+    }
+  }
+</style>
