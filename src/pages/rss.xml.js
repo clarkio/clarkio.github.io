@@ -6,5 +6,4 @@ export const get = () => rss({
   site: import.meta.env.SITE,
   items: import.meta.glob('./blog/**/*.md'),
   customData: `<language>en-us</language>`,
-  stylesheet: '/rss/styles.xsl',
 });

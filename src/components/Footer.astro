@@ -1,9 +1,39 @@
 ---
+import rss from '../images/rss.png';
+import twitter from '../images/twitter.png';
+import twitch from '../images/twitch.png';
+import github from '../images/github.png';
+import youtube from '../images/youtube.png';
+import instagram from '../images/instagram.png';
 const year = new Date().getFullYear();
 ---
 
 <footer>
   <span>© {year} Brian Clark</span>
+  <div class="socials">
+    <a href="/rss.xml">
+      <img src={rss} alt="rss feed" />
+    </a>
+    <a href="https://twitter.com/_clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={twitter} alt="twitter profile" />
+    </a>
+    <a href="https://www.twitch.tv/clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={twitch} alt="twitch channel" />
+    </a>
+
+    <a href="https://github.com/clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={github} alt="github profile" />
+    </a>
+
+    <a href="https://www.youtube.com/c/Clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={youtube} alt="youtube channel" />
+    </a>
+
+    <a href="https://instagram.com/_clarkio" target="_blank" rel="noreferrer noopener">
+      <img src={instagram} alt="instagram profile" />
+    </a>
+
+  </div>
   <p><a href="https://astro.build" target="_blank" rel="noreferrer noopener">🚀 Built with Astro</a></p>
 </footer>
 
@@ -24,9 +54,26 @@ const year = new Date().getFullYear();
     color: #000;
   }
 
+  .socials {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 60px 0;
+  }
+
+  .socials img {
+    height: 24px;
+    padding: 5px;
+  }
+
+
   @media(min-width: 700px) {
     footer {
       padding: 60px 0;
+    }
+
+    .socials img {
+      height: 36px;
     }
   }
 </style>

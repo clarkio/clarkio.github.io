@@ -8,7 +8,7 @@ const response = await fetch("https://api.github.com/graphql",
     body: JSON.stringify({
       query: `
         {
-          user(login: "dhanishgajjar") {
+          user(login: "clarkio") {
             starredRepositories(ownedByViewer: true){
               edges {
                 node {
