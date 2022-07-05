@@ -41,7 +41,8 @@ const year = new Date().getFullYear();
   footer {
     align-items: center;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    margin-top: 2rem;
   }
 
   span,
@@ -55,21 +56,22 @@ const year = new Date().getFullYear();
   }
 
   .socials {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: 60px 0;
+    place-items: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
   }
 
   .socials img {
     height: 24px;
-    padding: 5px;
   }
 
 
   @media(min-width: 700px) {
     footer {
-      padding: 60px 0;
+      justify-content: space-between;
+      flex-direction: row;
     }
 
     .socials img {
