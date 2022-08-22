@@ -1,10 +1,10 @@
 ---
-import rss from '../images/rss.png';
-import twitter from '../images/twitter.png';
-import twitch from '../images/twitch.png';
-import github from '../images/github.png';
-import youtube from '../images/youtube.png';
-import instagram from '../images/instagram.png';
+import rss from "../images/rss.png";
+import twitter from "../images/twitter.png";
+import twitch from "../images/twitch.png";
+import github from "../images/github.png";
+import youtube from "../images/youtube.png";
+import instagram from "../images/instagram.png";
 const year = new Date().getFullYear();
 ---
 
@@ -14,27 +14,50 @@ const year = new Date().getFullYear();
     <a href="/rss.xml">
       <img src={rss} alt="rss feed" />
     </a>
-    <a href="https://twitter.com/_clarkio" target="_blank" rel="noreferrer noopener">
+    <a
+      href="https://twitter.com/_clarkio"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       <img src={twitter} alt="twitter profile" />
     </a>
-    <a href="https://www.twitch.tv/clarkio" target="_blank" rel="noreferrer noopener">
+    <a
+      href="https://www.twitch.tv/clarkio"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       <img src={twitch} alt="twitch channel" />
     </a>
 
-    <a href="https://github.com/clarkio" target="_blank" rel="noreferrer noopener">
+    <a
+      href="https://github.com/clarkio"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       <img src={github} alt="github profile" />
     </a>
 
-    <a href="https://www.youtube.com/c/Clarkio" target="_blank" rel="noreferrer noopener">
+    <a
+      href="https://www.youtube.com/c/Clarkio"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       <img src={youtube} alt="youtube channel" />
     </a>
 
-    <a href="https://instagram.com/_clarkio" target="_blank" rel="noreferrer noopener">
+    <a
+      href="https://instagram.com/_clarkio"
+      target="_blank"
+      rel="noreferrer noopener"
+    >
       <img src={instagram} alt="instagram profile" />
     </a>
-
   </div>
-  <p><a href="https://astro.build" target="_blank" rel="noreferrer noopener">🚀 Built with Astro</a></p>
+  <p>
+    <a href="https://astro.build" target="_blank" rel="noreferrer noopener"
+      >🚀 Built with Astro
+    </a>
+  </p>
 </footer>
 
 <style>
@@ -42,12 +65,12 @@ const year = new Date().getFullYear();
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    margin: 4rem 0;
   }
 
   span,
   p {
-    font-size: clamp(.75rem, 2vw, 1rem);
+    font-size: clamp(0.75rem, 2vw, 1rem);
   }
 
   span,
@@ -67,8 +90,7 @@ const year = new Date().getFullYear();
     height: 24px;
   }
 
-
-  @media(min-width: 700px) {
+  @media (min-width: 700px) {
     footer {
       justify-content: space-between;
       flex-direction: row;

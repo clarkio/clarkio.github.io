@@ -1,15 +1,20 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import profilePhoto from '../images/clarkio-profile-photo.jpg';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import profilePhoto from "../images/clarkio-profile-photo.jpg";
 ---
 
-<BaseLayout title="Brian Clark"
-  description="Developer advocate and content creator who loves to learn new things and share them.">
+<BaseLayout
+  title="Brian Clark"
+  description="Developer advocate and content creator who loves to learn new things and share them."
+>
   <div class="heroContainer">
     <div class="heroText">
-      <span>Hey there, It's me! Brian Clark.</span>
-      <h1>Developer advocate and content creator who loves to learn new things and share them. I enjoy building tools
-        to automate the boring stuff, teaching about application security and sharing development tips and tricks.
+      <span>Hey, It's me! Brian Clark.</span>
+      <h1>
+        Developer advocate and content creator who loves to learn new things and
+        share them. I enjoy building tools to automate the boring stuff,
+        teaching about application security and sharing development tips and
+        tricks.
       </h1>
       <a href="/about/" class="about">Read more about me &rarr;</a>
     </div>
@@ -27,18 +32,20 @@ import profilePhoto from '../images/clarkio-profile-photo.jpg';
   }
 
   .heroText span {
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    color: rgb(0 0 255);
+    font-size: clamp(1.75rem, 2vw, 2rem);
+    font-weight: 700;
   }
 
   h1 {
-    color: #7D7D7D;
+    color: #000 !important;
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 400;
     margin: 2rem 0;
   }
 
   .profile-photo {
-    width: 95%;
+    width: 100%;
     box-shadow: 32px 32px 0px rgba(0, 0, 0, 0.12);
   }
 
@@ -55,11 +62,11 @@ import profilePhoto from '../images/clarkio-profile-photo.jpg';
     text-decoration: underline;
   }
 
-  @media(min-width: 700px) {
+  @media (min-width: 700px) {
     .heroContainer {
-      grid-template-columns: auto 300px;
+      place-items: center;
+      grid-template-columns: auto 400px;
       padding: 60px 1rem;
     }
-
   }
 </style>
