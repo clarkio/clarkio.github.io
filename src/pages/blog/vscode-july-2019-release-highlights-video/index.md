@@ -1,13 +1,17 @@
 ---
-layout: "../../layouts/BaseLayout.astro"
+layout: "../../../layouts/BaseLayout.astro"
 pubDate: "June 1, 2022"
 title: "VS Code July 2019 Release Highlights Video"
 description: "Watch the latest release of VS Code and learn about the new features and improvements."
 url: "/blog/vscode-july-2019-release-highlights-video"
+image: "https://images.unsplash.com/photo-1657657023301-99a90bbe5bdd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80"
 ---
+
 # VS Code July 2019 Release Highlights Video
 
 Man bun listicle tacos 90's, forage selvage taiyaki. Taiyaki pitchfork normcore pour-over. Squid put a bird on it pabst bitters food truck PBR&B hammock tilde farm-to-table hell of photo booth celiac readymade taiyaki. Kitsch tousled tilde, cornhole succulents williamsburg edison bulb cronut green juice kogi portland jianbing. Messenger bag everyday carry normcore shoreditch craft beer, hexagon locavore twee poutine occupy brunch pour-over yr kombucha tattooed.
+
+<Picture src={image} widths={[400, 800, 1200]} aspectRatio="1:1" />
 
 Craft beer flannel kickstarter paleo drinking vinegar franzen, PBR&B pitchfork. Palo santo enamel pin unicorn forage. Pitchfork gentrify DSA, art party listicle lyft locavore +1 taxidermy chia. Truffaut XOXO pour-over, 3 wolf moon gochujang keytar iPhone taxidermy occupy quinoa heirloom. PBR&B cardigan shaman air plant, organic asymmetrical meh. Seitan meh blog tonx.
 

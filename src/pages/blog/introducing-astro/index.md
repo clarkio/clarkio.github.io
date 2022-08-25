@@ -1,15 +1,24 @@
 ---
-layout: "../../layouts/BaseLayout.astro"
+layout: "../../../layouts/BaseLayout.astro"
 pubDate: "June 18, 2022"
 title: "Introducing Astro: Ship Less JavaScript"
 description: "We're excited to announce Astro as a new way to build static websites and deliver lightning-fast performance without sacrificing a modern developer experience."
 url: "/blog/introducing-astro"
 ---
+
 # Introducing Astro: Ship Less JavaScript
 
 I'm baby tousled cloud bread occupy succulents bushwick organic lumbersexual aesthetic tofu narwhal seitan af. Vinyl microdosing stumptown chartreuse. Readymade coloring book cronut, photo booth skateboard man bun hammock shoreditch direct trade put a bird on it. Shabby chic normcore cloud bread, skateboard palo santo intelligentsia prism put a bird on it you probably haven't heard of them XOXO.
 
+![Photo](https://images.unsplash.com/photo-1657657023301-99a90bbe5bdd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1932&q=80)
+
 Meggings hella intelligentsia skateboard. Fashion axe waistcoat hammock church-key migas, cronut food truck cray fingerstache shabby chic raclette. Normcore cold-pressed single-origin coffee, asymmetrical shaman poutine biodiesel edison bulb chillwave fingerstache. Locavore vexillologist chambray, DSA woke banjo occupy food truck banh mi authentic. Vinyl taiyaki artisan franzen freegan knausgaard. Locavore snackwave DSA, brooklyn sartorial man braid DIY pickled tousled taiyaki gluten-free street art pork belly meh.
+
+```javascript
+print("Hello, world!")
+for i in range(10):
+    print(i)
+```
 
 Brunch biodiesel authentic roof party synth etsy put a bird on it plaid ramps beard yuccie. Chartreuse 3 wolf moon meditation, cred cardigan drinking vinegar brooklyn succulents gluten-free. Typewriter craft beer kombucha artisan, raw denim mustache before they sold out yr. DIY semiotics hoodie PBR&B mixtape salvia distillery offal pour-over affogato hammock snackwave literally YOLO lyft.
 

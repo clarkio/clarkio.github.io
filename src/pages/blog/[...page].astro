@@ -1,12 +1,16 @@
 ---
-import readingTime from 'reading-time';
+import readingTime from "reading-time";
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Paginator from '../../components/Paginator.astro';
+import Paginator from "../../components/Paginator.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob('./*.md');
-  const sortedPosts = allPosts.sort((a, b) => new Date(b.frontmatter.pubDate).valueOf() - new Date(a.frontmatter.pubDate).valueOf());
+  const allPosts = await Astro.glob("./*/*.md");
+  const sortedPosts = allPosts.sort(
+    (a, b) =>
+      new Date(b.frontmatter.pubDate).valueOf() -
+      new Date(a.frontmatter.pubDate).valueOf()
+  );
   return paginate(sortedPosts, { pageSize: 10 });
 }
 
@@ -15,19 +19,28 @@ export async function getStaticPaths({ paginate }) {
 const { page } = Astro.props;
 ---
 
-<BaseLayout title="Blog Posts" description="Recently written posts on various topics and interests.">
+<BaseLayout
+  title="Blog Posts"
+  description="Recently written posts on various topics and interests."
+>
   <h1>Blog Posts</h1>
   <ul>
-    {page.data.map(({ rawContent, frontmatter: {title, url, pubDate, description}}) => (
-    <li>
-      <h2><a href={url}>{title}</a></h2>
-      <div class="details">
-        <span class="date">{pubDate}</span>
-        <span class="reading-time">{readingTime(rawContent()).text}</span>
-      </div>
-      <p>{description}</p>
-    </li>
-    ))}
+    {
+      page.data.map(
+        ({ rawContent, frontmatter: { title, url, pubDate, description } }) => (
+          <li>
+            <h2>
+              <a href={url}>{title}</a>
+            </h2>
+            <div class="details">
+              <span class="date">{pubDate}</span>
+              <span class="reading-time">{readingTime(rawContent()).text}</span>
+            </div>
+            <p>{description}</p>
+          </li>
+        )
+      )
+    }
   </ul>
   <Paginator page={page} />
 </BaseLayout>
@@ -52,7 +65,7 @@ const { page } = Astro.props;
   }
 
   span {
-    color: #7D7D7D;
+    color: #7d7d7d;
   }
 
   p {
