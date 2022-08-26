@@ -5,7 +5,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Paginator from "../../components/Paginator.astro";
 
 export async function getStaticPaths({ paginate }) {
-  const allPosts = await Astro.glob("./*/*.md");
+  const oldPosts = await Astro.glob("../old-posts/*.md");
+  const newPosts = await Astro.glob('./*/*.md');
+  const allPosts = oldPosts.concat(newPosts);
   const sortedPosts = allPosts.sort(
     (a, b) =>
       new Date(b.frontmatter.pubDate).valueOf() -
@@ -14,8 +16,6 @@ export async function getStaticPaths({ paginate }) {
   return paginate(sortedPosts, { pageSize: 10 });
 }
 
-// If set up correctly, The page prop now has everything that
-// you need to render a single page (see next section).
 const { page } = Astro.props;
 ---
 
@@ -27,18 +27,28 @@ const { page } = Astro.props;
   <ul>
     {
       page.data.map(
-        ({ rawContent, frontmatter: { title, url, pubDate, description } }) => (
+        ({ rawContent, url, frontmatter: { title, publishDate, description } }) => {
+        if(url.includes('old-posts')) {
+          const oldUrl = url.replace('/old-posts/', '').replace('/blog/');
+          const year = oldUrl.slice(0,4);
+          const month = oldUrl.slice(5,7);
+          const day = oldUrl.slice(8,10);
+          const name = oldUrl.slice(11);
+          url = `/${year}/${month}/${day}/${name}`;
+        }
+        return (
           <li>
             <h2>
               <a href={url}>{title}</a>
             </h2>
             <div class="details">
-              <span class="date">{pubDate}</span>
+              <span class="date">{publishDate}</span>
               <span class="reading-time">{readingTime(rawContent()).text}</span>
             </div>
             <p>{description}</p>
           </li>
         )
+      }
       )
     }
   </ul>

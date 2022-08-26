@@ -1,9 +1,8 @@
 ---
 layout: "../../../layouts/BaseLayout.astro"
-pubDate: "June 18, 2022"
+publishDate: "June 18, 2022"
 title: "Introducing Astro: Ship Less JavaScript"
 description: "We're excited to announce Astro as a new way to build static websites and deliver lightning-fast performance without sacrificing a modern developer experience."
-url: "/blog/introducing-astro"
 ---
 
 # Introducing Astro: Ship Less JavaScript

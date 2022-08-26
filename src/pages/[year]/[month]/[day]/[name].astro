@@ -1,0 +1,18 @@
+---
+export async function getStaticPaths() {
+  let allLegacyPosts = await Astro.glob('../../../old-posts/*.md');
+  const result = allLegacyPosts.map(postContent => {
+    const url = postContent.url.replace('/old-posts/', '');
+    const year = url.slice(0,4);
+    const month = url.slice(5,7);
+    const day = url.slice(8,10);
+    const name = url.slice(11);
+    return {params: {year, month, day, name}, props: {content: postContent}};
+  });
+  return result;
+}
+
+const {content} = Astro.props;
+---
+
+<content.Content />
