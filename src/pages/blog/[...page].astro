@@ -7,11 +7,12 @@ import Paginator from "../../components/Paginator.astro";
 export async function getStaticPaths({ paginate }) {
   const oldPosts = await Astro.glob("../old-posts/*.md");
   const newPosts = await Astro.glob('./*/*.md');
+  console.dir(newPosts);
   const allPosts = oldPosts.concat(newPosts);
   const sortedPosts = allPosts.sort(
     (a, b) =>
-      new Date(b.frontmatter.pubDate).valueOf() -
-      new Date(a.frontmatter.pubDate).valueOf()
+      new Date(b.frontmatter.publishDate).valueOf() -
+      new Date(a.frontmatter.publishDate).valueOf()
   );
   return paginate(sortedPosts, { pageSize: 10 });
 }
