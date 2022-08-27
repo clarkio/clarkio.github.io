@@ -1,5 +1,5 @@
 interface ImportMetaEnv {
-  readonly GITHUB_ACCESS_TOKEN: string;
+  readonly GH_ACCESS_TOKEN: string;
 }
 
 interface ImportMeta {

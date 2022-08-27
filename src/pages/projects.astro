@@ -5,7 +5,7 @@ import star from "../images/star.png";
 const requestBody = `
 {
   user(login: "clarkio") {
-    pinnedItems(first: 9, types: REPOSITORY) {
+    pinnedItems(first: 6, types: REPOSITORY) {
       nodes {
         ... on Repository {
                   id
@@ -31,7 +31,7 @@ const requestBody = `
 
 const response = await fetch("https://api.github.com/graphql", {
   method: "POST",
-  headers: { authorization: `Bearer ${import.meta.env.GITHUB_ACCESS_TOKEN}` },
+  headers: { authorization: `Bearer ${import.meta.env.GH_ACCESS_TOKEN}` },
   body: JSON.stringify({
     query: requestBody,
   }),
@@ -44,6 +44,8 @@ const {
 
 <BaseLayout title="Projects" description="Some of my best work">
   <h1>Projects</h1>
+  <p>You can see the top, pinned, projects below but be sure to go to <a href="https://github.com/clarkio">Clarkio's GitHub profile</a> for more.</p>
+
   <ul class="project-list">
     {
       projects.map(
