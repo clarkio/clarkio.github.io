@@ -4,7 +4,7 @@ import readingTime from "reading-time";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Paginator from "../../components/Paginator.astro";
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths({ paginate, rss }) {
   const oldPosts = await Astro.glob("../old-posts/*.md");
   const newPosts = await Astro.glob('./*/*.md');
   const allPosts = oldPosts.concat(newPosts);
