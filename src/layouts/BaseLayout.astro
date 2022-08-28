@@ -37,7 +37,11 @@ const description = Astro.props.description || Astro.props.content.description;
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 
-    <link rel="icon" type="image/png" href="/assets/old-posts/img/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/old-posts/img/favicon.ico"
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,8 +82,8 @@ const description = Astro.props.description || Astro.props.content.description;
         background: #272a36 !important;
         padding: 1rem;
       }
-      .profile-photo {
-        max-width: 350px;
+      img {
+        width: 100%;
       }
     </style>
   </body>

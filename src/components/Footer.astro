@@ -9,7 +9,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer>
-  <span>© {year} Brian Clark</span>
+  <span
+    ><a href="https://astro.build" target="_blank" rel="noreferrer noopener"
+      >🚀 Built with Astro</a
+    > | © {year} Brian Clark</span
+  >
   <div class="socials">
     <a href="/rss.xml">
       <img src={rss} alt="rss feed" />
@@ -54,9 +58,11 @@ const year = new Date().getFullYear();
     </a>
   </div>
   <p>
-    <a href="https://astro.build" target="_blank" rel="noreferrer noopener"
-      >🚀 Built with Astro</a> and <br>
-    <a href="https://dhanishgajjar.com" target="_blank" rel="noreferrer noopener">Designed by DG</a>
+    <a
+      href="https://dhanishgajjar.com"
+      target="_blank"
+      rel="noreferrer noopener">DG</a
+    >
   </p>
 </footer>
 
@@ -74,7 +80,8 @@ const year = new Date().getFullYear();
   }
 
   span,
-  p a {
+  p a,
+  a:visited {
     color: #000;
   }
 
@@ -98,6 +105,7 @@ const year = new Date().getFullYear();
 
     .socials img {
       height: 36px;
+      width: max-content !important;
     }
   }
 </style>
