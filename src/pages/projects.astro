@@ -8,22 +8,22 @@ const requestBody = `
     pinnedItems(first: 6, types: REPOSITORY) {
       nodes {
         ... on Repository {
-                  id
-                  name
-                  description
-                  stargazers {
-                    totalCount
-                  }
-                  url
-                  languages(first: 3) {
-                    edges {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                }
+          id
+          name
+          description
+          stargazers {
+            totalCount
+          }
+          url
+          languages(first: 3) {
+            edges {
+              node {
+                name
               }
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -85,7 +85,7 @@ const {
   ul {
     display: grid;
     gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     list-style: none;
     padding: 0;
   }
@@ -127,11 +127,9 @@ const {
 
   .languages {
     display: flex;
+    justify-content: flex-end;
   }
-
   .languages span {
     margin-left: 10px;
   }
-
-  @media;
 </style>
