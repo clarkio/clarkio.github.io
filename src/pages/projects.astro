@@ -85,7 +85,7 @@ const {
   ul {
     display: grid;
     gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
     list-style: none;
     padding: 0;
   }
@@ -131,5 +131,10 @@ const {
   }
   .languages span {
     margin-left: 10px;
+  }
+  @media (min-width: 500px) {
+    ul {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>
