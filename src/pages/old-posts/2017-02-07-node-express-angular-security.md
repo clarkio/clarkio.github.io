@@ -2,7 +2,7 @@
 title:      "Getting Started with Node.js Security with Express and Angular"
 publishDate:       February 7, 2017
 author:     "Brian Clark"
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 A few months ago my latest course was released on [Pluralsight](pluralsight.com): [Getting Started with Node.js Security with Express and Angular](https://bit.ly/2cJyxhD). I had a lot of fun putting this course together because it helped draw out the knowledge I've gained over the years building secure web applications. In this course my goal was to share this knowledge in a way that aides others to better comprehend some of the topics within secure application development.

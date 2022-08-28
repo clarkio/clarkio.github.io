@@ -2,7 +2,7 @@
 title:      "A New Start at Microsoft"
 publishDate:       June 6, 2017
 author:     "Brian Clark"
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 

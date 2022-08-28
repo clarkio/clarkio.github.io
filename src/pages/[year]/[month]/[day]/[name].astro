@@ -1,6 +1,4 @@
 ---
-import BlogPostLayout from '../../../../layouts/BlogPost.astro';
-
 export async function getStaticPaths() {
   let allLegacyPosts = await Astro.glob('../../../old-posts/*.md');
   const result = allLegacyPosts.map(postContent => {
@@ -9,7 +7,6 @@ export async function getStaticPaths() {
     const month = url.slice(5,7);
     const day = url.slice(8,10);
     const name = url.slice(11);
-    const slug = '/' + url.replace('-', '/').replace('-', '/').replace('-', '/') + '/';
     return {params: {year, month, day, name}, props: {content: postContent}};
   });
   return result;
@@ -18,8 +15,4 @@ export async function getStaticPaths() {
 const {content} = Astro.props;
 ---
 
-<!-- Supply the content needed to render the BlogPost Layout -->
-<!-- <BlogPostLayout content={content}> -->
-  <!-- Supply the actual blog post markdown  -->
 <content.Content />
-<!-- </BlogPostLayout> -->

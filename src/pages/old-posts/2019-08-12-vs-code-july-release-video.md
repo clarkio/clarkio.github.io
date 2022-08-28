@@ -2,7 +2,7 @@
 title: 'VS Code July 2019 Release Highlights Video'
 publishDate: August 12, 2019
 author: 'Brian Clark'
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 ## July 2019 VS Code Release

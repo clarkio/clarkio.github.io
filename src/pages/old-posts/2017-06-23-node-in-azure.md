@@ -2,7 +2,7 @@
 title:      "Running Node.js in Azure"
 publishDate:       June 23, 2017
 author:     "Brian Clark"
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 ### Running Node.js in Azure

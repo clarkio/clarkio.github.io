@@ -3,7 +3,7 @@ title:      "Restify Middleware & Next()"
 publishDate:       November 2, 2016
 author:     "Brian Clark"
 keywords: "headers already set, next(), restify next(), short-circuit request, node restify"
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 If you've used any kind of Node.js web frameworks (such as [Express](http://expressjs.com/) or [Restify](http://restify.com/)) before you've probably used plenty of middleware modules, but have you built one before? If you've built one before, have you ever needed to short-circuit the request handling chain by blocking the execution of the next middleware module and returning your own response? If so you may have run into the same issue that I had struggled with for quite some time.

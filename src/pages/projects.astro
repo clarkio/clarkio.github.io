@@ -1,33 +1,140 @@
 ---
-import Layout from '../layouts/Main.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
-import allProjects from '../../public/projects.json';
+import BaseLayout from "../layouts/BaseLayout.astro";
+import star from "../images/star.png";
 
-let title = 'Clarkio | Projects';
-let description = 'Learn about projects clarkio has worked on.'
-let permalink = 'https://clarkio.com/projects';
+const requestBody = `
+{
+  user(login: "clarkio") {
+    pinnedItems(first: 6, types: REPOSITORY) {
+      nodes {
+        ... on Repository {
+          id
+          name
+          description
+          stargazers {
+            totalCount
+          }
+          url
+          languages(first: 3) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+const response = await fetch("https://api.github.com/graphql", {
+  method: "POST",
+  headers: { authorization: `Bearer ${import.meta.env.GH_ACCESS_TOKEN}` },
+  body: JSON.stringify({
+    query: requestBody,
+  }),
+}).then((res) => res.json());
+
+const {
+  pinnedItems: { nodes: projects },
+} = response.data.user;
 ---
 
-<Layout content={{ title, description, permalink }}>
-  <div class="content">
-    <h3>GitHub Projects of Note:</h3>
+<BaseLayout title="Projects" description="Some of my best work">
+  <h1>Projects</h1>
+  <p>
+    You can see the top, pinned, projects below but be sure to go to <a
+      href="https://github.com/clarkio">Clarkio's GitHub profile</a
+    > for more.
+  </p>
 
-    {allProjects.map(p => <ProjectPreview project={p} />)}
-    <!-- <ul>
-      <li>
-        <a href="https://github.com/clarkio/vscode-twitch-highlighter">vscode-twitch-highlighter</a>: A VS Code extension that integrates with Twitch chat that allows viewers to highlight lines of code via commands. The idea is this will help point out issues a viewer may have caught but the streamer missed.
-      </li>
-      <li><a href="https://github.com/clarkio/snyk-cli-action">snyk-cli-action</a>: A GitHub Action that integrates the Snyk CLI tool into workflows.</li>
-      <li><a href="https://github.com/clarkio/macos-wifiname">wifiname</a>: A macOS toolbar app that displays the name of the wifi to which your device is currently connected.</li>
-      <li><a href="https://github.com/clarkio/azure-mask">azure-mask</a>: A browser extension built with [Anthony Chu](https:twitter.com/nthonychu) that can be used to obfuscate subscription ID's when presenting the Azure portal website on your screen.</li>
-      <li><a href="https://github.com/clarkio/ttv-chat-bot">ttv-chat-bot</a>: A Twitch chat bot that will listen for commands to control internet connected lights and on stream overlay color.</li>
-      <li><a href="https://github.com/dhanishgajjar/vscode-icons">vscode-icons</a>: A project I've contributed to that provides custom app icons for VS Code instead of the default one.</li>
-      <li><a href="https://github.com/Azure-Samples/angular-cosmosdb/tree/insecure-heroes">insecure-heroes</a>: A sample Angular application that is used to demonstrate web application security topics.</li>
-      <li><a href="https://github.com/clarkio/vulnerable-app">vulnerable-app</a>: A sample AngularJS application that is used to demonstrate web application security topics.</li>
-      <li><a href="https://github.com/clarkio/cert-sig-alg">cert-sig-alg</a>: A CLI tool that will determine the signature algorithm used in the SSL certificate for a list of domains.</li>
-      <li><a href="https://github.com/clarkio/ios-favorite-movies">ios-favorite-movies</a>: A sample iOS app that allows the user to search for movies and add them to a list as their favorite.</li>
-      <li><a href="https://github.com/clarkio/node-web-push">node-web-push</a>: A demo Node.js application that uses the Web Push protocol to be used with Progressive Web Application clients.</li>
-      <li><a href="https://github.com/clarkio/house-bot">house-bot</a>: A serverless AI bot using Azure Functions to receive text commands for controlling internet connected light bulbs.</li>
-    </ul> -->
-  </div>
-</Layout>
+  <ul class="project-list">
+    {
+      projects.map(({ url, name, stargazers, description, languages }) => (
+        <li class="project">
+          <h2>
+            <a href={url} target="_blank">
+              {name}
+            </a>
+          </h2>
+          <p>{description}</p>
+          <div class="project-details">
+            <span class="stars">
+              <img src={star} alt="stargazers" /> {stargazers.totalCount}
+            </span>
+            <div class="languages">
+              {languages.edges.map(({ node: { name } }) => (
+                <span>{name}</span>
+              ))}
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
+
+<style>
+  h2 a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  ul {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr;
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    background: rgba(0, 0, 255, 0.02);
+    border: 2px solid rgba(0, 0, 255, 0.2);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(0.5rem, 2vw, 1rem);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  li:hover {
+    box-shadow: 1px 2px 2px rgba(0, 0, 255, 0.1),
+      2px 4px 4px rgba(0, 0, 255, 0.1), 4px 8px 8px rgba(0, 0, 255, 0.1),
+      8px 16px 16px rgba(0, 0, 255, 0.1), 16px 32px 32px rgba(0, 0, 255, 0.1);
+  }
+
+  .project-details {
+    color: #7d7d7d;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: auto;
+  }
+
+  .stars {
+    align-items: center;
+    display: flex;
+  }
+
+  .stars img {
+    height: 24px;
+    width: 24px !important;
+    margin-right: 0.5rem;
+  }
+
+  .languages {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .languages span {
+    margin-left: 10px;
+  }
+  @media (min-width: 500px) {
+    ul {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

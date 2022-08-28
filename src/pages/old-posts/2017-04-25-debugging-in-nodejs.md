@@ -2,7 +2,7 @@
 title:      "Debugging in Node.js"
 publishDate:       April 25, 2017
 author:     "Brian Clark"
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 Debugging our applications is a critical part of the development process and can aid in discovering why the app may be behaving differently than expected. Doing this using Node.js can tend to be quite elusive and maybe even frustrating. In this post we'll talk about the typical hurdles developers run into while debugging Node.js and look at better ways to approach it. We'll go over the various techniques and tools that are available to help make debugging Node.js an easy task.

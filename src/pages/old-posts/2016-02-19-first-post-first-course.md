@@ -2,7 +2,7 @@
 title: 'First Post, First Course'
 publishDate: February 19, 2016
 author: 'Brian Clark'
-layout: '../../layouts/BlogPost.astro'
+layout: "../../layouts/BaseLayout.astro"
 ---
 
 To kick things off, I thought what better way could I start the site than by sharing a quick highlight of my first course published on [Pluralsight](https://app.pluralsight.com).

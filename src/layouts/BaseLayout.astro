@@ -1,0 +1,90 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+
+const { canonicalURL = Astro.url } = Astro.props;
+const title = Astro.props.title || Astro.props.content.title;
+const description = Astro.props.description || Astro.props.content.description;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Preload -->
+    <slot name="preload" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      {canonicalURL.pathname === "/" ? title : `Brian Clark - ${title}`}
+    </title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/old-posts/img/favicon.ico"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <Nav />
+      <slot />
+      <Footer />
+    </div>
+    <style is:global>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        font-family: "Inter", sans-serif;
+        font-size: clamp(1rem, 2vw, 1.75rem);
+        line-height: 1.5;
+      }
+      body {
+        padding: 1rem;
+      }
+
+      .wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      h1 {
+        color: rgb(0, 0, 255);
+      }
+      pre {
+        background: #272a36 !important;
+        padding: 1rem;
+      }
+      img {
+        width: 100%;
+      }
+    </style>
+  </body>
+</html>
