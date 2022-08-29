@@ -117,13 +117,12 @@ const {
   }
 
   .stars {
-    align-content: center;
     display: flex;
   }
 
   .stars img {
     height: 16px;
-    width: 16px !important;
+    width: 16px;
     margin-right: 0.5rem;
   }
 
@@ -138,10 +137,12 @@ const {
     ul {
       grid-template-columns: 1fr 1fr;
     }
-
+    .stars {
+      align-items: center;
+    }
     .stars img {
       height: 24px;
-      width: 24px !important;
+      width: 24px;
     }
   }
 </style>
