@@ -96,8 +96,9 @@ const {
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    padding: clamp(0.5rem, 2vw, 1rem);
+    padding: 1rem;
     transition: box-shadow 0.3s ease-in-out;
+    min-width: 300px;
   }
 
   li:hover {
@@ -110,18 +111,18 @@ const {
     color: #7d7d7d;
     display: grid;
     gap: 1rem;
+    font-size: clamp(0.75rem, 2vw, 1rem);
     grid-template-columns: repeat(2, 1fr);
     margin-top: auto;
   }
 
   .stars {
-    align-items: center;
     display: flex;
   }
 
   .stars img {
-    height: 24px;
-    width: 24px !important;
+    height: 16px;
+    width: 16px;
     margin-right: 0.5rem;
   }
 
@@ -135,6 +136,13 @@ const {
   @media (min-width: 500px) {
     ul {
       grid-template-columns: 1fr 1fr;
+    }
+    .stars {
+      align-items: center;
+    }
+    .stars img {
+      height: 24px;
+      width: 24px;
     }
   }
 </style>
