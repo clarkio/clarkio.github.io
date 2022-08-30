@@ -2,14 +2,14 @@
 title: 'VS Code July 2019 Release Highlights Video'
 publishDate: August 12, 2019
 author: 'Brian Clark'
-layout: "../../layouts/BaseLayout.astro"
+layout: '../../layouts/BaseLayout.astro'
 ---
 
 ## July 2019 VS Code Release
 
 Visual Studio Code has come out with another release that is jam packed with improvements and new features. You can read through the [release notes](https://code.visualstudio.com/updates/v1_37?WT.mc_id=clarkio-blog-brcl) to find out more about them or watch this short video to see some of the highlights from it.
 
-<div class="video-container">
+<div class="videoWrapper">
   <iframe src="https://www.youtube.com/embed/BPhzEbugqsM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
