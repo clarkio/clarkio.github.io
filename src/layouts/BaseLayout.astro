@@ -1,10 +1,12 @@
 ---
-import Nav from "../components/Nav.astro";
-import Footer from "../components/Footer.astro";
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
 
 const { canonicalURL = Astro.url } = Astro.props;
-const title = Astro.props.title || Astro.props.content.title;
-const description = Astro.props.description || Astro.props.content.description;
+const title = Astro.props.title || Astro.props.content.title || '';
+const description =
+  Astro.props.description || Astro.props.content.description || '';
+const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
 ---
 
 <!DOCTYPE html>
@@ -19,10 +21,11 @@ const description = Astro.props.description || Astro.props.content.description;
 
     <!-- Primary Meta Tags -->
     <title>
-      {canonicalURL.pathname === "/" ? title : `Brian Clark - ${title}`}
+      {canonicalURL.pathname === '/' ? title : `Brian Clark - ${title}`}
     </title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph / Facebook -->
@@ -63,7 +66,7 @@ const description = Astro.props.description || Astro.props.content.description;
       }
 
       html {
-        font-family: "Inter", sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: clamp(1rem, 2vw, 1.75rem);
         line-height: 1.5;
       }
