@@ -1,15 +1,20 @@
 ---
-title:      "Debugging in Node.js"
-publishDate:       April 25, 2017
-author:     "Brian Clark"
-layout: "../../layouts/BaseLayout.astro"
+title: 'Debugging in Node.js in 2017'
+publishDate: April 25, 2017
+author: 'Brian Clark'
+description: 'Exploring the different debugging strategies for Node.js apps and understanding the pros and cons of each one'
+keywords: 'pwa, progressive web app, web push, api, web push api, javascript, node.js, node, nodejs'
+layout: '../../layouts/BaseLayout.astro'
 ---
+
+# Debugging in Node.js (in 2017)
 
 Debugging our applications is a critical part of the development process and can aid in discovering why the app may be behaving differently than expected. Doing this using Node.js can tend to be quite elusive and maybe even frustrating. In this post we'll talk about the typical hurdles developers run into while debugging Node.js and look at better ways to approach it. We'll go over the various techniques and tools that are available to help make debugging Node.js an easy task.
 
 > You can use this [GitHub repository](https://github.com/clarkio/nodejs-debugging) to follow along and try out what's described in this post.
 
 ## The Simple and Initial Approach: Console.log()
+
 When starting out in a Node.js project for the first time the natural approach to debugging an application is with `console.log`. This is typical for developers either starting out in general for the first time or even seasoned developers coming from other languages and platforms. We want to get a quick understanding of what the value of a variable may be at a certain point in code or make sure a method is actually being executed. Plugging in a simple `console.log(variable);` or `console.log('Made it here!!!');` and then spinning up our application is very simple and provides quick feedback. Let's briefly take a look at an example of doing this in Node.js.
 
 <img class="post-image" src="/assets/old-posts/img/node-debugging/simple-console-log.png" alt="An example of using console.log to log a string message and to determine which branch of an if statement was executed">
@@ -21,6 +26,7 @@ Here we can see that using the first log lets us know that Node.js executed this
 This is useful to us in a very simple example and can still be useful in a more complex and robust Node.js application. However, as our applications grow this approach can be very tedious and become quite cumbersome to keep up with. If we really think about it we'd be adding these log statements throughout the stack we are trying to debug which could be lengthy depending on the size of the application. The other downside to this approach is that many times these logs which are supposed to be just for temporary debugging purposes will often be forgotten and left in our production code for which they were never intended.
 
 ## Node.js Built-in Debugger
+
 This brings us to the next feasible option to help with debugging: the built-in Node.js debugger. As is expected of a fully fledged platform, Node.js provides a debug target that runs as a separate process from an application.
 
 Just like the `console.log` approach there's no need to install anything on top of Node.js. The difference in using this approach is in the way we start our application. This is accomplished through a flag, `debug` or `--debug`, that let's Node.js know to start up a separate debugger process.
@@ -38,15 +44,18 @@ The `>` on line 2 indicates where the debugger has stopped in our code. The `deb
 At this point there are many options for the commands we can send to the debugger that allow us to debug our code. Below are just a few core commands that will be useful as we go further through this example.
 
 #### Navigation
+
 - c: continue
 - n: next
 - s: step in
 - o: step out
 
 #### Breakpoints
+
 - sb: set breakpoint
 
 #### Watching
+
 - watch('\<variable name\>'): adds a watch for the variable name indicated inside the string
 - watchers: view all watchers and their values based on the current state
 - unwatch('\<variable name\>'): removes the watch for the variable name indicated inside the string
@@ -70,16 +79,17 @@ Sending the next command two times will bring us to line 14 where the `currentIn
 We can continue from here by stepping through the loop and observing the value changes of our watched variable after each iteration. The use of the built-in debugger is pretty helpful and a step up from the console log method because we can control the flow of code execution. This also creates a better debugging workflow in that we don't have to restart our app every time we add or remove more console logs to help us debug further. While this is great, it would be even better if we had some type of UI that can make debugging even easier.
 
 ## Node.js Built-in Inspector
+
 Insert the built-in Node.js inspector that is available as of version 6.3.0. It provides a means to debug Node.js applications with a UI and a familiar one at that. This utility leverages the Chrome developer tools to create an even better debugging experience. It's filled with the expected features many of us are used to when debugging client-side JavaScript code: view source files, set breakpoints, add watchers and more which can be found in [Paul Irish's post](https://medium.com/@paul_irish/debugging-node-js-nightlies-with-chrome-devtools-7c4a1b95ae27).
 
 In short, we can start the inspector using the `--inspect` flag and add the `--debug-brk` option so that it breaks on the first line of code. We will then see a long URL in our terminal which we can copy and paste into a new browser tab.
-
 
 <img class="post-image" src="/assets/old-posts/img/node-debugging/node-built-in-inspector-start.png" alt="Node.js built-in inspector start in terminal">
 
 <img class="post-image" src="/assets/old-posts/img/node-debugging/node-built-in-inspector.png" alt="Node.js built-in inspector running in Chrome Dev Tools">
 
 ## Visual Studio Code (VS Code)
+
 Up until now we've had to do a lot of switching back and forth between a few windows as part of our workflow. Having the ability to stay within one window is something that will definitely speed up the efficiency of our debugging process and VS Code does an excellent job of accomplishing this. Much of its features around debugging are well described and outlined in its [corresponding documentation](https://code.visualstudio.com/docs/nodejs/nodejs-debugging), but let's highlight a few here that match what we've been working through in the previous tools.
 
 First we'll need to set up some configuration to tell VS Code we're going to run and debug a Node.js app. VS Code has a debug view that is visible when we click on the debug icon and then it even provides a starting point for the configuration file we need. We can see this file by clicking the gear icon.
@@ -104,28 +114,27 @@ VS Code will then restart our application and we will see that the process break
 
 We can find more details on the various features VS code provides through its [official documentation](https://code.visualstudio.com/docs/nodejs/nodejs-debugging), but this should be a great primer for us to realize the value it offers. There are definitely many more possibilities with this great editor and below are a few of them which are worth reading more about (click to view):
 
- - [Launch with Other Tools](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-support-for-npm-and-other-tools)
- - [Remote Debugging](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging)
- - [Source Maps](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_source-maps)
+- [Launch with Other Tools](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_launch-configuration-support-for-npm-and-other-tools)
+- [Remote Debugging](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_remote-debugging)
+- [Source Maps](https://code.visualstudio.com/docs/nodejs/nodejs-debugging#_source-maps)
 
 ## Debugging Progression
+
 Since Node.js has been around, the majority of developers have gone through a progression in how they approach debugging their applications. As we have covered, the most simple way to approach this when first starting out is to use the `console.log` method. The folks over at [RisingStack](https://risingstack.com) surveyed members of the community how they go about debugging their applications and found that the majority of them use this as well.
 
 <a href="https://blog.risingstack.com/node-js-developer-survey-results-2016
 ">
-    <img class="post-image" src="/assets/old-posts/img/node-debugging/rising-stack-debug-method-results.png" alt="RisingStack: How Developers use Node.js - Survey Results. Chosen debugging method">
+<img class="post-image" src="/assets/old-posts/img/node-debugging/rising-stack-debug-method-results.png" alt="RisingStack: How Developers use Node.js - Survey Results. Chosen debugging method">
 </a>
-<span class="caption text-muted">[RisingStack: How Developers use Node.js - Survey Results](https://blog.risingstack.com/node-js-developer-survey-results-2016
-)</span>
+<span class="caption text-muted">[RisingStack: How Developers use Node.js - Survey Results](https://blog.risingstack.com/node-js-developer-survey-results-2016)</span>
 
 Another interesting result captured from their survey is that regardless of a developer's years of experience using Node.js, the majority of them use `console.log`. This leads us to believe that once someone starts out using this approach they tend to stick with it for all their work within Node.js based projects.
 
 <a href="https://blog.risingstack.com/node-js-developer-survey-results-2016
 ">
-    <img class="post-image" src="/assets/old-posts/img/node-debugging/rising-stack-debug-method-experience.png" alt="RisingStack: How Developers use Node.js - Survey Results. Experience levels.">
+<img class="post-image" src="/assets/old-posts/img/node-debugging/rising-stack-debug-method-experience.png" alt="RisingStack: How Developers use Node.js - Survey Results. Experience levels.">
 </a>
-<span class="caption text-muted">[RisingStack: How Developers use Node.js - Survey Results](https://blog.risingstack.com/node-js-developer-survey-results-2016
-)</span>
+<span class="caption text-muted">[RisingStack: How Developers use Node.js - Survey Results](https://blog.risingstack.com/node-js-developer-survey-results-2016)</span>
 
 This is quite unfortunate because as we've seen in this post there are options available to us now that make for a much richer and more efficient debugging experience that developers may be missing out on.
 
@@ -142,5 +151,5 @@ node console-log.js
 If you're interested in learning how to improve the security of your Node.js applications check out my course on Pluralsight: [Getting Started with Node.js Security with Express and Angular](https://bit.ly/2cJyxhD)
 <a href="https://bit.ly/2cJyxhD
 ">
-    <img class="post-image" src="/assets/old-posts/img/course-node-angular-security-ps.png" alt="Getting Started with Node.js Security with Express and Angular Video">
+<img class="post-image" src="/assets/old-posts/img/course-node-angular-security-ps.png" alt="Getting Started with Node.js Security with Express and Angular Video">
 </a>

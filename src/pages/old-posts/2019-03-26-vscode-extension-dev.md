@@ -2,9 +2,12 @@
 title: 'Visual Studio Code Extension Development'
 publishDate: March 25, 2019
 author: 'Brian Clark'
+description: 'Learn how to develop a Visual Studio Code extension. Walkthrough creating a theme extension and a functional extension'
 keywords: 'VS Code, Visual Studio Code, vscode, Extension, extensions, development, TypeScript'
-layout: "../../layouts/BaseLayout.astro"
+layout: '../../layouts/BaseLayout.astro'
 ---
+
+# Visual Studio Code Extension Development
 
 I don't like long introductions in posts because you know what brought you here and don't need the fluff. Let's get right into it...
 
@@ -104,7 +107,7 @@ npm i -g generator-code
 Once you've installed that go to your main folder/directory that you'd like to use for development (example: `cd /my/dev/folder`) and run `yo code` to get started:
 
 ```javascript
-function test (a, b) {
+function test(a, b) {
   const sum = a + b;
   return sum;
 }

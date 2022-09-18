@@ -2,16 +2,18 @@
 title: 'Getting a Handle on User Input'
 publishDate: June 14, 2016
 author: 'Brian Clark'
+description: "Learn how to properly handle user input for your application's security. Understand the different types of input handling and why they're important."
+keywords: 'security, application security, appsec, application, input handling, cross-site scripting, injection, code injection, sql injection, xss'
 layout: '../../layouts/BaseLayout.astro'
 ---
 
-## Input Handling
+# Input Handling
 
 Proper input handling is, in many ways, an important aspect in providing both a user friendly and secure web application today. It accomplishes this by ensuring the user understands the expected values they should be entering into fields within the application as well as protecting the system from malicious attempts to subvert the constraints put in place. It essentially boils down to making sure any user provided data has been vetted so that it will not cause any harm or unexpected behavior when used within its intended context.
 
 Input handling encompasses a few different things, but can be confusing as to what the purpose is of each type of input handling and how they help. In fact, in some cases they can actually assist each other in their purposes. In this post we'll talk through what each type is and what it accomplishes within our applications.
 
-### Why it Matters
+## Why it Matters
 
 Before we get too deep into what each one does and accomplishes we should first better understand why they're important to have. To explain this further we'll talk about two risks that we place in our web applications when we don't implement proper input handling. Those two risks are invalid or corrupt data and code injection.
 
@@ -71,6 +73,6 @@ Input validation is the process of confirming something is true to its expected 
 
 <img class="post-image" src="/assets/old-posts/img/input-validation-example.png" alt="Example input validation image">
 
-## ---
+## Conclusion
 
 With this understanding of input handling now we can go forth in implementing these techniques to provide a better experience and more secure web application for our users. Feel free to comment with any questions below.

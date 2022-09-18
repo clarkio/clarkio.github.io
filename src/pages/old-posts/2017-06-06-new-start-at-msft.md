@@ -1,18 +1,21 @@
 ---
-title:      "A New Start at Microsoft"
-publishDate:       June 6, 2017
-author:     "Brian Clark"
-layout: "../../layouts/BaseLayout.astro"
+title: 'A New Start at Microsoft'
+publishDate: June 6, 2017
+author: 'Brian Clark'
+description: 'Clarkio shares his experiences starting a new job at Microsoft'
+keywords: 'microsoft, developer, advocate, developer advocate, cloud, azure, cloud advocate, cloud developer advocate, career'
+layout: '../../layouts/BaseLayout.astro'
 ---
 
+# A New Start at Microsoft
 
-### Cloud Developer Advocate
+## Cloud Developer Advocate
 
 I started a new role this past week at Microsoft as a Cloud Developer Advocate. In this role, I'll be involved in the communities around JavaScript, Node.js, Angular and Security and connecting them with the relevant awesomeness in Azure. I'll also be collaborating with the excellent teams that build the products in Azure to ensure it's creating the best experiences possible.
 
 What this all means is I'll be telling the story of how things like Node.js and Angular fit in Azure. You'll be able to hear about it through conference talks, blogs, social media, podcasts and more. Overall my goal is to always be learning and sharing the knowledge to help empower everyone in the community to achieve more.
 
-### Starting at Microsoft
+## Starting at Microsoft
 
 Fun and exciting is the best way to describe my first week at Microsoft:
 
@@ -20,9 +23,10 @@ Fun and exciting is the best way to describe my first week at Microsoft:
     <img class="post-image" src="/assets/old-posts/img/new-start-at-msft/start-at-msft-tweet.png" alt="Twitter post from @_clarkio">
 </a>
 
-The first day was orientation which includes lots of helpful information and inspiration. The orientation folks did a great job of getting everyone hyped up while sharing important details about the company.  My biggest takeaway from this session was the culture evolution at Microsoft.
+The first day was orientation which includes lots of helpful information and inspiration. The orientation folks did a great job of getting everyone hyped up while sharing important details about the company. My biggest takeaway from this session was the culture evolution at Microsoft.
 
 There were four key factors around the culture that were shared with us:
+
 1. Growth Mindset
 2. Customer Obsessed
 3. Diverse and Inclusive

@@ -1,8 +1,10 @@
 ---
-title:      "Progressive Web Apps and Web Push API - Introduction"
-publishDate:       June 15, 2017
-author:     "Brian Clark"
-layout: "../../layouts/BaseLayout.astro"
+title: 'Progressive Web Apps and Web Push API - Introduction'
+publishDate: June 15, 2017
+author: 'Brian Clark'
+description: "Part 1 of the PWA and Web Push API blog series. This one covers an introduction to progressive web apps (PWA's)."
+keywords: 'pwa, progressive web app, web push, api, web push api, javascript, node.js, node, nodejs'
+layout: '../../layouts/BaseLayout.astro'
 ---
 
 #### PWA and Web Push API Blog Series
@@ -12,9 +14,9 @@ layout: "../../layouts/BaseLayout.astro"
 3. [Application Server](/2017/08/22/pwa-web-push-3)
 4. [Pushing Messages](/2017/10/18/pwa-web-push-4)
 
-----------
+<hr>
 
-## Progressive Web Apps and Web Push API
+# Progressive Web Apps and Web Push API
 
 [Progressive Web Apps (PWA)](https://en.wikipedia.org/wiki/Progressive_web_app) are a great way to create excellent experiences for users on the web and mobile. I've recently been experimenting in this space and have found it to be a lot of fun to create such apps. As part of my app, I wanted to be able to push notification messages to all clients whether they're using the web or mobile instance of the PWA. I found that this can be done through the [Web Push API](https://developer.mozilla.org/en-US/docs/Web/API/Push_API).
 
