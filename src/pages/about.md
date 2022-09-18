@@ -1,10 +1,13 @@
 ---
 layout: ../layouts/BaseLayout.astro
 title: About
-description: A little bit about me
+description: Learn more about clarkio through his bio, media and talks.
+keywords: 'clarkio, bio, media, talks, slides'
 ---
 
 # About
+
+Below you'll find some bio information on me but you can also refer to [media](/media) I've been in or my [talks](/talks).
 
 ### TL;DR:
 
