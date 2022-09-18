@@ -4,7 +4,7 @@ publishDate: November 2, 2016
 author: 'Brian Clark'
 description: 'A tutorial on how to create Restify route middleware that short-circuits the request handling chain. This is often needed for security purposes to not process the request fully if the required permissions are missing.'
 keywords: 'headers already set, next(), restify next(), short-circuit request, node restify, restify, node, node.js, javascript'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 # Restify Middleware & Next()

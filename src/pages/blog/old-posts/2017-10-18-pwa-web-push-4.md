@@ -4,7 +4,7 @@ publishDate: October 18, 2017
 author: 'Brian Clark'
 description: 'Part 4 of the PWA and Web Push API blog series. This one covers how to push messages to clients.'
 keywords: 'pwa, progressive web app, web push, api, web push api, javascript, node.js, node, nodejs'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 #### PWA and Web Push API Blog Series

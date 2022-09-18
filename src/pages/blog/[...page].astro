@@ -5,9 +5,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Paginator from '../../components/Paginator.astro';
 
 export async function getStaticPaths({ paginate, rss }) {
-  const oldPosts = await Astro.glob('../old-posts/*.md');
-  const newPosts = await Astro.glob('./*/*.md');
-  const allPosts = oldPosts.concat(newPosts);
+  // const oldPosts = await Astro.glob('../old-posts/*.md');
+  const allPosts = await Astro.glob('./*/*.md');
+  // const allPosts = oldPosts.concat(newPosts);
   const sortedPosts = allPosts.sort(
     (a, b) =>
       new Date(b.frontmatter.publishDate).valueOf() -
@@ -34,7 +34,7 @@ const { page } = Astro.props;
           frontmatter: { title, publishDate, description },
         }) => {
           if (url.includes('old-posts')) {
-            const oldUrl = url.replace('/old-posts/', '').replace('/blog/');
+            const oldUrl = url.replace('/blog/old-posts/', '').replace('/blog/');
             const year = oldUrl.slice(0, 4);
             const month = oldUrl.slice(5, 7);
             const day = oldUrl.slice(8, 10);

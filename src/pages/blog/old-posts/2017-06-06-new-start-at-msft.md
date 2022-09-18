@@ -4,7 +4,7 @@ publishDate: June 6, 2017
 author: 'Brian Clark'
 description: 'Clarkio shares his experiences starting a new job at Microsoft'
 keywords: 'microsoft, developer, advocate, developer advocate, cloud, azure, cloud advocate, cloud developer advocate, career'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 # A New Start at Microsoft

@@ -4,7 +4,7 @@ publishDate: August 22, 2017
 author: 'Brian Clark'
 description: 'Part 3 of the PWA and Web Push API blog series. This one covers how to set up the application server.'
 keywords: 'pwa, progressive web app, web push, api, web push api, javascript, node.js, node, nodejs, application, server'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 #### PWA and Web Push API Blog Series

@@ -4,7 +4,7 @@ publishDate: August 4, 2017
 author: 'Brian Clark'
 description: 'Part 2 of the PWA and Web Push API blog series. This one covers how to set up components of a PWA so that we have a client that can subscribe to push notifications.'
 keywords: 'pwa, progressive web app, web push, api, web push api, javascript, node.js, node, nodejs'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 #### PWA and Web Push API Blog Series

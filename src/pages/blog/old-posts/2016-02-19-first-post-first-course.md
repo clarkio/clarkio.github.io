@@ -4,7 +4,7 @@ publishDate: February 19, 2016
 author: 'Brian Clark'
 description: 'Sharing my course on Pluralsight covering internationalization in Angular'
 keywords: 'pluralsight, course, educational, angular, internationalization, angular.js, i18n, localization'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 # First Post, First Course (2016)

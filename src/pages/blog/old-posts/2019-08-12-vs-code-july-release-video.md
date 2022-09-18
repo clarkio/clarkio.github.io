@@ -4,7 +4,7 @@ publishDate: August 12, 2019
 author: 'Brian Clark'
 description: 'Highlights of features for the VS Code July 2019 Release (version 1.37)'
 keywords: 'vscode, vs code, visual studio code, release, publish, 2019'
-layout: '../../layouts/BaseLayout.astro'
+layout: '../../../layouts/BaseLayout.astro'
 ---
 
 # July 2019 VS Code Release
