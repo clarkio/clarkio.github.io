@@ -1,0 +1,88 @@
+---
+import logo from "../images/logo.png";
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.slice(1);
+---
+
+<nav>
+  <a href="/">
+    <img src={logo} alt="Brian Clark Logo" />
+  </a>
+  <ul>
+    <li>
+      <a class={currentPath === "blog/" ? "active" : ""} href="/blog/">Blog</a>
+    </li>
+    <li>
+      <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
+        >Projects</a
+      >
+    </li>
+    <li>
+      <a class={currentPath === "about/" ? "active" : ""} href="/about/"
+        >About</a
+      >
+    </li>
+    <li>
+      <a class={currentPath === "uses/" ? "active" : ""} href="/uses/">Uses</a>
+    </li>
+  </ul>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  ul {
+    display: flex;
+    padding: 0;
+  }
+
+  li {
+    margin-right: 1rem;
+  }
+
+  li a,
+  li a:visited {
+    color: rgb(0 0 255 / 50%);
+    font-weight: 600;
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    text-decoration: none;
+  }
+
+  li a:hover,
+  .active {
+    color: rgb(0 0 255 / 100%);
+    text-decoration: underline;
+  }
+
+  img {
+    height: 48px;
+    width: auto !important;
+  }
+
+  @media (min-width: 500px) {
+    nav {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 60px 0;
+    }
+
+    li {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+
+    img {
+      height: 64px;
+    }
+  }
+</style>

@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import profilePhoto from '../images/clarkio-profile-photo.jpg';
+---
+
+<BaseLayout
+  title="Brian Clark"
+  description="Developer advocate and content creator who loves to learn new things and share them."
+  keywords="clarkio, developer, developer advocate"
+>
+  <div class="heroContainer">
+    <div class="heroText">
+      <span>Hey, it's me! Brian Clark.</span>
+      <h1>
+        Developer advocate and content creator who loves to learn new things and
+        share them. I enjoy building tools to automate the boring stuff,
+        teaching about application security and sharing development tips and
+        tricks.
+      </h1>
+      <a href="/about/" class="about">Read more about me &rarr;</a>
+    </div>
+    <img class="profile-photo" src={profilePhoto} alt="Clarkio Profile Photo" />
+  </div>
+</BaseLayout>
+
+<style>
+  .heroContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    width: 100%;
+    padding: 1rem 0;
+  }
+
+  .heroText span {
+    color: rgb(0 0 255);
+    font-size: clamp(1.75rem, 2vw, 2rem);
+    font-weight: 700;
+  }
+
+  h1 {
+    color: #000 !important;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 400;
+    margin: 2rem 0;
+  }
+
+  .profile-photo {
+    box-shadow: 32px 32px 0px rgba(0, 0, 0, 0.12);
+    max-width: 400px !important;
+  }
+
+  .about {
+    color: rgb(0 0 255 / 0.5);
+    display: inline-block;
+    font-weight: 600;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    text-decoration: none;
+  }
+
+  .about:hover {
+    color: rgb(0 0 255);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 700px) {
+    .heroContainer {
+      place-items: center;
+      grid-template-columns: auto 400px;
+      padding: 60px 1rem;
+    }
+  }
+</style>
