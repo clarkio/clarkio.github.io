@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^1.0.0",
-    "astro": "^1.1.1"
+    "astro": "^1.5.0"
   },
   "dependencies": {
-    "@astrojs/rss": "^1.0.0",
+    "@astrojs/rss": "^1.0.2",
     "reading-time": "^1.5.0"
   }
 }
