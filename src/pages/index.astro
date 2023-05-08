@@ -1,15 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import profilePhoto from '../images/clarkio-profile-photo.jpg';
+import profilePhoto from '../images/clarkio-profile-photo.avif';
 ---
 
 <BaseLayout
-  title="Brian Clark"
-  description="Developer advocate and content creator who loves to learn new things and share them."
-  keywords="clarkio, developer, developer advocate"
+  title='Brian Clark'
+  description='Developer advocate and content creator who loves to learn new things and share them.'
+  keywords='clarkio, developer, developer advocate'
 >
-  <div class="heroContainer">
-    <div class="heroText">
+  <div class='heroContainer'>
+    <div class='heroText'>
       <span>Hey, it's me! Brian Clark.</span>
       <h1>
         Developer advocate and content creator who loves to learn new things and
@@ -17,9 +17,9 @@ import profilePhoto from '../images/clarkio-profile-photo.jpg';
         teaching about application security and sharing development tips and
         tricks.
       </h1>
-      <a href="/about/" class="about">Read more about me &rarr;</a>
+      <a href='/about/' class='about'>Read more about me &rarr;</a>
     </div>
-    <img class="profile-photo" src={profilePhoto} alt="Clarkio Profile Photo" />
+    <img class='profile-photo' src={profilePhoto} alt='Clarkio Profile Photo' />
   </div>
 </BaseLayout>
 
