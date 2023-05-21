@@ -18,12 +18,14 @@ export const get = () =>
     site: import.meta.env.SITE,
     items: sortedPosts.map((post) => {
       if (post.url.includes('old-posts')) {
-        return handleOldPosts(post);
+        const result = handleOldPosts(post);
+        console.log(result);
+        return result;
       } else {
         return {
           link: post.url,
           title: post.frontmatter.title,
-          pubDate: post.frontmatter.publishData,
+          pubDate: post.frontmatter.publishDate,
         };
       }
     }),
@@ -41,6 +43,6 @@ function handleOldPosts(post) {
   return {
     link: newUrl,
     title: post.frontmatter.title,
-    pubDate: post.frontmatter.publishData,
+    pubDate: post.frontmatter.publishDate,
   };
 }
