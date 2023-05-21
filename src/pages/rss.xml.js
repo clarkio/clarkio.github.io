@@ -3,7 +3,6 @@ import rss from '@astrojs/rss';
 const allPosts = Object.values(
   import.meta.glob('./blog/**/*.md', { eager: true })
 );
-console.log(allPosts.map((post) => post.url));
 const sortedPosts = allPosts.sort(
   (a, b) =>
     new Date(b.frontmatter.publishDate).valueOf() -
@@ -23,7 +22,7 @@ export const get = () =>
         return {
           link: post.url,
           title: post.frontmatter.title,
-          pubDate: post.frontmatter.publishData,
+          pubDate: post.frontmatter.publishDate,
         };
       }
     }),
@@ -41,6 +40,6 @@ function handleOldPosts(post) {
   return {
     link: newUrl,
     title: post.frontmatter.title,
-    pubDate: post.frontmatter.publishData,
+    pubDate: post.frontmatter.publishDate,
   };
 }
