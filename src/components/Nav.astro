@@ -1,29 +1,29 @@
 ---
-import logo from "../images/logo.png";
+import logo from '../images/logo.png';
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
 ---
 
 <nav>
-  <a href="/">
-    <img src={logo} alt="Brian Clark Logo" />
+  <a href='/'>
+    <img src={logo} alt='Brian Clark Logo' />
   </a>
   <ul>
     <li>
-      <a class={currentPath === "blog/" ? "active" : ""} href="/blog/">Blog</a>
+      <a class={currentPath === 'blog/' ? 'active' : ''} href='/blog/'>Blog</a>
     </li>
     <li>
-      <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
+      <a class={currentPath === 'projects/' ? 'active' : ''} href='/projects/'
         >Projects</a
       >
     </li>
     <li>
-      <a class={currentPath === "about/" ? "active" : ""} href="/about/"
+      <a class={currentPath === 'about/' ? 'active' : ''} href='/about/'
         >About</a
       >
     </li>
     <li>
-      <a class={currentPath === "uses/" ? "active" : ""} href="/uses/">Uses</a>
+      <a class={currentPath === 'uses/' ? 'active' : ''} href='/uses/'>Uses</a>
     </li>
   </ul>
 </nav>
@@ -50,7 +50,7 @@ const currentPath = pathname.slice(1);
 
   li a,
   li a:visited {
-    color: rgb(0 0 255 / 50%);
+    color: var(--color-nav-a);
     font-weight: 600;
     font-size: clamp(1.25rem, 2vw, 1.5rem);
     text-decoration: none;
@@ -58,7 +58,7 @@ const currentPath = pathname.slice(1);
 
   li a:hover,
   .active {
-    color: rgb(0 0 255 / 100%);
+    color: var(--color-nav-a-hover-active);
     text-decoration: underline;
   }
 

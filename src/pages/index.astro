@@ -33,25 +33,25 @@ import profilePhoto from '../images/clarkio-profile-photo.avif';
   }
 
   .heroText span {
-    color: rgb(0 0 255);
+    color: var(--color-heroText);
     font-size: clamp(1.75rem, 2vw, 2rem);
     font-weight: 700;
   }
 
   h1 {
-    color: #000 !important;
+    color: var(--color-h1) !important;
     font-size: clamp(1rem, 2vw, 1.25rem);
     font-weight: 400;
     margin: 2rem 0;
   }
 
   .profile-photo {
-    box-shadow: 32px 32px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 32px 32px 0px var(--color-box-shadow);
     max-width: 400px !important;
   }
 
   .about {
-    color: rgb(0 0 255 / 0.5);
+    color: var(--color-about);
     display: inline-block;
     font-weight: 600;
     font-size: clamp(1rem, 2vw, 1.25rem);
@@ -59,7 +59,7 @@ import profilePhoto from '../images/clarkio-profile-photo.avif';
   }
 
   .about:hover {
-    color: rgb(0 0 255);
+    color: var(--color-about-hover);
     text-decoration: underline;
   }
 

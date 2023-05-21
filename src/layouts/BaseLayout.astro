@@ -10,57 +10,98 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en' data-theme='dark'>
   <head>
     <!-- Global Metadata -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width' />
 
     <!-- Preload -->
-    <slot name="preload" />
+    <slot name='preload' />
 
     <!-- Primary Meta Tags -->
     <title>
       {canonicalURL.pathname === '/' ? title : `Brian Clark - ${title}`}
     </title>
-    <meta name="title" content={title} />
-    <meta name="description" content={description} />
-    <meta name="keywords" content={keywords} />
-    <link rel="canonical" href={canonicalURL} />
+    <meta name='title' content={title} />
+    <meta name='description' content={description} />
+    <meta name='keywords' content={keywords} />
+    <link rel='canonical' href={canonicalURL} />
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={canonicalURL} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:url' content={canonicalURL} />
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={canonicalURL} />
-    <meta property="twitter:title" content={title} />
-    <meta property="twitter:description" content={description} />
+    <meta property='twitter:card' content='summary_large_image' />
+    <meta property='twitter:url' content={canonicalURL} />
+    <meta property='twitter:title' content={title} />
+    <meta property='twitter:description' content={description} />
 
     <link
-      rel="icon"
-      type="image/png"
-      href="/assets/old-posts/img/favicon.ico"
+      rel='icon'
+      type='image/png'
+      href='/assets/old-posts/img/favicon.ico'
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+      href='https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+      rel='stylesheet'
     />
   </head>
 
   <body>
-    <div class="wrapper">
+    <div class='wrapper'>
       <Nav />
       <slot />
       <Footer />
     </div>
     <style is:global>
+      :root {
+        /* Light theme colors */
+        --color-bg: #ffffff;
+        --color-text: #000000;
+        --color-h1: #0000ff;
+        --color-pre-bg: #272a36;
+        --color-heroText: #0000ff;
+        --color-about: rgba(0, 0, 255, 0.5);
+        --color-about-hover: #0000ff;
+        --color-box-shadow: rgba(0, 0, 0, 0.12);
+        --color-h2-a: #000000;
+        --color-span: #7d7d7d;
+        --color-p: #333333;
+        --color-span-p-a-a: #000000;
+        --color-nav-a: rgba(0, 0, 255, 0.5);
+        --color-nav-a-hover-active: rgba(0, 0, 255, 1);
+      }
+
+      [data-theme='dark'] {
+        /* Dark theme colors */
+        --color-bg: #000000;
+        --color-text: #ffffff;
+        --color-h1: #1e90ff; /* lighter shade of blue for dark mode */
+        --color-pre-bg: #1e1e1e; /* darker background for pre elements */
+        --color-heroText: #87cefa; /* light blue for dark mode */
+        --color-about: rgba(30, 144, 255, 0.5); /* adjusted for dark mode */
+        --color-about-hover: #87cefa; /* light blue for dark mode */
+        --color-box-shadow: rgba(
+          255,
+          255,
+          255,
+          0.12
+        ); /* lighter box-shadow for dark mode */
+        --color-h2-a: #ffffff; /* White color for dark mode */
+        --color-span: #bbbbbb; /* Light gray color for dark mode */
+        --color-p: #cccccc; /* Lighter gray color for dark mode */
+        --color-span-p-a-a: #ffffff; /* White color for dark mode */
+        --color-nav-a: #ffffff; /* White color for dark mode */
+        --color-nav-a-hover-active: #ffffff; /* White color for dark mode */
+      }
+
       * {
         box-sizing: border-box;
       }
@@ -69,7 +110,10 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         font-family: 'Inter', sans-serif;
         font-size: clamp(1rem, 2vw, 1.75rem);
         line-height: 1.5;
+        background-color: var(--color-bg);
+        color: var(--color-text);
       }
+
       body {
         padding: 1rem;
       }
@@ -78,13 +122,17 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         max-width: 1200px;
         margin: 0 auto;
       }
+
       h1 {
-        color: rgb(0, 0, 255);
+        color: var(--color-h1);
       }
+
       pre {
-        background: #272a36 !important;
+        background: var(--color-pre-bg) !important;
         padding: 1rem;
+        color: var(--color-text);
       }
+
       img {
         width: 100%;
       }

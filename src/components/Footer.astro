@@ -11,65 +11,65 @@ const year = new Date().getFullYear();
 
 <footer>
   <span
-    ><a href="https://astro.build" target="_blank" rel="noreferrer noopener"
+    ><a href='https://astro.build' target='_blank' rel='noreferrer noopener'
       >🚀 Built with Astro</a
     > | © {year} Brian Clark</span
   >
-  <div class="socials">
-    <a href="/rss.xml">
-      <img src={rss} alt="rss feed" />
+  <div class='socials'>
+    <a href='/rss.xml'>
+      <img src={rss} alt='rss feed' />
     </a>
     <a
-      href="https://twitter.com/_clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
+      href='https://twitter.com/_clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
     >
-      <img src={twitter} alt="twitter profile" />
+      <img src={twitter} alt='twitter profile' />
     </a>
     <a
-      href="https://www.twitch.tv/clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
+      href='https://www.twitch.tv/clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
     >
-      <img src={twitch} alt="twitch channel" />
-    </a>
-
-    <a
-      href="https://github.com/clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <img src={github} alt="github profile" />
+      <img src={twitch} alt='twitch channel' />
     </a>
 
     <a
-      href="https://www.youtube.com/c/Clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
+      href='https://github.com/clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
     >
-      <img src={youtube} alt="youtube channel" />
+      <img src={github} alt='github profile' />
     </a>
 
     <a
-      href="https://instagram.com/_clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
+      href='https://www.youtube.com/c/Clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
     >
-      <img src={instagram} alt="instagram profile" />
+      <img src={youtube} alt='youtube channel' />
+    </a>
+
+    <a
+      href='https://instagram.com/_clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
+    >
+      <img src={instagram} alt='instagram profile' />
     </a>
     <a
-      href="https://tiktok.com/@clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
+      href='https://tiktok.com/@clarkio'
+      target='_blank'
+      rel='noreferrer noopener'
     >
-      <img src={tiktok} alt="tiktok profile" />
+      <img src={tiktok} alt='tiktok profile' />
     </a>
   </div>
   <p>
     <a
-      href="https://dhanishgajjar.com"
-      target="_blank"
-      rel="noreferrer noopener">DG</a
+      href='https://dhanishgajjar.com'
+      target='_blank'
+      rel='noreferrer noopener'>DG</a
     >
   </p>
 </footer>
@@ -85,7 +85,7 @@ const year = new Date().getFullYear();
   p a,
   a,
   a:visited {
-    color: #000;
+    color: var(--color-span-p-a-a);
   }
 
   .socials {
