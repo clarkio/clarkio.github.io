@@ -3,7 +3,6 @@ import rss from '@astrojs/rss';
 const allPosts = Object.values(
   import.meta.glob('./blog/**/*.md', { eager: true })
 );
-console.log(allPosts.map((post) => post.url));
 const sortedPosts = allPosts.sort(
   (a, b) =>
     new Date(b.frontmatter.publishDate).valueOf() -
@@ -18,9 +17,7 @@ export const get = () =>
     site: import.meta.env.SITE,
     items: sortedPosts.map((post) => {
       if (post.url.includes('old-posts')) {
-        const result = handleOldPosts(post);
-        console.log(result);
-        return result;
+        return handleOldPosts(post);
       } else {
         return {
           link: post.url,
