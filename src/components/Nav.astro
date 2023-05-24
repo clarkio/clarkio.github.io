@@ -1,12 +1,13 @@
 ---
-import logo from "../images/logo.png";
 const pathname = new URL(Astro.request.url).pathname;
 const currentPath = pathname.slice(1);
+import Icons from "./Icons/Logo.astro";
+import ThemeToggle from "./Icons/ThemeToggle.astro";
 ---
 
 <nav>
   <a href="/">
-    <img src={logo} alt="Brian Clark Logo" />
+    <Icons name="Logo"/>
   </a>
   <ul>
     <li>
@@ -14,16 +15,19 @@ const currentPath = pathname.slice(1);
     </li>
     <li>
       <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
-        >Projects</a
+      >Projects</a
       >
     </li>
     <li>
       <a class={currentPath === "about/" ? "active" : ""} href="/about/"
-        >About</a
+      >About</a
       >
     </li>
     <li>
       <a class={currentPath === "uses/" ? "active" : ""} href="/uses/">Uses</a>
+    </li>
+    <li>
+      <ThemeToggle />
     </li>
   </ul>
 </nav>
@@ -46,6 +50,8 @@ const currentPath = pathname.slice(1);
 
   li {
     margin-right: 1rem;
+    display: flex;
+    align-items: center;
   }
 
   li a,
@@ -56,15 +62,18 @@ const currentPath = pathname.slice(1);
     text-decoration: none;
   }
 
+  :global(.dark) li a, :global(.dark) li a:visited {
+    color: rgb(255 255 255 / 0.5);
+  }
+
   li a:hover,
   .active {
-    color: rgb(0 0 255 / 100%);
+    color: rgb(0 0 255 / 1);
     text-decoration: underline;
   }
 
-  img {
-    height: 48px;
-    width: auto !important;
+  :global(.dark) li a:hover, :global(.dark) .active {
+    color: rgb(255 255 255 / 0.75);
   }
 
   @media (min-width: 500px) {
@@ -80,9 +89,10 @@ const currentPath = pathname.slice(1);
       margin-left: 1rem;
       margin-right: 0;
     }
-
-    img {
-      height: 64px;
-    }
   }
 </style>
+
+
+<script>
+
+</script>

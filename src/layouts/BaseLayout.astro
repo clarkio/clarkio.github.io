@@ -65,6 +65,17 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         box-sizing: border-box;
       }
 
+      html.dark {
+        background-color: #161625;
+      }
+      .dark .strokeColor {
+        stroke: white;
+      }
+
+      .dark .fillColor {
+        fill: white;
+      }
+
       html {
         font-family: 'Inter', sans-serif;
         font-size: clamp(1rem, 2vw, 1.75rem);
@@ -80,6 +91,18 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
       }
       h1 {
         color: rgb(0, 0, 255);
+      }
+
+      .dark h1 {
+        color: rgb(255 255 255 / 0.75);
+      }
+
+      .dark p, .dark h2, .dark h3, .dark li {
+        color: rgb(255 255 255 / 0.5);
+      }
+
+      .dark li a, .dark a {
+        color: rgb(255 255 255 / 0.75);
       }
       pre {
         background: #272a36 !important;
@@ -101,6 +124,7 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         width: 100%;
         height: 100%;
       }
+
     </style>
   </body>
 </html>
