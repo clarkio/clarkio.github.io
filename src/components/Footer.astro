@@ -1,11 +1,11 @@
 ---
-import rss from '../images/rss.png';
-import twitter from '../images/twitter.png';
-import twitch from '../images/twitch.png';
-import github from '../images/github.png';
-import youtube from '../images/youtube.png';
-import instagram from '../images/instagram.png';
-import tiktok from '../images/tiktok.png';
+import Rss from './Icons/Rss.astro';
+import Twitter from './Icons/Twitter.astro';
+import Twitch from './Icons/Twitch.astro';
+import Github from './Icons/Github.astro';
+import Instagram from './Icons/Ig.astro';
+import Tiktok from './Icons/Tiktok.astro';
+import Youtube from './Icons/Youtube.astro';
 const year = new Date().getFullYear();
 ---
 
@@ -17,21 +17,21 @@ const year = new Date().getFullYear();
   >
   <div class="socials">
     <a href="/rss.xml">
-      <img src={rss} alt="rss feed" />
+      <Rss />
     </a>
     <a
       href="https://twitter.com/_clarkio"
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={twitter} alt="twitter profile" />
+      <Twitter />
     </a>
     <a
       href="https://www.twitch.tv/clarkio"
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={twitch} alt="twitch channel" />
+      <Twitch />
     </a>
 
     <a
@@ -39,7 +39,7 @@ const year = new Date().getFullYear();
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={github} alt="github profile" />
+      <Github />
     </a>
 
     <a
@@ -47,7 +47,7 @@ const year = new Date().getFullYear();
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={youtube} alt="youtube channel" />
+      <Youtube />
     </a>
 
     <a
@@ -55,14 +55,14 @@ const year = new Date().getFullYear();
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={instagram} alt="instagram profile" />
+      <Instagram />
     </a>
     <a
       href="https://tiktok.com/@clarkio"
       target="_blank"
       rel="noreferrer noopener"
     >
-      <img src={tiktok} alt="tiktok profile" />
+      <Tiktok />
     </a>
   </div>
   <p>
@@ -88,27 +88,28 @@ const year = new Date().getFullYear();
     color: #000;
   }
 
+  :global(.dark) span,
+  :global(.dark) p a,
+  :global(.dark) a,
+  :global(.dark) a:visited {
+    color: rgb(255 255 255 / 0.75);
+  }
+
   .socials {
-    place-items: center;
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 1rem;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
     margin: 1rem 0;
   }
 
-  .socials img {
-    height: 24px;
-    width: auto !important;
+  .socials a {
+    margin: 0.5rem;
   }
 
   @media (min-width: 700px) {
     footer {
       justify-content: space-between;
       flex-direction: row;
-    }
-
-    .socials img {
-      height: 36px;
     }
   }
 </style>
