@@ -18,6 +18,10 @@ Here you can find some of the content I've either created or have been a part of
   - [Part 1](https://www.youtube.com/watch?v=CTwjrxwWoLQ)
   - [Part 2](https://www.youtube.com/watch?v=rTAWOxr210Y)
 
+### YouTube
+A playlist of all videos that I've been involved in. These range from produced videos, to conferences, podcasts and live stream recordings.
+- [Playlist](https://www.youtube.com/playlist?list=PLG8WGLcszzgXprhety_rmZjYB9kZuJZGW)
+
 ### Pluralsight
 
 - [Automating Node.js with NPM Scripts](https://www.pluralsight.com/courses/automating-nodejs-npm-scripts)
@@ -30,3 +34,35 @@ Here you can find some of the content I've either created or have been a part of
 
 - [Talk Python: Episode 242 Your education will be live-streamed](https://talkpython.fm/episodes/show/242/your-education-will-be-live-streamed)
 - [Adventures in Angular: Episode 131 Security and Angular](http://bit.ly/2nKfCZU)
+- [Web Rush: Twitched at Birth](https://webrush.io/episodes/episode-64-twitched-at-birth-with-brian-clark)
+- [WebRush/Real Talk Podcast (mentioned as a security expert)](https://webrush.io/episodes/e03e32ef)
+- [Coffee and Open Source: Brian Clark](https://open.spotify.com/episode/4KUmjtvg5fntgq7hPvVnNF)
+
+### Other Articles/Blog Posts
+A collection of articles/blog posts I've written or contributed to
+
+#### Written
+- [Best practices for creating a modern npm package with security in mind](https://snyk.io/blog/best-practices-create-modern-npm-package/)
+- [Web Almanac 2022 - Security Chapter](https://almanac.httparchive.org/en/2022/security)
+  - [Contributor List](https://almanac.httparchive.org/en/2022/contributors)
+
+#### Contributed to
+
+Snyk:
+- [Mitigating DOM clobbering attacks in JavaScript](https://snyk.io/blog/mitigating-dom-clobbering-attacks-javascript/)
+- [XS leaks: What they are and how to avoid them](https://snyk.io/blog/xs-leaks/)
+- [Session management security: Best practices for protecting user sessions](https://snyk.io/blog/session-management-security/)
+- [The importance of verifying webhook signatures](https://snyk.io/blog/verifying-webhook-signatures/)
+- [Security implications of HTTP response headers](https://snyk.io/blog/security-implications-of-http-response-headers/)
+- [How to build a secure API gateway in Node.js](https://snyk.io/blog/how-to-build-secure-api-gateway-node-js/)
+- [How to write your first unit test in JavaScript](https://snyk.io/blog/how-to-write-unit-test-in-javascript/)
+- [How to make a mock API server in JavaScript](https://snyk.io/blog/how-to-mock-api-server-javascript/)
+- [Building a secure API with gRPC](https://snyk.io/blog/building-a-secure-api-with-grpc/)
+- [Building a secure GraphQL API with Node.js](https://snyk.io/blog/build-secure-graphql-api-node-js/)
+- [Node.js multithreading with worker threads series: worker_threads tutorial](https://snyk.io/blog/node-js-multithreading-with-worker-threads/)
+- [Node.js multithreading with worker threads: pros and cons](https://snyk.io/blog/node-js-multithreading-worker-threads-pros-cons/)
+- [Comparing Node.js web frameworks: Which is most secure?](https://snyk.io/blog/comparing-node-js-web-frameworks/)
+
+Microsoft:
+- [Learning on Twitch](https://cloudblogs.microsoft.com/opensource/2019/06/03/learning-on-twitch/)
+- [Top 3 reasons developers should use social media](https://cloudblogs.microsoft.com/opensource/2019/02/27/why-developers-should-use-social-media/)
