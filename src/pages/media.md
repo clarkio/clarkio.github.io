@@ -1,15 +1,15 @@
 ---
 layout: ../layouts/BaseLayout.astro
 title: 'Media'
-description: "Videos, podcasts and other media in which I've talked and/or presented something."
-keywords: 'clarkio, media, videos, podcasts'
+description: "Videos, podcasts and other media in which clarkio has either created or had some involvement in."
+keywords: 'clarkio, media, videos, podcasts, livestreams, articles, blogs, courses'
 ---
 
 # Media
 
-Here you can find some of the content I've either created or have been a part of.
+Here you can find some of the content I've either created or have been a part of that are available on other platforms/sites.
 
-### Live Stream
+### Live Streams
 
 - [Twitch Channel](https://twitch.tv/clarkio): Regular live coding sessions covering various projects dealing mostly with JavaScript, TypeScript and Node.js.
 - [Past Streams](https://twitch.tv/clarkio/videos): If you missed a stream you can catch the recordings that are saved on Twitch
@@ -18,11 +18,11 @@ Here you can find some of the content I've either created or have been a part of
   - [Part 1](https://www.youtube.com/watch?v=CTwjrxwWoLQ)
   - [Part 2](https://www.youtube.com/watch?v=rTAWOxr210Y)
 
-### YouTube
+### YouTube Videos
 A playlist of all videos that I've been involved in. These range from produced videos, to conferences, podcasts and live stream recordings.
 - [Playlist](https://www.youtube.com/playlist?list=PLG8WGLcszzgXprhety_rmZjYB9kZuJZGW)
 
-### Pluralsight
+### Pluralsight Courses
 
 - [Automating Node.js with NPM Scripts](https://www.pluralsight.com/courses/automating-nodejs-npm-scripts)
 - [Angular Internationalization: Play by Play with John Papa](http://bit.ly/1Q6XrJI)
@@ -38,17 +38,16 @@ A playlist of all videos that I've been involved in. These range from produced v
 - [WebRush/Real Talk Podcast (mentioned as a security expert)](https://webrush.io/episodes/e03e32ef)
 - [Coffee and Open Source: Brian Clark](https://open.spotify.com/episode/4KUmjtvg5fntgq7hPvVnNF)
 
-### Other Articles/Blog Posts
-A collection of articles/blog posts I've written or contributed to
+### Articles/Blog Posts
+A collection of articles/blog posts I've written or contributed to on other platforms/sites.
 
-#### Written
-- [Best practices for creating a modern npm package with security in mind](https://snyk.io/blog/best-practices-create-modern-npm-package/)
+#### Web Almanac
+
 - [Web Almanac 2022 - Security Chapter](https://almanac.httparchive.org/en/2022/security)
   - [Contributor List](https://almanac.httparchive.org/en/2022/contributors)
 
-#### Contributed to
-
-Snyk:
+#### Snyk
+- [Best practices for creating a modern npm package with security in mind](https://snyk.io/blog/best-practices-create-modern-npm-package/)
 - [Top 5 VS Code extensions for security](https://snyk.io/blog/top-5-vs-code-extensions-security/)
 - [Mitigating DOM clobbering attacks in JavaScript](https://snyk.io/blog/mitigating-dom-clobbering-attacks-javascript/)
 - [XS leaks: What they are and how to avoid them](https://snyk.io/blog/xs-leaks/)
@@ -64,6 +63,6 @@ Snyk:
 - [Node.js multithreading with worker threads: pros and cons](https://snyk.io/blog/node-js-multithreading-worker-threads-pros-cons/)
 - [Comparing Node.js web frameworks: Which is most secure?](https://snyk.io/blog/comparing-node-js-web-frameworks/)
 
-Microsoft:
+#### Microsoft:
 - [Learning on Twitch](https://cloudblogs.microsoft.com/opensource/2019/06/03/learning-on-twitch/)
 - [Top 3 reasons developers should use social media](https://cloudblogs.microsoft.com/opensource/2019/02/27/why-developers-should-use-social-media/)
