@@ -49,6 +49,7 @@ A collection of articles/blog posts I've written or contributed to
 #### Contributed to
 
 Snyk:
+- [Top 5 VS Code extensions for security](https://snyk.io/blog/top-5-vs-code-extensions-security/)
 - [Mitigating DOM clobbering attacks in JavaScript](https://snyk.io/blog/mitigating-dom-clobbering-attacks-javascript/)
 - [XS leaks: What they are and how to avoid them](https://snyk.io/blog/xs-leaks/)
 - [Session management security: Best practices for protecting user sessions](https://snyk.io/blog/session-management-security/)
