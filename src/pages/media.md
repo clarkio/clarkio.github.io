@@ -49,6 +49,8 @@ A collection of articles/blog posts I've written or contributed to on other plat
 #### Snyk
 - [Best practices for creating a modern npm package with security in mind](https://snyk.io/blog/best-practices-create-modern-npm-package/)
 - [Top 5 VS Code extensions for security](https://snyk.io/blog/top-5-vs-code-extensions-security/)
+- [Building an application security battle plan: Home Alone edition](https://snyk.io/blog/application-security-battle-plan-home-alone/)
+- [5 best practices for building modern access control for cloud applications](https://snyk.io/blog/5-best-practices-modern-access-control-cloud-apps/)
 - [Mitigating DOM clobbering attacks in JavaScript](https://snyk.io/blog/mitigating-dom-clobbering-attacks-javascript/)
 - [XS leaks: What they are and how to avoid them](https://snyk.io/blog/xs-leaks/)
 - [Session management security: Best practices for protecting user sessions](https://snyk.io/blog/session-management-security/)
