@@ -47,6 +47,7 @@ A collection of articles/blog posts I've written or contributed to on other plat
   - [Contributor List](https://almanac.httparchive.org/en/2022/contributors)
 
 #### Snyk
+- [Critical WebP 0-day security CVE-2023-4863 impacts wider software ecosystem](https://snyk.io/blog/critical-webp-0-day-cve-2023-4863/)
 - [Best practices for creating a modern npm package with security in mind](https://snyk.io/blog/best-practices-create-modern-npm-package/)
 - [Top 5 VS Code extensions for security](https://snyk.io/blog/top-5-vs-code-extensions-security/)
 - [Node.js vs. Deno vs. Bun: JavaScript runtime comparison](https://snyk.io/blog/javascript-runtime-compare-node-deno-bun/)
