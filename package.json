@@ -1,20 +1,22 @@
 {
-  "name": "@clarkio/website",
-  "version": "2.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "devDependencies": {
-    "@astrojs/sitemap": "^1.3.1",
-    "astro": "^2.5.1"
-  },
-  "dependencies": {
-    "@astrojs/rss": "^2.4.3",
-    "reading-time": "^1.5.0"
-  }
+	"name": "@clarkio/website",
+	"version": "2.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview"
+	},
+	"devDependencies": {
+		"@astrojs/sitemap": "^3.1.4",
+		"astro": "^4.7.1"
+	},
+	"dependencies": {
+		"@astrojs/rss": "^4.0.5",
+		"dotenv": "^16.4.5",
+		"prettier-plugin-astro": "^0.13.0",
+		"reading-time": "^1.5.0"
+	}
 }

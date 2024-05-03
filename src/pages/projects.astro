@@ -1,24 +1,28 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import star from '../images/star.png';
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { Image } from 'astro:assets'
+import 'dotenv/config'
+import star from '../images/star.png'
 
 const requestBody = `
 {
   user(login: "clarkio") {
     pinnedItems(first: 6, types: REPOSITORY) {
-      nodes {
-        ... on Repository {
-          id
-          name
-          description
-          stargazers {
-            totalCount
-          }
-          url
-          languages(first: 3) {
-            edges {
-              node {
-                name
+      edges {
+        node {
+            ...on Repository {
+              id
+            name
+            description
+            stargazers {
+              totalCount
+            }
+            url
+            languages(first: 3) {
+              edges {
+                node {
+                  name
+                }
               }
             }
           }
@@ -27,55 +31,56 @@ const requestBody = `
     }
   }
 }
-`;
+`
 
 const response = await fetch('https://api.github.com/graphql', {
   method: 'POST',
-  headers: { authorization: `Bearer ${import.meta.env.GH_ACCESS_TOKEN}` },
+  headers: { authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}` },
   body: JSON.stringify({
-    query: requestBody,
-  }),
-}).then((res) => res.json());
+    query: requestBody
+  })
+}).then((res) => res.json())
 
-const {
-  pinnedItems: { nodes: projects },
-} = response.data.user;
+const projects = response.data.user.pinnedItems.edges
+console.log(projects)
 ---
 
 <BaseLayout
-  title="Projects"
+  title='Projects'
   description="Clarkio's GitHub repositories for all of his projects"
-  keywords="clarkio, projects, github, repository, repositories"
+  keywords='clarkio, projects, github, repository, repositories'
 >
   <h1>Projects</h1>
   <p>
     You can see the top, pinned, projects below but be sure to go to <a
-      href="https://github.com/clarkio">Clarkio's GitHub profile</a
+      href='https://github.com/clarkio'>Clarkio's GitHub profile</a
     > for more.
   </p>
 
-  <ul class="project-list">
+  <ul class='project-list'>
     {
-      projects.map(({ url, name, stargazers, description, languages }) => (
-        <li class="project">
-          <h2>
-            <a href={url} target="_blank">
-              {name}
-            </a>
-          </h2>
-          <p>{description}</p>
-          <div class="project-details">
-            <span class="stars">
-              <img src={star} alt="stargazers" /> {stargazers.totalCount}
-            </span>
-            <div class="languages">
-              {languages.edges.map(({ node: { name } }) => (
-                <span>{name}</span>
-              ))}
+      projects.map(
+        ({ node: { url, name, stargazers, description, languages } }) => (
+          <li class='project'>
+            <h2>
+              <a href={url} target='_blank'>
+                {name}
+              </a>
+            </h2>
+            <p>{description}</p>
+            <div class='project-details'>
+              <span class='stars'>
+                <Image src={star} alt='stargazers' /> {stargazers.totalCount}
+              </span>
+              <div class='languages'>
+                {languages.edges.map(({ node: { name } }) => (
+                  <span>{name}</span>
+                ))}
+              </div>
             </div>
-          </div>
-        </li>
-      ))
+          </li>
+        )
+      )
     }
   </ul>
 </BaseLayout>
@@ -84,6 +89,10 @@ const {
   h2 a {
     color: #000;
     text-decoration: underline;
+  }
+
+  :global(.dark) h2 a {
+    color: rgb(255 255 255 / 1);
   }
 
   ul {
@@ -105,17 +114,23 @@ const {
     min-width: 300px;
   }
 
+  :global(.dark) li {
+    background: rgba(0, 0, 255, 0.1);
+  }
+
   li:hover {
-    box-shadow: 1px 2px 2px rgba(0, 0, 255, 0.1),
-      2px 4px 4px rgba(0, 0, 255, 0.1), 4px 8px 8px rgba(0, 0, 255, 0.1),
-      8px 16px 16px rgba(0, 0, 255, 0.1), 16px 32px 32px rgba(0, 0, 255, 0.1);
+    box-shadow:
+      1px 2px 2px rgba(0, 0, 255, 0.1),
+      2px 4px 4px rgba(0, 0, 255, 0.1),
+      4px 8px 8px rgba(0, 0, 255, 0.1),
+      8px 16px 16px rgba(0, 0, 255, 0.1),
+      16px 32px 32px rgba(0, 0, 255, 0.1);
   }
 
   .project-details {
     color: #7d7d7d;
     display: grid;
     gap: 1rem;
-    font-size: clamp(0.75rem, 2vw, 1rem);
     grid-template-columns: repeat(2, 1fr);
     margin-top: auto;
   }

@@ -1,86 +1,73 @@
 ---
-const pathname = new URL(Astro.request.url).pathname;
-const currentPath = pathname.slice(1);
-import Icons from "./Icons/Logo.astro";
-import ThemeToggle from "./Icons/ThemeToggle.astro";
+const currentPath = Astro.url.pathname
+import Icons from './Icons/Logo.astro'
+import ThemeToggle from './Icons/ThemeToggle.astro'
 ---
 
-<nav>
-  <a href="/">
-    <Icons name="Logo"/>
+<div class='header'>
+  <a href='/'>
+    <Icons name='Logo' />
   </a>
-  <ul>
-    <li>
-      <a class={currentPath === "blog/" ? "active" : ""} href="/blog/">Blog</a>
-    </li>
-    <li>
-      <a class={currentPath === "projects/" ? "active" : ""} href="/projects/"
+  <nav>
+    <a class={currentPath === '/blog/' ? 'active' : ''} href='/blog/'>Blog</a>
+
+    <a class={currentPath === '/projects/' ? 'active' : ''} href='/projects/'
       >Projects</a
-      >
-    </li>
-    <li>
-      <a class={currentPath === "about/" ? "active" : ""} href="/about/"
-      >About</a
-      >
-    </li>
-    <li>
-      <a class={currentPath === "uses/" ? "active" : ""} href="/uses/">Uses</a>
-    </li>
-    <li>
-      <a class={currentPath === "stream-tools/" ? "active" : ""} href="/stream-tools/">Stream Tools</a>
-    </li>
-    <li>
-      <ThemeToggle />
-    </li>
-  </ul>
-</nav>
+    >
+
+    <a class={currentPath === '/about/' ? 'active' : ''} href='/about/'>About</a
+    >
+
+    <a class={currentPath === '/uses/' ? 'active' : ''} href='/uses/'>Uses</a>
+
+    <a
+      class={currentPath === '/stream-tools/' ? 'active' : ''}
+      href='/stream-tools/'>Stream Tools</a
+    >
+  </nav>
+  <ThemeToggle />
+</div>
 
 <style>
+  .header {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
   nav {
-    display: flex;
-    flex-direction: column;
-  }
-
-  ul,
-  li {
-    list-style: none;
-  }
-
-  ul {
-    display: flex;
-    padding: 0;
-  }
-
-  li {
-    margin-right: 1rem;
     display: flex;
     align-items: center;
   }
 
-  li a,
-  li a:visited {
+  a,
+  a:visited {
     color: rgb(0 0 255 / 50%);
     font-weight: 600;
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    margin-right: 1rem;
     text-decoration: none;
   }
 
-  :global(.dark) li a, :global(.dark) li a:visited {
+  :global(.dark) a,
+  :global(.dark) a:visited {
     color: rgb(255 255 255 / 0.5);
   }
 
-  li a:hover,
+  a:hover,
+  a:focus,
   .active {
     color: rgb(0 0 255 / 1);
     text-decoration: underline;
   }
 
-  :global(.dark) li a:hover, :global(.dark) .active {
+  :global(.dark) a:hover,
+  :global(.dark) .active {
     color: rgb(255 255 255 / 0.75);
   }
 
-  @media (min-width: 500px) {
-    nav {
+  @media (min-width: 700px) {
+    .header {
       align-items: center;
       display: flex;
       flex-direction: row;
@@ -88,14 +75,9 @@ import ThemeToggle from "./Icons/ThemeToggle.astro";
       padding: 60px 0;
     }
 
-    li {
+    nav a {
       margin-left: 1rem;
       margin-right: 0;
     }
   }
 </style>
-
-
-<script>
-
-</script>
