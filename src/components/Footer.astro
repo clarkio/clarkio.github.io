@@ -1,115 +1,125 @@
 ---
-import Rss from './Icons/Rss.astro';
-import Twitter from './Icons/Twitter.astro';
-import Twitch from './Icons/Twitch.astro';
-import Github from './Icons/Github.astro';
-import Instagram from './Icons/Ig.astro';
-import Tiktok from './Icons/Tiktok.astro';
-import Youtube from './Icons/Youtube.astro';
-const year = new Date().getFullYear();
+import Rss from './Icons/Rss.astro'
+import Twitter from './Icons/Twitter.astro'
+import Twitch from './Icons/Twitch.astro'
+import Github from './Icons/Github.astro'
+import Instagram from './Icons/Ig.astro'
+import Tiktok from './Icons/Tiktok.astro'
+import Youtube from './Icons/Youtube.astro'
+const year = new Date().getFullYear()
 ---
 
 <footer>
-  <span
-    ><a href="https://astro.build" target="_blank" rel="noreferrer noopener"
-      >🚀 Built with Astro</a
-    > | © {year} Brian Clark</span
-  >
-  <div class="socials">
-    <a href="/rss.xml">
-      <Rss />
-    </a>
-    <a
-      href="https://twitter.com/_clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Twitter />
-    </a>
-    <a
-      href="https://www.twitch.tv/clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Twitch />
-    </a>
+	<span
+		><a href="https://astro.build" target="_blank" rel="noreferrer noopener"
+			>🚀 Built with Astro</a
+		> | © {year} Brian Clark</span
+	>
+	<div class="socials">
+		<a href="/rss.xml">
+			<Rss />
+		</a>
+		<a
+			href="https://twitter.com/_clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Twitter />
+		</a>
+		<a
+			href="https://www.twitch.tv/clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Twitch />
+		</a>
 
-    <a
-      href="https://github.com/clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Github />
-    </a>
+		<a
+			href="https://github.com/clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Github />
+		</a>
 
-    <a
-      href="https://www.youtube.com/c/Clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Youtube />
-    </a>
+		<a
+			href="https://www.youtube.com/c/Clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Youtube />
+		</a>
 
-    <a
-      href="https://instagram.com/_clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Instagram />
-    </a>
-    <a
-      href="https://tiktok.com/@clarkio"
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <Tiktok />
-    </a>
-  </div>
-  <p>
-    <a
-      href="https://dhanishgajjar.com"
-      target="_blank"
-      rel="noreferrer noopener">DG</a
-    >
-  </p>
+		<a
+			href="https://instagram.com/_clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Instagram />
+		</a>
+		<a
+			href="https://tiktok.com/@clarkio"
+			target="_blank"
+			rel="noreferrer noopener"
+		>
+			<Tiktok />
+		</a>
+	</div>
+	<p>
+		<a
+			href="https://dhanishgajjar.com"
+			target="_blank"
+			rel="noreferrer noopener">DG</a
+		>
+	</p>
 </footer>
 
 <style>
-  footer {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    margin: 4rem 0;
-  }
-  span,
-  p a,
-  a,
-  a:visited {
-    color: #000;
-  }
+	footer {
+		align-items: center;
+		display: flex;
+		flex-direction: column;
+		margin-top: 4rem;
+	}
+	span,
+	p a,
+	a,
+	a:visited {
+		color: #000;
+	}
 
-  :global(.dark) span,
-  :global(.dark) p a,
-  :global(.dark) a,
-  :global(.dark) a:visited {
-    color: rgb(255 255 255 / 0.75);
-  }
+	:global(.dark) span,
+	:global(.dark) p a,
+	:global(.dark) a,
+	:global(.dark) a:visited {
+		color: rgb(255 255 255 / 0.75);
+	}
 
-  .socials {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
-  }
+	.socials {
+		justify-content: center;
+		display: flex;
+		flex-wrap: wrap;
+		margin: 1rem 0;
+	}
 
-  .socials a {
-    margin: 0.5rem;
-  }
+	.socials a {
+		margin: 0.5rem;
+	}
 
-  @media (min-width: 700px) {
-    footer {
-      justify-content: space-between;
-      flex-direction: row;
-    }
-  }
+	@media (min-width: 700px) {
+		footer {
+			margin-top: 0;
+			justify-content: space-between;
+			flex-direction: row;
+		}
+		.socials {
+			justify-content: center;
+			display: flex;
+			flex-wrap: wrap;
+			margin: 1rem 0;
+		}
+		.socials a {
+			margin: 05rem 1rem;
+		}
+	}
 </style>
