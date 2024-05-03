@@ -5,95 +5,95 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import Paginator from '../../components/Paginator.astro'
 
 export async function getStaticPaths({ paginate, rss }) {
-	// const oldPosts = await Astro.glob('../old-posts/*.md');
-	const allPosts = await Astro.glob('./**/*.md')
-	// const allPosts = oldPosts.concat(newPosts);
-	const sortedPosts = allPosts.sort(
-		(a, b) =>
-			new Date(b.frontmatter.publishDate).valueOf() -
-			new Date(a.frontmatter.publishDate).valueOf()
-	)
-	return paginate(sortedPosts, { pageSize: 10 })
+  // const oldPosts = await Astro.glob('../old-posts/*.md');
+  const allPosts = await Astro.glob('./**/*.md')
+  // const allPosts = oldPosts.concat(newPosts);
+  const sortedPosts = allPosts.sort(
+    (a, b) =>
+      new Date(b.frontmatter.publishDate).valueOf() -
+      new Date(a.frontmatter.publishDate).valueOf()
+  )
+  return paginate(sortedPosts, { pageSize: 10 })
 }
 
 const { page } = Astro.props
 ---
 
 <BaseLayout
-	title="Blog Posts"
-	description="Recently written posts on various topics and interests."
-	keywords="clarkio, blog posts, post, posts, blog, writings, articles"
+  title='Blog Posts'
+  description='Recently written posts on various topics and interests.'
+  keywords='clarkio, blog posts, post, posts, blog, writings, articles'
 >
-	<h1>Blog Posts</h1>
-	<ul>
-		{
-			page.data.map(
-				({
-					rawContent,
-					url,
-					frontmatter: { title, publishDate, description }
-				}) => {
-					if (url.includes('old-posts')) {
-						const oldUrl = url.replace('/blog/old-posts/', '').replace('/blog/')
-						const year = oldUrl.slice(0, 4)
-						const month = oldUrl.slice(5, 7)
-						const day = oldUrl.slice(8, 10)
-						const name = oldUrl.slice(11)
-						url = `/${year}/${month}/${day}/${name}`
-					}
-					return (
-						<li>
-							<h2>
-								<a href={url}>{title}</a>
-							</h2>
-							<div class="details">
-								<span class="date">{publishDate}</span>
-								<span class="reading-time">
-									{readingTime(rawContent()).text}
-								</span>
-							</div>
-							<p>{description}</p>
-						</li>
-					)
-				}
-			)
-		}
-	</ul>
-	<Paginator page={page} />
+  <h1>Blog Posts</h1>
+  <ul>
+    {
+      page.data.map(
+        ({
+          rawContent,
+          url,
+          frontmatter: { title, publishDate, description }
+        }) => {
+          if (url.includes('old-posts')) {
+            const oldUrl = url.replace('/blog/old-posts/', '').replace('/blog/')
+            const year = oldUrl.slice(0, 4)
+            const month = oldUrl.slice(5, 7)
+            const day = oldUrl.slice(8, 10)
+            const name = oldUrl.slice(11)
+            url = `/${year}/${month}/${day}/${name}`
+          }
+          return (
+            <li>
+              <h2>
+                <a href={url}>{title}</a>
+              </h2>
+              <div class='details'>
+                <span class='date'>{publishDate}</span>
+                <span class='reading-time'>
+                  {readingTime(rawContent()).text}
+                </span>
+              </div>
+              <p>{description}</p>
+            </li>
+          )
+        }
+      )
+    }
+  </ul>
+  <Paginator page={page} />
 </BaseLayout>
 
 <style>
-	ul,
-	li {
-		list-style: none;
-	}
+  ul,
+  li {
+    list-style: none;
+  }
 
-	ul {
-		margin: 0;
-		padding: 0;
-	}
+  ul {
+    margin: 0;
+    padding: 0;
+  }
 
-	li {
-		margin: 2rem 0;
-	}
+  li {
+    margin: 2rem 0;
+  }
 
-	h2 a {
-		color: #000;
-	}
+  h2 a {
+    color: #000;
+  }
 
-	:global(.dark) h2 a {
-		color: rgb(255 255 255 / 0.5);
-	}
+  :global(.dark) h2 a {
+    color: rgb(255 255 255 / 0.5);
+  }
 
-	span {
-		color: #7d7d7d;
-	}
+  span {
+    color: #7d7d7d;
+  }
 
-	p {
-		color: #333;
-	}
+  p {
+    color: #333;
+  }
 
-	.reading-time {
-		margin-left: 2rem;
-	}
+  .reading-time {
+    margin-left: 2rem;
+  }
 </style>
