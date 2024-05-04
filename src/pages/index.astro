@@ -5,12 +5,12 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
 ---
 
 <BaseLayout
-  title='Brian Clark'
-  description='Developer advocate and content creator who loves to learn new things and share them.'
-  keywords='clarkio, developer, developer advocate'
+  title="Brian Clark"
+  description="Developer advocate and content creator who loves to learn new things and share them."
+  keywords="clarkio, developer, developer advocate"
 >
-  <div class='heroContainer'>
-    <div class='heroText'>
+  <div class="heroContainer">
+    <div class="heroText">
       <span>Hey, it's me! Brian Clark.</span>
       <h1>
         Developer advocate and content creator who loves to learn new things and
@@ -18,7 +18,7 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
         teaching about application security and sharing development tips and
         tricks.
       </h1>
-      <a href='/about/' class='about'>Read more about me &rarr;</a>
+      <a href="/about/" class="about">Read more about me &rarr;</a>
     </div>
     <Image
       src={profilePhoto}
@@ -34,15 +34,15 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
   <style>
     .heroContainer {
       display: grid;
-      grid-template-columns: 1fr;
       gap: 4rem;
+      grid-template-columns: auto 300px;
+      padding: 60px 0;
       width: 100%;
-      padding: 1rem 0;
     }
 
     .heroText span {
       color: rgb(0 0 255);
-      font-size: clamp(1.75rem, 2vw, 2rem);
+      font-size: clamp(1.5rem, 2vw, 2rem);
       font-weight: 700;
     }
 
@@ -53,7 +53,7 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
     h1 {
       color: #000;
       font-weight: 400;
-      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-size: 1rem;
       margin: 2rem 0;
     }
 
@@ -64,7 +64,7 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
     img {
       object-fit: cover;
       box-shadow: 32px 32px 0px rgba(0 0 0 / 0.12);
-      max-width: 400px !important;
+      max-width: 300px !important;
     }
 
     :global(.dark) .profile-photo {
@@ -89,14 +89,6 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
 
     :global(.dark) .about:hover {
       color: rgb(255 255 255 / 0.75);
-    }
-
-    @media (min-width: 700px) {
-      .heroContainer {
-        place-items: center;
-        grid-template-columns: auto 400px;
-        padding: 60px 1rem;
-      }
     }
   </style>
 </BaseLayout>

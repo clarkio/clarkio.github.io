@@ -4,48 +4,74 @@ import Icons from './Icons/Logo.astro'
 import ThemeToggle from './Icons/ThemeToggle.astro'
 ---
 
-<div class='header'>
-  <a href='/'>
-    <Icons name='Logo' />
+<header>
+  <a href="/">
+    <Icons name="Logo" />
   </a>
   <nav>
-    <a class={currentPath === '/blog/' ? 'active' : ''} href='/blog/'>Blog</a>
+    <ul>
+      <li>
+        <a class={currentPath === '/blog/' ? 'active' : ''} href="/blog/"
+          >Blog</a
+        >
+      </li>
 
-    <a class={currentPath === '/projects/' ? 'active' : ''} href='/projects/'
-      >Projects</a
-    >
+      <li>
+        <a
+          class={currentPath === '/projects/' ? 'active' : ''}
+          href="/projects/">Projects</a
+        >
+      </li>
 
-    <a class={currentPath === '/about/' ? 'active' : ''} href='/about/'>About</a
-    >
+      <li>
+        <a class={currentPath === '/about/' ? 'active' : ''} href="/about/"
+          >About</a
+        >
+      </li>
 
-    <a class={currentPath === '/uses/' ? 'active' : ''} href='/uses/'>Uses</a>
+      <li>
+        <a class={currentPath === '/uses/' ? 'active' : ''} href="/uses/"
+          >Uses</a
+        >
+      </li>
 
-    <a
-      class={currentPath === '/stream-tools/' ? 'active' : ''}
-      href='/stream-tools/'>Stream Tools</a
-    >
+      <li>
+        <a
+          class={currentPath === '/stream-tools/' ? 'active' : ''}
+          href="/stream-tools/">Stream tools</a
+        >
+      </li>
+    </ul>
   </nav>
   <ThemeToggle />
-</div>
+</header>
 
 <style>
-  .header {
+  header {
     display: grid;
     gap: 1rem;
-    grid-template-columns: 1fr;
-    justify-items: start;
+    grid-template-columns: 48px 1fr auto;
   }
 
-  nav {
+  @media (max-width: 550px) {
+    nav {
+      display: none;
+    }
+  }
+
+  nav ul {
     display: flex;
-    align-items: center;
+    list-style: none;
+    justify-content: end;
+    padding: 0;
   }
 
-  a,
-  a:visited {
+  nav li a,
+  nav li a:visited {
+    display: inline-block;
     color: rgb(0 0 255 / 50%);
     font-weight: 600;
-    margin-right: 1rem;
+    margin-left: 1rem;
     text-decoration: none;
   }
 
@@ -54,9 +80,9 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
     color: rgb(255 255 255 / 0.5);
   }
 
-  a:hover,
-  a:focus,
-  .active {
+  nav li a:hover,
+  nav li a:focus,
+  nav li a.active {
     color: rgb(0 0 255 / 1);
     text-decoration: underline;
   }
@@ -64,20 +90,5 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
   :global(.dark) a:hover,
   :global(.dark) .active {
     color: rgb(255 255 255 / 0.75);
-  }
-
-  @media (min-width: 700px) {
-    .header {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 60px 0;
-    }
-
-    nav a {
-      margin-left: 1rem;
-      margin-right: 0;
-    }
   }
 </style>

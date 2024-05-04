@@ -1,15 +1,16 @@
 ---
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
+import { ViewTransitions } from 'astro:transitions'
+import Nav from '../components/Nav.astro'
+import Footer from '../components/Footer.astro'
 
-const { canonicalURL = Astro.url } = Astro.props;
-const title = Astro.props.title || Astro.props.content.title || '';
+const { canonicalURL = Astro.url } = Astro.props
+const title = Astro.props.title || Astro.props.content.title || ''
 const description =
-  Astro.props.description || Astro.props.content.description || '';
-const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
+  Astro.props.description || Astro.props.content.description || ''
+const keywords = Astro.props.keywords || Astro.props.content.keywords || ''
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <!-- Global Metadata -->
@@ -53,12 +54,20 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
       rel="stylesheet"
     />
     <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ivq40nz3d1");
-</script>
+      ;(function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            ;(c[a].q = c[a].q || []).push(arguments)
+          }
+        t = l.createElement(r)
+        t.async = 1
+        t.src = 'https://www.clarity.ms/tag/' + i
+        y = l.getElementsByTagName(r)[0]
+        y.parentNode.insertBefore(t, y)
+      })(window, document, 'clarity', 'script', 'ivq40nz3d1')
+    </script>
+    <ViewTransitions />
   </head>
 
   <body>
@@ -85,15 +94,12 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
 
       html {
         font-family: 'Inter', sans-serif;
-        line-height: 1.5;
-      }
-      body {
-        padding: 1rem;
+        line-height: 1.4;
       }
 
       .wrapper {
-        max-width: 1200px;
-        margin: 0 auto;
+        max-width: 960px;
+        margin: 2rem auto;
       }
       h1 {
         color: rgb(0, 0, 255);
@@ -103,11 +109,16 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         color: rgb(255 255 255 / 0.75);
       }
 
-      .dark p, .dark h2, .dark h3, .dark h4, .dark li {
+      .dark p,
+      .dark h2,
+      .dark h3,
+      .dark h4,
+      .dark li {
         color: rgb(255 255 255 / 0.5);
       }
 
-      .dark li a, .dark a {
+      .dark li a,
+      .dark a {
         color: rgb(255 255 255 / 0.75);
       }
       pre {
@@ -131,7 +142,6 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || '';
         width: 100%;
         height: 100%;
       }
-
     </style>
   </body>
 </html>

@@ -3,8 +3,6 @@
   "singleQuote": true,
   "trailingComma": "none",
   "semi": false,
-  "plugins": [
-    "prettier-plugin-astro"
-  ],
+  "plugins": ["prettier-plugin-astro"],
   "pluginSearchDirs": false
 }
