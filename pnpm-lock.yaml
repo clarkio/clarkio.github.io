@@ -11,9 +11,6 @@ importers:
       '@astrojs/rss':
         specifier: ^4.0.5
         version: 4.0.5
-      canvas-confetti:
-        specifier: ^1.9.3
-        version: 1.9.3
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
@@ -668,9 +665,6 @@ packages:
 
   caniuse-lite@1.0.30001615:
     resolution: {integrity: sha512-1IpazM5G3r38meiae0bHRnPhz+CBQ3ZLqbQMtrg+AsTPKAXgW38JNsXkyZ+v8waCsDmPq87lmfun5Q2AGysNEQ==}
-
-  canvas-confetti@1.9.3:
-    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -2425,8 +2419,6 @@ snapshots:
   camelcase@7.0.1: {}
 
   caniuse-lite@1.0.30001615: {}
-
-  canvas-confetti@1.9.3: {}
 
   ccount@2.0.1: {}
 
