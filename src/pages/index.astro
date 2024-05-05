@@ -19,6 +19,7 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
         tricks.
       </h1>
       <a href="/about/" class="about">Read more about me &rarr;</a>
+      <button data-confetti-button>Celebrate!</button>
     </div>
     <Image
       src={profilePhoto}
@@ -32,12 +33,35 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
   </div>
 
   <style>
+    button[data-confetti-button] {
+      outline: none;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: rgb(0 0 255 / 0.75);
+      font-size: 1rem;
+      padding: 1rem 1rem 1rem 0;
+      width: fit-content;
+    }
     .heroContainer {
+      place-items: center;
       display: grid;
       gap: 4rem;
-      grid-template-columns: auto 300px;
-      padding: 60px 0;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      padding: 3rem 0;
       width: 100%;
+    }
+
+    .heroText {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (max-width: 510px) {
+      .heroText {
+        justify-items: center;
+        text-align: center;
+      }
     }
 
     .heroText span {
@@ -54,7 +78,6 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
       color: #000;
       font-weight: 400;
       font-size: 1rem;
-      margin: 2rem 0;
     }
 
     :global(.dark) h1 {
@@ -67,28 +90,51 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
       max-width: 300px !important;
     }
 
-    :global(.dark) .profile-photo {
-      box-shadow: 32px 32px 0px rgba(255 255 255 / 0.05);
+    :global(.dark) img {
+      box-shadow: 32px 32px 0px rgba(255 255 255 / 0.1);
     }
 
     .about {
-      color: rgb(0 0 255 / 0.5);
+      color: rgb(0 0 255);
       display: inline-block;
       font-weight: 600;
       text-decoration: none;
     }
 
     .about:hover {
-      color: rgb(0 0 255 / 1);
       text-decoration: underline;
     }
 
     :global(.dark) .about {
-      color: rgb(255 255 255 / 0.5);
+      color: rgb(255 255 255 / 0.75);
     }
 
     :global(.dark) .about:hover {
-      color: rgb(255 255 255 / 0.75);
     }
   </style>
 </BaseLayout>
+
+<script>
+  // Import npm modules.
+  import confetti from 'canvas-confetti'
+
+  // Find our component DOM on the page.
+  const buttons = document.querySelectorAll('[data-confetti-button]')
+
+  // Add event listeners to fire confetti when a button is clicked.
+  buttons.forEach((button) => {
+    button.addEventListener('click', () =>
+      confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        resize: true,
+        spread: 360,
+        origin: {
+          x: Math.random(),
+          // since they fall down, start a bit higher than random
+          y: Math.random() - 0.2
+        }
+      })
+    )
+  })
+</script>

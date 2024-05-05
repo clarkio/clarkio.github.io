@@ -97,15 +97,14 @@ const projects = response.data.user.pinnedItems.edges
   .project-details {
     padding: 0 1rem;
   }
-  h2 a {
+  .project h2 a {
     color: #000;
     text-decoration: underline;
   }
-
   .project-list {
     display: grid;
     gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     list-style: none;
   }
 
@@ -114,7 +113,16 @@ const projects = response.data.user.pinnedItems.edges
     border: 1px dotted rgba(0, 0, 255, 0.2);
   }
 
+  ::global(.dark) article,
+  ::global(.dark) .description {
+    border: 1px dotted rgba(255, 255, 255, 0.2);
+  }
+
   .description {
+    border-width: 1px 0;
+  }
+
+  ::global(.dark) .description {
     border-width: 1px 0;
   }
 
@@ -128,19 +136,32 @@ const projects = response.data.user.pinnedItems.edges
     transition: box-shadow 0.3s ease-in-out;
   }
 
-  :global(.dark) article {
-    background: rgba(0, 0, 255, 0.1);
+  ::global(.dark) article {
+    background: rgba(255, 255, 255, 0.02);
   }
 
   article:hover {
     background: rgba(0, 0, 255, 0.15);
   }
 
+  ::global(.dark) article:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
   .project-details {
     align-items: center;
     display: grid;
-    gap: 1rem;
+    gap: 0.5rem;
     grid-template-columns: auto auto 1fr;
+  }
+
+  .project-details p {
+    margin: 3px 0 0 0;
+  }
+  .project-details p,
+  ul.languages li {
+    font-size: 12px;
+    font-weight: 600;
   }
 
   img {
@@ -154,8 +175,9 @@ const projects = response.data.user.pinnedItems.edges
     padding: 0;
   }
   ul.languages li {
+    border-radius: 20px;
     display: inline-block;
-    margin-left: 1rem;
+    margin-left: 0.5rem;
   }
 
   @media (max-width: 450px) {

@@ -1,30 +1,31 @@
 ---
+const year = new Date().getFullYear()
 import Rss from './Icons/Rss.astro'
-import Twitter from './Icons/Twitter.astro'
+import Xitter from './Icons/Xitter.astro'
 import Twitch from './Icons/Twitch.astro'
 import Github from './Icons/Github.astro'
-import Instagram from './Icons/Ig.astro'
-import Tiktok from './Icons/Tiktok.astro'
 import Youtube from './Icons/Youtube.astro'
-const year = new Date().getFullYear()
+import Instagram from './Icons/Instagram.astro'
+import Tiktok from './Icons/Tiktok.astro'
 ---
 
 <footer>
   <span class="bri"
     ><a href="https://astro.build" target="_blank" rel="noreferrer noopener"
       >🚀 Built with Astro</a
-    > | © {year} Brian Clark</span
+    ><span class="copy">| © {year} Brian Clark</span></span
   >
   <div class="socials">
     <a href="/rss.xml">
       <Rss />
     </a>
     <a
+      class="xIcon"
       href="https://twitter.com/_clarkio"
       target="_blank"
       rel="noreferrer noopener"
     >
-      <Twitter />
+      <Xitter />
     </a>
     <a
       href="https://www.twitch.tv/clarkio"
@@ -65,61 +66,77 @@ const year = new Date().getFullYear()
       <Tiktok />
     </a>
   </div>
-  <span class="dg">
-    <a
-      href="https://dhanishgajjar.com"
-      target="_blank"
-      rel="noreferrer noopener">DG</a
-    >
-  </span>
+  <a
+    class="dg"
+    href="https://dhanishgajjar.com"
+    target="_blank"
+    rel="noreferrer noopener">DG</a
+  >
 </footer>
 
 <style>
   footer {
     align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-  }
-  span,
-  p a,
-  a,
-  a:visited {
-    color: #000;
-  }
-
-  :global(.dark) span,
-  :global(.dark) p a,
-  :global(.dark) a,
-  :global(.dark) a:visited {
-    color: rgb(255 255 255 / 0.75);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 4rem 0;
   }
 
   .socials {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 1rem 0;
+    display: flex; /* Change display to flex */
+    flex-wrap: wrap; /* Allow items to wrap to the next row */
+    justify-content: center; /* Center items horizontally */
+    gap: 2rem; /* Add gap between items */
+  }
+  a,
+  a {
+    color: black;
+    font-weight: unset;
   }
 
-  .socials a {
-    margin: 0.5rem;
+  .bri,
+  .copy,
+  a.dg {
+    font-size: 14px;
   }
 
-  @media (min-width: 700px) {
+  ::global(.dark) .bri a,
+  ::global(.dark) .copy,
+  ::global(.dark) a.dg {
+    color: rgb(255 255 255 / 0.75);
+  }
+
+  @media (max-width: 768px) {
     footer {
-      margin-top: 0;
-      justify-content: space-between;
-      flex-direction: row;
+      gap: 2rem;
+    }
+
+    footer span.bri {
+      grid-column-start: 1;
+      grid-column-end: -2;
     }
     .socials {
-      justify-content: center;
-      display: flex;
-      flex-wrap: wrap;
-      margin: 1rem 0;
+      display: flex; /* Change display to flex */
+      flex-wrap: wrap; /* Allow items to wrap to the next row */
+      justify-content: center; /* Center items horizontally */
+      order: -1;
+      grid-column: 1 / -1;
+      gap: 2rem; /* Add gap between items */
     }
-    .socials a {
-      margin: 05rem 1rem;
+    footer .dg {
+      grid-column: -2 / -1;
+    }
+  }
+  @media (max-width: 350px) {
+    footer {
+      justify-items: center;
+      grid-template-columns: 1fr;
+    }
+
+    .bri,
+    .copy,
+    .dg {
+      font-size: 12px;
     }
   }
 </style>

@@ -20,9 +20,9 @@ const { page } = Astro.props
 ---
 
 <BaseLayout
-  title='Blog Posts'
-  description='Recently written posts on various topics and interests.'
-  keywords='clarkio, blog posts, post, posts, blog, writings, articles'
+  title="Blog Posts"
+  description="Recently written posts on various topics and interests."
+  keywords="clarkio, blog posts, post, posts, blog, writings, articles"
 >
   <h1>Blog Posts</h1>
   <ul>
@@ -46,9 +46,9 @@ const { page } = Astro.props
               <h2>
                 <a href={url}>{title}</a>
               </h2>
-              <div class='details'>
-                <span class='date'>{publishDate}</span>
-                <span class='reading-time'>
+              <div class="details">
+                <span class="date">{publishDate}</span>
+                <span class="reading-time">
                   {readingTime(rawContent()).text}
                 </span>
               </div>
@@ -63,11 +63,9 @@ const { page } = Astro.props
 </BaseLayout>
 
 <style>
-  ul,
-  li {
+  ul {
     list-style: none;
   }
-
   ul {
     margin: 0;
     padding: 0;
@@ -81,8 +79,12 @@ const { page } = Astro.props
     color: #000;
   }
 
+  li a {
+    font-weight: unset;
+  }
+
   :global(.dark) h2 a {
-    color: rgb(255 255 255 / 0.5);
+    color: rgb(255 255 255 / 0.75);
   }
 
   span {
@@ -91,6 +93,10 @@ const { page } = Astro.props
 
   p {
     color: #333;
+  }
+
+  ::global(.dark) p {
+    color: rgb(255 255 255 / 0.5);
   }
 
   .reading-time {

@@ -1,14 +1,16 @@
 ---
 const currentPath = Astro.url.pathname
-import Icons from './Icons/Logo.astro'
+import Logo from './Icons/Logo.astro'
 import ThemeToggle from './Icons/ThemeToggle.astro'
 ---
 
 <header>
   <a href="/">
-    <Icons name="Logo" />
+    <Logo name="Logo" />
   </a>
+
   <nav>
+    <button aria-controls="menu" aria-expanded="false"></button>
     <ul>
       <li>
         <a class={currentPath === '/blog/' ? 'active' : ''} href="/blog/"
@@ -43,6 +45,7 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
       </li>
     </ul>
   </nav>
+
   <ThemeToggle />
 </header>
 
@@ -51,12 +54,12 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
     display: grid;
     gap: 1rem;
     grid-template-columns: 48px 1fr auto;
+    align-items: center;
+    margin-bottom: 2rem;
   }
 
-  @media (max-width: 550px) {
-    nav {
-      display: none;
-    }
+  button[aria-expanded] {
+    display: none;
   }
 
   nav ul {
@@ -75,8 +78,8 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
     text-decoration: none;
   }
 
-  :global(.dark) a,
-  :global(.dark) a:visited {
+  :global(.dark) nav li a,
+  :global(.dark) nav li a:visited {
     color: rgb(255 255 255 / 0.5);
   }
 
@@ -91,4 +94,171 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
   :global(.dark) .active {
     color: rgb(255 255 255 / 0.75);
   }
+
+  @media (max-width: 565px) {
+    header {
+      grid-template-columns: auto 1fr auto;
+    }
+    button[aria-expanded] {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+      height: 30px;
+      margin-left: auto;
+      outline: none;
+      padding: 0;
+      position: relative;
+      width: 30px;
+      z-index: 1;
+    }
+
+    button[aria-expanded='false']:before,
+    button[aria-expanded='false']:after,
+    button[aria-expanded='true']:before,
+    button[aria-expanded='true']:after {
+      background: black;
+      bottom: 0;
+      content: '';
+      height: 2px;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+      width: 100%;
+    }
+
+    ::global(.dark) button[aria-expanded='false']:before,
+    ::global(.dark) button[aria-expanded='false']:after,
+    ::global(.dark) button[aria-expanded='true']:before,
+    ::global(.dark) button[aria-expanded='true']:after {
+      background: rgb(255 255 255 / 0.5);
+    }
+
+    button[aria-expanded='false']:before {
+      transform: translateY(-5px) rotate3d(0, 0, 0, 45deg);
+    }
+
+    button[aria-expanded='false']:after {
+      transform: translateY(5px) rotate3d(0, 0, 0, -45deg);
+    }
+
+    button[aria-expanded='true']:before {
+      transform: translateY(0px) rotate3d(0, 0, 1, 45deg);
+    }
+
+    button[aria-expanded='true']:after {
+      transform: translateY(0px) rotate3d(0, 0, 1, -45deg);
+    }
+
+    button[aria-expanded='false']:before {
+      transform: translateY(-5px) rotate3d(0, 0, 0, 45deg);
+    }
+
+    button[aria-expanded='false']:after {
+      transform: translateY(5px) rotate3d(0, 0, 0, -45deg);
+    }
+
+    button[aria-expanded='true']:before {
+      transform: translateY(0px) rotate3d(0, 0, 1, 45deg);
+    }
+
+    button[aria-expanded='true']:after {
+      transform: translateY(0px) rotate3d(0, 0, 1, -45deg);
+    }
+
+    nav {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr;
+      position: sticky;
+      top: 0;
+    }
+
+    nav ul {
+      background-color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-gap: 20px;
+      justify-content: center;
+      max-height: 0px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      transition: all 0.5s ease-in-out;
+    }
+
+    ::global(.dark) nav ul {
+      background-color: #161625;
+    }
+
+    ul li {
+      text-align: center;
+    }
+
+    ul li:nth-child(1) {
+      opacity: 0;
+      transition: opacity 0.2s 0.1s ease-in;
+    }
+
+    ul li:nth-child(2) {
+      opacity: 0;
+      transition: opacity 0.2s 0.2s ease-in;
+    }
+
+    ul li:nth-child(3) {
+      opacity: 0;
+      transition: opacity 0.2s 0.3s ease-in;
+    }
+
+    li:nth-child(4) {
+      opacity: 0;
+      transition: opacity 0.2s 0.4s ease-in;
+    }
+
+    ul li:nth-child(5) {
+      opacity: 0;
+      transition: opacity 0.2s 0.5s ease-in;
+    }
+
+    [aria-expanded='true'] ~ ul {
+      max-height: 300px;
+      padding: 4rem 0;
+    }
+
+    [aria-expanded='true'] ~ ul li {
+      opacity: 1;
+      padding: 0;
+    }
+
+    [aria-expanded='false'] ~ ul {
+      max-height: 0px;
+    }
+
+    [aria-expanded='false'] ~ ul li {
+      opacity: 0;
+      padding: 0;
+    }
+  }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const navButtons = [...document.querySelectorAll('button[aria-expanded]')]
+
+    function toggleNav() {
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false
+      this.setAttribute('aria-expanded', !expanded)
+      console.log('CLICK')
+    }
+
+    navButtons.map((button) => {
+      button.addEventListener('click', toggleNav)
+    })
+  })
+</script>
