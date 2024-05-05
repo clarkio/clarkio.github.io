@@ -40,7 +40,7 @@
   }
 </style>
 
-<script>
+<script is:inline>
   document.addEventListener('astro:page-load', () => {
     const theme = (() => {
       if (
@@ -77,10 +77,10 @@
   })
 </script>
 
-<!-- <script>
+<script is:inline>
   document.addEventListener('astro:after-swap', () => {
     localStorage.theme === 'dark'
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark')
   })
-</script> -->
+</script>
