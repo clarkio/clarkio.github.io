@@ -119,25 +119,25 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
 </BaseLayout>
 
 <script>
-  // Import npm modules.
   import confetti from 'canvas-confetti'
-  // Find our component DOM on the page.
-  const buttons = document.querySelectorAll('[data-confetti-button]')
+  document.addEventListener('astro:page-load', () => {
+    const buttons = document.querySelectorAll('[data-confetti-button]')
 
-  // Add event listeners to fire confetti when a button is clicked.
-  buttons.forEach((button) => {
-    button.addEventListener('click', () =>
-      confetti({
-        particleCount: 100,
-        startVelocity: 30,
-        resize: true,
-        spread: 360,
-        origin: {
-          x: Math.random(),
-          // since they fall down, start a bit higher than random
-          y: Math.random() - 0.2
-        }
-      })
-    )
+    // Add event listeners to fire confetti when a button is clicked.
+    buttons.forEach((button) => {
+      button.addEventListener('click', () =>
+        confetti({
+          particleCount: 100,
+          startVelocity: 30,
+          resize: true,
+          spread: 360,
+          origin: {
+            x: Math.random(),
+            // since they fall down, start a bit higher than random
+            y: Math.random() - 0.2
+          }
+        })
+      )
+    })
   })
 </script>
