@@ -256,20 +256,16 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
 </style>
 
 <script>
-  document.addEventListener(
-    'astro:page-load',
-    () => {
-      const navButtons = [...document.querySelectorAll('button[aria-expanded]')]
+  document.addEventListener('astro:page-load', () => {
+    const navButtons = [...document.querySelectorAll('button[aria-expanded]')]
 
-      function toggleNav() {
-        const expanded = this.getAttribute('aria-expanded') === 'true' || false
-        this.setAttribute('aria-expanded', !expanded)
-      }
+    function toggleNav() {
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false
+      this.setAttribute('aria-expanded', !expanded)
+    }
 
-      navButtons.map((button) => {
-        button.addEventListener('click', toggleNav)
-      })
-    },
-    { once: true }
-  )
+    navButtons.map((button) => {
+      button.addEventListener('click', toggleNav)
+    })
+  })
 </script>
