@@ -9,7 +9,6 @@ export default defineConfig({
   integrations: [sitemap()],
   image: {
     domains: ['cdn.simpleicons.org', 'youtube.com'],
-    service: passthroughImageService(),
-    remotePatterns: [{ protocol: 'https' }]
+    service: passthroughImageService()
   }
 })
