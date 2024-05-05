@@ -17,8 +17,8 @@ html {
 
 .wrapper {
   max-width: 960px;
-  margin: 1rem auto;
-  padding: 2rem 1rem;
+  margin: auto;
+  padding: 1rem;
 }
 h1 {
   color: rgb(0, 0, 255);
