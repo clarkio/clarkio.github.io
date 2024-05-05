@@ -41,17 +41,17 @@
 </style>
 
 <script is:inline>
-  if (localStorage.getItem('darkMode') === 'dark') {
-    document.querySelector('html').dataset.theme = 'dark'
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark')
   }
-  if (localStorage.getItem('darkMode') === 'light') {
-    document.querySelector('html').dataset.theme = 'light'
+  if (localStorage.getItem('theme') === 'light') {
+    document.documentElement.classList.add('light')
   }
-  if (!localStorage.getItem('darkMode')) {
+  if (!localStorage.getItem('theme')) {
     let theme = window.matchMedia('(prefers-color-scheme: dark)')
       ? 'dark'
       : 'light'
-    localStorage.setItem('darkMode', theme)
+    localStorage.setItem('theme', theme)
   }
 </script>
 
