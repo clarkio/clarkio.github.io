@@ -8,7 +8,7 @@ export default defineConfig({
   site: 'https://clarkio.com/',
   integrations: [sitemap()],
   image: {
-    domains: ['cdn.simpleicons.org'],
+    domains: ['cdn.simpleicons.org', 'youtube.com'],
     service: passthroughImageService(),
     remotePatterns: [{ protocol: 'https' }]
   }
