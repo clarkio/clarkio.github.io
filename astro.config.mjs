@@ -8,6 +8,8 @@ export default defineConfig({
   site: 'https://clarkio.com/',
   integrations: [sitemap()],
   image: {
-    service: passthroughImageService()
+    domains: ['cdn.simpleicons.org'],
+    service: passthroughImageService(),
+    remotePatterns: [{ protocol: 'https' }]
   }
 })

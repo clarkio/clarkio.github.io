@@ -42,126 +42,159 @@ const response = await fetch('https://api.github.com/graphql', {
 }).then((res) => res.json())
 
 const projects = response.data.user.pinnedItems.edges
-console.log(projects)
 ---
 
 <BaseLayout
-  title='Projects'
+  title="Projects"
   description="Clarkio's GitHub repositories for all of his projects"
-  keywords='clarkio, projects, github, repository, repositories'
+  keywords="clarkio, projects, github, repository, repositories"
 >
   <h1>Projects</h1>
   <p>
     You can see the top, pinned, projects below but be sure to go to <a
-      href='https://github.com/clarkio'>Clarkio's GitHub profile</a
+      href="https://github.com/clarkio">Clarkio's GitHub profile</a
     > for more.
   </p>
 
-  <ul class='project-list'>
+  <div class="project-list">
     {
       projects.map(
         ({ node: { url, name, stargazers, description, languages } }) => (
-          <li class='project'>
-            <h2>
-              <a href={url} target='_blank'>
-                {name}
-              </a>
-            </h2>
-            <p>{description}</p>
-            <div class='project-details'>
-              <span class='stars'>
-                <Image src={star} alt='stargazers' /> {stargazers.totalCount}
-              </span>
-              <div class='languages'>
-                {languages.edges.map(({ node: { name } }) => (
-                  <span>{name}</span>
-                ))}
-              </div>
+          <article>
+            <header>
+              <h2>
+                <a href={url} target="_blank">
+                  {name}
+                </a>
+              </h2>
+            </header>
+            <div class="description">
+              <p>{description}</p>
             </div>
-          </li>
+            <div class="project-details">
+              <>
+                <Image src={star} alt="stargazers" />
+                <p>{stargazers.totalCount}</p>
+              </>
+              {languages && (
+                <ul class="languages">
+                  {languages.edges.map(({ node: { name } }) => (
+                    <li>{name}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </article>
         )
       )
     }
-  </ul>
+  </div>
 </BaseLayout>
 
 <style>
-  h2 a {
+  header,
+  .description,
+  .project-details {
+    padding: 0 1rem;
+  }
+  .project h2 a {
     color: #000;
     text-decoration: underline;
   }
-
-  :global(.dark) h2 a {
-    color: rgb(255 255 255 / 1);
-  }
-
-  ul {
+  .project-list {
     display: grid;
     gap: 30px;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
     list-style: none;
-    padding: 0;
   }
 
-  li {
+  article,
+  .description {
+    border: 1px dotted rgba(0, 0, 255, 0.2);
+  }
+
+  ::global(.dark) article,
+  ::global(.dark) .description {
+    border: 1px dotted rgba(255, 255, 255, 0.2);
+  }
+
+  .description {
+    border-width: 1px 0;
+  }
+
+  ::global(.dark) .description {
+    border-width: 1px 0;
+  }
+
+  article {
     background: rgba(0, 0, 255, 0.02);
-    border: 2px solid rgba(0, 0, 255, 0.2);
     border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
+    display: grid;
+    gap: 0;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
     transition: box-shadow 0.3s ease-in-out;
-    min-width: 300px;
   }
 
-  :global(.dark) li {
-    background: rgba(0, 0, 255, 0.1);
+  ::global(.dark) article {
+    background: rgba(255, 255, 255, 0.02);
   }
 
-  li:hover {
-    box-shadow:
-      1px 2px 2px rgba(0, 0, 255, 0.1),
-      2px 4px 4px rgba(0, 0, 255, 0.1),
-      4px 8px 8px rgba(0, 0, 255, 0.1),
-      8px 16px 16px rgba(0, 0, 255, 0.1),
-      16px 32px 32px rgba(0, 0, 255, 0.1);
+  article:hover {
+    background: rgba(0, 0, 255, 0.15);
+  }
+
+  ::global(.dark) article:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .project-details {
-    color: #7d7d7d;
+    align-items: center;
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(2, 1fr);
-    margin-top: auto;
+    gap: 0.5rem;
+    grid-template-columns: auto auto 1fr;
   }
 
-  .stars {
-    display: flex;
+  .project-details p {
+    margin: 3px 0 0 0;
+  }
+  .project-details p,
+  ul.languages li {
+    font-size: 12px;
+    font-weight: 600;
   }
 
-  .stars img {
+  img {
     height: 16px;
     width: 16px;
-    margin-right: 0.5rem;
   }
 
-  .languages {
+  ul.languages {
+    justify-self: end;
     display: flex;
-    justify-content: flex-end;
+    padding: 0;
   }
-  .languages span {
-    margin-left: 10px;
+  ul.languages li {
+    border-radius: 20px;
+    display: inline-block;
+    margin-left: 0.5rem;
   }
-  @media (min-width: 500px) {
-    ul {
-      grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 450px) {
+    .project-details {
+      grid-template-columns: 16px 1fr;
+      margin-top: 1rem;
     }
-    .stars {
-      align-items: center;
+    .project-details p {
+      margin: 0;
     }
-    .stars img {
-      height: 24px;
-      width: 24px;
+    ul.languages {
+      justify-self: start;
+      margin: 0 0 1rem 0;
+    }
+    ul.languages li {
+      margin-left: 0;
+      margin-right: 1rem;
     }
   }
 </style>
