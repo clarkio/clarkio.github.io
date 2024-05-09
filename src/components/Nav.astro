@@ -4,9 +4,11 @@ import Logo from './Icons/Logo.astro'
 import ThemeToggle from './Icons/ThemeToggle.astro'
 ---
 
-<header>
+<header class="mainNav">
   <a href="/">
-    <Logo name="Logo" />
+    <div class="logo">
+      <Logo name="Logo" />
+    </div>
   </a>
   <button aria-controls="menu" aria-expanded="false"></button>
   <nav>
@@ -48,6 +50,9 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
 </header>
 
 <style>
+  .shrink {
+    padding: 1rem 1rem 1rem 1rem;
+  }
   header {
     background-color: rgb(255 255 255 / 0.5);
     backdrop-filter: blur(10px);
@@ -56,11 +61,12 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
     gap: 1rem;
     grid-template-columns: 48px 1fr auto;
     align-items: center;
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 4rem 1rem 1rem 1rem;
     position: sticky;
     max-width: 960px;
     margin: auto;
     top: 0;
+    transition: padding 0.5s ease;
   }
   ::global(.dark) header {
     background-color: rgb(22 22 37 / 50%);
@@ -259,14 +265,40 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
 <script>
   document.addEventListener('astro:page-load', () => {
     const navButtons = [...document.querySelectorAll('button[aria-expanded]')]
+    const header: Element | null = document.querySelector('.mainNav')
 
     function toggleNav() {
       const expanded = this.getAttribute('aria-expanded') === 'true' || false
       this.setAttribute('aria-expanded', !expanded)
     }
 
-    navButtons.map((button) => {
+    navButtons.forEach((button) => {
       button.addEventListener('click', toggleNav)
     })
+
+    function handleResize(entries) {
+      const { contentRect } = entries[0]
+      const isHeaderShrinkable = contentRect.width > 534
+
+      if (isHeaderShrinkable) {
+        const shouldShrink = window.scrollY > 50
+        header?.classList.toggle('shrink', shouldShrink)
+        window.addEventListener('scroll', handleScroll)
+      } else {
+        header?.classList.remove('shrink')
+        window.removeEventListener('scroll', handleScroll)
+      }
+    }
+
+    function handleScroll() {
+      const shouldShrink = window.scrollY > 50
+      header?.classList.toggle('shrink', shouldShrink)
+    }
+
+    const resizeObserver = new ResizeObserver(handleResize)
+    resizeObserver.observe(header)
+
+    // Call handleResize immediately to set initial state
+    handleResize([{ contentRect: header.getBoundingClientRect() }])
   })
 </script>

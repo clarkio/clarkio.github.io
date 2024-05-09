@@ -25,7 +25,7 @@ const { page } = Astro.props
   keywords="clarkio, blog posts, post, posts, blog, writings, articles"
 >
   <h1>Blog Posts</h1>
-  <ul>
+  <div class="articles">
     {
       page.data.map(
         ({
@@ -42,39 +42,74 @@ const { page } = Astro.props
             url = `/${year}/${month}/${day}/${name}`
           }
           return (
-            <li>
-              <h2>
-                <a href={url}>{title}</a>
-              </h2>
-              <div class="details">
-                <span class="date">{publishDate}</span>
-                <span class="reading-time">
-                  {readingTime(rawContent()).text}
-                </span>
+            <article>
+              <header>
+                <h2>
+                  <a href={url}>{title}</a>
+                </h2>
+              </header>
+              <div class="description">
+                <p>{description}</p>
               </div>
-              <p>{description}</p>
-            </li>
+              <div class="details">
+                <p class="date">{publishDate}</p>
+                <p class="reading-time">{readingTime(rawContent()).text}</p>
+              </div>
+            </article>
           )
         }
       )
     }
-  </ul>
-  <Paginator page={page} />
+  </div>
 </BaseLayout>
+<Paginator page={page} />
 
 <style>
-  ul {
+  .articles {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: 1fr;
     list-style: none;
   }
-  ul {
-    margin: 0;
-    padding: 0;
+  article {
+    background: rgba(0, 0, 255, 0.02);
+    border-radius: 4px;
+    display: grid;
+    gap: 0;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+  }
+  article:hover {
+    background: rgba(0, 0, 255, 0.15);
   }
 
-  li {
-    margin: 2rem 0;
+  ::global(.dark) article:hover {
+    background: rgba(255, 255, 255, 0.1);
   }
 
+  header,
+  .details,
+  .description {
+    padding: 0 1rem;
+  }
+
+  article,
+  .description {
+    border: 1px dotted rgba(0, 0, 255, 0.2);
+  }
+  .description,
+  ::global(.dark) .description {
+    border-width: 1px 0;
+  }
+
+  ::global(.dark) article h2 a {
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  ::global(.dark) article,
+  ::global(.dark) .description {
+    border: 1px dotted rgba(255, 255, 255, 0.2);
+  }
   h2 a {
     color: #000;
   }
@@ -87,8 +122,9 @@ const { page } = Astro.props
     color: rgb(255 255 255 / 0.75);
   }
 
-  span {
-    color: #7d7d7d;
+  .details {
+    display: grid;
+    grid-template-columns: auto auto;
   }
 
   p {
@@ -100,6 +136,6 @@ const { page } = Astro.props
   }
 
   .reading-time {
-    margin-left: 2rem;
+    justify-self: end;
   }
 </style>
