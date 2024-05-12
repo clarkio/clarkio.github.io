@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout title="Stream tools">
+  <h1>Stream tools</h1>
+  <section class="tools">
+    <article>
+      <header>
+        <h2>
+          <a href="/stream-tools/face-cam-scene-switcher/">
+            Face Cam Switcher
+          </a>
+        </h2>
+      </header>
+      <div class="description">
+        <p>
+          Detect when your face is looking at a camera and switch to that scene
+          in OBS
+        </p>
+      </div>
+    </article>
+    <article>
+      <header>
+        <h2>
+          <a
+            href="https://github.com/clarkio/vscode-twitch-highlighter"
+            target="_blank"
+          >
+            VS Code Chat Highlighter
+          </a>
+        </h2>
+      </header>
+      <div class="description">
+        <p>
+          Allow your chat to highlight code in your editor via commands "!line
+          5"
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <style>
+    header,
+    .description {
+      padding: 0 1rem;
+    }
+
+    article h2 a {
+      color: #000;
+      text-decoration: underline;
+    }
+
+    ::global(.dark) article h2 a {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    section.tools {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      list-style: none;
+    }
+
+    article,
+    .description {
+      border: 1px dotted rgba(0, 0, 255, 0.2);
+    }
+
+    ::global(.dark) article,
+    ::global(.dark) .description {
+      border: 1px dotted rgba(255, 255, 255, 0.2);
+    }
+
+    .description,
+    ::global(.dark) .description {
+      border-width: 1px 0 0 0;
+    }
+
+    article {
+      background: rgba(0, 0, 255, 0.02);
+      border-radius: 4px;
+      display: grid;
+      gap: 0;
+      grid-template-rows: subgrid;
+      grid-row: span 2;
+    }
+
+    ::global(.dark) article {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    article:hover {
+      background: rgba(0, 0, 255, 0.15);
+    }
+
+    ::global(.dark) article:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</BaseLayout>
