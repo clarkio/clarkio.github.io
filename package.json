@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.5",
+    "astro-font": "^0.0.81",
     "canvas-confetti": "^1.9.3",
     "dotenv": "^16.4.5",
     "prettier-plugin-astro": "^0.13.0",

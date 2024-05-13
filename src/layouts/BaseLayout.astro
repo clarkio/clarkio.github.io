@@ -1,4 +1,5 @@
 ---
+import { AstroFont } from 'astro-font'
 import { ViewTransitions } from 'astro:transitions'
 import '../styles/global.css'
 
@@ -48,11 +49,19 @@ const keywords = Astro.props.keywords || Astro.props.content.keywords || ''
       href="/assets/old-posts/img/favicon.ico"
     />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+    <AstroFont
+      config={[
+        {
+          src: [],
+          name: 'Inter',
+          preload: false,
+          display: 'swap',
+          selector: 'html',
+          fallback: 'sans-serif',
+          googleFontsURL:
+            'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700'
+        }
+      ]}
     />
 
     <script type="text/javascript">
