@@ -1,89 +1,120 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-// make api request to http://localhost:3000/stats to get wordle data
-// then display the data in a nice table/leaderboard format
-const response = await fetch(
-  'https://discord-wordle-bot-and-web-api.onrender.com/stats',
-  {
-    method: 'GET'
-  }
-)
-const data = await response.json()
-console.dir(data)
 ---
 
 <BaseLayout title='Wordle Leaderboard'>
   <h1>Wordle Leaderboard</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Discord Name</th>
-        <th>Wins</th>
-        <th>Losses</th>
-        <th>Ties</th>
-        <th>Failures</th>
-        <th>Average Attempts</th>
-        <th>Total Games</th>
-      </tr>
-    </thead>
-    <tbody>
-      {
-        data.map((player) => (
-          <tr>
-            <td>{player.discord_name}</td>
-            <td>
-              {player.wins} ({player.win_percent}%)
-            </td>
-            <td>
-              {player.losses} ({player.loss_percent}%)
-            </td>
-            <td>
-              {player.ties} ({player.tie_percent}%)
-            </td>
-            <td>
-              {player.failures} ({player.failure_percent}%)
-            </td>
-            <td>{player.avg_attempts}</td>
-            <td>{player.total_games}</td>
-          </tr>
-        ))
-      }
-    </tbody>
-  </table>
+  <div class='table-container'>
+    <table id='leaderboard'>
+      <thead>
+        <tr>
+          <th>Discord Name</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Ties</th>
+          <th>Failures</th>
+          <th>Average Attempts</th>
+          <th>Total Games</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const response = await fetch(
+        'https://discord-wordle-bot-and-web-api.onrender.com/stats',
+        {
+          method: 'GET'
+        }
+      )
+      const data = await response.json()
+      const tbody = document.querySelector('#leaderboard tbody')
+
+      data.forEach((player, index) => {
+        const row = document.createElement('tr')
+        // Add the row class that matches your CSS selector
+        row.classList.add('leaderboard-row')
+
+        row.innerHTML = `
+          <td class="leaderboard-cell">${player.discord_name}</td>
+          <td class="leaderboard-cell">${player.wins} (${player.win_percent}%)</td>
+          <td class="leaderboard-cell">${player.losses} (${player.loss_percent}%)</td>
+          <td class="leaderboard-cell">${player.ties} (${player.tie_percent}%)</td>
+          <td class="leaderboard-cell">${player.failures} (${player.failure_percent}%)</td>
+          <td class="leaderboard-cell">${player.avg_attempts}</td>
+          <td class="leaderboard-cell">${player.total_games}</td>
+        `
+        tbody?.appendChild(row)
+      })
+    })
+  </script>
   <style>
-    table {
-      width: 100%;
+    :global(.table-container) {
+      overflow-x: auto;
+      max-width: 100%;
+    }
+
+    :global(table) {
       border-collapse: collapse;
-      margin-top: 20px;
+      width: 100%;
+      margin: 2rem 0;
     }
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 8px;
+
+    :global(th) {
+      background: rgba(0, 0, 255, 0.02);
+      color: rgb(0, 0, 255);
+      font-weight: 600;
+      padding: 1rem;
       text-align: left;
+      border: 1px solid rgba(0, 0, 255, 0.1);
     }
-    th {
-      background-color: #f2f2f2;
+
+    :global(.leaderboard-cell) {
+      border: 1px solid rgba(0, 0, 255, 0.1);
+      color: #333;
+      padding: 1rem;
+      white-space: nowrap;
     }
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
+
+    :global(.leaderboard-row:nth-child(even)) {
+      background: rgba(0, 0, 255, 0.02);
     }
-    tr:hover {
-      background-color: #ddd;
+
+    :global(.leaderboard-row:hover) {
+      background: rgba(0, 0, 255, 0.15);
     }
-    :global(.dark) th {
-      background-color: #333;
-      color: #fff;
+
+    /* Dark mode styles */
+    :global(.dark) :global(th) {
+      background: rgba(255, 255, 255, 0.02);
+      color: rgb(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    :global(.dark) td {
-      border-color: #555;
-      color: #ddd;
+
+    :global(.dark) :global(.leaderboard-cell) {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgb(255, 255, 255, 0.5);
     }
-    :global(.dark) tr:nth-child(even) {
-      background-color: #444;
+
+    :global(.dark) :global(.leaderboard-row:nth-child(even)) {
+      background: rgba(255, 255, 255, 0.02);
     }
-    :global(.dark) tr:hover {
-      background-color: #555;
+
+    :global(.dark) :global(.leaderboard-row:hover) {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      :global(table) {
+        font-size: 14px;
+      }
+
+      :global(th),
+      :global(.leaderboard-cell) {
+        padding: 0.5rem;
+      }
     }
   </style>
 </BaseLayout>
