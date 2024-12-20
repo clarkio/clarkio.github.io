@@ -1,7 +1,7 @@
 // Full Astro Configuration API Documentation:
 // https://docs.astro.build/reference/configuration-reference
-import { defineConfig, passthroughImageService } from 'astro/config'
-import sitemap from '@astrojs/sitemap'
+import { defineConfig, passthroughImageService } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,4 +11,4 @@ export default defineConfig({
     domains: ['cdn.simpleicons.org', 'youtube.com'],
     service: passthroughImageService()
   }
-})
+});

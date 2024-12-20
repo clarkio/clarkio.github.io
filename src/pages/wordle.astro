@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+// make api request to http://localhost:3000/stats to get wordle data
+// then display the data in a nice table/leaderboard format
+const response = await fetch(
+  'https://discord-wordle-bot-and-web-api.onrender.com/stats',
+  {
+    method: 'GET'
+  }
+)
+const data = await response.json()
+console.dir(data)
+---
+
+<BaseLayout title='Wordle Leaderboard'>
+  <h1>Wordle Leaderboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Discord Name</th>
+        <th>Wins</th>
+        <th>Losses</th>
+        <th>Ties</th>
+        <th>Failures</th>
+        <th>Average Attempts</th>
+        <th>Total Games</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        data.map((player) => (
+          <tr>
+            <td>{player.discord_name}</td>
+            <td>
+              {player.wins} ({player.win_percent}%)
+            </td>
+            <td>
+              {player.losses} ({player.loss_percent}%)
+            </td>
+            <td>
+              {player.ties} ({player.tie_percent}%)
+            </td>
+            <td>
+              {player.failures} ({player.failure_percent}%)
+            </td>
+            <td>{player.avg_attempts}</td>
+            <td>{player.total_games}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    tr:hover {
+      background-color: #ddd;
+    }
+    :global(.dark) th {
+      background-color: #333;
+      color: #fff;
+    }
+    :global(.dark) td {
+      border-color: #555;
+      color: #ddd;
+    }
+    :global(.dark) tr:nth-child(even) {
+      background-color: #444;
+    }
+    :global(.dark) tr:hover {
+      background-color: #555;
+    }
+  </style>
+</BaseLayout>
