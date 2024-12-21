@@ -12,9 +12,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           <th>Wins</th>
           <th>Losses</th>
           <th>Ties</th>
+          <th>Successes</th>
           <th>Failures</th>
           <th>Average Attempts</th>
           <th>Total Games</th>
+          <th>Longest Win Streak</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -42,9 +44,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
           <td class="leaderboard-cell">${player.wins} (${player.win_percent}%)</td>
           <td class="leaderboard-cell">${player.losses} (${player.loss_percent}%)</td>
           <td class="leaderboard-cell">${player.ties} (${player.tie_percent}%)</td>
+          <td class="leaderboard-cell">${player.successes} (${player.success_percent}%)</td>
           <td class="leaderboard-cell">${player.failures} (${player.failure_percent}%)</td>
           <td class="leaderboard-cell">${player.avg_attempts}</td>
           <td class="leaderboard-cell">${player.total_games}</td>
+          <td class="leaderboard-cell">${player.longest_win_streak}</td>
         `
         tbody?.appendChild(row)
       })
