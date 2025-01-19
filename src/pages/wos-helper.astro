@@ -1,0 +1,280 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<script
+  is:inline
+  src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js'
+></script>
+<script
+  is:inline
+  src='https://cdn.jsdelivr.net/npm/tmi.js@1.9.0-pre.1/dist/tmi.min.js'
+></script>
+
+<BaseLayout title='Wordle Leaderboard'>
+  <h2>WOS Helper</h2>
+  <div class='controls'>
+    <div>
+      <label>WOS URL:</label>
+      <input type='text' id='mirrorUrl' placeholder='Enter WOS mirror URL' />
+      <button onclick='connect()'>Connect WOS</button>
+      <button onclick='disconnect()'>Disconnect WOS</button>
+    </div>
+    <div>
+      <label>Twitch Channel:</label>
+      <input type='text' id='twitchChannel' placeholder='Enter channel name' />
+      <button onclick='connectTwitch()'>Connect Twitch</button>
+      <button onclick='disconnectTwitch()'>Disconnect Twitch</button>
+    </div>
+  </div>
+  <div class='log-container'>
+    <div>
+      <h3>WOS Event Log:</h3>
+      <div id='wos-game-log'></div>
+    </div>
+    <div>
+      <h3>Twitch Chat Log:</h3>
+      <div id='twitch-chat-log'></div>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const wosGameLogId = 'wos-game-log'
+  const twitchChatLogId = 'twitch-chat-log'
+  class GameSpectator {
+    twitchChatLog: Map<string, { message: string; timestamp: number }>
+    wosSocket: any
+    twitchClient: any
+
+    constructor() {
+      this.twitchChatLog = new Map()
+      this.wosSocket = null
+      this.twitchClient = null
+    }
+
+    getMirrorCode(mirrorUrl) {
+      try {
+        const url = new URL(mirrorUrl)
+        const pathParts = url.pathname.split('/')
+        const codeIndex = pathParts.indexOf('r') + 1
+        if (codeIndex > 0 && codeIndex < pathParts.length) {
+          return pathParts[codeIndex]
+        }
+        return null
+      } catch (error) {
+        console.error('Error parsing mirror URL:', error)
+        return null
+      }
+    }
+
+    connectToGame(mirrorUrl) {
+      const gameCode = this.getMirrorCode(mirrorUrl)
+      if (!gameCode) {
+        this.log('Invalid mirror URL', wosGameLogId)
+        return
+      }
+
+      if (this.wosSocket) {
+        this.wosSocket.disconnect()
+      }
+
+      this.wosSocket = io('wss://wos2.gartic.es', {
+        autoConnect: true,
+        reconnection: true,
+        transports: ['websocket'],
+        query: {
+          uid: gameCode
+        },
+        forceNew: true
+      })
+
+      this.wosSocket.on((event, ...args) => {
+        this.log(`Event received: ${event}`, wosGameLogId)
+        this.log(`Data: ${JSON.stringify(args, null, 2)}`, wosGameLogId)
+      })
+
+      this.wosSocket.on('3', (eventType, data) => {
+        this.log(`Game Event Type: ${eventType}`, wosGameLogId)
+
+        // correct guess event
+        if (eventType === 3) {
+          if (data.letters.includes('?')) {
+            // correct guesses are hidden so get the latest message for that user from chat log
+            const username = data.user.name.toLowerCase()
+            const latestMessage = this.twitchChatLog.get(username)
+            if (
+              latestMessage &&
+              latestMessage.message.length === data.letters.length
+            ) {
+              this.log(
+                `${data.user.name} correctly guessed: ${latestMessage.message}`,
+                wosGameLogId
+              )
+            }
+          } else {
+            this.log(
+              `${data.user.name} correctly guessed: ${data.letters.join('')}`,
+              wosGameLogId
+            )
+          }
+        }
+
+        // round end, clear chat log
+        if (eventType === 8) {
+          this.twitchChatLog.clear()
+        }
+      })
+
+      this.wosSocket.on('connect', () => {
+        this.log('Connected to WOS game: ' + gameCode, wosGameLogId)
+      })
+
+      this.wosSocket.on('connect_error', (error) => {
+        this.log('WOS Connection error: ' + error, wosGameLogId)
+      })
+
+      this.wosSocket.on('disconnect', () => {
+        this.log('Disconnected from WOS game server', wosGameLogId)
+      })
+
+      this.wosSocket.on('error', (error) => {
+        this.log('WOS Socket error: ' + error, wosGameLogId)
+      })
+    }
+
+    connectToTwitch(channel) {
+      if (!channel.startsWith('#')) {
+        channel = '#' + channel
+      }
+
+      if (this.twitchClient) {
+        this.disconnectTwitch()
+      }
+
+      this.twitchClient = new tmi.Client({
+        connection: {
+          secure: true,
+          reconnect: true
+        },
+        channels: [channel]
+      })
+
+      this.twitchClient.on('message', (channel, tags, message, self) => {
+        this.log(
+          `Twitch Chat - ${tags['display-name']}: ${message}`,
+          twitchChatLogId
+        )
+        if (message.length < 10) {
+          this.twitchChatLog.set(tags['display-name'].toLowerCase(), {
+            message: message.toLowerCase(),
+            timestamp: Date.now()
+          })
+          console.dir(this.twitchChatLog)
+        }
+      })
+
+      this.twitchClient.on('connected', (addr, port) => {
+        this.log(`Connected to Twitch chat: ${channel}`, twitchChatLogId)
+      })
+
+      this.twitchClient.on('disconnected', (reason) => {
+        this.log(`Disconnected from Twitch chat: ${reason}`, twitchChatLogId)
+      })
+
+      this.twitchClient.connect().catch(console.error)
+    }
+
+    disconnect() {
+      if (this.wosSocket) {
+        this.wosSocket.disconnect()
+        this.wosSocket = null
+      }
+    }
+
+    disconnectTwitch() {
+      if (this.twitchClient) {
+        this.twitchClient.disconnect()
+        this.twitchClient = null
+      }
+    }
+
+    log(message, logId) {
+      const logDiv = document.getElementById(logId || 'wos-game-log')
+      if (typeof message === 'object') {
+        message = JSON.stringify(message, null, 2)
+      }
+      logDiv!.innerHTML += `${message}<br>`
+      console.log(message)
+      logDiv!.scrollTop = logDiv!.scrollHeight
+    }
+  }
+
+  const spectator = new GameSpectator()
+
+  window.connect = () => {
+    const mirrorUrl = document.getElementById('mirrorUrl')?.value
+    spectator.connectToGame(mirrorUrl)
+  }
+
+  window.disconnect = () => {
+    spectator.disconnect()
+  }
+
+  window.connectTwitch = () => {
+    const channel = document.getElementById('twitchChannel')?.value
+    spectator.connectToTwitch(channel)
+  }
+
+  window.disconnectTwitch = () => {
+    spectator.disconnectTwitch()
+  }
+</script>
+
+<style>
+  body {
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .log-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  .log-container > div {
+    flex: 1;
+    width: 50%;
+  }
+  .controls {
+    margin-bottom: 20px;
+  }
+  .controls > div {
+    margin: 10px 0;
+  }
+  #wos-game-log,
+  #twitch-chat-log {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: calc(100vh - 200px);
+    width: 100%;
+    overflow-y: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+    background: #f5f5f5;
+    box-sizing: border-box;
+  }
+  input,
+  button {
+    margin: 5px;
+    padding: 5px;
+  }
+  label {
+    font-weight: bold;
+  }
+  h3 {
+    margin: 10px 0;
+  }
+</style>
