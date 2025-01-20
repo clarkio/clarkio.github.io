@@ -45,6 +45,7 @@ h4 {
 .dark h2,
 .dark h3,
 .dark h4,
+.dark label,
 .dark li {
   color: rgb(255 255 255 / 0.5);
 }
