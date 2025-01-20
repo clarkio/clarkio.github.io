@@ -11,8 +11,12 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   src='https://cdn.jsdelivr.net/npm/tmi.js@1.9.0-pre.1/dist/tmi.min.js'
 ></script>
 
-<BaseLayout title='Wordle Leaderboard'>
-  <h2>WOS Helper</h2>
+<BaseLayout
+  title='Words on Stream Helper'
+  description="Clarkio's Words on Stream helper tool"
+  keywords='clarkio, words on stream, wos, twitch, streaming, helper, wordsonstream'
+>
+  <h2>Words on Stream Helper</h2>
   <div class='controls'>
     <div>
       <label>WOS URL:</label>
@@ -26,6 +30,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       <button onclick='connectTwitch()'>Connect Twitch</button>
       <button onclick='disconnectTwitch()'>Disconnect Twitch</button>
     </div>
+  </div>
+  <div class='level-data-container'>
+    <h3 id='level-title'>Level #</h3>
+    <span><label>Big Word:</label><label id='big-word'></label></span>
+    <span><label>Correct Words:</label><div id='correct-words-log'></div></span>
   </div>
   <div class='log-container'>
     <div>
@@ -46,6 +55,8 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     twitchChatLog: Map<string, { message: string; timestamp: number }>
     wosSocket: any
     twitchClient: any
+    currentLevelBigWord: string = ''
+    currentLevelCorrectWords: string[] = []
 
     constructor() {
       this.twitchChatLog = new Map()
@@ -95,7 +106,8 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       })
 
       this.wosSocket.on('3', (eventType, data) => {
-        this.log(`Game Event Type: ${eventType}`, wosGameLogId)
+        let correctWord = ''
+        // this.log(`Game Event Type: ${eventType}`, wosGameLogId)
 
         // correct guess event
         if (eventType === 3) {
@@ -111,13 +123,42 @@ import BaseLayout from '../layouts/BaseLayout.astro'
                 `${data.user.name} correctly guessed: ${latestMessage.message}`,
                 wosGameLogId
               )
+              this.currentLevelCorrectWords.push(latestMessage.message)
+              correctWord = latestMessage.message
             }
           } else {
             this.log(
               `${data.user.name} correctly guessed: ${data.letters.join('')}`,
               wosGameLogId
             )
+            this.currentLevelCorrectWords.push(data.letters.join(''))
+            correctWord = data.letters.join('')
           }
+
+          document.getElementById('correct-words-log')!.innerText =
+            this.currentLevelCorrectWords.join(', ')
+          if (data.hitMax === true) {
+            this.currentLevelBigWord = correctWord
+              .split('')
+              .join(' ')
+              .toUpperCase()
+            document.getElementById('big-word')!.innerText =
+              this.currentLevelBigWord
+          }
+        }
+
+        if (eventType === 4) {
+          this.log(`Level ended with ${data.stars} stars`, wosGameLogId)
+          this.currentLevelCorrectWords = []
+          this.currentLevelBigWord = ''
+          document.getElementById('correct-words-log')!.innerText = ''
+          document.getElementById('big-word')!.innerText = ''
+        }
+
+        if (eventType === 1) {
+          this.log(`Level ${data.level} started`, wosGameLogId)
+          document.getElementById('level-title')!.innerText =
+            `Level ${data.level}`
         }
 
         // round end, clear chat log
@@ -238,6 +279,43 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     box-sizing: border-box;
   }
 
+  .level-data-container span {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  /* Add new style for the correct words span */
+  .level-data-container span:last-of-type {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+    gap: 0.25rem; /* Small gap between label and log div */
+  }
+
+  #correct-words-log {
+    max-height: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    height: calc(100vh - 200px);
+    width: 100%;
+    overflow-y: auto;
+    font-family: monospace;
+    white-space: pre-wrap;
+    background: #f5f5f5;
+    box-sizing: border-box;
+    background: #272a36 !important;
+    padding: 1rem;
+    color: #e1e4e8;
+  }
+
+  .level-data-container label {
+    min-width: 100px;
+  }
+
+  #correct-words-log {
+    width: 100%;
+  }
+
   .log-container {
     display: flex;
     gap: 20px;
@@ -265,11 +343,16 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     white-space: pre-wrap;
     background: #f5f5f5;
     box-sizing: border-box;
+    background: #272a36 !important;
+    padding: 1rem;
+    color: #e1e4e8;
   }
   input,
   button {
     margin: 5px;
     padding: 5px;
+    color: #e1e4e8;
+    background: #272a36 !important;
   }
   label {
     font-weight: bold;
