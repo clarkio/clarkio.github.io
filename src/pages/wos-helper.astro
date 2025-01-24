@@ -17,41 +17,52 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   keywords='clarkio, words on stream, wos, twitch, streaming, helper, wordsonstream'
 >
   <h2>Words on Stream Helper</h2>
-  <div class='controls'>
-    <div>
-      <label>WOS URL:</label>
-      <input type='text' id='mirrorUrl' placeholder='Enter WOS mirror URL' />
-      <button onclick='connect()'>Connect WOS</button>
-      <button onclick='disconnect()'>Disconnect WOS</button>
+  <details>
+    <summary>Show/Hide Controls</summary>
+    <div class='controls'>
+      <div>
+        <label>WOS URL:</label>
+        <input type='text' id='mirrorUrl' placeholder='Enter WOS mirror URL' />
+        <button onclick='connect()'>Connect WOS</button>
+        <button onclick='disconnect()'>Disconnect WOS</button>
+      </div>
+      <div>
+        <label>Twitch Channel:</label>
+        <input
+          type='text'
+          id='twitchChannel'
+          placeholder='Enter channel name'
+        />
+        <button onclick='connectTwitch()'>Connect Twitch</button>
+        <button onclick='disconnectTwitch()'>Disconnect Twitch</button>
+      </div>
     </div>
-    <div>
-      <label>Twitch Channel:</label>
-      <input type='text' id='twitchChannel' placeholder='Enter channel name' />
-      <button onclick='connectTwitch()'>Connect Twitch</button>
-      <button onclick='disconnectTwitch()'>Disconnect Twitch</button>
-    </div>
-  </div>
+  </details>
   <div class='level-data-container'>
-    <h3 id='level-title'>Level #</h3>
+    <h3 id='level-title'>Level:</h3>
     <span><label>Big Word:</label><label id='big-word'></label></span>
     <span><label>Correct Words:</label><div id='correct-words-log'></div></span>
   </div>
-  <div class='log-container'>
-    <div>
-      <h3>WOS Event Log:</h3>
-      <div id='wos-game-log'></div>
+  <details>
+    <summary>Show/Hide Logs</summary>
+    <div class='log-container'>
+      <div>
+        <h3>WOS Event Log:</h3>
+        <div id='wos-game-log'></div>
+      </div>
+      <div>
+        <h3>Twitch Chat Log:</h3>
+        <div id='twitch-chat-log'></div>
+      </div>
     </div>
-    <div>
-      <h3>Twitch Chat Log:</h3>
-      <div id='twitch-chat-log'></div>
-    </div>
-  </div>
+  </details>
 </BaseLayout>
 
 <script>
   const wosGameLogId = 'wos-game-log'
   const twitchChatLogId = 'twitch-chat-log'
   class GameSpectator {
+    currentLevel: number = 0
     twitchChatLog: Map<string, { message: string; timestamp: number }>
     wosSocket: any
     twitchClient: any
@@ -107,7 +118,8 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
       this.wosSocket.on('3', (eventType, data) => {
         let correctWord = ''
-        // this.log(`Game Event Type: ${eventType}`, wosGameLogId)
+        this.log(`Game Event Type: ${eventType}`, wosGameLogId)
+        // this.log(`Data: ${JSON.stringify(data, null, 2)}`, wosGameLogId)
 
         // correct guess event
         if (eventType === 3) {
@@ -125,6 +137,14 @@ import BaseLayout from '../layouts/BaseLayout.astro'
               )
               this.currentLevelCorrectWords.push(latestMessage.message)
               correctWord = latestMessage.message
+            } else {
+              console.warn(
+                `Could not find a matching message for ${data.user.name} in the chat log
+                Twitch username: ${username}
+                Twitch message: ${latestMessage?.message}
+                WOS Hidden Word: ${data.letters.join('')}
+                WOS word length: ${data.letters.length}`
+              )
             }
           } else {
             this.log(
@@ -157,8 +177,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         if (eventType === 1) {
           this.log(`Level ${data.level} started`, wosGameLogId)
+          this.currentLevel = parseInt(data.level)
           document.getElementById('level-title')!.innerText =
-            `Level ${data.level}`
+            `Level: ${data.level}`
         }
 
         // round end, clear chat log
@@ -202,12 +223,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       })
 
       this.twitchClient.on('message', (channel, tags, message, self) => {
-        this.log(
-          `Twitch Chat - ${tags['display-name']}: ${message}`,
-          twitchChatLogId
-        )
-        if (message.length < 10) {
-          this.twitchChatLog.set(tags['display-name'].toLowerCase(), {
+        this.log(`Twitch Chat - ${tags.username}: ${message}`, twitchChatLogId)
+        if (
+          message.length > 4 &&
+          message.length < 10 &&
+          !message.includes(' ')
+        ) {
+          this.twitchChatLog.set(tags.username.toLowerCase(), {
             message: message.toLowerCase(),
             timestamp: Date.now()
           })
@@ -270,6 +292,23 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   window.disconnectTwitch = () => {
     spectator.disconnectTwitch()
   }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // check for query parameters in the url
+    const urlParams = new URLSearchParams(window.location.search)
+    console.dir(urlParams)
+    if (urlParams.has('mirrorUrl')) {
+      document.getElementById('mirrorUrl').value = urlParams.get('mirrorUrl')
+    }
+    if (urlParams.has('twitchChannel')) {
+      document.getElementById('twitchChannel').value =
+        urlParams.get('twitchChannel')
+    }
+    const mirrorUrl = document.getElementById('mirrorUrl')?.value
+    spectator.connectToGame(mirrorUrl)
+    const channel = document.getElementById('twitchChannel')?.value
+    spectator.connectToTwitch(channel)
+  })
 </script>
 
 <style>
@@ -306,6 +345,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     background: #272a36 !important;
     padding: 1rem;
     color: #e1e4e8;
+  }
+
+  summary {
+    cursor: pointer;
+    padding: 10px;
+    color: #e1e4e8;
+    background: #272a36 !important;
   }
 
   .level-data-container label {
