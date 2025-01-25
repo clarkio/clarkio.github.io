@@ -19,6 +19,8 @@
     "dotenv": "^16.4.5",
     "prettier-plugin-astro": "^0.13.0",
     "reading-time": "^1.5.0",
-    "sharp": "^0.33.3"
+    "sharp": "^0.33.3",
+    "socket.io-client": "^2.5.0",
+    "tmi.js": "^1.8.5"
   }
 }
