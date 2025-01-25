@@ -3,35 +3,70 @@ declare var self: Worker;
 export interface WosWorkerMessage {
   eventType: number;
   data: {
-    user: {
-      name: string;
+    user?: {
+      name?: string;
     };
-    letters: string[];
-    hitMax: boolean;
+    letters?: string[];
+    hitMax?: boolean;
+    level?: number;
+    stars?: number;
   };
 }
 
 export interface WosWorkerResult {
   type: 'wos_event';
+  wosEventType: number;
+  wosEventName: string;
   username: string;
   letters: string[];
+  stars: number;
+  level: number;
   hitMax: boolean;
 }
+
+let currentLevel = 0;
 
 self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
   try {
     const { eventType, data } = e.data;
+    currentLevel = data.level || currentLevel;
+    let result: WosWorkerResult = {
+      type: 'wos_event',
+      wosEventType: eventType,
+      wosEventName: 'unkown',
+      username: data.user?.name?.toLowerCase() || '',
+      letters: data.letters || [],
+      stars: data.stars || 0,
+      level: data.level || 0,
+      hitMax: data.hitMax || false
+    };
 
-    if (eventType === 3) {
-      const result: WosWorkerResult = {
-        type: 'wos_event',
-        username: data.user.name,
-        letters: data.letters,
-        hitMax: data.hitMax
-      };
+    // console.log(`[WOS Worker] Event Type: ${eventType}`, data);
 
+    if (eventType === 1) {
+      currentLevel = data.level!;
+      result.wosEventName = 'Level Started';
       self.postMessage(result);
+    } else if (eventType === 3) {
+      result.wosEventName = 'Correct Guess';
+      self.postMessage(result);
+    } else if (eventType === 4) {
+      result.wosEventName = 'Level Ended';
+      self.postMessage(result);
+    } else if (eventType === 5) {
+      result.wosEventName = 'Game Ended';
+      self.postMessage(result);
+    } else if (eventType === 10) {
+      result.wosEventName = 'TBD';
+      self.postMessage(result);
+    } else if (eventType === 12) {
+      currentLevel = data.level!;
+      result.wosEventName = 'Game Connected';
+      self.postMessage(result);
+    } else {
+      console.log(`[WOS Worker] Unhandled WOS event type: ${eventType}`);
     }
+
   } catch (error) {
     self.postMessage({
       type: 'error',

@@ -1,14 +1,22 @@
-// const twitchWorker = new Worker(
-//   new URL('../scripts/twitch-chat-worker.ts', import.meta.url),
-//   { type: 'module' }
-// );
-// const wosWorker = new Worker(
-//   new URL('../scripts/wos-worker.ts', import.meta.url),
-//   { type: 'module' }
-// );
 import tmi from 'tmi.js';
 import io from 'socket.io-client';
+
+const twitchWorker = new Worker(
+  new URL('../scripts/twitch-chat-worker.ts', import.meta.url),
+  { type: 'module' }
+);
+const wosWorker = new Worker(
+  new URL('../scripts/wos-worker.ts', import.meta.url),
+  { type: 'module' }
+);
+
 export class GameSpectator {
+  private msgProcessDelay = 500;
+  private lastTwitchMessage: {
+    username: string;
+    message: string;
+    timestamp: number;
+  } | null = null;
   wosGameLogId = 'wos-game-log';
   twitchChatLogId = 'twitch-chat-log';
   currentLevel: number = 0;
@@ -30,25 +38,97 @@ export class GameSpectator {
   }
 
   private async startEventProcessors() {
-    // WOS Event Processor
-    setInterval(async () => {
-      if (!this.isProcessingWos && this.wosEventQueue.length > 0) {
-        this.isProcessingWos = true;
-        const event = this.wosEventQueue.shift();
-        await this.processWosEvent(event);
-        this.isProcessingWos = false;
-      }
-    }, 100);
+    // Set up WOS worker message handler
+    wosWorker.onmessage = async (e) => {
+      if (e.data.type === 'wos_event') {
+        const { wosEventType, wosEventName, username, letters, hitMax, stars, level } = e.data;
 
-    // Twitch Event Processor
-    setInterval(async () => {
-      if (!this.isProcessingTwitch && this.twitchEventQueue.length > 0) {
-        this.isProcessingTwitch = true;
-        const event = this.twitchEventQueue.shift();
-        await this.processTwitchEvent(event);
-        this.isProcessingTwitch = false;
+        const message = username ? `:${username} - ${letters.join('')} - Big Word: ${hitMax}` : '';
+        console.log(`[WOS Event] <${wosEventName}>${message}`);
+
+        if (wosEventType === 1 || wosEventType === 12) {
+          this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
+          this.currentLevel = parseInt(level);
+          document.getElementById('level-title')!.innerText =
+            `Level: ${level}`;
+        } else if (wosEventType === 3) {
+          // Wait for any pending Twitch messages
+          await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
+          // if (this.lastTwitchMessage && Date.now() - this.lastTwitchMessage.timestamp < this.msgProcessDelay) {
+          // }
+
+          // Update UI with processed data
+          this.updateGameState(username, letters, hitMax);
+        } else if (wosEventType === 4) {
+          this.log(`Level ${this.currentLevel} ended with ${stars} stars`, this.wosGameLogId);
+          console.log('[WOS Helper] Level ended, clearing the correct words and big word');
+          this.currentLevelCorrectWords = [];
+          this.currentLevelBigWord = '';
+          this.lastTwitchMessage = null;
+          this.twitchChatLog.clear();
+          document.getElementById('correct-words-log')!.innerText = '';
+          document.getElementById('big-word')!.innerText = '';
+        }
       }
-    }, 100);
+    };
+
+    // Set up Twitch worker message handler
+    twitchWorker.onmessage = (e) => {
+      if (e.data.type === 'twitch_message') {
+        const { username, message, timestamp } = e.data;
+        this.lastTwitchMessage = { username, message, timestamp };
+        this.twitchChatLog.set(username, { message, timestamp });
+        this.log(`[Twitch Chat] ${username}: ${message}`, this.twitchChatLogId);
+      }
+    };
+  }
+
+  private updateGameState(username: string, letters: string[], hitMax: boolean) {
+    // Log the correct guess
+    let word = letters.join('');
+
+    // if (word.includes('?')) {
+    // WOS is at level 20+ and hides the correct word
+    // Get the latest message from the user in chat log
+    // const latestMessage = this.twitchChatLog.get(username);
+    const lowerUsername = username.toLowerCase();
+    console.log(`[WOS Helper] Looking for ${lowerUsername}'s message in chat log`);
+    console.log(`[WOS Helper] Last twitch message: ${JSON.stringify(this.lastTwitchMessage)}`);
+    console.log(`[WOS Helper] Chat log entry for ${lowerUsername}: ${JSON.stringify(this.twitchChatLog.get(lowerUsername))}`);
+    if (
+      this.lastTwitchMessage &&
+      this.lastTwitchMessage.username.toLowerCase() === lowerUsername &&
+      this.lastTwitchMessage.message.length === letters.length
+    ) {
+      word = this.lastTwitchMessage.message;
+    } else {
+      // Fall back to chat log
+      const latestMessage = this.twitchChatLog.get(lowerUsername);
+      if (latestMessage && latestMessage.message.length === letters.length) {
+        word = latestMessage.message;
+      } else {
+        console.warn(
+          `[WOS Helper] Could not find matching message for ${lowerUsername}`,
+          `[WOS Helper] Last message: ${JSON.stringify(this.lastTwitchMessage)}`,
+          `[WOS Helper] Chat log entry: ${JSON.stringify(latestMessage)}`
+        );
+        return; // Skip updating UI if we can't find the word
+      }
+    }
+    // }
+
+    this.log(`[WOS Event] ${lowerUsername} correctly guessed: ${word}`, this.wosGameLogId);
+    // Add to correct words list
+    this.currentLevelCorrectWords.push(word);
+    // Update correct words display
+    document.getElementById('correct-words-log')!.innerText =
+      this.currentLevelCorrectWords.join(', ');
+
+    // If hitMax is true, set the current level big word
+    if (hitMax) {
+      this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
+      document.getElementById('big-word')!.innerText = this.currentLevelBigWord;
+    }
   }
 
   private async processWosEvent(event: { type: number; data: any; }) {
@@ -126,36 +206,6 @@ export class GameSpectator {
     }
   }
 
-  private async processHiddenWosWord(eventType: number, data: any) { }
-
-  private updateCorrectWordsDisplay() {
-    const correctWordsDiv = document.getElementById('correct-words-log');
-    if (correctWordsDiv) {
-      correctWordsDiv.innerHTML = this.currentLevelCorrectWords.join(', ');
-    }
-  }
-
-  private async processTwitchEvent(event: {
-    username: string;
-    message: string;
-  }) {
-    this.log(
-      `Processing Twitch message: ${event.username}: ${event.message}`,
-      'twitch-chat-log'
-    );
-    if (
-      event.message.length > 4 &&
-      event.message.length < 10 &&
-      !event.message.includes(' ') &&
-      !event.message.includes('<')
-    ) {
-      this.twitchChatLog.set(event.username.toLowerCase(), {
-        message: event.message.toLowerCase(),
-        timestamp: Date.now()
-      });
-    }
-  }
-
   getMirrorCode(mirrorUrl) {
     try {
       const url = new URL(mirrorUrl);
@@ -171,7 +221,7 @@ export class GameSpectator {
     }
   }
 
-  connectToGame(mirrorUrl) {
+  connectToWosGame(mirrorUrl) {
     const gameCode = this.getMirrorCode(mirrorUrl);
     if (!gameCode) {
       this.log('Invalid mirror URL', this.wosGameLogId);
@@ -203,7 +253,8 @@ export class GameSpectator {
     });
 
     this.wosSocket.on('3', (eventType, data) => {
-      this.wosEventQueue.push({ type: eventType, data });
+      // console.log('[WOS Event] Event received: ', eventType, data);
+      wosWorker.postMessage({ eventType, data });
     });
 
     this.wosSocket.on('connect', () => {
@@ -241,22 +292,16 @@ export class GameSpectator {
     });
 
     this.twitchClient.on('message', (channel, tags, message, self) => {
-      this.log(`Twitch Chat - ${tags.username}: ${message}`, this.twitchChatLogId);
-      if (
-        message.length > 4 &&
-        message.length < 10 &&
-        !message.includes(' ')
-      ) {
-        this.twitchChatLog.set(tags.username.toLowerCase(), {
-          message: message.toLowerCase(),
-          timestamp: Date.now()
-        });
-        console.dir(this.twitchChatLog);
-      }
+      // this.log(`Twitch Chat: ${tags.username}: ${message}`, this.twitchChatLogId);
+      twitchWorker.postMessage({
+        username: tags.username.toLowerCase(),
+        message: message.toLowerCase(),
+        timestamp: Date.now()
+      });
     });
 
     this.twitchClient.on('connected', (addr, port) => {
-      this.log(`Connected to Twitch chat: ${channel}`, this.twitchChatLogId);
+      this.log(`Connected to Twitch chat for channel: ${channel}`, this.twitchChatLogId);
     });
 
     this.twitchClient.on('disconnected', (reason) => {

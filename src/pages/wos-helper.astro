@@ -74,7 +74,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   wosConnectBtn.addEventListener('click', () => {
     const mirrorUrl = (document.getElementById('mirrorUrl') as HTMLInputElement)
       .value
-    spectator.connectToGame(mirrorUrl)
+    spectator.connectToWosGame(mirrorUrl)
   })
   const wosDisconnectBtn = document.getElementById(
     'wos-discconnect-btn'
@@ -99,7 +99,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     }
     const mirrorUrl = (document.getElementById('mirrorUrl') as HTMLInputElement)
       .value
-    spectator.connectToGame(mirrorUrl)
+    spectator.connectToWosGame(mirrorUrl)
     const channel = (
       document.getElementById('twitchChannel') as HTMLInputElement
     ).value

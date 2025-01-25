@@ -15,11 +15,12 @@ export interface TwitchWorkerResult {
 }
 
 // Worker implementation
+const messageRegex = /^[a-zA-Z]{4,12}$/;
 self.onmessage = function (e: MessageEvent<TwitchWorkerMessage>) {
   try {
     const { username, message, timestamp } = e.data;
 
-    if (message.length > 4 && message.length < 10 && !message.includes(' ')) {
+    if (messageRegex.test(message)) {
       const result: TwitchWorkerResult = {
         type: 'twitch_message',
         username: username.toLowerCase(),
