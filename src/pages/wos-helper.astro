@@ -68,11 +68,141 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     twitchClient: any
     currentLevelBigWord: string = ''
     currentLevelCorrectWords: string[] = []
+    wosEventQueue: any[] = []
+    twitchEventQueue: any[] = []
+    isProcessingWos: boolean = false
+    isProcessingTwitch: boolean = false
 
     constructor() {
       this.twitchChatLog = new Map()
       this.wosSocket = null
       this.twitchClient = null
+      this.startEventProcessors()
+    }
+
+    private async startEventProcessors() {
+      // WOS Event Processor
+      setInterval(async () => {
+        if (!this.isProcessingWos && this.wosEventQueue.length > 0) {
+          this.isProcessingWos = true
+          const event = this.wosEventQueue.shift()
+          await this.processWosEvent(event)
+          this.isProcessingWos = false
+        }
+      }, 100)
+
+      // Twitch Event Processor
+      setInterval(async () => {
+        if (!this.isProcessingTwitch && this.twitchEventQueue.length > 0) {
+          this.isProcessingTwitch = true
+          const event = this.twitchEventQueue.shift()
+          await this.processTwitchEvent(event)
+          this.isProcessingTwitch = false
+        }
+      }, 100)
+    }
+
+    private async processWosEvent(event: { type: number; data: any }) {
+      const eventType = event.type
+      const data = event.data
+      this.log(`Processing WOS event: ${event.type}`, 'wos-game-log')
+      let correctWord = ''
+      this.log(`Game Event Type: ${eventType}`, wosGameLogId)
+      // this.log(`Data: ${JSON.stringify(data, null, 2)}`, wosGameLogId)
+
+      // correct guess event
+      if (eventType === 3) {
+        if (data.letters.includes('?')) {
+          // correct guesses are hidden so get the latest message for that user from chat log
+          const username = data.user.name.toLowerCase()
+          const latestMessage = this.twitchChatLog.get(username)
+          if (
+            latestMessage &&
+            latestMessage.message.length === data.letters.length
+          ) {
+            this.log(
+              `${data.user.name} correctly guessed: ${latestMessage.message}`,
+              wosGameLogId
+            )
+            this.currentLevelCorrectWords.push(latestMessage.message)
+            correctWord = latestMessage.message
+          } else {
+            console.warn(
+              `Could not find a matching message for ${data.user.name} in the chat log
+                Twitch username: ${username}
+                Twitch message: ${latestMessage?.message}
+                WOS Hidden Word: ${data.letters.join('')}
+                WOS word length: ${data.letters.length}`
+            )
+          }
+        } else {
+          this.log(
+            `${data.user.name} correctly guessed: ${data.letters.join('')}`,
+            wosGameLogId
+          )
+          this.currentLevelCorrectWords.push(data.letters.join(''))
+          correctWord = data.letters.join('')
+        }
+
+        document.getElementById('correct-words-log')!.innerText =
+          this.currentLevelCorrectWords.join(', ')
+        if (data.hitMax === true) {
+          this.currentLevelBigWord = correctWord
+            .split('')
+            .join(' ')
+            .toUpperCase()
+          document.getElementById('big-word')!.innerText =
+            this.currentLevelBigWord
+        }
+      }
+
+      if (eventType === 4) {
+        this.log(`Level ended with ${data.stars} stars`, wosGameLogId)
+        this.currentLevelCorrectWords = []
+        this.currentLevelBigWord = ''
+        document.getElementById('correct-words-log')!.innerText = ''
+        document.getElementById('big-word')!.innerText = ''
+      }
+
+      if (eventType === 1) {
+        this.log(`Level ${data.level} started`, wosGameLogId)
+        this.currentLevel = parseInt(data.level)
+        document.getElementById('level-title')!.innerText =
+          `Level: ${data.level}`
+      }
+
+      // round end, clear chat log
+      if (eventType === 8) {
+        this.twitchChatLog.clear()
+      }
+    }
+
+    private updateCorrectWordsDisplay() {
+      const correctWordsDiv = document.getElementById('correct-words-log')
+      if (correctWordsDiv) {
+        correctWordsDiv.innerHTML = this.currentLevelCorrectWords.join(', ')
+      }
+    }
+
+    private async processTwitchEvent(event: {
+      username: string
+      message: string
+    }) {
+      this.log(
+        `Processing Twitch message: ${event.username}: ${event.message}`,
+        'twitch-chat-log'
+      )
+      if (
+        event.message.length > 4 &&
+        event.message.length < 10 &&
+        !event.message.includes(' ') &&
+        !event.message.includes('<')
+      ) {
+        this.twitchChatLog.set(event.username.toLowerCase(), {
+          message: event.message.toLowerCase(),
+          timestamp: Date.now()
+        })
+      }
     }
 
     getMirrorCode(mirrorUrl) {
@@ -104,6 +234,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       this.wosSocket = io('wss://wos2.gartic.es', {
         autoConnect: true,
         reconnection: true,
+        reconnectionAttempts: Infinity,
+        reconnectionDelay: 1000,
+        reconnectionDelayMax: 5000,
+        randomizationFactor: 0.5,
+        timeout: 20000,
         transports: ['websocket'],
         query: {
           uid: gameCode
@@ -117,75 +252,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       })
 
       this.wosSocket.on('3', (eventType, data) => {
-        let correctWord = ''
-        this.log(`Game Event Type: ${eventType}`, wosGameLogId)
-        // this.log(`Data: ${JSON.stringify(data, null, 2)}`, wosGameLogId)
-
-        // correct guess event
-        if (eventType === 3) {
-          if (data.letters.includes('?')) {
-            // correct guesses are hidden so get the latest message for that user from chat log
-            const username = data.user.name.toLowerCase()
-            const latestMessage = this.twitchChatLog.get(username)
-            if (
-              latestMessage &&
-              latestMessage.message.length === data.letters.length
-            ) {
-              this.log(
-                `${data.user.name} correctly guessed: ${latestMessage.message}`,
-                wosGameLogId
-              )
-              this.currentLevelCorrectWords.push(latestMessage.message)
-              correctWord = latestMessage.message
-            } else {
-              console.warn(
-                `Could not find a matching message for ${data.user.name} in the chat log
-                Twitch username: ${username}
-                Twitch message: ${latestMessage?.message}
-                WOS Hidden Word: ${data.letters.join('')}
-                WOS word length: ${data.letters.length}`
-              )
-            }
-          } else {
-            this.log(
-              `${data.user.name} correctly guessed: ${data.letters.join('')}`,
-              wosGameLogId
-            )
-            this.currentLevelCorrectWords.push(data.letters.join(''))
-            correctWord = data.letters.join('')
-          }
-
-          document.getElementById('correct-words-log')!.innerText =
-            this.currentLevelCorrectWords.join(', ')
-          if (data.hitMax === true) {
-            this.currentLevelBigWord = correctWord
-              .split('')
-              .join(' ')
-              .toUpperCase()
-            document.getElementById('big-word')!.innerText =
-              this.currentLevelBigWord
-          }
-        }
-
-        if (eventType === 4) {
-          this.log(`Level ended with ${data.stars} stars`, wosGameLogId)
-          this.currentLevelCorrectWords = []
-          this.currentLevelBigWord = ''
-          document.getElementById('correct-words-log')!.innerText = ''
-          document.getElementById('big-word')!.innerText = ''
-        }
-
-        if (eventType === 1) {
-          this.log(`Level ${data.level} started`, wosGameLogId)
-          this.currentLevel = parseInt(data.level)
-          document.getElementById('level-title')!.innerText =
-            `Level: ${data.level}`
-        }
-
-        // round end, clear chat log
-        if (eventType === 8) {
-          this.twitchChatLog.clear()
-        }
+        this.wosEventQueue.push({ type: eventType, data })
       })
 
       this.wosSocket.on('connect', () => {
