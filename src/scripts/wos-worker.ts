@@ -57,7 +57,7 @@ self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
       result.wosEventName = 'Game Ended';
       self.postMessage(result);
     } else if (eventType === 10) {
-      result.wosEventName = 'TBD';
+      result.wosEventName = 'Hidden/Fake Letters Revealed';
       self.postMessage(result);
     } else if (eventType === 12) {
       currentLevel = data.level!;

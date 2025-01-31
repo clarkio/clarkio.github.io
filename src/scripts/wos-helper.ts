@@ -51,33 +51,36 @@ export class GameSpectator {
           this.currentLevel = parseInt(level);
           document.getElementById('level-title')!.innerText =
             `Level: ${level}`;
-        } else if (wosEventType === 5) {
-          this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
-          this.clearBoard();
         } else if (wosEventType === 3) {
           // Wait for any pending Twitch messages
           await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
-          // if (this.lastTwitchMessage && Date.now() - this.lastTwitchMessage.timestamp < this.msgProcessDelay) {
-          // }
 
           // Update UI with processed data
           this.updateGameState(username, letters, hitMax);
         } else if (wosEventType === 4) {
           this.log(`Level ${this.currentLevel} ended with ${stars} stars`, this.wosGameLogId);
           console.log(`[WOS Helper] Level ${this.currentLevel} ended`);
+
+          this.currentLevel += parseInt(stars);
+          document.getElementById('level-title')!.innerText =
+            `Next Level: ${this.currentLevel}`;
+
+          this.clearBoard();
+        } else if (wosEventType === 5) {
+          this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
           this.clearBoard();
         }
-      }
-    };
+      };
 
-    // Set up Twitch worker message handler
-    twitchWorker.onmessage = (e) => {
-      if (e.data.type === 'twitch_message') {
-        const { username, message, timestamp } = e.data;
-        this.lastTwitchMessage = { username, message, timestamp };
-        this.twitchChatLog.set(username, { message, timestamp });
-        this.log(`[Twitch Chat] ${username}: ${message}`, this.twitchChatLogId);
-      }
+      // Set up Twitch worker message handler
+      twitchWorker.onmessage = (e) => {
+        if (e.data.type === 'twitch_message') {
+          const { username, message, timestamp } = e.data;
+          this.lastTwitchMessage = { username, message, timestamp };
+          this.twitchChatLog.set(username, { message, timestamp });
+          this.log(`[Twitch Chat] ${username}: ${message}`, this.twitchChatLogId);
+        }
+      };
     };
   }
 
@@ -128,6 +131,7 @@ export class GameSpectator {
     this.log(`[WOS Event] ${lowerUsername} correctly guessed: ${word}`, this.wosGameLogId);
     // Add to correct words list
     this.currentLevelCorrectWords.push(word);
+    this.currentLevelCorrectWords.sort();
     // Update correct words display
     document.getElementById('correct-words-log')!.innerText =
       this.currentLevelCorrectWords.join(', ');
