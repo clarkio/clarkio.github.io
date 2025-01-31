@@ -51,6 +51,9 @@ export class GameSpectator {
           this.currentLevel = parseInt(level);
           document.getElementById('level-title')!.innerText =
             `Level: ${level}`;
+        } else if (wosEventType === 5) {
+          this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
+          this.clearBoard();
         } else if (wosEventType === 3) {
           // Wait for any pending Twitch messages
           await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
@@ -61,13 +64,8 @@ export class GameSpectator {
           this.updateGameState(username, letters, hitMax);
         } else if (wosEventType === 4) {
           this.log(`Level ${this.currentLevel} ended with ${stars} stars`, this.wosGameLogId);
-          console.log('[WOS Helper] Level ended, clearing the correct words and big word');
-          this.currentLevelCorrectWords = [];
-          this.currentLevelBigWord = '';
-          this.lastTwitchMessage = null;
-          this.twitchChatLog.clear();
-          document.getElementById('correct-words-log')!.innerText = '';
-          document.getElementById('big-word')!.innerText = '';
+          console.log(`[WOS Helper] Level ${this.currentLevel} ended`);
+          this.clearBoard();
         }
       }
     };
@@ -81,6 +79,16 @@ export class GameSpectator {
         this.log(`[Twitch Chat] ${username}: ${message}`, this.twitchChatLogId);
       }
     };
+  }
+
+  private clearBoard() {
+    console.log('[WOS Helper] Clearing the correct words and big word');
+    this.currentLevelCorrectWords = [];
+    this.currentLevelBigWord = '';
+    this.lastTwitchMessage = null;
+    this.twitchChatLog.clear();
+    document.getElementById('correct-words-log')!.innerText = '';
+    document.getElementById('big-word')!.innerText = '';
   }
 
   private updateGameState(username: string, letters: string[], hitMax: boolean) {
