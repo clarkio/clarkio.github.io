@@ -50,7 +50,12 @@ export class GameSpectator {
           this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
           this.currentLevel = parseInt(level);
           document.getElementById('level-title')!.innerText =
-            `Level: ${level}`;
+            `Level:`;
+          document.getElementById('level-value')!.innerText =
+            `${level}`;
+          if (letters.length > 0) {
+            document.getElementById('letters')!.innerText = letters.join(' ').toUpperCase();
+          }
         } else if (wosEventType === 3) {
           // Wait for any pending Twitch messages
           await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
@@ -63,7 +68,9 @@ export class GameSpectator {
 
           this.currentLevel += parseInt(stars);
           document.getElementById('level-title')!.innerText =
-            `Next Level: ${this.currentLevel}`;
+            `Next Level:`;
+          document.getElementById('level-value')!.innerText =
+            `${this.currentLevel}`;
 
           this.clearBoard();
         } else if (wosEventType === 5) {
@@ -139,6 +146,7 @@ export class GameSpectator {
     // If hitMax is true, set the current level big word
     if (hitMax) {
       this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
+      document.getElementById('letters')!.innerText = '';
       document.getElementById('big-word')!.innerText = this.currentLevelBigWord;
     }
   }
