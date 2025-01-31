@@ -5,19 +5,19 @@ async function removeUnnecessaryElements() {
   const wosHelperLogs = document.getElementById('wos-helper-logs');
 
   if (header) {
-    header.remove();
+    header.style.display = 'none';
   }
 
   if (footer) {
-    footer.remove();
+    footer.style.display = 'none';
   }
 
   if (wosHelperControls) {
-    wosHelperControls.remove();
+    wosHelperControls.style.display = 'none';
   }
 
   if (wosHelperLogs) {
-    wosHelperLogs.remove();
+    wosHelperLogs.style.display = 'none';
   }
 }
 
