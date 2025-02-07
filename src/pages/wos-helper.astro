@@ -91,6 +91,7 @@ import '../styles/wos-helper.css'
 </BaseLayout>
 
 <script>
+  import { isAborted } from 'astro:schema'
   import { GameSpectator } from '../scripts/wos-helper'
   import { removeUnnecessaryElements } from '../scripts/wos-widget'
 
@@ -143,6 +144,19 @@ import '../styles/wos-helper.css'
       iframe.src = url
       console.log(url)
     }
+
+    if (urlParams.has('chat')) {
+      const isChatEnabled = urlParams.get('chat')?.toLowerCase() === 'true'
+      const twitchChatWidget = document.getElementById(
+        'twitch-chat-widget'
+      ) as HTMLIFrameElement
+      if (isChatEnabled) {
+        twitchChatWidget.style.display = ''
+      } else {
+        twitchChatWidget.style.display = 'none'
+      }
+    }
+
     if (urlParams.has('twitchChannel')) {
       const twitchChannel = urlParams.get('twitchChannel') || 'clarkio'
       const twitchChannelInput = document.getElementById(
