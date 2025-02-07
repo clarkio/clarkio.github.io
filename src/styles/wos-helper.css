@@ -119,6 +119,7 @@ button {
 }
 
 .twitch-chat-frame {
+  display: none;
   grid-column: 3;
   grid-row: span 2;
 }

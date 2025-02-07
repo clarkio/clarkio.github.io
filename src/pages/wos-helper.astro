@@ -131,7 +131,6 @@ import '../styles/wos-helper.css'
   document.addEventListener('DOMContentLoaded', () => {
     // check for query parameters in the url
     const urlParams = new URLSearchParams(window.location.search)
-    console.dir(urlParams.toString())
     if (urlParams.has('mirrorUrl')) {
       const url = urlParams.get('mirrorUrl') || ''
       const mirrorUrlInput = document.getElementById(
