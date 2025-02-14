@@ -1,3 +1,8 @@
+html {
+  background-color: #420072;
+  color: #dacfe6;
+}
+
 body {
   margin: 0;
   /* padding: 20px; */
@@ -6,6 +11,14 @@ body {
 
 .logo {
   width: 48px;
+  margin: 10px;
+  background-color: #7736c6;
+}
+
+.logo-container {
+  display: flex;
+  background-color: #7736c6;
+  color: #ddcdf1;
 }
 
 #correct-words-log-container span {
@@ -21,18 +34,20 @@ body {
   gap: 0.25rem; /* Small gap between label and log div */
 }
 
+.logs {
+  background: #4b1a81;
+}
+
 #correct-words-log {
   max-height: 200px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #c79cff;
   height: calc(100vh - 200px);
   width: 100%;
   overflow-y: auto;
   font-family: monospace;
   white-space: pre-wrap;
-  background: #f5f5f5;
   box-sizing: border-box;
-  background: #272a36 !important;
   padding: 1rem;
   color: #e1e4e8;
 }
@@ -41,7 +56,7 @@ summary {
   cursor: pointer;
   padding: 10px;
   color: #e1e4e8;
-  background: #272a36 !important;
+  background: #4b1a81;
 }
 
 .level-data-container label {
@@ -74,19 +89,20 @@ summary {
 
 #wos-game-log,
 #twitch-chat-log {
-  margin-top: 20px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #c79cff;
   height: calc(100vh - 200px);
   width: 100%;
   overflow-y: auto;
   font-family: monospace;
   white-space: pre-wrap;
-  background: #f5f5f5;
   box-sizing: border-box;
-  background: #272a36 !important;
   padding: 1rem;
   color: #e1e4e8;
+}
+
+.log-container h3 {
+  margin-left: 10px;
 }
 
 input,
@@ -94,7 +110,7 @@ button {
   margin: 5px;
   padding: 5px;
   color: #e1e4e8;
-  background: #272a36 !important;
+  background-color: #7736c6;
 }
 
 .iframe-container {
@@ -114,18 +130,30 @@ button {
 .wos-main-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1/3fr 2/3fr;
+  grid-template-rows: 1/4fr 2/4fr 1/4fr;
   gap: 10px;
 }
 
 .twitch-chat-frame {
-  display: none;
+  width: 100%;
+  /* height: 80vh; 80% of viewport height */
   grid-column: 3;
-  grid-row: span 2;
+  grid-row: span 3;
+}
+
+#wos-helper-logs {
+  grid-row: 3;
+  grid-column: span 2;
+}
+
+#twitch-chat-widget {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .grid-item {
-  padding: 20px; /* Optional: padding for grid items */
+  margin: 20px; /* Optional: padding for grid items */
 }
 
 #wos-board-iframe {

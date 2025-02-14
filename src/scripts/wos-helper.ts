@@ -30,7 +30,7 @@ export class GameSpectator {
   isProcessingWos: boolean = false;
   isProcessingTwitch: boolean = false;
 
-  constructor () {
+  constructor() {
     this.twitchChatLog = new Map();
     this.wosSocket = null;
     this.twitchClient = null;
@@ -138,7 +138,7 @@ export class GameSpectator {
     this.log(`[WOS Event] ${lowerUsername} correctly guessed: ${word}`, this.wosGameLogId);
     // Add to correct words list
     this.currentLevelCorrectWords.push(word);
-    this.currentLevelCorrectWords.sort();
+    this.currentLevelCorrectWords.sort((a, b) => a.length - b.length);
     // Update correct words display
     document.getElementById('correct-words-log')!.innerText =
       this.currentLevelCorrectWords.join(', ');

@@ -1,22 +1,21 @@
 ---
 import Logo from '../components/Icons/Logo.astro'
-import BaseLayout from '../layouts/BaseLayout.astro'
-import '../styles/wos-helper.css'
+import WosBaseLayout from '../layouts/WosBaseLayout.astro'
 ---
 
-<BaseLayout
-  title="Words on Stream Helper"
+<WosBaseLayout
+  title="Words on Stream Highlighter"
   description="Clarkio's Words on Stream helper tool"
   keywords="clarkio, words on stream, wos, twitch, streaming, helper, wordsonstream"
 >
-  <div style="display: flex; gap: 10px">
+  <div class="logo-container">
     <a href="/">
-      <div class="logo">
+      <div class="logo dark">
         <Logo name="Logo" />
       </div>
     </a>
 
-    <h2>Clarkio's Words on Stream Helper</h2>
+    <h2>Clarkio's Words on Stream Highlighter</h2>
   </div>
   <details id="wos-helper-controls">
     <summary>Show/Hide Controls</summary>
@@ -64,7 +63,8 @@ import '../styles/wos-helper.css'
       </div>
       <div class="grid-item">
         <div id="correct-words-log-container">
-          <span>Correct Words:</span><div id="correct-words-log"></div>
+          <span>Correct Words:</span><div id="correct-words-log" class="logs">
+          </div>
         </div>
       </div>
     </div>
@@ -74,24 +74,23 @@ import '../styles/wos-helper.css'
     <div class="twitch-chat-frame">
       <iframe id="twitch-chat-widget" src=""></iframe>
     </div>
+    <details id="wos-helper-logs">
+      <summary>Show/Hide Logs</summary>
+      <div class="log-container">
+        <div>
+          <h3>WOS Event Log:</h3>
+          <div id="wos-game-log" class="logs"></div>
+        </div>
+        <div>
+          <h3>Twitch Chat Log:</h3>
+          <div id="twitch-chat-log" class="logs"></div>
+        </div>
+      </div>
+    </details>
   </div>
-  <details id="wos-helper-logs">
-    <summary>Show/Hide Logs</summary>
-    <div class="log-container">
-      <div>
-        <h3>WOS Event Log:</h3>
-        <div id="wos-game-log"></div>
-      </div>
-      <div>
-        <h3>Twitch Chat Log:</h3>
-        <div id="twitch-chat-log"></div>
-      </div>
-    </div>
-  </details>
-</BaseLayout>
+</WosBaseLayout>
 
 <script>
-  import { isAborted } from 'astro:schema'
   import { GameSpectator } from '../scripts/wos-helper'
   import { removeUnnecessaryElements } from '../scripts/wos-widget'
 
@@ -166,7 +165,7 @@ import '../styles/wos-helper.css'
       const twitchChatWidget = document.getElementById(
         'twitch-chat-widget'
       ) as HTMLIFrameElement
-      twitchChatWidget.src = `https://www.twitch.tv/embed/${twitchChannel}/chat?parent=${location.hostname}`
+      twitchChatWidget.src = `https://www.twitch.tv/embed/${twitchChannel}/chat?darkpopout&parent=${location.hostname}`
     }
     const mirrorUrl = (document.getElementById('mirrorUrl') as HTMLInputElement)
       .value
