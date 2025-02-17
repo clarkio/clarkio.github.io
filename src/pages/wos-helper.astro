@@ -59,20 +59,18 @@ import WosBaseLayout from '../layouts/WosBaseLayout.astro'
           </div>
           <div><span>Letters:</span> <span id="letters"></span></div>
           <div><span>Big Word:</span> <span id="big-word"></span></div>
-        </div>
-      </div>
-      <div class="grid-item">
-        <div id="correct-words-log-container">
-          <span>Correct Words:</span><div id="correct-words-log" class="logs">
+          <div id="correct-words-log-container">
+            <span>Correct Words:</span><div id="correct-words-log" class="logs">
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="iframe-container" id="wos-board" style="display: none;">
-      <iframe id="wos-board-iframe" src=""></iframe>
-    </div>
     <div class="twitch-chat-frame">
       <iframe id="twitch-chat-widget" src=""></iframe>
+    </div>
+    <div class="iframe-container" id="wos-board" style="display: none;">
+      <iframe id="wos-board-iframe" src=""></iframe>
     </div>
     <details id="wos-helper-logs">
       <summary>Show/Hide Logs</summary>
