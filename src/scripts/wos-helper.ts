@@ -99,6 +99,8 @@ export class GameSpectator {
     this.twitchChatLog.clear();
     document.getElementById('correct-words-log')!.innerText = '';
     document.getElementById('big-word')!.innerText = '';
+    document.getElementById('letters')!.innerText = '';
+    document.getElementById('letters-label')!.innerText = 'Letters:';
   }
 
   private updateGameState(username: string, letters: string[], hitMax: boolean) {
@@ -146,8 +148,8 @@ export class GameSpectator {
     // If hitMax is true, set the current level big word
     if (hitMax) {
       this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
-      document.getElementById('letters')!.innerText = '';
-      document.getElementById('big-word')!.innerText = this.currentLevelBigWord;
+      document.getElementById('letters-label')!.innerText = 'Big Word:';
+      document.getElementById('letters')!.innerText = this.currentLevelBigWord;
     }
   }
 
