@@ -39,12 +39,13 @@ body {
 }
 
 #correct-words-log {
+  font-size: min(4vw, 24px);
   max-height: 200px;
   padding: 10px;
   border: 1px solid #c79cff;
   height: calc(100vh - 200px);
   width: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   font-family: monospace;
   white-space: pre-wrap;
   box-sizing: border-box;
@@ -61,6 +62,12 @@ summary {
 
 .level-data-container label {
   min-width: 100px;
+}
+
+.level-data-container > div:not(#correct-words-log-container) {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 #correct-words-log {
@@ -113,47 +120,48 @@ button {
   background-color: #7736c6;
 }
 
-.iframe-container {
-  width: 100%;
-  height: 80vh; /* 80% of viewport height */
-  grid-row: 2;
-  grid-column: span 2;
+.wos-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content max-content max-content;
+  gap: 10px 10px;
 }
 
 .level-data-grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* Two columns with equal width */
-  gap: 10px; /* Optional: space between grid items */
-  grid-column: span 2;
-}
-
-.wos-main-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1/4fr 2/4fr 1/4fr;
-  gap: 10px;
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  margin: 20px;
+  min-width: 320px;
+  /* height: 50vh; */
 }
 
 .twitch-chat-frame {
-  width: 100%;
-  /* height: 80vh; 80% of viewport height */
-  grid-column: 3;
-  grid-row: span 3;
+  grid-column: 2 / 2;
+  grid-row: 1 / 3;
+  margin: 10px;
+  /* width: 100%;
+  height: 80vh; */
+}
+
+.iframe-container {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  min-height: 50vh;
+  /* width: 100%;
+  height: 50vh; */
 }
 
 #wos-helper-logs {
-  grid-row: 3;
-  grid-column: span 2;
+  grid-column: 1 / 3;
+  grid-row: 3 / 3;
 }
 
 #twitch-chat-widget {
   width: 100%;
-  height: 100%;
+  height: 90vh;
+  min-width: 320px;
+  min-height: 500px;
   border: none;
-}
-
-.grid-item {
-  margin: 20px; /* Optional: padding for grid items */
 }
 
 #wos-board-iframe {
@@ -165,11 +173,12 @@ button {
 #letters,
 #big-word,
 #level-value {
-  font-size: x-large;
+  font-size: min(3vw, 30px);
   font-weight: bold;
 }
 
-label {
+span {
+  font-size: min(3vw, 30px);
   font-weight: bold;
 }
 
