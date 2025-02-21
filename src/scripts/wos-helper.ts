@@ -27,6 +27,7 @@ export class GameSpectator {
   currentLevelCorrectWords: string[] = [];
   wosEventQueue: any[] = [];
   twitchEventQueue: any[] = [];
+  currentLevelLetters: string[] = [];
   isProcessingWos: boolean = false;
   isProcessingTwitch: boolean = false;
 
@@ -41,7 +42,7 @@ export class GameSpectator {
     // Set up WOS worker message handler
     wosWorker.onmessage = async (e) => {
       if (e.data.type === 'wos_event') {
-        const { wosEventType, wosEventName, username, letters, hitMax, stars, level } = e.data;
+        const { wosEventType, wosEventName, username, letters, hitMax, stars, level, falseLetters, hiddenLetters } = e.data;
 
         const message = username ? `:${username} - ${letters.join('')} - Big Word: ${hitMax}` : '';
         console.log(`[WOS Event] <${wosEventName}>${message}`);
@@ -55,6 +56,7 @@ export class GameSpectator {
             `${level}`;
           document.getElementById('letters-label')!.innerText = 'Letters:';
           if (letters.length > 0) {
+            this.currentLevelLetters = letters;
             document.getElementById('letters')!.innerText = letters.join(' ').toUpperCase();
           }
         } else if (wosEventType === 3) {
@@ -77,6 +79,16 @@ export class GameSpectator {
         } else if (wosEventType === 5) {
           this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
           this.clearBoard();
+        } else if (wosEventType === 10) {
+          this.log(`Hidden/Fake Letters Revealed`, this.wosGameLogId);
+          this.log(`Hidden Letters: ${hiddenLetters.join(' ')}`, this.wosGameLogId);
+          this.log(`Fake Letters: ${falseLetters.join(' ')}`, this.wosGameLogId);
+          if (falseLetters.length > 0) {
+            document.getElementById('fake-letter')!.innerText = falseLetters.join(' ').toUpperCase();
+          }
+          if (hiddenLetters.length > 0) {
+            document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
+          }
         }
       };
 
@@ -99,9 +111,10 @@ export class GameSpectator {
     this.lastTwitchMessage = null;
     this.twitchChatLog.clear();
     document.getElementById('correct-words-log')!.innerText = '';
-    document.getElementById('big-word')!.innerText = '';
     document.getElementById('letters')!.innerText = '';
     document.getElementById('letters-label')!.innerText = 'Letters:';
+    document.getElementById('hidden-letter')!.innerText = '';
+    document.getElementById('fake-letter')!.innerText = '';
   }
 
   private updateGameState(username: string, letters: string[], hitMax: boolean) {
@@ -151,81 +164,44 @@ export class GameSpectator {
       this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
       document.getElementById('letters-label')!.innerText = 'Big Word:';
       document.getElementById('letters')!.innerText = this.currentLevelBigWord;
+      this.calculateHiddenLetters(this.currentLevelBigWord);
+      this.calculateFakeLetters(this.currentLevelBigWord);
     }
   }
 
-  private async processWosEvent(event: { type: number; data: any; }) {
-    const eventType = event.type;
-    const data = event.data;
-    this.log(`Processing WOS event: ${event.type}`, 'wos-game-log');
-    let correctWord = '';
-    this.log(`Game Event Type: ${eventType}`, this.wosGameLogId);
-    // this.log(`Data: ${JSON.stringify(data, null, 2)}`, wosGameLogId)
-
-    // correct guess event
-    if (eventType === 3) {
-      if (data.letters.includes('?')) {
-        // correct guesses are hidden so get the latest message for that user from chat log
-        const username = data.user.name.toLowerCase();
-        const latestMessage = this.twitchChatLog.get(username);
-        if (
-          latestMessage &&
-          latestMessage.message.length === data.letters.length
-        ) {
-          this.log(
-            `${data.user.name} correctly guessed: ${latestMessage.message}`,
-            this.wosGameLogId
-          );
-          this.currentLevelCorrectWords.push(latestMessage.message);
-          correctWord = latestMessage.message;
-        } else {
-          console.warn(
-            `Could not find a matching message for ${data.user.name} in the chat log
-                Twitch username: ${username}
-                Twitch message: ${latestMessage?.message}
-                WOS Hidden Word: ${data.letters.join('')}
-                WOS word length: ${data.letters.length}`
-          );
-        }
-      } else {
-        this.log(
-          `${data.user.name} correctly guessed: ${data.letters.join('')}`,
-          this.wosGameLogId
-        );
-        this.currentLevelCorrectWords.push(data.letters.join(''));
-        correctWord = data.letters.join('');
+  calculateHiddenLetters(bigWord: string) {
+    const bigWordLetters = bigWord.split(' ').map(letter => letter.toLowerCase());
+    console.log(`Big Word Letters: ${bigWordLetters.join(' ')}`, this.wosGameLogId);
+    console.log(`Current Level Letters: ${this.currentLevelLetters.join(' ')}`, this.wosGameLogId);
+    // compare bigWordLetters with currentLevelLetters
+    // if a letter is in the bigWordLetters but not in currentLevelLetters, it is hidden
+    // if a letter is in the bigWordLetters more than once and is in currentLevelLetters, it is hidden as well
+    const hiddenLettersSet = new Set<string>();
+    bigWordLetters.forEach(letter => {
+      const bigWordLetterCount = bigWordLetters.filter(l => l === letter).length;
+      const currentLevelLetterCount = this.currentLevelLetters.filter(l => l === letter).length;
+      if (currentLevelLetterCount < bigWordLetterCount) {
+        hiddenLettersSet.add(letter);
       }
-
-      document.getElementById('correct-words-log')!.innerText =
-        this.currentLevelCorrectWords.join(', ');
-      if (data.hitMax === true) {
-        this.currentLevelBigWord = correctWord
-          .split('')
-          .join(' ')
-          .toUpperCase();
-        document.getElementById('big-word')!.innerText =
-          this.currentLevelBigWord;
-      }
+    });
+    const hiddenLetters = Array.from(hiddenLettersSet);
+    this.log(`Hidden Letters: ${hiddenLetters.join(' ')}`, this.wosGameLogId);
+    if (hiddenLetters.length > 0 && hiddenLetters.length !== this.currentLevelLetters.length) {
+      document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
     }
 
-    if (eventType === 4) {
-      this.log(`Level ended with ${data.stars} stars`, this.wosGameLogId);
-      this.currentLevelCorrectWords = [];
-      this.currentLevelBigWord = '';
-      document.getElementById('correct-words-log')!.innerText = '';
-      document.getElementById('big-word')!.innerText = '';
-    }
 
-    if (eventType === 1) {
-      this.log(`Level ${data.level} started`, this.wosGameLogId);
-      this.currentLevel = parseInt(data.level);
-      document.getElementById('level-title')!.innerText =
-        `Level: ${data.level}`;
-    }
+    // ? C S R E A L
+    // S C A R E D
+    // L is Fake and D is Hidden
+  }
 
-    // round end, clear chat log
-    if (eventType === 8) {
-      this.twitchChatLog.clear();
+  calculateFakeLetters(bigWord: string) {
+    const bigWordLetters = bigWord.split(' ').map(letter => letter.toLowerCase());
+    const fakeLetters = this.currentLevelLetters.filter(letter => !bigWordLetters.includes(letter) && letter !== '?');
+    this.log(`Fake Letters: ${fakeLetters.join(' ')}`, this.wosGameLogId);
+    if (fakeLetters.length > 0 && fakeLetters.length !== this.currentLevelLetters.length) {
+      document.getElementById('fake-letter')!.innerText = fakeLetters.join(' ').toUpperCase();
     }
   }
 
@@ -357,4 +333,79 @@ export class GameSpectator {
     console.log(message);
     logDiv!.scrollTop = logDiv!.scrollHeight;
   }
+
+  // private async processWosEvent(event: { type: number; data: any; }) {
+  //   const eventType = event.type;
+  //   const data = event.data;
+  //   this.log(`Processing WOS event: ${event.type}`, 'wos-game-log');
+  //   let correctWord = '';
+  //   this.log(`Game Event Type: ${eventType}`, this.wosGameLogId);
+  //   // this.log(`Data: ${JSON.stringify(data, null, 2)}`, wosGameLogId)
+
+  //   // correct guess event
+  //   if (eventType === 3) {
+  //     if (data.letters.includes('?')) {
+  //       // correct guesses are hidden so get the latest message for that user from chat log
+  //       const username = data.user.name.toLowerCase();
+  //       const latestMessage = this.twitchChatLog.get(username);
+  //       if (
+  //         latestMessage &&
+  //         latestMessage.message.length === data.letters.length
+  //       ) {
+  //         this.log(
+  //           `${data.user.name} correctly guessed: ${latestMessage.message}`,
+  //           this.wosGameLogId
+  //         );
+  //         this.currentLevelCorrectWords.push(latestMessage.message);
+  //         correctWord = latestMessage.message;
+  //       } else {
+  //         console.warn(
+  //           `Could not find a matching message for ${data.user.name} in the chat log
+  //               Twitch username: ${username}
+  //               Twitch message: ${latestMessage?.message}
+  //               WOS Hidden Word: ${data.letters.join('')}
+  //               WOS word length: ${data.letters.length}`
+  //         );
+  //       }
+  //     } else {
+  //       this.log(
+  //         `${data.user.name} correctly guessed: ${data.letters.join('')}`,
+  //         this.wosGameLogId
+  //       );
+  //       this.currentLevelCorrectWords.push(data.letters.join(''));
+  //       correctWord = data.letters.join('');
+  //     }
+
+  //     document.getElementById('correct-words-log')!.innerText =
+  //       this.currentLevelCorrectWords.join(', ');
+  //     if (data.hitMax === true) {
+  //       this.currentLevelBigWord = correctWord
+  //         .split('')
+  //         .join(' ')
+  //         .toUpperCase();
+  //       document.getElementById('big-word')!.innerText =
+  //         this.currentLevelBigWord;
+  //     }
+  //   }
+
+  //   if (eventType === 4) {
+  //     this.log(`Level ended with ${data.stars} stars`, this.wosGameLogId);
+  //     this.currentLevelCorrectWords = [];
+  //     this.currentLevelBigWord = '';
+  //     document.getElementById('correct-words-log')!.innerText = '';
+  //     document.getElementById('big-word')!.innerText = '';
+  //   }
+
+  //   if (eventType === 1) {
+  //     this.log(`Level ${data.level} started`, this.wosGameLogId);
+  //     this.currentLevel = parseInt(data.level);
+  //     document.getElementById('level-title')!.innerText =
+  //       `Level: ${data.level}`;
+  //   }
+
+  //   // round end, clear chat log
+  //   if (eventType === 8) {
+  //     this.twitchChatLog.clear();
+  //   }
+  // }
 }

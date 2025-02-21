@@ -10,6 +10,8 @@ export interface WosWorkerMessage {
     hitMax?: boolean;
     level?: number;
     stars?: number;
+    falseLetters?: string[];
+    hiddenLetters?: string[];
   };
 }
 
@@ -22,6 +24,8 @@ export interface WosWorkerResult {
   stars: number;
   level: number;
   hitMax: boolean;
+  falseLetters: string[];
+  hiddenLetters: string[];
 }
 
 let currentLevel = 0;
@@ -38,7 +42,9 @@ self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
       letters: data.letters || [],
       stars: data.stars || 0,
       level: data.level || 0,
-      hitMax: data.hitMax || false
+      hitMax: data.hitMax || false,
+      falseLetters: data.falseLetters || [],
+      hiddenLetters: data.hiddenLetters || [],
     };
 
     // console.log(`[WOS Worker] Event Type: ${eventType}`, data);
