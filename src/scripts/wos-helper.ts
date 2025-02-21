@@ -150,6 +150,8 @@ export class GameSpectator {
       this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
       document.getElementById('letters-label')!.innerText = 'Big Word:';
       document.getElementById('letters')!.innerText = this.currentLevelBigWord;
+    } else {
+      document.getElementById('letters-label')!.innerText = 'Letters:';
     }
   }
 
@@ -292,7 +294,7 @@ export class GameSpectator {
     });
 
     this.wosSocket.on('error', (error) => {
-      this.log('WOS Socket error: ' + error, this.wosGameLogId);
+      this.log('WOS Socket error: ', this.wosGameLogId);
     });
   }
 
@@ -352,7 +354,7 @@ export class GameSpectator {
     if (typeof message === 'object') {
       message = JSON.stringify(message, null, 2);
     }
-    logDiv!.innerHTML += `${message}<br>`;
+    logDiv!.innerText += `${message}\n`;
     console.log(message);
     logDiv!.scrollTop = logDiv!.scrollHeight;
   }
