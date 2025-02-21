@@ -53,6 +53,7 @@ export class GameSpectator {
             `Level:`;
           document.getElementById('level-value')!.innerText =
             `${level}`;
+          document.getElementById('letters-label')!.innerText = 'Letters:';
           if (letters.length > 0) {
             document.getElementById('letters')!.innerText = letters.join(' ').toUpperCase();
           }
@@ -150,8 +151,6 @@ export class GameSpectator {
       this.currentLevelBigWord = word.split('').join(' ').toUpperCase();
       document.getElementById('letters-label')!.innerText = 'Big Word:';
       document.getElementById('letters')!.innerText = this.currentLevelBigWord;
-    } else {
-      document.getElementById('letters-label')!.innerText = 'Letters:';
     }
   }
 

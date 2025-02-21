@@ -172,7 +172,8 @@ button {
 
 #letters,
 #big-word,
-#level-value {
+#level-value,
+#hidden-letter {
   font-size: min(3vw, 30px);
   font-weight: bold;
 }
