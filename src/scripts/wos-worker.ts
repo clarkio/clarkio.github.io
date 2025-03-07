@@ -12,6 +12,7 @@ export interface WosWorkerMessage {
     stars?: number;
     falseLetters?: string[];
     hiddenLetters?: string[];
+    slots?: any[];
   };
 }
 
@@ -26,6 +27,7 @@ export interface WosWorkerResult {
   hitMax: boolean;
   falseLetters: string[];
   hiddenLetters: string[];
+  slots: any[];
 }
 
 let currentLevel = 0;
@@ -45,6 +47,7 @@ self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
       hitMax: data.hitMax || false,
       falseLetters: data.falseLetters || [],
       hiddenLetters: data.hiddenLetters || [],
+      slots: data.slots || [],
     };
 
     // console.log(`[WOS Worker] Event Type: ${eventType}`, data);
@@ -57,13 +60,22 @@ self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
       result.wosEventName = 'Correct Guess';
       self.postMessage(result);
     } else if (eventType === 4) {
-      result.wosEventName = 'Level Ended';
+      result.wosEventName = 'Level Results';
       self.postMessage(result);
     } else if (eventType === 5) {
       result.wosEventName = 'Game Ended';
       self.postMessage(result);
+    } else if (eventType === 7) {
+      result.wosEventName = 'Letters Cycled';
+      self.postMessage(result);
+    } else if (eventType === 8) {
+      result.wosEventName = 'Level Ended';
+      self.postMessage(result);
     } else if (eventType === 10) {
       result.wosEventName = 'Hidden/Fake Letters Revealed';
+      self.postMessage(result);
+    } else if (eventType === 11) {
+      result.wosEventName = 'Guessing Unlocked';
       self.postMessage(result);
     } else if (eventType === 12) {
       currentLevel = data.level!;

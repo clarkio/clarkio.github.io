@@ -1,6 +1,8 @@
 import tmi from 'tmi.js';
 import io from 'socket.io-client';
 
+import { findAllMissingWords } from './wos-missing-words';
+
 const twitchWorker = new Worker(
   new URL('../scripts/twitch-chat-worker.ts', import.meta.url),
   { type: 'module' }
@@ -30,6 +32,9 @@ export class GameSpectator {
   currentLevelLetters: string[] = [];
   isProcessingWos: boolean = false;
   isProcessingTwitch: boolean = false;
+  currentLevelHiddenLetters: string[] = [];
+  currentLevelFakeLetters: string[] = [];
+  currentLevelSlots: {letters: string[], user?: string, hitMax: boolean}[] = [];
 
   constructor() {
     this.twitchChatLog = new Map();
@@ -42,53 +47,21 @@ export class GameSpectator {
     // Set up WOS worker message handler
     wosWorker.onmessage = async (e) => {
       if (e.data.type === 'wos_event') {
-        const { wosEventType, wosEventName, username, letters, hitMax, stars, level, falseLetters, hiddenLetters } = e.data;
+        const { wosEventType, wosEventName, username, letters, hitMax, stars, level, falseLetters, hiddenLetters, slots } = e.data;
 
         const message = username ? `:${username} - ${letters.join('')} - Big Word: ${hitMax}` : '';
         console.log(`[WOS Event] <${wosEventName}>${message}`);
 
         if (wosEventType === 1 || wosEventType === 12) {
-          this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
-          this.currentLevel = parseInt(level);
-          document.getElementById('level-title')!.innerText =
-            `Level:`;
-          document.getElementById('level-value')!.innerText =
-            `${level}`;
-          document.getElementById('letters-label')!.innerText = 'Letters:';
-          if (letters.length > 0) {
-            this.currentLevelLetters = letters;
-            document.getElementById('letters')!.innerText = letters.join(' ').toUpperCase();
-          }
+          this.handleGameInitialization(level, wosEventType, letters, slots);
         } else if (wosEventType === 3) {
-          // Wait for any pending Twitch messages
-          await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
-
-          // Update UI with processed data
-          this.updateGameState(username, letters, hitMax);
+          await this.handleCorrectGuess(username, letters, hitMax);
         } else if (wosEventType === 4) {
-          this.log(`Level ${this.currentLevel} ended with ${stars} stars`, this.wosGameLogId);
-          console.log(`[WOS Helper] Level ${this.currentLevel} ended`);
-
-          this.currentLevel += parseInt(stars);
-          document.getElementById('level-title')!.innerText =
-            `Next Level:`;
-          document.getElementById('level-value')!.innerText =
-            `${this.currentLevel}`;
-
-          this.clearBoard();
+          this.handleLevelResults(stars);
         } else if (wosEventType === 5) {
-          this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
-          this.clearBoard();
+          this.handleLevelEnd(level);
         } else if (wosEventType === 10) {
-          this.log(`Hidden/Fake Letters Revealed`, this.wosGameLogId);
-          this.log(`Hidden Letters: ${hiddenLetters.join(' ')}`, this.wosGameLogId);
-          this.log(`Fake Letters: ${falseLetters.join(' ')}`, this.wosGameLogId);
-          if (falseLetters.length > 0) {
-            document.getElementById('fake-letter')!.innerText = falseLetters.join(' ').toUpperCase();
-          }
-          if (hiddenLetters.length > 0) {
-            document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
-          }
+          this.handleLetterReveal(hiddenLetters, falseLetters);
         }
       };
 
@@ -104,11 +77,91 @@ export class GameSpectator {
     };
   }
 
+  private handleLetterReveal(hiddenLetters: any, falseLetters: any) {
+    this.log(`Hidden/Fake Letters Revealed`, this.wosGameLogId);
+    this.log(`Hidden Letters: ${hiddenLetters.join(' ')}`, this.wosGameLogId);
+    this.log(`Fake Letters: ${falseLetters.join(' ')}`, this.wosGameLogId);
+    if (falseLetters.length > 0) {
+      document.getElementById('fake-letter')!.innerText = falseLetters.join(' ').toUpperCase();
+    }
+    if (hiddenLetters.length > 0) {
+      document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
+    }
+
+    if(this.currentLevelBigWord === '') {
+      // Then update currentLevelLetters with the hidden letters and remove the fake letters
+      this.currentLevelLetters = this.currentLevelLetters.filter(letter => !falseLetters.includes(letter));
+      this.currentLevelLetters.push(...hiddenLetters);
+      console.log('Updated currentLevelLetters:', this.currentLevelLetters);
+    }
+  }
+
+  private handleLevelEnd(level: any) {
+    this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
+
+    this.logMissingWords();
+
+    this.clearBoard();
+  }
+
+  private handleLevelResults(stars: any) {
+    this.log(`Level ${this.currentLevel} ended with ${stars} stars`, this.wosGameLogId);
+    console.log(`[WOS Helper] Level ${this.currentLevel} ended`);
+
+    this.currentLevel += parseInt(stars);
+    document.getElementById('level-title')!.innerText =
+      `Next Level:`;
+    document.getElementById('level-value')!.innerText =
+      `${this.currentLevel}`;
+
+    this.logMissingWords();
+
+    this.clearBoard();
+  }
+
+  private async handleCorrectGuess(username: any, letters: any, hitMax: any) {
+    await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
+
+    // Update UI with processed data
+    this.updateGameState(username, letters, hitMax);
+  }
+
+  private handleGameInitialization(level: any, wosEventType: any, letters: any, slots: any) {
+    if(wosEventType === 1) {
+      this.currentLevelSlots = slots;
+    }
+    this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
+    this.currentLevel = parseInt(level);
+    document.getElementById('level-title')!.innerText =
+      `Level:`;
+    document.getElementById('level-value')!.innerText =
+      `${level}`;
+    document.getElementById('letters-label')!.innerText = 'Letters:';
+    if (letters.length > 0) {
+      this.currentLevelLetters = letters;
+      document.getElementById('letters')!.innerText = letters.join(' ').toUpperCase();
+    }
+  }
+
+  private logMissingWords () {
+    // This should only ever be called after a level ends or the game fails at which time we either know the big word that has all valid letters we can use or the game revealed all hidden and fake letters so we can determine the current level correct letters to use for determining which words are missing at the end of the level/game
+    const knownLetters = this.currentLevelBigWord || this.currentLevelLetters.join('');
+    const minLength = this.currentLevelSlots.reduce((min, slot) => Math.min(min, slot.letters.length), 3) || 4;
+    console.log('Known Letters:', knownLetters);
+    console.log('Minimum Word Length:', minLength);
+    console.log('Calculating missing words...');
+    console.log(findAllMissingWords(this.currentLevelCorrectWords, knownLetters, minLength));
+  }
+
   private clearBoard() {
     console.log('[WOS Helper] Clearing the correct words and big word');
     this.currentLevelCorrectWords = [];
     this.currentLevelBigWord = '';
     this.lastTwitchMessage = null;
+    this.currentLevelSlots = [];
+    this.currentLevelLetters = [];
+    this.currentLevelHiddenLetters = [];
+    this.currentLevelFakeLetters = [];
     this.twitchChatLog.clear();
     document.getElementById('correct-words-log')!.innerText = '';
     document.getElementById('letters')!.innerText = '';
