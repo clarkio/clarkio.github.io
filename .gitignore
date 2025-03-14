@@ -21,3 +21,8 @@ yarn-error.log*
 .netlify
 .env*
 .dccache
+
+/temp
+
+*.todo
+ao-wos-helper-design.png

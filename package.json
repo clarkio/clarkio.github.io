@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.1.4",
+    "@types/bun": "^1.2.4",
     "astro": "^4.7.1"
   },
   "dependencies": {
