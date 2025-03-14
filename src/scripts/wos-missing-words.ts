@@ -1,5 +1,3 @@
-// API to use: https://wordfind.org/ajax/find?params[letters]=
-
 import wosDictionary from './wos_dictionary.json';
 
 /**
@@ -12,7 +10,7 @@ function findWosWordsByLetters(letters: string, length?: number): string[] {
   // Create a map to track letter frequencies in the input
   const letterFrequency: { [key: string]: number } = {};
   letters = letters.toLowerCase();
-  
+
   for (const char of letters) {
     letterFrequency[char] = (letterFrequency[char] || 0) + 1;
   }
@@ -21,7 +19,7 @@ function findWosWordsByLetters(letters: string, length?: number): string[] {
   let possibleWords = wosDictionary.words.filter((word) => {
     // Create a copy of the letter frequency map for each word check
     const availableLetters = { ...letterFrequency };
-    
+
     for (const char of word.toLowerCase()) {
       // If the character isn't available or has been used up, word can't be formed
       if (!availableLetters[char]) {
@@ -29,7 +27,7 @@ function findWosWordsByLetters(letters: string, length?: number): string[] {
       }
       availableLetters[char]--;
     }
-    
+
     return true;
   });
 
@@ -62,7 +60,7 @@ export function findAllMissingWords(knownWords: string[], knownLetters: string, 
 function findMissingWordsFromList(knownWords: string[], dictionaryWords: string[]): string[] {
   // Create a Set of knownWords for efficient lookup
   const knownWordsSet = new Set(knownWords.map(word => word.toLowerCase()));
-  
+
   // Filter dictionaryWords to find words not in knownWordsSet
   return dictionaryWords.filter(word => !knownWordsSet.has(word.toLowerCase()));
 }

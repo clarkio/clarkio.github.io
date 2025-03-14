@@ -34,7 +34,7 @@ export class GameSpectator {
   isProcessingTwitch: boolean = false;
   currentLevelHiddenLetters: string[] = [];
   currentLevelFakeLetters: string[] = [];
-  currentLevelSlots: {letters: string[], user?: string, hitMax: boolean}[] = [];
+  currentLevelSlots: { letters: string[], user?: string, hitMax: boolean }[] = [];
 
   constructor() {
     this.twitchChatLog = new Map();
@@ -59,7 +59,7 @@ export class GameSpectator {
         } else if (wosEventType === 4) {
           this.handleLevelResults(stars);
         } else if (wosEventType === 5) {
-          this.handleLevelEnd(level);
+          this.handleLevelEnd();
         } else if (wosEventType === 10) {
           this.handleLetterReveal(hiddenLetters, falseLetters);
         }
@@ -88,7 +88,7 @@ export class GameSpectator {
       document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
     }
 
-    if(this.currentLevelBigWord === '') {
+    if (this.currentLevelBigWord === '') {
       // Then update currentLevelLetters with the hidden letters and remove the fake letters
       this.currentLevelLetters = this.currentLevelLetters.filter(letter => !falseLetters.includes(letter));
       this.currentLevelLetters.push(...hiddenLetters);
@@ -96,12 +96,10 @@ export class GameSpectator {
     }
   }
 
-  private handleLevelEnd(level: any) {
-    this.log(`Game Ended on Level ${level}`, this.wosGameLogId);
+  private handleLevelEnd() {
+    this.log(`Game Ended on Level ${this.currentLevel}`, this.wosGameLogId);
 
     this.logMissingWords();
-
-    this.clearBoard();
   }
 
   private handleLevelResults(stars: any) {
@@ -115,8 +113,6 @@ export class GameSpectator {
       `${this.currentLevel}`;
 
     this.logMissingWords();
-
-    this.clearBoard();
   }
 
   private async handleCorrectGuess(username: any, letters: any, hitMax: any) {
@@ -127,7 +123,9 @@ export class GameSpectator {
   }
 
   private handleGameInitialization(level: any, wosEventType: any, letters: any, slots: any) {
-    if(wosEventType === 1) {
+    if (wosEventType === 1) {
+      this.clearBoard();
+      console.log('[WOS Helper] Game Initialized with slots:', slots);
       this.currentLevelSlots = slots;
     }
     this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
@@ -143,14 +141,22 @@ export class GameSpectator {
     }
   }
 
-  private logMissingWords () {
+  private logMissingWords() {
     // This should only ever be called after a level ends or the game fails at which time we either know the big word that has all valid letters we can use or the game revealed all hidden and fake letters so we can determine the current level correct letters to use for determining which words are missing at the end of the level/game
     const knownLetters = this.currentLevelBigWord || this.currentLevelLetters.join('');
-    const minLength = this.currentLevelSlots.reduce((min, slot) => Math.min(min, slot.letters.length), 3) || 4;
+    const minLength = this.currentLevelSlots.length > 0
+      ? Math.min(...this.currentLevelSlots.map(slot => slot.letters.length))
+      : 4;
     console.log('Known Letters:', knownLetters);
     console.log('Minimum Word Length:', minLength);
     console.log('Calculating missing words...');
-    console.log(findAllMissingWords(this.currentLevelCorrectWords, knownLetters, minLength));
+    const missingWords = findAllMissingWords(this.currentLevelCorrectWords, knownLetters, minLength);
+
+    if (missingWords.length > 0) {
+      missingWords.forEach(word => {
+        this.updateCorrectWordsDisplayed(word + "*");
+      });
+    }
   }
 
   private clearBoard() {
@@ -205,12 +211,9 @@ export class GameSpectator {
     // }
 
     this.log(`[WOS Event] ${lowerUsername} correctly guessed: ${word}`, this.wosGameLogId);
+
     // Add to correct words list
-    this.currentLevelCorrectWords.push(word);
-    this.currentLevelCorrectWords.sort((a, b) => a.length - b.length);
-    // Update correct words display
-    document.getElementById('correct-words-log')!.innerText =
-      this.currentLevelCorrectWords.join(', ');
+    this.updateCorrectWordsDisplayed(word);
 
     // If hitMax is true, set the current level big word
     if (hitMax) {
@@ -220,6 +223,14 @@ export class GameSpectator {
       this.calculateHiddenLetters(this.currentLevelBigWord);
       this.calculateFakeLetters(this.currentLevelBigWord);
     }
+  }
+
+  private updateCorrectWordsDisplayed(word: string) {
+    this.currentLevelCorrectWords.push(word);
+    this.currentLevelCorrectWords.sort((a, b) => a.replace('*', '').length - b.replace('*', '').length);
+    // Update correct words display
+    document.getElementById('correct-words-log')!.innerText =
+      this.currentLevelCorrectWords.join(', ');
   }
 
   calculateHiddenLetters(bigWord: string) {
@@ -242,11 +253,6 @@ export class GameSpectator {
     if (hiddenLetters.length > 0 && hiddenLetters.length !== this.currentLevelLetters.length) {
       document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
     }
-
-
-    // ? C S R E A L
-    // S C A R E D
-    // L is Fake and D is Hidden
   }
 
   calculateFakeLetters(bigWord: string) {
