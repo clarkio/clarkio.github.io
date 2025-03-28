@@ -92,7 +92,9 @@ export class GameSpectator {
       // Then update currentLevelLetters with the hidden letters and remove the fake letters
       this.currentLevelLetters = this.currentLevelLetters.filter(letter => !falseLetters.includes(letter));
       this.currentLevelLetters.push(...hiddenLetters);
+      this.currentLevelLetters = this.currentLevelLetters.filter(letter => letter !== '?');
       console.log('Updated currentLevelLetters:', this.currentLevelLetters);
+      document.getElementById('letters')!.innerText = this.currentLevelLetters.join(' ').toUpperCase();
     }
   }
 
