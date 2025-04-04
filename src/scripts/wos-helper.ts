@@ -226,6 +226,69 @@ export class GameSpectator {
       this.calculateHiddenLetters(this.currentLevelBigWord);
       this.calculateFakeLetters(this.currentLevelBigWord);
     }
+
+    // Try to determine hidden letters
+    // Use letters found in this.currentLevelCorrectWords
+    // Compare the letters from that with the letters in
+    // this.currentLevelLetters and this should possible reveal the hidden letter(s)
+    // Try to determine the full set of letters from correct words
+    if (this.currentLevelCorrectWords.length > 0 && !hitMax) {
+      // Count frequency of each letter in all correct words
+      const correctLettersFrequency = new Map<string, number>();
+
+      this.currentLevelCorrectWords.forEach(word => {
+        // Skip words marked with * (these are missing words added by the system)
+        if (!word.includes('*')) {
+          // Count letter frequencies in this specific word
+          const wordLetterFrequency = new Map<string, number>();
+          const letters = word.toLowerCase().split('');
+
+          letters.forEach(letter => {
+            wordLetterFrequency.set(letter, (wordLetterFrequency.get(letter) || 0) + 1);
+          });
+
+          // Update correctLettersFrequency with the max frequency of each letter
+          wordLetterFrequency.forEach((count, letter) => {
+            const currentMax = correctLettersFrequency.get(letter) || 0;
+            if (count > currentMax) {
+              correctLettersFrequency.set(letter, count);
+            }
+          });
+        }
+      });
+
+      // Count frequency of each letter in current level letters
+      const levelLettersFrequency = new Map<string, number>();
+      this.currentLevelLetters.forEach(letter => {
+        if (letter !== '?') {
+          levelLettersFrequency.set(letter, (levelLettersFrequency.get(letter) || 0) + 1);
+        }
+      });
+
+      // Find potential hidden letters (letters that appear more times in correct words than in level letters)
+      const potentialHiddenLetters: string[] = [];
+
+      correctLettersFrequency.forEach((count, letter) => {
+        const levelCount = levelLettersFrequency.get(letter) || 0;
+        if (count > levelCount) {
+          // Add the letter as many times as it's "missing"
+          for (let i = 0; i < (count - levelCount); i++) {
+            potentialHiddenLetters.push(letter);
+          }
+        }
+      });
+
+      // Log potential hidden letters if any were found
+      if (potentialHiddenLetters.length > 0) {
+        this.log(`Potential hidden letters: ${potentialHiddenLetters.join(' ')}`, this.wosGameLogId);
+
+        // Update the hidden letters display
+        const currentHiddenLetters = document.getElementById('hidden-letter')!.innerText;
+        if (!currentHiddenLetters) {
+          document.getElementById('hidden-letter')!.innerText = potentialHiddenLetters.join(' ').toUpperCase();
+        }
+      }
+    }
   }
 
   private updateCorrectWordsDisplayed(word: string) {
