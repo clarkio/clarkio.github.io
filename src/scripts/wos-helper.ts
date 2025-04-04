@@ -13,7 +13,7 @@ const wosWorker = new Worker(
 );
 
 export class GameSpectator {
-  private msgProcessDelay = 500;
+  private msgProcessDelay = parseInt(import.meta.env.WOS_MSG_PROCESS_DELAY || '400');
   private lastTwitchMessage: {
     username: string;
     message: string;
@@ -88,6 +88,7 @@ export class GameSpectator {
       document.getElementById('hidden-letter')!.innerText = hiddenLetters.join(' ').toUpperCase();
     }
 
+    console.log('Current Level Big Word:', this.currentLevelBigWord);
     if (this.currentLevelBigWord === '') {
       // Then update currentLevelLetters with the hidden letters and remove the fake letters
       this.currentLevelLetters = this.currentLevelLetters.filter(letter => !falseLetters.includes(letter));
@@ -145,7 +146,7 @@ export class GameSpectator {
 
   private logMissingWords() {
     // This should only ever be called after a level ends or the game fails at which time we either know the big word that has all valid letters we can use or the game revealed all hidden and fake letters so we can determine the current level correct letters to use for determining which words are missing at the end of the level/game
-    const knownLetters = this.currentLevelBigWord || this.currentLevelLetters.join('');
+    const knownLetters = this.currentLevelBigWord !== '' ? this.currentLevelBigWord : this.currentLevelLetters.join('').replace('?', '');
     const minLength = this.currentLevelSlots.length > 0
       ? Math.min(...this.currentLevelSlots.map(slot => slot.letters.length))
       : 4;
