@@ -232,6 +232,23 @@ export class GameSpectator {
     // Compare the letters from that with the letters in
     // this.currentLevelLetters and this should possible reveal the hidden letter(s)
     // Try to determine the full set of letters from correct words
+
+    /*
+    Level letters: T L R I S M ? B
+
+    correctly guessed 'trilby'
+    should be able to determine y is hidden
+    need to consider multiple instances of the same letter too
+
+    compare letters in 'trilby' with levelLetters and determine what's missing to identify a possible hidden letter
+
+
+
+    -----
+
+    when playing if we guess 'stim'
+    can we use all possible letters from correctly guessed words
+    */
     if (this.currentLevelCorrectWords.length > 0 && !hitMax) {
       // Count frequency of each letter in all correct words
       const correctLettersFrequency = new Map<string, number>();
@@ -286,6 +303,31 @@ export class GameSpectator {
         const currentHiddenLetters = document.getElementById('hidden-letter')!.innerText;
         if (!currentHiddenLetters) {
           document.getElementById('hidden-letter')!.innerText = potentialHiddenLetters.join(' ').toUpperCase();
+
+          // Check if currentLevelLetters contains more than one '?'
+          if (this.currentLevelLetters.filter(letter => letter === '?').length === 1) {
+            this.currentLevelLetters = this.currentLevelLetters.filter(letter => letter !== '?');
+            this.currentLevelHiddenLetters.push(...potentialHiddenLetters);
+            document.getElementById('letters')!.innerText = this.currentLevelLetters.join(' ').toUpperCase();
+          } else {
+            // If there are multiple '?' check how many potential hidden letters we have and if it matches the number of '?'
+            const questionMarksCount = this.currentLevelLetters.filter(letter => letter === '?').length;
+            if (potentialHiddenLetters.length === questionMarksCount) {
+              this.currentLevelLetters = this.currentLevelLetters.filter(letter => letter !== '?');
+              this.currentLevelHiddenLetters.push(...potentialHiddenLetters);
+              document.getElementById('letters')!.innerText = this.currentLevelLetters.join(' ').toUpperCase();
+            } else {
+              // If not, only replace the same number of '?' with the same number of potential hidden letters
+              const lettersToReplace = Math.min(potentialHiddenLetters.length, questionMarksCount);
+              for (let i = 0; i < lettersToReplace; i++) {
+                const index = this.currentLevelLetters.indexOf('?');
+                if (index !== -1) {
+                  this.currentLevelLetters[index] = potentialHiddenLetters[i];
+                }
+              }
+              this.currentLevelHiddenLetters.push(...potentialHiddenLetters.slice(0, lettersToReplace));
+            }
+          }
         }
       }
     }
