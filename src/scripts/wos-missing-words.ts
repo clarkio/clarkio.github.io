@@ -16,7 +16,7 @@ function findWosWordsByLetters(letters: string, length?: number): string[] {
   }
 
   // Filter words that can be formed from the given letters
-  let possibleWords = wosDictionary.words.filter((word) => {
+  let possibleWords = (wosDictionary as string[]).filter((word) => {
     // Create a copy of the letter frequency map for each word check
     const availableLetters = { ...letterFrequency };
 
