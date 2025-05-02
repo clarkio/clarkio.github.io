@@ -115,7 +115,16 @@ export class GameSpectator {
     document.getElementById('level-value')!.innerText =
       `${this.currentLevel}`;
 
-    this.logMissingWords();
+    if (stars === 5) {
+      // Level completed successfully with all words found on the board (CLEAR)
+      // Play the clear.wav audio file found in the public folder
+      const audio = new Audio('/assets/clear.mp3');
+      audio.play().catch((error) => {
+        console.error('Error playing audio:', error);
+      });
+    } else {
+      this.logMissingWords();
+    }
   }
 
   private async handleCorrectGuess(username: any, letters: any, hitMax: any) {
