@@ -1,7 +1,7 @@
 import tmi from 'tmi.js';
 import io from 'socket.io-client';
 
-import { findAllMissingWords } from './wos-missing-words';
+import { findAllMissingWords, loadWosDictionary, updateWosDictionary } from './wos-words';
 
 const twitchWorker = new Worker(
   new URL('../scripts/twitch-chat-worker.ts', import.meta.url),
@@ -40,6 +40,7 @@ export class GameSpectator {
     this.twitchChatLog = new Map();
     this.wosSocket = null;
     this.twitchClient = null;
+    loadWosDictionary();
     this.startEventProcessors();
   }
 
@@ -226,6 +227,7 @@ export class GameSpectator {
 
     // Add to correct words list
     this.updateCorrectWordsDisplayed(word);
+    updateWosDictionary(word);
 
     // If hitMax is true, set the current level big word
     if (hitMax) {
@@ -409,17 +411,10 @@ export class GameSpectator {
 
     this.wosSocket = io('wss://wos2.gartic.es', {
       autoConnect: true,
-      reconnection: true,
-      reconnectionAttempts: Infinity,
-      reconnectionDelay: 1000,
-      reconnectionDelayMax: 5000,
-      randomizationFactor: 0.5,
-      timeout: 20000,
       transports: ['websocket'],
       query: {
         uid: gameCode
-      },
-      forceNew: true
+      }
     });
 
     this.wosSocket.on((event, ...args) => {
@@ -435,6 +430,11 @@ export class GameSpectator {
     this.wosSocket.on('connect', () => {
       this.log('Connected to WOS game: ' + gameCode, this.wosGameLogId);
     });
+
+    this.wosSocket.on('reconnect_attempt', () => {
+      this.wosSocket.io.opts.query.uid = this.getMirrorCode(mirrorUrl);
+      this.log('Attempting to reconnect to WOS game: ' + this.getMirrorCode(mirrorUrl), this.wosGameLogId);
+    })
 
     this.wosSocket.on('connect_error', (error) => {
       this.log('WOS Connection error: ' + error, this.wosGameLogId);
