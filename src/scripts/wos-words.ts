@@ -1,5 +1,5 @@
-import localDictionary from './wos_dictionary.json';
-let wosDictionary: string[] = localDictionary as string[];
+// import localDictionary from './wos_dictionary.json';
+let wosDictionary: string[]; // = localDictionary as string[];
 
 export async function updateWosDictionary(word: string) {
   try {
@@ -36,9 +36,8 @@ export async function loadWosDictionary() {
       throw new Error('Network response was not ok');
     }
 
-    const text = await response.text();
-    // Split the text into an array of words
-    wosDictionary = text.split('\n').map(word => word.trim());
+    const wordsJson = await response.json();
+    wosDictionary = wordsJson.map(word => word.trim());
     console.log('WOS Dictionary loaded:', wosDictionary.length, 'words');
   } catch (error) {
     console.error('Error loading WOS dictionary:', error);
