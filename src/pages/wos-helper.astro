@@ -1,21 +1,22 @@
 ---
 import Logo from '../components/Icons/Logo.astro'
 import WosBaseLayout from '../layouts/WosBaseLayout.astro'
+import Twitch from '../components/Icons/Twitch.astro'
 ---
 
 <WosBaseLayout
-  title="Words on Stream Highlighter"
-  description="Clarkio's Words on Stream helper tool"
-  keywords="clarkio, words on stream, wos, twitch, streaming, helper, wordsonstream"
+  title="Clarkio's Words on Stream Tool"
+  description="Clarkio's Words on Stream Tool"
+  keywords="clarkio, words on stream, wos, twitch, streaming, helper, wordsonstream, tool"
 >
-  <div class="logo-container">
+  <div id="logo-container-id" class="logo-container">
     <a href="/">
       <div class="logo dark">
         <Logo name="Logo" />
       </div>
     </a>
 
-    <h2>Clarkio's Words on Stream Highlighter</h2>
+    <h2>Clarkio's Words on Stream Tool</h2>
   </div>
   <details id="wos-helper-controls">
     <summary>Show/Hide Controls</summary>
@@ -68,6 +69,7 @@ import WosBaseLayout from '../layouts/WosBaseLayout.astro'
             <span id="letters-label">Letters:</span>
             <span id="letters"></span>
           </div>
+          <span>Made by: <Twitch height={10} width={10} /> clarkio</span>
           <div id="correct-words-log-container">
             <span>Correct Words: (* words missed)</span>
             <div id="correct-words-log" class="logs"></div>

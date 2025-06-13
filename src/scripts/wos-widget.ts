@@ -3,6 +3,7 @@ async function removeUnnecessaryElements() {
   const footer = document.querySelector('footer');
   const wosHelperControls = document.getElementById('wos-helper-controls');
   const wosHelperLogs = document.getElementById('wos-helper-logs');
+  const siteHeader = document.getElementById('logo-container-id');
 
   if (header) {
     header.style.display = 'none';
@@ -18,6 +19,10 @@ async function removeUnnecessaryElements() {
 
   if (wosHelperLogs) {
     wosHelperLogs.style.display = 'none';
+  }
+
+  if (siteHeader) {
+    siteHeader.style.display = 'none';
   }
 }
 
