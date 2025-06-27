@@ -108,6 +108,9 @@ function findWosWordsByLetters(letters: string, length?: number): string[] {
     possibleWords = possibleWords.filter(word => word.length > 3);
   }
 
+  // Remove duplicates by converting to a Set and back to an array
+  possibleWords = Array.from(new Set(possibleWords.map(word => word.toLowerCase())));
+
   // Sort words by length (descending)
   return possibleWords.sort((a, b) => b.length - a.length);
 }
