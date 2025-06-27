@@ -35,6 +35,7 @@ export class GameSpectator {
   currentLevelHiddenLetters: string[] = [];
   currentLevelFakeLetters: string[] = [];
   currentLevelSlots: { letters: string[], user?: string, hitMax: boolean }[] = [];
+  currentLevelEmptySlotsCount: { [key: number]: number } = {};
 
   constructor() {
     this.twitchChatLog = new Map();
@@ -48,7 +49,7 @@ export class GameSpectator {
     // Set up WOS worker message handler
     wosWorker.onmessage = async (e) => {
       if (e.data.type === 'wos_event') {
-        const { wosEventType, wosEventName, username, letters, hitMax, stars, level, falseLetters, hiddenLetters, slots } = e.data;
+        const { wosEventType, wosEventName, username, letters, hitMax, stars, level, falseLetters, hiddenLetters, slots, index } = e.data;
 
         const message = username ? `:${username} - ${letters.join('')} - Big Word: ${hitMax}` : '';
         console.log(`[WOS Event] <${wosEventName}>${message}`);
@@ -56,7 +57,7 @@ export class GameSpectator {
         if (wosEventType === 1 || wosEventType === 12) {
           this.handleGameInitialization(level, wosEventType, letters, slots);
         } else if (wosEventType === 3) {
-          await this.handleCorrectGuess(username, letters, hitMax);
+          await this.handleCorrectGuess(username, letters, index, hitMax);
         } else if (wosEventType === 4) {
           this.handleLevelResults(stars);
         } else if (wosEventType === 5) {
@@ -125,22 +126,45 @@ export class GameSpectator {
       });
     } else {
       this.logMissingWords();
+      this.logEmptySlots();
+    }
+  }
+  logEmptySlots() {
+    // slots missed/empty will have user property set to null
+    let emptySlots = this.currentLevelSlots.filter(slot => !slot.user);
+    if (emptySlots.length > 0) {
+      // sort empty slots by the length of the letters array
+      emptySlots.sort((a, b) => a.letters.length - b.letters.length);
+
+      // count the number of empty slots by the length of the letters array
+      this.currentLevelEmptySlotsCount = emptySlots.reduce((acc, slot) => {
+        const key = slot.letters.length;
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
+
+      this.log(`Total Empty Slots: ${emptySlots.length}`, this.wosGameLogId);
+
+      // Iterate over emptySlotsCount and log the count of each length
+      for (const [length, count] of Object.entries(this.currentLevelEmptySlotsCount)) {
+        this.log(`Missed ${count}: ${length} letter words`, this.wosGameLogId);
+      }
     }
   }
 
-  private async handleCorrectGuess(username: any, letters: any, hitMax: any) {
+  private async handleCorrectGuess(username: string, letters: string[], index: number, hitMax: boolean) {
     await new Promise(resolve => setTimeout(resolve, this.msgProcessDelay));
 
     // Update UI with processed data
-    this.updateGameState(username, letters, hitMax);
+    this.updateGameState(username, letters, index, hitMax);
   }
 
   private handleGameInitialization(level: any, wosEventType: any, letters: any, slots: any) {
     if (wosEventType === 1) {
       this.clearBoard();
       console.log('[WOS Helper] Game Initialized with slots:', slots);
-      this.currentLevelSlots = slots;
     }
+    this.currentLevelSlots = slots;
     this.log(`Level ${level} ${wosEventType === 1 ? 'Started' : 'In Progress'}`, this.wosGameLogId);
     this.currentLevel = parseInt(level);
     document.getElementById('level-title')!.innerText =
@@ -181,6 +205,7 @@ export class GameSpectator {
     this.currentLevelLetters = [];
     this.currentLevelHiddenLetters = [];
     this.currentLevelFakeLetters = [];
+    this.currentLevelEmptySlotsCount = {};
     this.twitchChatLog.clear();
     document.getElementById('correct-words-log')!.innerText = '';
     document.getElementById('letters')!.innerText = '';
@@ -189,8 +214,7 @@ export class GameSpectator {
     document.getElementById('fake-letter')!.innerText = '';
   }
 
-  private updateGameState(username: string, letters: string[], hitMax: boolean) {
-    // Log the correct guess
+  private updateGameState(username: string, letters: string[], index: number, hitMax: boolean) {
     let word = letters.join('');
 
     // if (word.includes('?')) {
@@ -237,6 +261,8 @@ export class GameSpectator {
       this.calculateHiddenLetters(this.currentLevelBigWord);
       this.calculateFakeLetters(this.currentLevelBigWord);
     }
+
+    this.updateCurrentLevelSlots(username, word.split(''), index, hitMax);
 
     // Try to determine hidden letters
     // Use letters found in this.currentLevelCorrectWords
@@ -341,6 +367,19 @@ export class GameSpectator {
           }
         }
       }
+    }
+  }
+
+  private updateCurrentLevelSlots(username: string, letters: string[], index: number, hitMax: boolean) {
+    // Update the current level slots with the correct guess word
+    if (this.currentLevelSlots.length > 0 && index >= 0 && index < this.currentLevelSlots.length) {
+      this.currentLevelSlots[index] = {
+        letters: letters,
+        user: username,
+        hitMax: hitMax
+      };
+    } else {
+      console.warn(`Invalid index ${index} for current level slots`);
     }
   }
 

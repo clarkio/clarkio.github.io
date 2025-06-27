@@ -13,6 +13,7 @@ export interface WosWorkerMessage {
     falseLetters?: string[];
     hiddenLetters?: string[];
     slots?: any[];
+    index?: number;
   };
 }
 
@@ -28,6 +29,7 @@ export interface WosWorkerResult {
   falseLetters: string[];
   hiddenLetters: string[];
   slots: any[];
+  index?: number;
 }
 
 let currentLevel = 0;
@@ -41,6 +43,7 @@ self.onmessage = function (e: MessageEvent<WosWorkerMessage>) {
       wosEventType: eventType,
       wosEventName: 'unkown',
       username: data.user?.name?.toLowerCase() || '',
+      index: data.index || 0,
       letters: data.letters || [],
       stars: data.stars || 0,
       level: data.level || 0,
