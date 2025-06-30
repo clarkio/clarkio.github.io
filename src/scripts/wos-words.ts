@@ -3,6 +3,11 @@ let wosDictionary: string[]; // = localDictionary as string[];
 
 export async function updateWosDictionary(word: string) {
   try {
+    if (wosDictionary && wosDictionary.includes(word)) {
+      console.log(`Word "${word}" already exists in the WOS dictionary.`);
+      return;
+    }
+
     const url = 'https://clarkio.com/wos-dictionary';
     const response = await fetch(url, {
       method: 'PATCH',
