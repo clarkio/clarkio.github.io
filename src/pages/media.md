@@ -12,7 +12,7 @@ Here you can find some of the content I've either created or have been a part of
 ### Live Streams
 
 - [Twitch Channel](https://twitch.tv/clarkio): Regular live coding sessions covering various projects dealing mostly with JavaScript, TypeScript and Node.js.
-- [Past Streams](https://twitch.tv/clarkio/videos): If you missed a stream you can catch the recordings that are saved on Twitch
+- [Past Streams](https://www.youtube.com/clarkio/live): If you missed a stream you can catch the recordings that are saved on YouTube
 - [PyWeekly Live](https://www.youtube.com/playlist?list=PLlrxD0HtieHhMG0KVlaG9LlFpSOmJcCLa): A show I co-hosted with Cecil Phillip where we both learn Python as beginners and build with it.
 - [All Around Azure](https://blog.allaroundazure.com/): I was a guest on the show sharing VS Code extensions that help when working with Azure
   - [Part 1](https://www.youtube.com/watch?v=CTwjrxwWoLQ)
@@ -30,6 +30,10 @@ A playlist of all videos that I've been involved in. These range from produced v
 - [Play by Play: iOS and Swift from Scratch](http://bit.ly/2nvJY1j)
 - [Play by Play: Getting Started with Yarn as a Package Manager](https://www.pluralsight.com/courses/play-by-play-yarn-package-manager)
 
+### Python Course
+
+- [VS Code for Python Developers and Data Scientists Course](https://training.talkpython.fm/courses/visual-studio-code-for-python-developers)
+
 ### Podcasts
 
 - [Talk Python: Episode 242 Your education will be live-streamed](https://talkpython.fm/episodes/show/242/your-education-will-be-live-streamed)
@@ -43,10 +47,15 @@ A collection of articles/blog posts I've written or contributed to on other plat
 
 #### Web Almanac
 
+- [Web Almanac 2024 - Security Chapter](https://almanac.httparchive.org/en/2024/security)
+  - [Contributor List](https://almanac.httparchive.org/en/2024/contributors)
 - [Web Almanac 2022 - Security Chapter](https://almanac.httparchive.org/en/2022/security)
   - [Contributor List](https://almanac.httparchive.org/en/2022/contributors)
 
 #### Snyk
+- [Zero-day Extensive NPM Package Compromise - Shai Hulud Supply Chain Attack](https://snyk.io/blog/embedded-malicious-code-in-tinycolor-and-ngx-bootstrap-releases-on-npm/)
+- [npm Supply Chain Attack via Open Source maintainer compromise](https://snyk.io/blog/npm-supply-chain-attack-via-open-source-maintainer-compromise/)
+- [If you don’t know about HTTP Archive’s Web Almanac yet, you should!](https://snyk.io/blog/if-you-dont-know-about-http-archives-web-almanac-yet/)
 - [How to update curl](https://snyk.io/blog/how-to-update-curl/)
 - [How to find and fix Critical WebP zero-day vulnerability CVE-2023-4863](https://snyk.io/blog/find-and-fix-webp-vulnerability-cve-2023-4863/)
 - [Critical WebP 0-day security CVE-2023-4863 impacts wider software ecosystem](https://snyk.io/blog/critical-webp-0-day-cve-2023-4863/)
