@@ -39,14 +39,18 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
     'No GitHub access token found. Please set GH_ACCESS_TOKEN in your environment variables.'
   )
 } else {
-  const response = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: { authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}` },
-    body: JSON.stringify({
-      query: requestBody
-    })
-  }).then((res) => res.json())
-  projects = response.data?.user?.pinnedItems?.edges ?? []
+  try {
+    const response = await fetch('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: { authorization: `Bearer ${process.env.GH_ACCESS_TOKEN}` },
+      body: JSON.stringify({
+        query: requestBody
+      })
+    }).then((res) => res.json())
+    projects = response.data?.user?.pinnedItems?.edges ?? []
+  } catch (e) {
+    console.error('Failed to fetch projects', e)
+  }
 }
 ---
 
@@ -55,92 +59,82 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
   description="Clarkio's GitHub repositories for all of his projects"
   keywords='clarkio, projects, github, repository, repositories'
 >
-  <h1>Projects</h1>
-  <p>
-    You can see the top, pinned, projects below but be sure to go to <a
-      href='https://github.com/clarkio'>Clarkio's GitHub profile</a
-    > for more.
-  </p>
+  <header class="page-header">
+    <h1>Projects</h1>
+    <p class="subtitle">
+      A collection of my open source work. Check out <a href='https://github.com/clarkio' target="_blank">GitHub</a> for more.
+    </p>
+  </header>
 
-  <div class='project-list'>
-    <article>
-      <header>
-        <h2><a href='/wos-helper'> Words on Stream Helper</a></h2>
-      </header>
-      <div class='description'>
-        <p>
-          A tool to help when playing <a href='https://wos.gg/'
-            >Words on Stream</a
-          > with your community. It provides visibility to correctly guessed words
-          and highlights the biggest word for the round. It will also reveal the
-          correctly guessed words when playing higher levels.
+  <div class='project-grid'>
+    <article class="project-card">
+      <div class="card-content">
+        <h2><a href='/wos-helper'>Words on Stream Helper</a></h2>
+        <p class="description">
+          A tool to help when playing <a href='https://wos.gg/'>Words on Stream</a> with your community. 
+          It provides visibility to correctly guessed words and highlights the biggest word for the round.
         </p>
       </div>
-      <div class='project-details'>
-        <Image src={star} alt='stargazers' />
-        <p></p>
-        <ul class='languages'>
-          <li>JavaScript</li>
-          <li>WebSockets</li>
-          <li>CSS</li>
-          <li>HTML</li>
-        </ul>
+      <div class='card-footer'>
+        <div class="stats">
+          <Image src={star} alt='stargazers' width={16} height={16} />
+          <span>-</span>
+        </div>
+        <div class='tags'>
+          <span>JavaScript</span>
+          <span>WebSockets</span>
+        </div>
       </div>
     </article>
-    <article>
-      <header>
+
+    <article class="project-card">
+      <div class="card-content">
         <h2>
-          <a
-            href='https://github.com/clarkio/discord-wordle-bot'
-            target='_blank'
-          >
+          <a href='https://github.com/clarkio/discord-wordle-bot' target='_blank'>
             Discord Wordle Bot
           </a>
         </h2>
-      </header>
-      <div class='description'>
-        <p>
-          Play <a href='https://www.nytimes.com/games/wordle/index.html'
-            >Wordle</a
-          > with your community in your Discord server. Supports storing results
-          in a libSQL database, providing a leaderboard API and calculating winners
-          for each player of a Wordle game.
+        <p class="description">
+          Play Wordle with your community in your Discord server. 
+          Supports storing results in a libSQL database and providing a leaderboard API.
         </p>
       </div>
-      <div class='project-details'>
-        <Image src={star} alt='stargazers' />
-        <p></p>
-        <ul class='languages'>
-          <li>Bun.js</li>
-          <li>TypeScript</li>
-          <li>libSQL/SQLite</li>
-          <li>Turso</li>
-        </ul>
+      <div class='card-footer'>
+        <div class="stats">
+          <Image src={star} alt='stargazers' width={16} height={16} />
+          <span>-</span>
+        </div>
+        <div class='tags'>
+          <span>TypeScript</span>
+          <span>Bun.js</span>
+          <span>SQLite</span>
+        </div>
       </div>
     </article>
+
     {
       projects.map(
         ({ node: { url, name, stargazers, description, languages } }) => (
-          <article>
-            <header>
+          <article class="project-card">
+            <div class="card-content">
               <h2>
                 <a href={url} target='_blank'>
                   {name}
                 </a>
               </h2>
-            </header>
-            <div class='description'>
-              <p>{description}</p>
+              <p class="description">{description}</p>
             </div>
-            <div class='project-details'>
-              <Image src={star} alt='stargazers' />
-              <p>{stargazers.totalCount}</p>
+            <div class='card-footer'>
+              <div class="stats">
+                <Image src={star} alt='stargazers' width={16} height={16} />
+                <span>{stargazers.totalCount}</span>
+              </div>
               {languages && (
-                <ul class='languages'>
+                <div class='tags'>
                   {languages.edges.map(({ node: { name } }) => (
-                    <li>{name}</li>
+                    <span>{name}</span>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
           </article>
@@ -151,110 +145,104 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
 </BaseLayout>
 
 <style>
-  header,
-  .description,
-  .project-details {
-    padding: 0 1rem;
-  }
-  article h2 a {
-    color: #000;
-    text-decoration: underline;
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
   }
 
-  ::global(.dark) article h2 a {
-    color: rgba(255, 255, 255, 0.75);
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
   }
-  .project-list {
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+  }
+
+  .project-grid {
     display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-    list-style: none;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding-bottom: 4rem;
   }
 
-  article,
-  .description {
-    border: 1px dotted rgba(0, 0, 255, 0.2);
-  }
-
-  ::global(.dark) article,
-  ::global(.dark) .description {
-    border: 1px dotted rgba(255, 255, 255, 0.2);
-  }
-
-  .description,
-  ::global(.dark) .description {
-    border-width: 1px 0;
-  }
-
-  article {
-    background: rgba(0, 0, 255, 0.02);
-    border-radius: 4px;
-    display: grid;
-    gap: 0;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-  }
-
-  ::global(.dark) article {
-    background: rgba(255, 255, 255, 0.02);
-  }
-
-  article:hover {
-    background: rgba(0, 0, 255, 0.15);
-  }
-
-  ::global(.dark) article:hover {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  .project-details {
-    align-items: center;
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: auto auto 1fr;
-  }
-
-  .project-details p {
-    margin: 3px 0 0 0;
-  }
-  .project-details p,
-  ul.languages li {
-    font-size: 12px;
-    font-weight: 600;
-  }
-
-  img {
-    height: 16px;
-    width: 16px;
-  }
-
-  ul.languages {
-    justify-self: end;
+  .project-card {
+    background: var(--code-bg);
+    border-radius: 16px;
+    border: 1px solid transparent;
     display: flex;
-    padding: 0;
-  }
-  ul.languages li {
-    border-radius: 20px;
-    display: inline-block;
-    margin-left: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    overflow: hidden;
   }
 
-  @media (max-width: 300px) {
-    .project-details {
-      gap: 1rem;
-      grid-template-columns: 16px 1fr;
-      margin-top: 1rem;
-    }
-    .project-details p {
-      margin: 0;
-    }
-    ul.languages {
-      justify-self: start;
-      margin: 0 0 0.5rem 0;
-    }
-    ul.languages li {
-      margin-left: 0;
-      margin-right: 1rem;
-    }
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
+  }
+
+  .card-content {
+    padding: 1.5rem;
+  }
+
+  .project-card h2 {
+    margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-card h2 a {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  .project-card h2 a:hover {
+    color: var(--primary-color);
+  }
+
+  .description {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .card-footer {
+    padding: 1rem 1.5rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  :global(.dark) .card-footer {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .stats {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tags span {
+    font-size: 0.75rem;
+    background: var(--bg-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
   }
 </style>

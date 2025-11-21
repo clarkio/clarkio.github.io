@@ -24,8 +24,12 @@ const { page } = Astro.props
   description="Recently written posts on various topics and interests."
   keywords="clarkio, blog posts, post, posts, blog, writings, articles"
 >
-  <h1>Blog Posts</h1>
-  <div class="articles">
+  <header class="page-header">
+    <h1>Blog</h1>
+    <p class="subtitle">Thoughts, tutorials, and insights.</p>
+  </header>
+
+  <div class="articles-grid">
     {
       page.data.map(
         ({
@@ -42,100 +46,118 @@ const { page } = Astro.props
             url = `/${year}/${month}/${day}/${name}`
           }
           return (
-            <article>
-              <header>
-                <h2>
-                  <a href={url}>{title}</a>
-                </h2>
-              </header>
-              <div class="description">
-                <p>{description}</p>
-              </div>
-              <div class="details">
-                <p class="date">{publishDate}</p>
-                <p class="reading-time">{readingTime(rawContent()).text}</p>
-              </div>
+            <article class="post-card">
+              <a href={url} class="card-link">
+                <div class="card-content">
+                  <header>
+                    <h2>{title}</h2>
+                    <div class="meta">
+                      <time datetime={publishDate}>{publishDate}</time>
+                      <span class="separator">•</span>
+                      <span class="reading-time">{readingTime(rawContent()).text}</span>
+                    </div>
+                  </header>
+                  <p class="description">{description}</p>
+                </div>
+              </a>
             </article>
           )
         }
       )
     }
   </div>
-  <Paginator page={page} />
+  
+  <div class="pagination-wrapper">
+    <Paginator page={page} />
+  </div>
 </BaseLayout>
 
 <style>
-  .articles {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: 1fr;
-    list-style: none;
-  }
-  article {
-    background: rgba(0, 0, 255, 0.02);
-    border-radius: 4px;
-    display: grid;
-    gap: 0;
-    grid-template-rows: subgrid;
-    grid-row: span 3;
-  }
-  article:hover {
-    background: rgba(0, 0, 255, 0.15);
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
   }
 
-  ::global(.dark) article:hover {
-    background: rgba(255, 255, 255, 0.1);
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
   }
 
-  header,
-  .details,
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+  }
+
+  .articles-grid {
+    display: grid;
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .post-card {
+    background: var(--code-bg);
+    border-radius: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid transparent;
+    overflow: hidden;
+  }
+
+  .post-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+  }
+
+  .card-link:hover {
+    color: inherit;
+  }
+
+  .card-content {
+    padding: 2rem;
+  }
+
+  .post-card h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+  }
+
+  .post-card:hover h2 {
+    color: var(--primary-color);
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+
+  .separator {
+    color: var(--border-color);
+  }
+
   .description {
-    padding: 0 1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
   }
 
-  article,
-  .description {
-    border: 1px dotted rgba(0, 0, 255, 0.2);
-  }
-
-  ::global(.dark) article h2 a {
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  ::global(.dark) article,
-  ::global(.dark) .description {
-    border: 1px dotted rgba(255, 255, 255, 0.2);
-  }
-  .description,
-  ::global(.dark) .description {
-    border-width: 1px 0;
-  }
-  h2 a {
-    color: #000;
-  }
-
-  li a {
-    font-weight: unset;
-  }
-
-  :global(.dark) h2 a {
-    color: rgb(255 255 255 / 0.75);
-  }
-
-  .details {
-    display: grid;
-    grid-template-columns: auto auto;
-  }
-
-  p {
-    color: #333;
-  }
-
-  ::global(.dark) p {
-    color: rgb(255 255 255 / 0.5);
-  }
-
-  .reading-time {
-    justify-self: end;
+  .pagination-wrapper {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
   }
 </style>
