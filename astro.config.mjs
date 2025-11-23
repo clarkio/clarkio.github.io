@@ -10,5 +10,8 @@ export default defineConfig({
   image: {
     domains: ['cdn.simpleicons.org', 'youtube.com'],
     service: passthroughImageService()
+  },
+  build: {
+    exclude: ['temp/**/*', 'tests/**/*']
   }
 });

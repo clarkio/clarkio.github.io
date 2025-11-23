@@ -1,0 +1,188 @@
+html {
+  background-color: #420072;
+  color: #dacfe6;
+}
+
+body {
+  margin: 0;
+  /* padding: 20px; */
+  box-sizing: border-box;
+}
+
+.logo {
+  width: 48px;
+  margin: 10px;
+  background-color: #7736c6;
+}
+
+.logo-container {
+  display: flex;
+  background-color: #7736c6;
+  color: #ddcdf1;
+}
+
+#correct-words-log-container span {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* Add new style for the correct words span */
+#correct-words-log-container span:last-of-type {
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 1rem;
+  gap: 0.25rem; /* Small gap between label and log div */
+}
+
+.logs {
+  background: #4b1a81;
+}
+
+#correct-words-log {
+  font-size: min(4vw, 24px);
+  max-height: 200px;
+  padding: 10px;
+  border: 1px solid #c79cff;
+  height: calc(100vh - 200px);
+  width: 100%;
+  overflow-y: hidden;
+  font-family: monospace;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+  padding: 1rem;
+  color: #e1e4e8;
+}
+
+summary {
+  cursor: pointer;
+  padding: 10px;
+  color: #e1e4e8;
+  background: #4b1a81;
+}
+
+.level-data-container label {
+  min-width: 100px;
+}
+
+.level-data-container > div:not(#correct-words-log-container) {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#correct-words-log {
+  font-size: large;
+  width: 100%;
+}
+
+.log-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.log-container > div {
+  flex: 1;
+  width: 50%;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.controls > div {
+  margin: 10px 0;
+}
+
+#wos-game-log,
+#twitch-chat-log {
+  padding: 10px;
+  border: 1px solid #c79cff;
+  height: calc(100vh - 200px);
+  width: 100%;
+  overflow-y: auto;
+  font-family: monospace;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+  padding: 1rem;
+  color: #e1e4e8;
+}
+
+.log-container h3 {
+  margin-left: 10px;
+}
+
+input,
+button {
+  margin: 5px;
+  padding: 5px;
+  color: #e1e4e8;
+  background-color: #7736c6;
+}
+
+.wos-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content max-content max-content;
+  gap: 10px 10px;
+}
+
+.level-data-grid-container {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  margin: 20px;
+  min-width: 320px;
+  /* height: 50vh; */
+}
+
+.twitch-chat-frame {
+  grid-column: 2 / 2;
+  grid-row: 1 / 3;
+  margin: 10px;
+  /* width: 100%;
+  height: 80vh; */
+}
+
+.iframe-container {
+  grid-column: 1 / 1;
+  grid-row: 2 / 2;
+  min-height: 50vh;
+  /* width: 100%;
+  height: 50vh; */
+}
+
+#wos-helper-logs {
+  grid-column: 1 / 3;
+  grid-row: 3 / 3;
+}
+
+#twitch-chat-widget {
+  width: 100%;
+  height: 90vh;
+  min-width: 320px;
+  min-height: 500px;
+  border: none;
+}
+
+#wos-board-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#letters,
+#big-word,
+#level-value,
+#hidden-letter {
+  font-size: min(3vw, 30px);
+  font-weight: bold;
+}
+
+span {
+  font-size: min(3vw, 30px);
+  font-weight: bold;
+}
+
+h3 {
+  margin: 10px 0;
+}

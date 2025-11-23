@@ -1,0 +1,193 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import { Image } from 'astro:assets'
+import profilePhoto from '../images/clarkio-profile-photo.avif'
+
+const skills = [
+  "JavaScript/TypeScript",
+  "Node.js",
+  "React & Angular",
+  "Cloud Architecture",
+  "DevRel",
+  "Content Creation"
+]
+---
+
+<BaseLayout
+  title="About Brian Clark"
+  description="Learn more about clarkio through his bio, media and talks."
+  keywords="clarkio, bio, media, talks, slides"
+>
+  <div class="about-container">
+    <header class="page-header">
+      <h1>About Me</h1>
+      <p class="subtitle">Developer, Creator, & Educator</p>
+    </header>
+
+    <div class="content-grid">
+      <div class="bio-section">
+        <h2>The TL;DR</h2>
+        <p>
+          Brian programs for a living with a focus on JavaScript. He shares a lot of it online and in his live streams on <a href="https://twitch.tv/clarkio" target="_blank">Twitch</a>.
+        </p>
+
+        <h2>The Longer Version</h2>
+        <p>
+          Brian is a developer who has been building and architecting software for all different types of purposes and applications. His initial focus was on ASP.NET, C#/.NET, SQL and WPF, but he has since shifted to technologies such as Swift, Ionic, Angular and Node.js (basically JavaScript).
+        </p>
+        <p>
+          Brian is an author of <a href="https://www.pluralsight.com/authors/brian-clark" target="_blank">several courses</a> on <a href="https://www.pluralsight.com" target="_blank">Pluralsight</a> and co-authored the Angular Security Guide documentation. He has presented many talks at public and private conferences as well as at local code camps covering topics such as secure application development practices and getting started in Open Source Software.
+        </p>
+        <p>
+          You can best get in touch with him on <a href="https://twitter.com/_clarkio" target="_blank">Twitter</a>, <a href="https://github.com/clarkio" target="_blank">GitHub</a> or at <a href="https://clarkio.com">clarkio.com</a>.
+        </p>
+
+        <h2>Live Streaming</h2>
+        <p>
+          Brian also hosts regular live coding sessions on <a href="https://twitch.tv/clarkio" target="_blank">Twitch</a>. There you’ll find him working on his various <a href="/projects">GitHub projects</a>. He also shares how he prepares for upcoming talks, tips and tricks on the latest features found in VS Code and views behind the scenes of conferences as an attendee.
+        </p>
+      </div>
+
+      <aside class="sidebar">
+        <div class="profile-card">
+          <Image
+            src={profilePhoto}
+            alt="Brian Clark"
+            width={300}
+            class="profile-img"
+          />
+          <div class="skills-container">
+            <h3>Skills & Tech</h3>
+            <div class="tags">
+              {skills.map(skill => <span class="tag">{skill}</span>)}
+            </div>
+          </div>
+          
+          <div class="links-container">
+            <h3>More Info</h3>
+            <ul class="links-list">
+              <li><a href="/media">📺 Media Appearances</a></li>
+              <li><a href="/talks">🗣️ Talks & Speaking</a></li>
+              <li><a href="/uses">💻 Uses (Gear)</a></li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-container {
+    padding: 2rem 0;
+  }
+
+  .page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .bio-section h2 {
+    color: var(--primary-color);
+    margin-top: 2rem;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  .profile-card {
+    background: var(--code-bg);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+  }
+
+  .profile-img {
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .skills-container h3,
+  .links-container h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.875rem;
+    border: 1px solid var(--border-color);
+  }
+
+  .links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .links-list li {
+    margin-bottom: 0.75rem;
+  }
+
+  .links-list a {
+    display: block;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+  }
+
+  .links-list a:hover {
+    background-color: var(--bg-color);
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .sidebar {
+      position: static;
+      order: -1;
+    }
+
+    .profile-card {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+</style>

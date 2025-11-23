@@ -1,0 +1,77 @@
+---
+import { ViewTransitions } from 'astro:transitions'
+import '../styles/wos-helper.css'
+
+const { canonicalURL = Astro.url } = Astro.props
+const title = Astro.props?.title ?? Astro.props?.content?.title ?? ''
+const description =
+  Astro.props?.description ?? Astro.props?.content?.description ?? ''
+const keywords = Astro.props?.keywords ?? Astro.props?.content?.keywords ?? ''
+---
+
+<html lang="en">
+  <head>
+    <!-- Global Metadata -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Preload -->
+    <slot name="preload" />
+
+    <!-- Primary Meta Tags -->
+    <title>
+      {canonicalURL.pathname === '/' ? title : `Brian Clark - ${title}`}
+    </title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/old-posts/img/favicon.ico"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="text/javascript">
+      ;(function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            ;(c[a].q = c[a].q || []).push(arguments)
+          }
+        t = l.createElement(r)
+        t.async = 1
+        t.src = 'https://www.clarity.ms/tag/' + i
+        y = l.getElementsByTagName(r)[0]
+        y.parentNode.insertBefore(t, y)
+      })(window, document, 'clarity', 'script', 'ivq40nz3d1')
+    </script>
+    <ViewTransitions />
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <slot />
+    </div>
+  </body>
+</html>

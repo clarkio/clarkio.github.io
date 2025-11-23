@@ -5,300 +5,217 @@ import ThemeToggle from './Icons/ThemeToggle.astro'
 ---
 
 <header class="mainNav">
-  <a href="/">
-    <div class="logo">
-      <Logo name="Logo" />
+  <div class="nav-content">
+    <a href="/" class="logo-link">
+      <div class="logo">
+        <Logo name="Logo" />
+      </div>
+    </a>
+    
+    <button aria-controls="menu" aria-expanded="false" class="menu-toggle">
+      <span class="sr-only">Menu</span>
+      <div class="hamburger"></div>
+    </button>
+
+    <nav>
+      <ul>
+        <li>
+          <a class={currentPath === '/blog/' ? 'active' : ''} href="/blog/">Blog</a>
+        </li>
+        <li>
+          <a class={currentPath === '/projects/' ? 'active' : ''} href="/projects/">Projects</a>
+        </li>
+        <li>
+          <a class={currentPath === '/about/' ? 'active' : ''} href="/about/">About</a>
+        </li>
+        <li>
+          <a class={currentPath === '/uses/' ? 'active' : ''} href="/uses/">Uses</a>
+        </li>
+        <li>
+          <a class={currentPath === '/stream-tools/' ? 'active' : ''} href="/stream-tools/">Stream tools</a>
+        </li>
+      </ul>
+    </nav>
+    
+    <div class="theme-toggle-wrapper">
+      <ThemeToggle />
     </div>
-  </a>
-  <button aria-controls="menu" aria-expanded="false"></button>
-  <nav>
-    <ul>
-      <li>
-        <a class={currentPath === '/blog/' ? 'active' : ''} href="/blog/"
-          >Blog</a
-        >
-      </li>
-
-      <li>
-        <a
-          class={currentPath === '/projects/' ? 'active' : ''}
-          href="/projects/">Projects</a
-        >
-      </li>
-
-      <li>
-        <a class={currentPath === '/about/' ? 'active' : ''} href="/about/"
-          >About</a
-        >
-      </li>
-
-      <li>
-        <a class={currentPath === '/uses/' ? 'active' : ''} href="/uses/"
-          >Uses</a
-        >
-      </li>
-
-      <li>
-        <a
-          class={currentPath === '/stream-tools/' ? 'active' : ''}
-          href="/stream-tools/">Stream tools</a
-        >
-      </li>
-    </ul>
-  </nav>
-  <ThemeToggle />
+  </div>
 </header>
 
 <style>
-  .shrink {
-    padding: 1rem 1rem 1rem 1rem;
-  }
-  header {
-    background-color: rgb(255 255 255 / 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 48px 1fr auto;
-    align-items: center;
-    padding: 4rem 1rem 1rem 1rem;
+  .mainNav {
     position: sticky;
-    max-width: 960px;
-    margin: auto;
     top: 0;
-    transition: padding 0.5s ease;
-  }
-  ::global(.dark) header {
-    background-color: rgb(22 22 37 / 50%);
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
   }
 
-  button[aria-expanded] {
-    display: none;
+  :global(.dark) .mainNav {
+    background-color: rgba(15, 23, 42, 0.8);
+  }
+
+  .nav-content {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .logo-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
   }
 
   nav ul {
     display: flex;
     list-style: none;
-    justify-content: end;
+    margin: 0;
     padding: 0;
+    gap: 2rem;
   }
 
-  nav li a,
-  nav li a:visited {
-    display: inline-block;
-    color: rgb(0 0 255 / 50%);
-    font-weight: 600;
-    margin-left: 1rem;
+  nav a {
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--primary-color);
     text-decoration: none;
   }
 
-  :global(.dark) nav li a,
-  :global(.dark) nav li a:visited {
-    color: rgb(255 255 255 / 0.5);
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
   }
 
-  nav li a:hover,
-  nav li a:focus,
-  nav li a.active {
-    color: rgb(0 0 255 / 1);
-    text-decoration: underline;
+  .hamburger {
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    position: relative;
+    transition: all 0.3s ease;
   }
 
-  :global(.dark) nav li a:hover,
-  :global(.dark) nav li a.active {
-    color: rgb(255 255 255 / 0.75);
+  .hamburger::before,
+  .hamburger::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 2px;
+    background: var(--text-color);
+    left: 0;
+    transition: all 0.3s ease;
   }
 
-  @media (max-width: 565px) {
-    header {
-      grid-template-columns: 36px 1fr auto;
-      padding: 1rem 1rem 0 1rem;
-      box-shadow: 0 0.5rem 6rem 0 rgb(0 0 0 / 24%);
-    }
+  .hamburger::before { top: -8px; }
+  .hamburger::after { top: 8px; }
 
-    ::global(.dark) header {
-      box-shadow: 0 0.5rem 6rem 0 rgb(0 0 255 / 50%);
-    }
-    button[aria-expanded] {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: inline-block;
-      height: 24px;
-      margin-left: auto;
-      outline: none;
-      padding: 0;
-      position: relative;
-      width: 24px;
-    }
+  button[aria-expanded="true"] .hamburger {
+    background: transparent;
+  }
 
-    button[aria-expanded='false']:before,
-    button[aria-expanded='false']:after,
-    button[aria-expanded='true']:before,
-    button[aria-expanded='true']:after {
-      background: #333;
-      bottom: 0;
-      content: '';
-      height: 2px;
-      left: 0;
-      margin: auto;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
-      width: 100%;
-    }
+  button[aria-expanded="true"] .hamburger::before {
+    top: 0;
+    transform: rotate(45deg);
+  }
 
-    ::global(.dark) button[aria-expanded='false']:before,
-    ::global(.dark) button[aria-expanded='false']:after,
-    ::global(.dark) button[aria-expanded='true']:before,
-    ::global(.dark) button[aria-expanded='true']:after {
-      background: rgb(255 255 255 / 0.5);
-    }
+  button[aria-expanded="true"] .hamburger::after {
+    top: 0;
+    transform: rotate(-45deg);
+  }
 
-    button[aria-expanded='false']:before {
-      transform: translateY(-5px) rotate3d(0, 0, 0, 45deg);
-    }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 
-    button[aria-expanded='false']:after {
-      transform: translateY(5px) rotate3d(0, 0, 0, -45deg);
-    }
-
-    button[aria-expanded='true']:before {
-      transform: translateY(0px) rotate3d(0, 0, 1, 45deg);
-    }
-
-    button[aria-expanded='true']:after {
-      transform: translateY(0px) rotate3d(0, 0, 1, -45deg);
-    }
-
-    button[aria-expanded='false']:before {
-      transform: translateY(-5px) rotate3d(0, 0, 0, 45deg);
-    }
-
-    button[aria-expanded='false']:after {
-      transform: translateY(5px) rotate3d(0, 0, 0, -45deg);
-    }
-
-    button[aria-expanded='true']:before {
-      transform: translateY(0px) rotate3d(0, 0, 1, 45deg);
-    }
-
-    button[aria-expanded='true']:after {
-      transform: translateY(0px) rotate3d(0, 0, 1, -45deg);
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+      z-index: 101;
     }
 
     nav {
-      order: 4;
-      grid-column: 1 / -1;
-      align-items: center;
-      display: grid;
-      grid-template-columns: 1fr;
-      max-height: 0px;
-      overflow: hidden;
-      transition: max-height 0.5s ease-in-out;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--bg-color);
+      padding: 5rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 99;
     }
 
     nav ul {
-      display: grid;
-      grid-gap: 20px;
-      justify-content: center;
-      margin: 0;
-      padding: 0 0 3rem 0;
-      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
     }
 
-    ul li {
-      text-align: center;
+    nav a {
+      font-size: 1.5rem;
     }
 
-    nav ul li a,
-    nav ul li a:visited {
-      margin-left: 0;
+    button[aria-expanded="true"] + nav {
+      transform: translateX(0);
     }
-
-    ul li:nth-child(1) {
-      opacity: 0;
-      transition: opacity 0.2s 0.1s ease-in;
-    }
-
-    ul li:nth-child(2) {
-      opacity: 0;
-      transition: opacity 0.2s 0.2s ease-in;
-    }
-
-    ul li:nth-child(3) {
-      opacity: 0;
-      transition: opacity 0.2s 0.3s ease-in;
-    }
-
-    li:nth-child(4) {
-      opacity: 0;
-      transition: opacity 0.2s 0.4s ease-in;
-    }
-
-    ul li:nth-child(5) {
-      opacity: 0;
-      transition: opacity 0.2s 0.5s ease-in;
-    }
-
-    [aria-expanded='true'] ~ nav {
-      max-height: 300px;
-    }
-
-    [aria-expanded='true'] ~ nav ul li {
-      opacity: 1;
-      padding: 0;
-    }
-
-    [aria-expanded='false'] ~ nav {
-      max-height: 0px;
-    }
-
-    [aria-expanded='false'] ~ nav ul li {
-      opacity: 0;
-      padding: 0;
+    
+    /* Fix for the sibling selector logic in script */
+    .nav-content:has(button[aria-expanded="true"]) nav {
+      transform: translateX(0);
     }
   }
 </style>
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    const navButtons = [...document.querySelectorAll('button[aria-expanded]')]
-    const header: Element | null = document.querySelector('.mainNav')
+    const menuButton = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
 
-    function toggleNav() {
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false
-      this.setAttribute('aria-expanded', !expanded)
+    if (menuButton && nav) {
+      menuButton.addEventListener('click', () => {
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', !expanded);
+        
+        // Toggle class on nav for mobile menu
+        if (!expanded) {
+          nav.style.transform = 'translateX(0)';
+          document.body.style.overflow = 'hidden';
+        } else {
+          nav.style.transform = 'translateX(100%)';
+          document.body.style.overflow = '';
+        }
+      });
     }
-
-    navButtons.forEach((button) => {
-      button.addEventListener('click', toggleNav)
-    })
-
-    function handleResize(entries) {
-      const { contentRect } = entries[0]
-      const isHeaderShrinkable = contentRect.width > 534
-
-      if (isHeaderShrinkable) {
-        const shouldShrink = window.scrollY > 50
-        header?.classList.toggle('shrink', shouldShrink)
-        window.addEventListener('scroll', handleScroll)
-      } else {
-        header?.classList.remove('shrink')
-        window.removeEventListener('scroll', handleScroll)
-      }
-    }
-
-    function handleScroll() {
-      const shouldShrink = window.scrollY > 50
-      header?.classList.toggle('shrink', shouldShrink)
-    }
-
-    const resizeObserver = new ResizeObserver(handleResize)
-    resizeObserver.observe(header)
-
-    // Call handleResize immediately to set initial state
-    handleResize([{ contentRect: header.getBoundingClientRect() }])
-  })
+  });
 </script>
