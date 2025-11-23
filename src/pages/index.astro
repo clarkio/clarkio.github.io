@@ -9,111 +9,228 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
   description="Developer advocate and content creator who loves to learn new things and share them."
   keywords="clarkio, developer, developer advocate"
 >
-  <div class="heroContainer">
-    <div class="heroText">
-      <span>Hey, it's me! Brian Clark.</span>
-      <h1>
-        Developer advocate and content creator who loves to learn new things and
-        share them. I enjoy building tools to automate the boring stuff,
-        teaching about application security and sharing development tips and
-        tricks.
-      </h1>
-      <a href="/about/" class="about">Read more about me &rarr;</a>
-      <button data-confetti-button>Celebrate!</button>
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="greeting">Hey, it's me! Brian Clark.</span>
+        <h1>
+          <span class="text-gradient">Developer Advocate</span> & <br>
+          Content Creator
+        </h1>
+        <p class="bio">
+          I love learning new things and sharing them with the world. 
+          I build tools to automate the boring stuff, teach application security, 
+          and share development tips & tricks.
+        </p>
+        <div class="cta-group">
+          <a href="/about/" class="btn btn-primary">More about me</a>
+          <button data-confetti-button class="btn btn-secondary">Celebrate! 🎉</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-wrapper">
+          <Image
+            src={profilePhoto}
+            alt="Brian Clark Profile Photo"
+            quality={90}
+            width={600}
+            loading="eager"
+          />
+        </div>
+      </div>
     </div>
-    <Image
-      src={profilePhoto}
-      alt="Clarkio's Profile Photo"
-      quality={80}
-      widths={[200, 400, 600]}
-      sizes={`(max-width: 360px) 200px,
-      (max-width: 720px) 400px,
-      (max-width: 1600px) 600px`}
-    />
-  </div>
+  </section>
+
+  <section class="featured">
+    <div class="section-header">
+      <h2>What I Do</h2>
+      <p>Here's a glimpse into my work and content.</p>
+    </div>
+    
+    <div class="grid">
+      <div class="card">
+        <h3>✍️ Blog</h3>
+        <p>Articles on web development, security, and tools.</p>
+        <a href="/blog/">Read Articles &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>🛠️ Projects</h3>
+        <p>Open source tools and applications I've built.</p>
+        <a href="/projects/">View Projects &rarr;</a>
+      </div>
+      <div class="card">
+        <h3>🎥 Streaming</h3>
+        <p>Live coding and tech discussions on Twitch.</p>
+        <a href="https://twitch.tv/clarkio" target="_blank">Watch Live &rarr;</a>
+      </div>
+    </div>
+  </section>
 
   <style>
-    button[data-confetti-button] {
-      outline: none;
-      cursor: pointer;
-      border: none;
-      background: none;
-      color: rgb(0 0 255 / 0.75);
-      font-size: 1rem;
-      padding: 1rem 1rem 1rem 0;
-      width: fit-content;
+    .hero {
+      padding: 4rem 0;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
     }
 
-    ::global(.dark) button[data-confetti-button] {
-      color: rgb(255 255 255 / 0.75);
-    }
-    .heroContainer {
-      place-items: center;
+    .hero-content {
       display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 4rem;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      padding: 3rem 0;
-      width: 100%;
+      align-items: center;
     }
 
-    .heroText {
-      display: grid;
-      gap: 1rem;
-    }
-
-    @media (max-width: 510px) {
-      .heroText {
-        justify-items: center;
-        text-align: center;
-      }
-    }
-
-    .heroText span {
-      color: rgb(0 0 255);
-      font-size: clamp(1.5rem, 2vw, 2rem);
+    .greeting {
+      color: var(--primary-color);
       font-weight: 700;
-    }
-
-    :global(.dark) .heroText span {
-      color: rgb(72 191 254 / 0.75);
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      display: block;
     }
 
     h1 {
-      color: #000;
-      font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .bio {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      max-width: 540px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
       font-size: 1rem;
     }
 
-    :global(.dark) h1 {
-      color: rgb(255 255 255 / 0.75);
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
     }
 
-    img {
-      object-fit: cover;
-      box-shadow: 32px 32px 0px rgba(0 0 0 / 0.12);
-      max-width: 300px !important;
+    .btn-primary:hover {
+      background-color: var(--accent-color);
+      transform: translateY(-2px);
+      color: white;
     }
 
-    :global(.dark) img {
-      box-shadow: 32px 32px 0px rgba(255 255 255 / 0.1);
+    .btn-secondary {
+      background-color: var(--code-bg);
+      color: var(--text-color);
     }
 
-    .about {
-      color: rgb(0 0 255);
-      display: inline-block;
+    .btn-secondary:hover {
+      background-color: var(--border-color);
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+    }
+
+    .image-wrapper {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 20px 20px 0 var(--primary-color);
+      max-width: 400px;
+      transition: transform 0.3s ease;
+    }
+
+    .image-wrapper:hover {
+      transform: translate(-5px, -5px);
+      box-shadow: 25px 25px 0 var(--accent-color);
+    }
+
+    .featured {
+      padding: 4rem 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: var(--code-bg);
+      padding: 2rem;
+      border-radius: 16px;
+      transition: transform 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary-color);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .card a {
       font-weight: 600;
-      text-decoration: none;
     }
 
-    .about:hover {
-      text-decoration: underline;
-    }
+    @media (max-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 3rem;
+      }
 
-    :global(.dark) .about {
-      color: rgb(255 255 255 / 0.75);
-    }
+      .hero {
+        min-height: auto;
+        padding: 2rem 0;
+      }
 
-    :global(.dark) .about:hover {
+      .bio {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .cta-group {
+        justify-content: center;
+      }
+
+      .image-wrapper {
+        box-shadow: 10px 10px 0 var(--primary-color);
+        max-width: 300px;
+        margin: 0 auto;
+      }
     }
   </style>
 </BaseLayout>
@@ -123,7 +240,6 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
   document.addEventListener('astro:page-load', () => {
     const buttons = document.querySelectorAll('[data-confetti-button]')
 
-    // Add event listeners to fire confetti when a button is clicked.
     buttons.forEach((button) => {
       button.addEventListener('click', () =>
         confetti({
@@ -133,7 +249,6 @@ import profilePhoto from '../images/clarkio-profile-photo.avif'
           spread: 360,
           origin: {
             x: Math.random(),
-            // since they fall down, start a bit higher than random
             y: Math.random() - 0.2
           }
         })
