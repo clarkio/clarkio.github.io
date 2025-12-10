@@ -55,32 +55,36 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
 ---
 
 <BaseLayout
-  title='Projects'
+  title="Projects"
   description="Clarkio's GitHub repositories for all of his projects"
-  keywords='clarkio, projects, github, repository, repositories'
+  keywords="clarkio, projects, github, repository, repositories"
 >
   <header class="page-header">
     <h1>Projects</h1>
     <p class="subtitle">
-      A collection of my open source work. Check out <a href='https://github.com/clarkio' target="_blank">GitHub</a> for more.
+      A collection of my open source work. Check out <a
+        href="https://github.com/clarkio"
+        target="_blank">GitHub</a
+      > for more.
     </p>
   </header>
 
-  <div class='project-grid'>
+  <div class="project-grid">
     <article class="project-card">
       <div class="card-content">
-        <h2><a href='/wos-helper'>Words on Stream Helper</a></h2>
+        <h2><a href="https://wosplus.com">Words on Stream Plus</a></h2>
         <p class="description">
-          A tool to help when playing <a href='https://wos.gg/'>Words on Stream</a> with your community. 
-          It provides visibility to correctly guessed words and highlights the biggest word for the round.
+          A tool to help play <a href="https://wos.gg/">Words on Stream</a> with
+          your community. It provides visibility to correctly guessed words, highlights
+          the biggest word for the round and shows missed words once the level completes.
         </p>
       </div>
-      <div class='card-footer'>
+      <div class="card-footer">
         <div class="stats">
-          <Image src={star} alt='stargazers' width={16} height={16} />
+          <Image src={star} alt="stargazers" width={16} height={16} />
           <span>-</span>
         </div>
-        <div class='tags'>
+        <div class="tags">
           <span>JavaScript</span>
           <span>WebSockets</span>
         </div>
@@ -90,21 +94,24 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
     <article class="project-card">
       <div class="card-content">
         <h2>
-          <a href='https://github.com/clarkio/discord-wordle-bot' target='_blank'>
+          <a
+            href="https://github.com/clarkio/discord-wordle-bot"
+            target="_blank"
+          >
             Discord Wordle Bot
           </a>
         </h2>
         <p class="description">
-          Play Wordle with your community in your Discord server. 
-          Supports storing results in a libSQL database and providing a leaderboard API.
+          Play Wordle with your community in your Discord server. Supports
+          storing results in a libSQL database and providing a leaderboard API.
         </p>
       </div>
-      <div class='card-footer'>
+      <div class="card-footer">
         <div class="stats">
-          <Image src={star} alt='stargazers' width={16} height={16} />
+          <Image src={star} alt="stargazers" width={16} height={16} />
           <span>-</span>
         </div>
-        <div class='tags'>
+        <div class="tags">
           <span>TypeScript</span>
           <span>Bun.js</span>
           <span>SQLite</span>
@@ -118,19 +125,19 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
           <article class="project-card">
             <div class="card-content">
               <h2>
-                <a href={url} target='_blank'>
+                <a href={url} target="_blank">
                   {name}
                 </a>
               </h2>
               <p class="description">{description}</p>
             </div>
-            <div class='card-footer'>
+            <div class="card-footer">
               <div class="stats">
-                <Image src={star} alt='stargazers' width={16} height={16} />
+                <Image src={star} alt="stargazers" width={16} height={16} />
                 <span>{stargazers.totalCount}</span>
               </div>
               {languages && (
-                <div class='tags'>
+                <div class="tags">
                   {languages.edges.map(({ node: { name } }) => (
                     <span>{name}</span>
                   ))}
@@ -174,7 +181,9 @@ if (!process.env.GH_ACCESS_TOKEN || process.env.GH_ACCESS_TOKEN === '') {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
     overflow: hidden;
   }
 
