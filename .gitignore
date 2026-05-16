@@ -26,3 +26,4 @@ yarn-error.log*
 
 *.todo
 ao-wos-helper-design.png
+.astro/
