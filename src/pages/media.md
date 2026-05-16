@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/BaseLayout.astro
 title: 'Media'
-description: "Videos, podcasts and other media in which clarkio has either created or had some involvement in."
+description: 'Videos, podcasts and other media in which clarkio has either created or had some involvement in.'
 keywords: 'clarkio, media, videos, podcasts, livestreams, articles, blogs, courses'
 ---
 
@@ -17,9 +17,12 @@ Here you can find some of the content I've either created or have been a part of
 - [All Around Azure](https://blog.allaroundazure.com/): I was a guest on the show sharing VS Code extensions that help when working with Azure
   - [Part 1](https://www.youtube.com/watch?v=CTwjrxwWoLQ)
   - [Part 2](https://www.youtube.com/watch?v=rTAWOxr210Y)
+- [Building Securely with AI - Hosted by Nick Taylor from Pomerium](https://www.youtube.com/live/nt8KvxQiGmM)
 
 ### YouTube Videos
+
 A playlist of all videos that I've been involved in. These range from produced videos, to conferences, podcasts and live stream recordings.
+
 - [Playlist](https://www.youtube.com/playlist?list=PLG8WGLcszzgXprhety_rmZjYB9kZuJZGW)
 
 ### Pluralsight Courses
@@ -43,6 +46,7 @@ A playlist of all videos that I've been involved in. These range from produced v
 - [Coffee and Open Source: Brian Clark](https://open.spotify.com/episode/4KUmjtvg5fntgq7hPvVnNF)
 
 ### Articles/Blog Posts
+
 A collection of articles/blog posts I've written or contributed to on other platforms/sites.
 
 #### Web Almanac
@@ -53,6 +57,7 @@ A collection of articles/blog posts I've written or contributed to on other plat
   - [Contributor List](https://almanac.httparchive.org/en/2022/contributors)
 
 #### Snyk
+
 - [Zero-day Extensive NPM Package Compromise - Shai Hulud Supply Chain Attack](https://snyk.io/blog/embedded-malicious-code-in-tinycolor-and-ngx-bootstrap-releases-on-npm/)
 - [npm Supply Chain Attack via Open Source maintainer compromise](https://snyk.io/blog/npm-supply-chain-attack-via-open-source-maintainer-compromise/)
 - [If you don’t know about HTTP Archive’s Web Almanac yet, you should!](https://snyk.io/blog/if-you-dont-know-about-http-archives-web-almanac-yet/)
@@ -79,5 +84,6 @@ A collection of articles/blog posts I've written or contributed to on other plat
 - [Comparing Node.js web frameworks: Which is most secure?](https://snyk.io/blog/comparing-node-js-web-frameworks/)
 
 #### Microsoft:
+
 - [Learning on Twitch](https://cloudblogs.microsoft.com/opensource/2019/06/03/learning-on-twitch/)
 - [Top 3 reasons developers should use social media](https://cloudblogs.microsoft.com/opensource/2019/02/27/why-developers-should-use-social-media/)
