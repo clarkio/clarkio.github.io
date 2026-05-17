@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import '../styles/global.css'
 
 import Nav from '../components/Nav.astro'
@@ -69,7 +69,7 @@ const keywords = Astro.props?.keywords ?? Astro.props?.content?.keywords ?? ''
         y.parentNode.insertBefore(t, y)
       })(window, document, 'clarity', 'script', 'ivq40nz3d1')
     </script>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
 
   <body>

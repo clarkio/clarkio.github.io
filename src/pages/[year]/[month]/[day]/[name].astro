@@ -1,6 +1,14 @@
 ---
-export async function getStaticPaths() {
-  let allLegacyPosts = await Astro.glob('../../../blog/old-posts/*.md')
+import type { MarkdownInstance } from 'astro'
+
+type Props = {
+  content: MarkdownInstance<Record<string, unknown>>
+}
+
+export function getStaticPaths() {
+  const allLegacyPosts = Object.values(
+    import.meta.glob<MarkdownInstance<Record<string, unknown>>>('../../../blog/old-posts/*.md', { eager: true })
+  )
   const result = allLegacyPosts.map((postContent) => {
     const url = postContent.url.replace('/blog/old-posts/', '')
     const year = url.slice(0, 4)

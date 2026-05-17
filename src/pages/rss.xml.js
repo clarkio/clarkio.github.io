@@ -9,7 +9,7 @@ const sortedPosts = allPosts.sort(
     new Date(a.frontmatter.publishDate).valueOf()
 );
 
-export const get = () =>
+export const GET = () =>
   rss({
     title: 'Brian Clark',
     description:
