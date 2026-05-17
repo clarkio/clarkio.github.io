@@ -1,5 +1,4 @@
-// import localDictionary from './wos_dictionary.json';
-let wosDictionary: string[]; // = localDictionary as string[];
+let wosDictionary: string[];
 
 export async function updateWosDictionary(word: string) {
   try {
