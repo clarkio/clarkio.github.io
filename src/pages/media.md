@@ -51,6 +51,8 @@ A collection of articles/blog posts I've written or contributed to on other plat
 
 #### Web Almanac
 
+- [Web Almanac 2025 - Security Chapter](https://almanac.httparchive.org/en/2025/security)
+  - [Contributor List](https://almanac.httparchive.org/en/2025/contributors)
 - [Web Almanac 2024 - Security Chapter](https://almanac.httparchive.org/en/2024/security)
   - [Contributor List](https://almanac.httparchive.org/en/2024/contributors)
 - [Web Almanac 2022 - Security Chapter](https://almanac.httparchive.org/en/2022/security)
