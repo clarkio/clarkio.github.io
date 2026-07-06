@@ -9,6 +9,20 @@ keywords: 'clarkio, talks, presentations, conferences'
 
 Below is a record of the talks I've either presented directly or was involved in. You can see some of the [slides for them here](/slides)
 
+### 2026
+
+- ### Hack Miami / AI Security Engineers Community - Miami Chapter Kickoff
+  - [Four Extension Points, One Mental Model: Rules, Skills, Hooks, and MCP in Practice](https://www.meetup.com/ai-security-engineers-miami/events/315050047/)
+    <p>Miami, FL<br>
+      June 13, 2026</p>
+
+### 2025
+
+- ### Code Remix
+  - [Securing AI: A practical guide to AI threats and mitigation strategies](https://coderemix.ai/conference/hollywood/2025/05/session?id=52496)
+    <p>Miami, FL<br>
+      May 12 - 14, 2025</p>
+
 ### 2021
 
 - ### Microsoft Build
