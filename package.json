@@ -10,12 +10,12 @@
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@types/bun": "^1.2.4",
-    "astro": "^6.3.3"
+    "astro": "^7.1.0"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.18",
+    "@astrojs/rss": "^4.0.19",
     "canvas-confetti": "^1.9.3",
     "dotenv": "^16.4.5",
     "prettier-plugin-astro": "^0.13.0",
