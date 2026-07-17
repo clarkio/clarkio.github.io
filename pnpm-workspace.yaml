@@ -1,3 +1,8 @@
 allowBuilds:
   esbuild: false
   sharp: false
+
+# vite 8.1.5 (a transitive dependency of astro) is currently rejected by the
+# supply-chain minimumReleaseAge policy in CI; drop this once it has aged out.
+overrides:
+  vite: 8.1.4
