@@ -95,7 +95,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       text-decoration: underline;
     }
 
-    ::global(.dark) article h2 a {
+    :global(.dark) article h2 a {
       color: rgba(255, 255, 255, 0.75);
     }
 
@@ -111,13 +111,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       border: 1px dotted rgba(0, 0, 255, 0.2);
     }
 
-    ::global(.dark) article,
-    ::global(.dark) .description {
+    :global(.dark) article,
+    :global(.dark) .description {
       border: 1px dotted rgba(255, 255, 255, 0.2);
     }
 
     .description,
-    ::global(.dark) .description {
+    :global(.dark) .description {
       border-width: 1px 0 0 0;
     }
 
@@ -130,7 +130,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       grid-row: span 2;
     }
 
-    ::global(.dark) article {
+    :global(.dark) article {
       background: rgba(255, 255, 255, 0.02);
     }
 
@@ -138,7 +138,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       background: rgba(0, 0, 255, 0.15);
     }
 
-    ::global(.dark) article:hover {
+    :global(.dark) article:hover {
       background: rgba(255, 255, 255, 0.1);
     }
   </style>
